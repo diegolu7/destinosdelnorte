@@ -10,6 +10,7 @@ dist/
 
 # Assets originales en la raíz (duplicados en src/assets para el build)
 /logo_destinos_del_norte.png
+/logo_destinos_del_norte_footer.png
 /hero_img.png
 /salta_que_hacer_card.png
 /jujuy_que_hacer_card.png
