@@ -9,19 +9,19 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<section class="relative overflow-hidden">
+<section class="bg-page">
   <Image
     src={heroImg}
     alt="Paisaje del Norte Argentino con montañas y cactus"
-    width={1672}
-    height={941}
+    width={1916}
+    height={821}
     loading="eager"
     priority
-    class="absolute inset-0 h-full w-full object-cover"
+    class="block h-auto w-full object-cover"
     sizes="100vw"
   />
 
-  <div class="relative mx-auto flex min-h-[520px] w-full max-w-6xl items-center px-5 py-16 lg:min-h-[580px] lg:px-8">
+  <div class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
     <div class="max-w-2xl">
       <h1 class="font-display font-bold leading-tight text-navy">
         <span class="block text-[28px] lg:text-[42px]">Descubrí</span>
