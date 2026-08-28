@@ -9,7 +9,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<section class="bg-page">
+<section class="relative aspect-[1916/821] min-h-[520px] w-full overflow-hidden lg:min-h-0">
   <Image
     src={heroImg}
     alt="Paisaje del Norte Argentino con montañas y cactus"
@@ -17,26 +17,28 @@ const { title } = Astro.props;
     height={821}
     loading="eager"
     priority
-    class="block h-auto w-full object-cover"
+    class="absolute inset-0 h-full w-full object-cover"
     sizes="100vw"
   />
 
-  <div class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
-    <div class="max-w-2xl">
-      <h1 class="font-display font-bold leading-tight text-navy">
-        <span class="block text-[28px] lg:text-[42px]">Descubrí</span>
-        <span class="block text-[28px] lg:text-[42px]">lo mejor del</span>
-        <span class="block text-[28px] font-extrabold lg:text-[42px]">Norte Argentino</span>
-      </h1>
-      <p class="mt-4 max-w-md text-sm leading-relaxed text-body lg:text-base lg:leading-relaxed">
-        Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar.
-      </p>
-      <a
-        href="/#destinos"
-        class="mt-7 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover lg:px-6"
-      >
-        {title}
-      </a>
+  <div class="absolute inset-0 flex items-center">
+    <div class="mx-auto w-full max-w-6xl px-5 lg:px-8">
+      <div class="max-w-2xl">
+        <h1 class="font-display font-bold leading-tight text-navy">
+          <span class="block text-[28px] lg:text-[42px]">Descubrí</span>
+          <span class="block text-[28px] lg:text-[42px]">lo mejor del</span>
+          <span class="block text-[28px] font-extrabold lg:text-[42px]">Norte Argentino</span>
+        </h1>
+        <p class="mt-4 max-w-md text-sm leading-relaxed text-body lg:text-base lg:leading-relaxed">
+          Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar.
+        </p>
+        <a
+          href="/#destinos"
+          class="mt-7 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover lg:px-6"
+        >
+          {title}
+        </a>
+      </div>
     </div>
   </div>
 </section>
