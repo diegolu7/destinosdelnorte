@@ -44,7 +44,7 @@ const slides = [
     slides.map((slide, i) => (
       <div
         data-slide={i}
-        class={`absolute inset-0 transition-opacity duration-700 ${
+        class={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
           i === 0 ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -75,7 +75,7 @@ const slides = [
             slides.map((slide, i) => (
               <p
                 data-text={i}
-                class={`col-start-1 row-start-1 max-w-md text-sm leading-relaxed text-body transition-opacity duration-700 lg:text-base lg:leading-relaxed ${
+                class={`col-start-1 row-start-1 max-w-md text-sm leading-relaxed text-body transition-opacity duration-1000 ease-in-out lg:text-base lg:leading-relaxed ${
                   i === 0 ? "opacity-100" : "opacity-0"
                 }`}
               >
