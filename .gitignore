@@ -24,3 +24,6 @@ dist/
 
 # Referencia visual no utilizada en el sitio
 /mockup_del_sitio.png
+
+# Asset futuro (aún sin usar en el build)
+/hero_img_tafi_del_valle.png
