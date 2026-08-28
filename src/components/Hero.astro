@@ -1,25 +1,66 @@
 ---
 import { Image } from "astro:assets";
 import heroImg from "../assets/hero_img.png";
+import heroImgCafayate from "../assets/hero_img_cafayate.png";
+import heroImgPurmamarca from "../assets/hero_img_purmamarca.png";
+import heroImgTafi from "../assets/hero_img_tafi_del_valle.png";
+import Icon from "./Icon.astro";
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+
+const slides = [
+  {
+    img: heroImg,
+    alt: "Paisaje del Norte Argentino con montañas y cactus",
+    texto: "Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar.",
+  },
+  {
+    img: heroImgCafayate,
+    alt: "Viñedos de Cafayate, Salta",
+    texto: "Vinos de altura y la Quebrada de las Conchas. — Cafayate, Salta",
+  },
+  {
+    img: heroImgPurmamarca,
+    alt: "Cerro de los Siete Colores en Purmamarca, Jujuy",
+    texto: "El Cerro de los Siete Colores te espera. — Purmamarca, Jujuy",
+  },
+  {
+    img: heroImgTafi,
+    alt: "Montañas del valle en Tafí del Valle, Tucumán",
+    texto: "Naturaleza y aire puro entre montañas. — Tafí del Valle, Tucumán",
+  },
+];
 ---
 
-<section class="relative aspect-[1916/821] min-h-[520px] w-full max-h-[682px] overflow-hidden lg:min-h-0">
-  <Image
-    src={heroImg}
-    alt="Paisaje del Norte Argentino con montañas y cactus"
-    width={1916}
-    height={821}
-    loading="eager"
-    priority
-    class="absolute inset-0 h-full w-full object-cover"
-    sizes="100vw"
-  />
+<section
+  id="hero-slider"
+  class="relative aspect-[1916/821] min-h-[520px] w-full max-h-[682px] overflow-hidden lg:min-h-0"
+>
+  {
+    slides.map((slide, i) => (
+      <div
+        data-slide={i}
+        class={`absolute inset-0 transition-opacity duration-700 ${
+          i === 0 ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Image
+          src={slide.img}
+          alt={slide.alt}
+          width={slide.img.width}
+          height={slide.img.height}
+          loading={i === 0 ? "eager" : "lazy"}
+          priority={i === 0}
+          class="h-full w-full object-cover"
+          sizes="100vw"
+        />
+      </div>
+    ))
+  }
 
   <div class="absolute inset-0 flex items-center">
     <div class="mx-auto w-full max-w-6xl px-5 lg:px-8">
@@ -29,9 +70,20 @@ const { title } = Astro.props;
           <span class="block text-[28px] lg:text-[42px]">lo mejor del</span>
           <span class="block text-[28px] font-extrabold lg:text-[42px]">Norte Argentino</span>
         </h1>
-        <p class="mt-4 max-w-md text-sm leading-relaxed text-body lg:text-base lg:leading-relaxed">
-          Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar.
-        </p>
+        <div class="mt-4 grid">
+          {
+            slides.map((slide, i) => (
+              <p
+                data-text={i}
+                class={`col-start-1 row-start-1 max-w-md text-sm leading-relaxed text-body transition-opacity duration-700 lg:text-base lg:leading-relaxed ${
+                  i === 0 ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                {slide.texto}
+              </p>
+            ))
+          }
+        </div>
         <a
           href="/#destinos"
           class="mt-7 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover lg:px-6"
@@ -41,4 +93,109 @@ const { title } = Astro.props;
       </div>
     </div>
   </div>
+
+  <div class="absolute bottom-20 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
+    {
+      slides.map((_, i) => (
+        <button
+          type="button"
+          data-dot={i}
+          aria-label={`Ver slide ${i + 1}`}
+          class={`h-2.5 w-2.5 rounded-full transition-colors duration-300 ${
+            i === 0 ? "bg-white ring-2 ring-white/60" : "bg-white/40 ring-2 ring-white/20"
+          }`}
+        ></button>
+      ))
+    }
+  </div>
+
+  <button
+    id="hero-prev"
+    type="button"
+    aria-label="Slide anterior"
+    class="absolute left-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:inline-flex"
+  >
+    <span class="rotate-180">
+      <Icon name="arrow" size={20} />
+    </span>
+  </button>
+  <button
+    id="hero-next"
+    type="button"
+    aria-label="Slide siguiente"
+    class="absolute right-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:inline-flex"
+  >
+    <Icon name="arrow" size={20} />
+  </button>
 </section>
+
+<script>
+  const slider = document.getElementById("hero-slider");
+  const slideEls = slider.querySelectorAll<HTMLElement>("[data-slide]");
+  const textEls = slider.querySelectorAll<HTMLElement>("[data-text]");
+  const dotEls = slider.querySelectorAll<HTMLButtonElement>("[data-dot]");
+  const prevBtn = document.getElementById("hero-prev");
+  const nextBtn = document.getElementById("hero-next");
+
+  const count = slideEls.length;
+  const INTERVAL = 4000;
+  let current = 0;
+  let timer: number | undefined;
+
+  function show(index: number) {
+    current = (index + count) % count;
+    slideEls.forEach((el, i) => {
+      const active = i === current;
+      el.classList.toggle("opacity-100", active);
+      el.classList.toggle("opacity-0", !active);
+    });
+    textEls.forEach((el, i) => {
+      const active = i === current;
+      el.classList.toggle("opacity-100", active);
+      el.classList.toggle("opacity-0", !active);
+    });
+    dotEls.forEach((el, i) => {
+      const active = i === current;
+      el.classList.toggle("bg-white", active);
+      el.classList.toggle("bg-white/40", !active);
+      el.classList.toggle("ring-white/60", active);
+      el.classList.toggle("ring-white/20", !active);
+    });
+  }
+
+  function play() {
+    timer = window.setInterval(() => show(current + 1), INTERVAL);
+  }
+
+  function pause() {
+    if (timer !== undefined) window.clearInterval(timer);
+  }
+
+  prevBtn?.addEventListener("click", () => {
+    show(current - 1);
+    pause();
+    play();
+  });
+  nextBtn?.addEventListener("click", () => {
+    show(current + 1);
+    pause();
+    play();
+  });
+  dotEls.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      show(Number(dot.dataset.dot));
+      pause();
+      play();
+    });
+  });
+
+  slider.addEventListener("mouseenter", pause);
+  slider.addEventListener("mouseleave", play);
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    pause();
+  } else {
+    play();
+  }
+</script>
