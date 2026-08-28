@@ -1,0 +1,211 @@
+{
+"sistema_diseño": "Destinos del Norte - Turismo",
+"colores": {
+"marca": {
+"navy_principal": "#1B2A4A",
+"navy_oscuro": "#14213A",
+"terracota_primario": "#C6521F",
+"terracota_hover": "#A8441A",
+"terracota_claro": "#D97B4F"
+},
+"fondos": {
+"pagina": "#F7F5F1",
+"header": "#FFFFFF",
+"tarjeta": "#FFFFFF",
+"footer": "#1B2A4A",
+"barra_busqueda": "#FFFFFF",
+"overlay_imagen_card": "linear-gradient(180deg, rgba(20,20,20,0) 40%, rgba(0,0,0,0.65) 100%)"
+},
+"texto": {
+"titulo_principal": "#1B2A4A",
+"titulo_seccion": "#1B2A4A",
+"cuerpo": "#4A5568",
+"cuerpo_claro": "#718096",
+"sobre_imagen": "#FFFFFF",
+"sobre_navy": "#FFFFFF",
+"sobre_navy_secundario": "#B8C2D6",
+"link_footer": "#D8DEEA",
+"label_uppercase_footer": "#8FA0C2"
+},
+"bordes": {
+"tarjeta": "#E8E5DF",
+"input_busqueda": "#EDEBE6",
+"divisor_footer": "#2E3D5C"
+},
+"iconos": {
+"primario": "#C6521F",
+"sobre_navy": "#FFFFFF",
+"outline_experiencias": "#C6521F"
+},
+"botones": {
+"primario_fondo": "#C6521F",
+"primario_texto": "#FFFFFF",
+"primario_hover": "#A8441A",
+"secundario_fondo": "#1B2A4A",
+"secundario_texto": "#FFFFFF",
+"secundario_hover": "#0F1930",
+"circular_arrow_fondo": "#FFFFFF",
+"circular_arrow_icono": "#1B2A4A"
+},
+"acentos": {
+"subrayado_titulo": "#C6521F"
+}
+},
+"tipografia": {
+"familia_titulos": "'Poppins', 'Montserrat', sans-serif",
+"familia_cuerpo": "'Inter', 'Helvetica Neue', sans-serif",
+"hero_titulo": {
+"font": "Poppins",
+"size_desktop": "42px",
+"size_mobile": "28px",
+"weight": 700,
+"line_height": "1.15",
+"color": "#1B2A4A"
+},
+"hero_subtitulo": {
+"font": "Inter",
+"size_desktop": "16px",
+"size_mobile": "14px",
+"weight": 400,
+"line_height": "1.5",
+"color": "#4A5568"
+},
+"titulo_seccion": {
+"font": "Poppins",
+"size_desktop": "24px",
+"size_mobile": "18px",
+"weight": 700,
+"color": "#1B2A4A"
+},
+"titulo_tarjeta_destino": {
+"font": "Poppins",
+"size_desktop": "13px",
+"size_mobile": "11px",
+"weight": 500,
+"color": "#FFFFFF",
+"nota": "línea superior regular + línea inferior bold, ej: 'Qué hacer en' + 'Salta'"
+},
+"nombre_lugar_bold": {
+"font": "Poppins",
+"size_desktop": "20px",
+"size_mobile": "14px",
+"weight": 700,
+"color": "#FFFFFF"
+},
+"titulo_card_pequena": {
+"font": "Poppins",
+"size_desktop": "14px",
+"size_mobile": "10px",
+"weight": 600,
+"color": "#1B2A4A"
+},
+"descripcion_card_pequena": {
+"font": "Inter",
+"size_desktop": "12px",
+"size_mobile": "9px",
+"weight": 400,
+"color": "#718096"
+},
+"label_experiencia": {
+"font": "Poppins",
+"size_desktop": "15px",
+"weight": 600,
+"color": "#1B2A4A"
+},
+"texto_boton": {
+"font": "Inter",
+"size": "14px",
+"weight": 600,
+"letter_spacing": "0.2px"
+},
+"nav_link": {
+"font": "Inter",
+"size": "14px",
+"weight": 500,
+"color": "#1B2A4A"
+},
+"footer_titulo_columna": {
+"font": "Inter",
+"size": "12px",
+"weight": 700,
+"letter_spacing": "0.8px",
+"color": "#8FA0C2",
+"text_transform": "uppercase"
+},
+"footer_link": {
+"font": "Inter",
+"size": "13px",
+"weight": 400,
+"color": "#D8DEEA"
+}
+},
+"efectos": {
+"sombras": {
+"barra_busqueda": "0 8px 24px rgba(20, 33, 58, 0.12)",
+"tarjeta_destino": "0 2px 8px rgba(0, 0, 0, 0.06)",
+"tarjeta_hover": "0 6px 16px rgba(0, 0, 0, 0.12)",
+"boton_primario": "0 2px 6px rgba(198, 82, 31, 0.25)"
+},
+"borderRadius": {
+"tarjeta_grande": "16px",
+"tarjeta_pequena": "10px",
+"input": "10px",
+"boton": "8px",
+"boton_circular": "999px",
+"avatar_logo": "999px",
+"barra_busqueda_contenedor": "14px"
+},
+"hover": {
+"tarjeta": { "transform": "translateY(-4px)", "transition": "all 220ms ease-out" },
+"boton_primario": { "background": "#A8441A", "transition": "background 180ms ease" },
+"link_footer": { "color": "#FFFFFF", "transition": "color 150ms ease" },
+"boton_circular_arrow": { "transform": "scale(1.08)", "transition": "transform 200ms ease" }
+},
+"transiciones_globales": "all 200ms ease-in-out"
+},
+"espaciado": {
+"contenedor_max_width_desktop": "1200px",
+"padding_seccion_desktop": "64px 80px",
+"padding_seccion_mobile": "32px 20px",
+"gap_grid_tarjetas_grandes": "20px",
+"gap_grid_tarjetas_pequenas": "16px",
+"gap_experiencias": "32px",
+"padding_interno_tarjeta": "16px",
+"padding_interno_boton": "12px 24px",
+"padding_input_busqueda": "10px 16px",
+"margen_titulo_a_subrayado": "6px",
+"margen_entre_secciones": "48px",
+"footer_padding": "48px 80px 24px"
+},
+"layout": {
+"grid_destinos_principales": "3 columnas desktop / 3 columnas mobile (compactas)",
+"grid_destinos_imperdibles": "5 columnas desktop / scroll horizontal o 5 compactas mobile",
+"grid_experiencias": "4 columnas desktop / 4 columnas compactas mobile",
+"footer_columnas": "5 columnas desktop / acordeón colapsable mobile",
+"barra_busqueda": "flex horizontal con 3 campos + botón desktop / apilada verticalmente mobile",
+"header": "logo izquierda, nav centro-derecha, ícono búsqueda extremo derecho / logo izquierda + hamburguesa derecha mobile"
+},
+"responsive": {
+"breakpoint_mobile": "≤480px",
+"comportamiento": [
+"Hero: título reduce tamaño ~35%, imagen mantiene proporción con cactus visible",
+"Barra de búsqueda pasa de horizontal a vertical apilada",
+"Nav se colapsa a ícono hamburguesa",
+"Tarjetas grandes reducen texto pero mantienen estructura de overlay",
+"Footer pasa de columnas expandidas a acordeones colapsables (mostrando solo el navy header de cada categoría)",
+"Grid de destinos imperdibles reduce tamaño de imagen y texto proporcionalmente"
+]
+},
+"restricciones": [
+"No aplicar el color terracota como fondo de tarjeta, solo en botones, iconos y acentos",
+"No aplicar sombras de contenedor sobre el texto o iconos sueltos",
+"El botón primario (terracota) se usa solo para acciones principales de conversión (Explorá destinos, enviar newsletter)",
+"El botón secundario (navy) se usa para acciones de búsqueda/navegación interna, nunca como CTA de conversión",
+"El overlay oscuro en tarjetas con imagen debe ir solo en la mitad inferior, nunca cubrir toda la imagen",
+"Los títulos de sección siempre llevan el pequeño subrayado terracota debajo de la primera palabra o de todo el título, no usar en subtítulos",
+"No mezclar la tipografía de títulos (Poppins) en párrafos largos de cuerpo",
+"Mantener siempre alto contraste blanco-sobre-navy en el footer, nunca texto navy sobre navy",
+"Los íconos de 'Experiencias' deben ser outline/lineales, no rellenos, para diferenciarse de los íconos de UI (lupa, calendario, etc.)",
+"El logo mantiene siempre su isotipo circular con degradé de paisaje (naranja-marrón-verde), no alterar sus colores internos"
+]
+}

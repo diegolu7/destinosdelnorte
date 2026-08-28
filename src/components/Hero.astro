@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import heroImg from "../assets/hero_img.png";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="relative overflow-hidden">
+  <Image
+    src={heroImg}
+    alt="Paisaje del Norte Argentino con montañas y cactus"
+    width={1672}
+    height={941}
+    loading="eager"
+    priority
+    class="absolute inset-0 h-full w-full object-cover"
+    sizes="100vw"
+  />
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-[linear-gradient(0deg,rgba(247,245,241,0.96)_12%,rgba(247,245,241,0.6)_55%,rgba(247,245,241,0.2)_100%)] lg:hidden"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 hidden bg-[linear-gradient(90deg,rgba(247,245,241,0.97)_0%,rgba(247,245,241,0.85)_35%,rgba(247,245,241,0.4)_70%,rgba(247,245,241,0.05)_100%)] lg:block"
+  ></div>
+
+  <div class="relative mx-auto flex min-h-[520px] w-full max-w-6xl items-center px-5 py-16 lg:min-h-[580px] lg:px-8">
+    <div class="max-w-2xl">
+      <h1 class="font-display font-bold leading-tight text-navy">
+        <span class="block text-[28px] lg:text-[42px]">Descubrí</span>
+        <span class="block text-[28px] lg:text-[42px]">lo mejor del</span>
+        <span class="block text-[28px] font-extrabold lg:text-[42px]">Norte Argentino</span>
+      </h1>
+      <p class="mt-4 max-w-md text-sm leading-relaxed text-body lg:text-base lg:leading-relaxed">
+        Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar.
+      </p>
+      <a
+        href="/#destinos"
+        class="mt-7 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover lg:px-6"
+      >
+        {title}
+      </a>
+    </div>
+  </div>
+</section>

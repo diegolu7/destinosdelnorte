@@ -1,0 +1,113 @@
+---
+import { SITE } from "../lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  ogImage?: ImageMetadata;
+  ogType?: string;
+  breadcrumbs?: { name: string; path: string }[];
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  noindex = false,
+  nofollow = false,
+  ogImage,
+  ogType = "website",
+  breadcrumbs = [],
+  jsonLd = [],
+} = Astro.props;
+
+const url = new URL(Astro.url.pathname, Astro.site);
+const canonical = url.toString();
+const homeUrl = new URL(import.meta.env.BASE_URL + "/", Astro.site).toString();
+
+const robots = [
+  noindex ? "noindex" : "index",
+  nofollow ? "nofollow" : "follow",
+].join(", ");
+
+const ogImageUrl = ogImage
+  ? new URL(ogImage.src, Astro.site).toString()
+  : new URL("/logo_destinos_del_norte.png", Astro.site).toString();
+
+const websiteSchema: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: SITE.name,
+      url: homeUrl,
+      inLanguage: "es-AR",
+    },
+    {
+      "@type": "Organization",
+      name: SITE.name,
+      url: homeUrl,
+      logo: new URL("/logo_destinos_del_norte.png", Astro.site).toString(),
+    },
+  ],
+};
+
+const breadcrumbSchema: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: homeUrl },
+    ...breadcrumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 2,
+      name: crumb.name,
+      item: new URL(crumb.path, Astro.site).toString(),
+    })),
+  ],
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={robots} />
+<meta name="language" content="es-AR" />
+<meta name="theme-color" content="#1B2A4A" />
+
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content="es_AR" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{
+  ogImageUrl && (
+    <>
+      <meta property="og:image" content={ogImageUrl} />
+      <meta property="og:image:alt" content={SITE.name} />
+    </>
+  )
+}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{
+  ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />
+}
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
+
+{
+  breadcrumbs.length > 0 && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+  )
+}
+
+{
+  jsonLd.map((data) => (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />
+  ))
+}

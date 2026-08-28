@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  level?: 2 | 3;
+}
+
+const { title, level = 2 } = Astro.props;
+
+const words = title.split(" ");
+const firstWord = words[0];
+const rest = words.slice(1).join(" ");
+
+const Tag = level === 2 ? "h2" : "h3";
+---
+
+<Tag class="font-display font-bold text-navy text-[18px] lg:text-2xl">
+  <span class="underline decoration-terracota decoration-2 underline-offset-[6px]">{firstWord}</span>
+  {rest && <> {rest}</>}
+</Tag>

@@ -1,0 +1,36 @@
+---
+interface Props {
+  items: { name: string; path: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Ruta de navegación">
+  <ol class="flex flex-wrap items-center gap-1.5 text-sm text-body-light">
+    <li>
+      <a href="/" class="transition-colors duration-150 hover:text-terracota">
+        Inicio
+      </a>
+    </li>
+    {
+      items.map((item, index) => {
+        const isLast = index === items.length - 1;
+        return (
+          <li class="flex items-center gap-1.5">
+            <span aria-hidden="true" class="text-body-light/60">/</span>
+            {isLast ? (
+              <span aria-current="page" class="font-medium text-navy">
+                {item.name}
+              </span>
+            ) : (
+              <a href={item.path} class="transition-colors duration-150 hover:text-terracota">
+                {item.name}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

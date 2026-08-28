@@ -1,0 +1,50 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<div>
+  <p class="font-body text-xs font-bold uppercase tracking-[0.8px] text-footer-label">Newsletter</p>
+  <p class="mt-3 hidden text-[13px] leading-relaxed text-footer-link lg:block">
+    Recibí guías y novedades del Norte en tu mail.
+  </p>
+  <form id="newsletter-form" class="mt-3 flex items-center gap-0" novalidate>
+    <label class="sr-only" for="newsletter-email">Tu email</label>
+    <input
+      id="newsletter-email"
+      type="email"
+      name="email"
+      placeholder="Tu email"
+      required
+      class="w-full min-w-0 rounded-l-lg border border-white/20 bg-white/10 px-3 py-2.5 text-sm text-white placeholder:text-navy-secondary focus:border-terracota focus:outline-none"
+    />
+    <button
+      type="submit"
+      class="inline-flex shrink-0 items-center rounded-r-lg bg-terracota px-3 py-2.5 text-white transition-colors duration-200 hover:bg-terracota-hover"
+      aria-label="Suscribirse al newsletter"
+    >
+      <Icon name="send" size={18} />
+    </button>
+  </form>
+  <p id="newsletter-status" class="mt-2 hidden text-xs text-terracota-light" role="status"></p>
+</div>
+
+<script>
+  const form = document.getElementById("newsletter-form") as HTMLFormElement;
+  const status = document.getElementById("newsletter-status");
+
+  if (form && status) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = form.querySelector('input[name="email"]') as HTMLInputElement;
+      const email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = "Ingresá un email válido.";
+        status.classList.remove("hidden");
+        return;
+      }
+      status.textContent = "¡Gracias! Pronto vas a recibir nuestras novedades.";
+      status.classList.remove("hidden");
+      form.reset();
+    });
+  }
+</script>

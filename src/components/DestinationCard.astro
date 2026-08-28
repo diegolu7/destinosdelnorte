@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  nombre: string;
+  descripcion: string;
+  href: string;
+  imagen: ImageMetadata;
+  extraClass?: string;
+}
+
+const { nombre, descripcion, href, imagen, extraClass = "" } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`group relative block aspect-[4/5] overflow-hidden rounded-xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover ${extraClass}`}
+>
+  <Image
+    src={imagen}
+    alt={nombre}
+    width={487}
+    height={450}
+    loading="lazy"
+    class="h-full w-full object-cover"
+  />
+  <div aria-hidden="true" class="overlay-card absolute inset-0"></div>
+  <div class="absolute inset-x-0 bottom-0 p-3 lg:p-4">
+    <h3 class="font-display text-sm font-bold text-white lg:text-xl">{nombre}</h3>
+    <p class="mt-1 hidden text-xs leading-snug text-white/90 lg:block">{descripcion}</p>
+  </div>
+</a>

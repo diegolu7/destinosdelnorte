@@ -1,0 +1,654 @@
+{
+  "sistema_seo": "Destinos del Norte - SEO",
+  "proyecto": {
+    "nombre": "Destinos del Norte",
+    "dominio": "https://destinosdelnorte.ar",
+    "idioma": "es-AR",
+    "pais": "Argentina",
+    "region_objetivo": "Norte Argentino",
+    "provincias_iniciales": [
+      "Salta",
+      "Jujuy",
+      "Tucumán"
+    ]
+  },
+  "objetivo_principal": {
+    "descripcion": "Posicionar Destinos del Norte como referencia digital para descubrir lugares, actividades, experiencias y servicios turísticos del Norte Argentino.",
+    "estrategia": "Construir autoridad temática mediante páginas específicas por provincia, destino e intención de búsqueda antes de competir directamente por términos generales como 'Norte Argentino'.",
+    "conversion_principal": "Conectar viajeros interesados en visitar el Norte Argentino con destinos, experiencias y empresas turísticas."
+  },
+  "principios": [
+    "Priorizar intención de búsqueda antes que volumen de búsqueda.",
+    "Crear una URL específica únicamente cuando exista una intención de búsqueda diferenciada.",
+    "Cada página debe responder una pregunta o necesidad concreta del viajero.",
+    "Evitar páginas genéricas creadas únicamente para insertar palabras clave.",
+    "Evitar keyword stuffing.",
+    "Mantener títulos, H1 y metadescripciones únicos.",
+    "Utilizar contenido original y útil.",
+    "Construir autoridad temática mediante enlaces internos entre contenido relacionado.",
+    "Priorizar rendimiento, mobile-first y HTML fácilmente rastreable.",
+    "No depender del dominio como principal factor SEO."
+  ],
+  "modelo_seo": {
+    "tipo": "Topical Authority + Long Tail + Hub and Spoke",
+    "funcionamiento": [
+      "Las provincias funcionan como hubs SEO principales.",
+      "Los destinos funcionan como hubs secundarios.",
+      "Las guías responden búsquedas específicas del viajero.",
+      "Los artículos relacionados refuerzan las páginas principales mediante enlaces internos.",
+      "Las páginas de empresas se conectan únicamente con destinos y experiencias relevantes."
+    ]
+  },
+  "arquitectura": {
+    "jerarquia": [
+      "Home",
+      "Provincia",
+      "Destino",
+      "Guía",
+      "Experiencia",
+      "Empresa"
+    ],
+
+```
+"urls": {
+      "home": "/",
+      "provincia": "/{provincia}/",
+      "destino": "/{provincia}/{destino}/",
+      "guia_provincia": "/{provincia}/{guia}/",
+      "guia_destino": "/{provincia}/{destino}/{guia}/",
+      "experiencia": "/{provincia}/{destino}/{experiencia}/",
+      "empresa": "/{provincia}/{destino}/servicios/{empresa}/"
+    },
+    "ejemplos": [
+      "/salta/",
+      "/jujuy/",
+      "/tucuman/",
+      "/salta/cafayate/",
+      "/salta/cachi/",
+      "/jujuy/purmamarca/",
+      "/jujuy/tilcara/",
+      "/tucuman/tafi-del-valle/",
+      "/salta/que-hacer/",
+      "/jujuy/lugares-para-visitar/",
+      "/salta/cafayate/que-hacer/",
+      "/jujuy/purmamarca/como-llegar/"
+    ],
+    "reglas_url": [
+      "Usar minúsculas.",
+      "Usar guiones medios para separar palabras.",
+      "No utilizar tildes ni caracteres especiales.",
+      "Evitar parámetros en URLs indexables.",
+      "Evitar URLs innecesariamente profundas.",
+      "Una intención de búsqueda debe tener una URL canónica principal.",
+      "No duplicar contenido mediante diferentes estructuras de URL."
+    ]
+```
+  },
+  "clusters_principales": {
+    "salta": {
+      "hub": "/salta/",
+      "keywords_principales": [
+        "qué hacer en Salta",
+        "lugares para visitar en Salta",
+        "qué visitar en Salta",
+        "turismo en Salta",
+        "lugares turísticos de Salta"
+      ],
+      "destinos": [
+        "Cafayate",
+        "Cachi",
+        "San Lorenzo",
+        "Quebrada del Toro",
+        "San Antonio de los Cobres"
+      ]
+    },
+
+```
+"jujuy": {
+      "hub": "/jujuy/",
+      "keywords_principales": [
+        "qué hacer en Jujuy",
+        "lugares para visitar en Jujuy",
+        "qué visitar en Jujuy",
+        "turismo en Jujuy",
+        "lugares turísticos de Jujuy"
+      ],
+      "destinos": [
+        "Purmamarca",
+        "Tilcara",
+        "Humahuaca",
+        "Salinas Grandes",
+        "Maimará"
+      ]
+    },
+    "tucuman": {
+      "hub": "/tucuman/",
+      "keywords_principales": [
+        "qué hacer en Tucumán",
+        "lugares para visitar en Tucumán",
+        "qué visitar en Tucumán",
+        "turismo en Tucumán",
+        "lugares turísticos de Tucumán"
+      ],
+      "destinos": [
+        "Tafí del Valle",
+        "Amaicha del Valle",
+        "San Miguel de Tucumán",
+        "El Cadillal",
+        "Ruinas de Quilmes"
+      ]
+    }
+```
+  },
+  "intenciones_busqueda": {
+    "descubrimiento": [
+      "qué hacer en {destino}",
+      "qué hacer en {provincia}",
+      "lugares para visitar en {destino}",
+      "lugares para visitar en {provincia}",
+      "qué visitar en {destino}",
+      "lugares turísticos de {provincia}"
+    ],
+
+```
+"planificacion": [
+      "{destino} en 1 día",
+      "{provincia} en 3 días",
+      "{provincia} en 5 días",
+      "{provincia} en 7 días",
+      "itinerario por {provincia}",
+      "ruta por Salta y Jujuy",
+      "viaje al Norte Argentino",
+      "itinerario Norte Argentino"
+    ],
+    "informacion": [
+      "cómo llegar a {destino}",
+      "mejor época para visitar {destino}",
+      "cuándo viajar a {provincia}",
+      "clima en {destino}",
+      "cuántos días quedarse en {destino}",
+      "qué llevar a {destino}"
+    ],
+    "experiencias": [
+      "excursiones en {destino}",
+      "gastronomía en {destino}",
+      "senderismo en {destino}",
+      "turismo aventura en {destino}",
+      "bodegas en {destino}",
+      "miradores en {destino}"
+    ]
+```
+  },
+  "estrategia_keywords": {
+    "prioridad_1": {
+      "tipo": "Long Tail",
+      "objetivo": "Obtener las primeras posiciones mediante búsquedas específicas y de menor competencia.",
+      "ejemplos": [
+        "qué hacer en Cafayate",
+        "lugares para visitar en Purmamarca",
+        "qué hacer en Tafí del Valle",
+        "cómo llegar a Salinas Grandes",
+        "qué visitar en Cachi"
+      ]
+    },
+
+```
+"prioridad_2": {
+      "tipo": "Provincia",
+      "ejemplos": [
+        "qué hacer en Salta",
+        "qué hacer en Jujuy",
+        "qué hacer en Tucumán",
+        "lugares para visitar en Salta",
+        "lugares para visitar en Jujuy"
+      ]
+    },
+    "prioridad_3": {
+      "tipo": "Regional",
+      "ejemplos": [
+        "Norte Argentino",
+        "turismo Norte Argentino",
+        "qué visitar en el Norte Argentino",
+        "lugares para conocer en el Norte Argentino",
+        "viaje al Norte Argentino"
+      ]
+    }
+```
+  },
+  "templates_seo": {
+    "home": {
+      "title": "Destinos del Norte | Salta, Jujuy y Tucumán",
+      "h1": "Descubrí los mejores destinos del Norte Argentino",
+      "descripcion_objetivo": "Descubrir destinos, lugares y experiencias turísticas de Salta, Jujuy y Tucumán."
+    },
+
+```
+"provincia": {
+      "title_template": "Qué hacer en {provincia}: lugares para visitar | Destinos del Norte",
+      "h1_template": "Qué hacer en {provincia}",
+      "keyword_principal": "qué hacer en {provincia}",
+      "keywords_secundarias": [
+        "lugares para visitar en {provincia}",
+        "qué visitar en {provincia}",
+        "turismo en {provincia}"
+      ]
+    },
+    "destino": {
+      "title_template": "Qué hacer en {destino}: lugares para visitar | Destinos del Norte",
+      "h1_template": "Qué hacer en {destino}",
+      "keyword_principal": "qué hacer en {destino}",
+      "keywords_secundarias": [
+        "lugares para visitar en {destino}",
+        "qué visitar en {destino}",
+        "turismo en {destino}"
+      ]
+    },
+    "itinerario": {
+      "title_template": "{destino} en {dias} días: itinerario y lugares para visitar | Destinos del Norte",
+      "h1_template": "Qué hacer en {destino} en {dias} días"
+    },
+    "lugar": {
+      "title_template": "{lugar}: cómo llegar, qué ver y consejos | Destinos del Norte",
+      "h1_template": "{lugar}: guía para visitarlo"
+    },
+    "experiencia": {
+      "title_template": "{experiencia} en {destino}: guía y recomendaciones | Destinos del Norte",
+      "h1_template": "{experiencia} en {destino}"
+    }
+```
+  },
+  "metadata": {
+    "title": {
+      "requerido": true,
+      "unico": true,
+      "regla": "Describir claramente la intención principal de la página y añadir la marca al final cuando corresponda."
+    },
+
+```
+"meta_description": {
+      "requerido": true,
+      "unico": true,
+      "regla": "Resumir de forma natural el contenido y explicar qué encontrará el viajero.",
+      "prohibido": [
+        "Duplicar la misma descripción en múltiples páginas.",
+        "Crear descripciones mediante listas artificiales de keywords."
+      ]
+    },
+    "canonical": {
+      "requerido": true,
+      "tipo": "self-referencing",
+      "regla": "Cada página indexable debe indicar su URL canónica."
+    },
+    "robots": {
+      "default": "index, follow",
+      "paginas_sin_valor_seo": "noindex, follow"
+    },
+    "open_graph": {
+      "activo": true,
+      "campos": [
+        "og:title",
+        "og:description",
+        "og:image",
+        "og:url",
+        "og:type",
+        "og:locale"
+      ],
+      "locale": "es_AR"
+    }
+```
+  },
+  "contenido_on_page": {
+    "h1": {
+      "cantidad": 1,
+      "regla": "Debe representar claramente la temática principal de la página."
+    },
+
+```
+"jerarquia": [
+      "H1: intención principal",
+      "H2: temas principales",
+      "H3: subsecciones relacionadas"
+    ],
+    "estructura_destino_recomendada": [
+      "Introducción breve",
+      "Qué hacer",
+      "Lugares imperdibles",
+      "Cómo llegar",
+      "Cuándo visitar",
+      "Cuántos días quedarse",
+      "Dónde comer",
+      "Dónde alojarse",
+      "Experiencias",
+      "Consejos",
+      "Destinos cercanos"
+    ],
+    "reglas": [
+      "Responder la intención principal lo antes posible.",
+      "Utilizar lenguaje natural.",
+      "Incluir información concreta y verificable.",
+      "Evitar introducciones genéricas creadas únicamente para SEO.",
+      "Actualizar información cuando cambien accesos, precios, horarios o regulaciones.",
+      "Citar fuentes oficiales cuando sean necesarias.",
+      "Agregar fecha de actualización cuando aporte valor al viajero."
+    ]
+```
+  },
+  "enlazado_interno": {
+    "modelo": "Hub and Spoke",
+
+```
+"reglas": [
+      "Todo destino debe enlazar a su provincia.",
+      "Toda provincia debe enlazar a sus principales destinos.",
+      "Las guías deben enlazar al destino correspondiente.",
+      "Los destinos deben enlazar a guías relacionadas.",
+      "Relacionar destinos cercanos geográficamente.",
+      "Relacionar experiencias con los destinos donde pueden realizarse.",
+      "Evitar páginas huérfanas."
+    ],
+    "ejemplo": [
+      "Norte Argentino",
+      "Salta",
+      "Cafayate",
+      "Qué hacer en Cafayate",
+      "Bodegas de Cafayate"
+    ],
+    "anchor_text": {
+      "regla": "Utilizar textos descriptivos y naturales.",
+      "correcto": [
+        "qué hacer en Cafayate",
+        "lugares para visitar en Jujuy",
+        "conocé Purmamarca"
+      ],
+      "evitar": [
+        "clic aquí",
+        "ver más información"
+      ]
+    }
+```
+  },
+  "imagenes": {
+    "formatos_preferidos": [
+      "AVIF",
+      "WebP"
+    ],
+
+```
+"reglas": [
+      "Comprimir todas las imágenes.",
+      "Generar diferentes tamaños responsive.",
+      "Evitar imágenes significativamente mayores al tamaño en que serán renderizadas.",
+      "Aplicar lazy loading excepto en imágenes críticas como el hero.",
+      "Usar width y height para evitar layout shifts.",
+      "Usar nombres de archivo descriptivos.",
+      "El atributo alt debe describir realmente la imagen."
+    ],
+    "ejemplo_archivo": "cerro-siete-colores-purmamarca.webp",
+    "ejemplo_alt": "Cerro de los Siete Colores en Purmamarca, Jujuy"
+```
+  },
+  "datos_estructurados": {
+    "formato": "JSON-LD",
+
+```
+"globales": [
+      "WebSite",
+      "Organization"
+    ],
+    "navegacion": [
+      "BreadcrumbList"
+    ],
+    "contenido_editorial": [
+      "Article"
+    ],
+    "semanticos_turismo": [
+      "TouristDestination",
+      "TouristAttraction"
+    ],
+    "nota_turismo": "Los tipos específicos de turismo pueden utilizarse para describir semánticamente el contenido cuando corresponda, sin asumir que generarán un rich result en Google.",
+    "faq": {
+      "contenido_faq_permitido": true,
+      "faqpage_como_estrategia_rich_result": false,
+      "motivo": "El rich result de FAQ dejó de mostrarse en Google Search en 2026."
+    },
+    "regla": "Los datos estructurados siempre deben representar contenido visible y real de la página."
+```
+  },
+  "breadcrumbs": {
+    "activo": true,
+
+```
+"ejemplos": [
+      "Inicio > Salta > Cafayate",
+      "Inicio > Jujuy > Purmamarca",
+      "Inicio > Tucumán > Tafí del Valle"
+    ]
+```
+  },
+  "seo_tecnico": {
+    "renderizado": {
+      "estrategia": "Static Site Generation",
+      "framework": "Astro",
+      "objetivo": "Entregar contenido principal directamente en HTML."
+    },
+
+```
+"sitemap": {
+      "activo": true,
+      "url": "/sitemap-index.xml",
+      "generacion": "automática durante el build",
+      "incluir": "Solo URLs canónicas e indexables"
+    },
+    "robots_txt": {
+      "activo": true,
+      "incluir_sitemap": true
+    },
+    "canonical": {
+      "activo": true,
+      "self_referencing": true
+    },
+    "errores": {
+      "url_inexistente": 404,
+      "contenido_eliminado_definitivamente": 410,
+      "contenido_movido": 301
+    },
+    "https": {
+      "obligatorio": true
+    },
+    "mobile_first": {
+      "obligatorio": true
+    }
+```
+  },
+  "performance": {
+    "prioridad": "alta",
+
+```
+"metricas": [
+      "LCP",
+      "INP",
+      "CLS"
+    ],
+    "reglas": [
+      "Minimizar JavaScript innecesario.",
+      "Optimizar imágenes.",
+      "Lazy load en contenido fuera del viewport.",
+      "Evitar fuentes innecesarias.",
+      "Precargar únicamente recursos críticos.",
+      "Evitar scripts de terceros que no aporten valor.",
+      "Mantener HTML semántico."
+    ]
+```
+  },
+  "indexacion": {
+    "indexar": [
+      "Home",
+      "Provincias",
+      "Destinos",
+      "Guías originales",
+      "Experiencias con contenido propio",
+      "Empresas con perfiles suficientemente completos y diferenciados"
+    ],
+
+```
+"no_indexar": [
+      "Resultados internos de búsqueda",
+      "Filtros sin intención SEO",
+      "Combinaciones automáticas de filtros",
+      "Páginas vacías",
+      "Páginas duplicadas",
+      "Páginas de prueba",
+      "Contenido incompleto"
+    ]
+```
+  },
+  "prevencion_canibalizacion": {
+    "regla_principal": "Una intención principal debe tener una página principal.",
+
+```
+"ejemplo_incorrecto": [
+      "/salta/que-hacer/",
+      "/salta/que-visitar/",
+      "/salta/lugares-para-conocer/",
+      "/salta/lugares-turisticos/"
+    ],
+    "problema": "Las cuatro páginas podrían competir por prácticamente la misma intención.",
+    "solucion": {
+      "url_principal": "/salta/",
+      "keyword_principal": "qué hacer en Salta",
+      "keywords_secundarias": [
+        "qué visitar en Salta",
+        "lugares para conocer en Salta",
+        "lugares turísticos de Salta"
+      ]
+    }
+```
+  },
+  "autoridad_tematica": {
+    "objetivo": "Demostrar profundidad y cobertura consistente sobre turismo en Salta, Jujuy y Tucumán.",
+
+```
+"estrategia": [
+      "Crear primero los hubs provinciales.",
+      "Agregar destinos principales.",
+      "Crear contenido específico alrededor de cada destino.",
+      "Conectar toda la información mediante enlaces internos.",
+      "Actualizar contenido regularmente.",
+      "Expandir únicamente cuando exista suficiente cobertura del cluster actual."
+    ]
+```
+  },
+  "empresas_turisticas": {
+    "objetivo": "Integrar empresas dentro del contenido sin convertir el sitio en un directorio SEO de baja calidad.",
+
+```
+"tipos": [
+      "Alojamientos",
+      "Excursiones",
+      "Agencias",
+      "Gastronomía",
+      "Transporte",
+      "Bodegas",
+      "Experiencias"
+    ],
+    "reglas": [
+      "Una empresa debe estar asociada a un destino real.",
+      "Los perfiles deben contener información útil para el viajero.",
+      "Evitar crear cientos de páginas con contenido prácticamente idéntico.",
+      "Las publicaciones patrocinadas deben identificarse claramente.",
+      "La publicidad nunca debe modificar artificialmente la arquitectura SEO."
+    ]
+```
+  },
+  "contenido_inicial_recomendado": {
+    "fase_1": [
+      "/salta/",
+      "/jujuy/",
+      "/tucuman/"
+    ],
+
+```
+"fase_2": [
+      "/salta/cafayate/",
+      "/salta/cachi/",
+      "/jujuy/purmamarca/",
+      "/jujuy/tilcara/",
+      "/jujuy/humahuaca/",
+      "/tucuman/tafi-del-valle/"
+    ],
+    "fase_3": [
+      "Qué hacer en cada destino",
+      "Cómo llegar",
+      "Itinerarios",
+      "Mejor época para viajar",
+      "Experiencias",
+      "Destinos cercanos"
+    ]
+```
+  },
+  "medicion": {
+    "herramientas": [
+      "Google Search Console",
+      "Google Analytics"
+    ],
+
+```
+"metricas_principales": [
+      "Impresiones orgánicas",
+      "Clicks orgánicos",
+      "CTR",
+      "Posición media",
+      "Keywords posicionadas",
+      "Páginas indexadas",
+      "Páginas con tráfico orgánico",
+      "Conversiones hacia empresas"
+    ],
+    "revision": "mensual"
+```
+  },
+  "flujo_publicacion": [
+    "Definir intención de búsqueda.",
+    "Comprobar si ya existe una URL que responda esa intención.",
+    "Definir keyword principal y variantes semánticas.",
+    "Crear slug.",
+    "Crear title.",
+    "Crear H1.",
+    "Crear meta description.",
+    "Crear contenido original.",
+    "Agregar imágenes optimizadas.",
+    "Agregar alt descriptivos.",
+    "Agregar enlaces internos.",
+    "Agregar canonical.",
+    "Agregar datos estructurados cuando correspondan.",
+    "Agregar URL al sitemap.",
+    "Publicar.",
+    "Comprobar indexación en Search Console.",
+    "Medir rendimiento y actualizar contenido."
+  ],
+  "restricciones": [
+    "No crear contenido masivo únicamente cambiando el nombre de una ciudad.",
+    "No repetir keywords artificialmente.",
+    "No crear varias páginas para la misma intención de búsqueda.",
+    "No copiar descripciones de sitios oficiales, Wikipedia, empresas u otros portales.",
+    "No generar perfiles de empresas prácticamente vacíos.",
+    "No indexar filtros automáticamente.",
+    "No utilizar títulos engañosos.",
+    "No utilizar metadescripciones iguales en todo el sitio.",
+    "No publicar información turística crítica sin verificar.",
+    "No depender de FAQ Schema como estrategia de posicionamiento.",
+    "No sacrificar experiencia de usuario para introducir keywords."
+  ],
+  "objetivo_largo_plazo": {
+    "fase_inicial": "Posicionar búsquedas específicas relacionadas con Salta, Jujuy y Tucumán.",
+    "fase_intermedia": "Posicionar búsquedas provinciales de alta intención turística.",
+    "fase_avanzada": "Convertir Destinos del Norte en una autoridad para búsquedas generales relacionadas con viajes y turismo en el Norte Argentino.",
+    "keywords_objetivo_final": [
+      "Norte Argentino",
+      "turismo Norte Argentino",
+      "qué hacer en el Norte Argentino",
+      "qué visitar en el Norte Argentino",
+      "lugares para visitar en el Norte Argentino",
+      "viaje al Norte Argentino"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.netlify/
+*.log
+.DS_Store
+.env
+.env.*
+
+# Assets originales en la raíz (duplicados en src/assets para el build)
+/logo_destinos_del_norte.png
+/hero_img.png
+/salta_que_hacer_card.png
+/jujuy_que_hacer_card.png
+/tucuman_que_hacer_card.png
+/seccion_atractivo_cafayate.png
+/seccion_atractivo_cerro_7_colores.png
+/seccion_atractivo_purmamarca.png
+/seccion_atractivo_tafi_del_valle.png
+/seccion_atractivo_tilcara.png
+/seccion_atractivo_amicha.png
+
+# Referencia visual no utilizada en el sitio
+/mockup_del_sitio.png

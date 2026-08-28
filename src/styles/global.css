@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #1b2a4a;
+  --color-navy-dark: #14213a;
+  --color-navy-deeper: #0f1930;
+  --color-terracota: #c6521f;
+  --color-terracota-hover: #a8441a;
+  --color-terracota-light: #d97b4f;
+  --color-page: #f7f5f1;
+  --color-body: #4a5568;
+  --color-body-light: #718096;
+  --color-border-card: #e8e5df;
+  --color-border-input: #edebe6;
+  --color-footer-line: #2e3d5c;
+  --color-footer-link: #d8deea;
+  --color-footer-label: #8fa0c2;
+  --color-navy-secondary: #b8c2d6;
+
+  --font-display: "Poppins", "Montserrat", sans-serif;
+  --font-body: "Inter", "Helvetica Neue", sans-serif;
+
+  --shadow-search: 0 8px 24px rgba(20, 33, 58, 0.12);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --shadow-button: 0 2px 6px rgba(198, 82, 31, 0.25);
+
+  --radius-card-lg: 16px;
+  --radius-card-sm: 10px;
+  --radius-input: 10px;
+  --radius-button: 8px;
+  --radius-full: 999px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-page font-body text-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-navy;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-terracota;
+  }
+}
+
+@utility overlay-card {
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0) 40%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+@layer components {
+  .prose-norte {
+    @apply text-sm leading-relaxed text-body lg:text-base;
+  }
+
+  .prose-norte h2 {
+    @apply mt-8 mb-3 font-display text-lg font-bold text-navy lg:text-xl;
+  }
+
+  .prose-norte h3 {
+    @apply mt-6 mb-2 font-display text-base font-semibold text-navy lg:text-lg;
+  }
+
+  .prose-norte p {
+    @apply my-3;
+  }
+
+  .prose-norte ul {
+    @apply my-3 space-y-1.5 list-disc pl-5;
+  }
+
+  .prose-norte li::marker {
+    color: var(--color-terracota);
+  }
+
+  .prose-norte strong {
+    @apply font-semibold text-navy;
+  }
+
+  .prose-norte a {
+    @apply font-medium text-terracota underline decoration-terracota/40 underline-offset-2 transition-colors duration-150 hover:text-terracota-hover;
+  }
+}
+

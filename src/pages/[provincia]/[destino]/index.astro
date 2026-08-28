@@ -1,0 +1,106 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import DestinationCard from "../../../components/DestinationCard.astro";
+import { getImage } from "../../../lib/images";
+
+export async function getStaticPaths() {
+  const destinos = await getCollection("destinos");
+  return destinos.map((destino) => ({
+    params: { provincia: destino.data.provincia, destino: destino.data.slug },
+    props: { destino },
+  }));
+}
+
+const { destino } = Astro.props;
+
+const provincias = await getCollection("provincias");
+const provincia = provincias.find((p) => p.data.slug === destino.data.provincia)!;
+
+const destinosCercanos = (await getCollection("destinos"))
+  .filter((d) => d.data.provincia === provincia.data.slug && d.data.slug !== destino.data.slug)
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, "es"));
+
+const { Content } = await render(destino);
+
+const title = `Qué hacer en ${destino.data.name}: lugares para visitar | Destinos del Norte`;
+
+const touristDestination = {
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  name: destino.data.name,
+  description: destino.data.intro,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  image: new URL(getImage(destino.data.imagen).src, Astro.site).toString(),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={destino.data.descripcion}
+  breadcrumbs={[
+    { name: provincia.data.name, path: `/${provincia.data.slug}/` },
+    { name: destino.data.name, path: `/${provincia.data.slug}/${destino.data.slug}/` },
+  ]}
+  jsonLd={[touristDestination]}
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <Breadcrumbs
+      items={[
+        { name: provincia.data.name, path: `/${provincia.data.slug}/` },
+        { name: destino.data.name, path: `/${provincia.data.slug}/${destino.data.slug}/` },
+      ]}
+    />
+
+    <h1 class="mt-4 font-display text-3xl font-bold text-navy lg:text-[42px] lg:leading-tight">
+      Qué hacer en {destino.data.name}
+    </h1>
+
+    <p class="mt-4 max-w-3xl text-sm leading-relaxed text-body lg:text-base">
+      {destino.data.intro}
+    </p>
+
+    <div class="mt-8 overflow-hidden rounded-2xl shadow-card">
+      <Image
+        src={getImage(destino.data.imagen)}
+        alt={destino.data.name}
+        width={672}
+        height={621}
+        loading="eager"
+        class="h-auto w-full max-w-2xl object-cover"
+      />
+    </div>
+
+    <div class="prose-norte mt-8 max-w-3xl lg:mt-10">
+      <Content />
+    </div>
+
+    <div class="mt-12 border-t border-border-card pt-8">
+      <div class="flex items-center justify-between gap-4">
+        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">
+          Otros destinos de {provincia.data.name}
+        </h2>
+        <a
+          href={`/${provincia.data.slug}/`}
+          class="shrink-0 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
+        >
+          Ver {provincia.data.name}
+        </a>
+      </div>
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {
+          destinosCercanos.map((d) => (
+            <DestinationCard
+              nombre={d.data.name}
+              descripcion={d.data.descripcion}
+              href={`/${provincia.data.slug}/${d.data.slug}/`}
+              imagen={getImage(d.data.imagen)}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

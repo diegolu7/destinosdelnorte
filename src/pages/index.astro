@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import SearchBar from "../components/SearchBar.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ProvinceCard from "../components/ProvinceCard.astro";
+import DestinationCard from "../components/DestinationCard.astro";
+import ExperienceCard from "../components/ExperienceCard.astro";
+import { getImage } from "../lib/images";
+
+const provincias = (await getCollection("provincias")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, "es"),
+);
+const destinos = (await getCollection("destinos")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, "es"),
+);
+const experiencias = (await getCollection("experiencias")).sort((a, b) =>
+  a.data.nombre.localeCompare(b.data.nombre, "es"),
+);
+
+const destinosParaMostrar = destinos.slice(0, 5);
+---
+
+<BaseLayout
+  title="Destinos del Norte | Salta, Jujuy y Tucumán"
+  description="Descubrí los mejores destinos del Norte Argentino: qué hacer en Salta, Jujuy y Tucumán, lugares para visitar, experiencias y guías de viaje."
+>
+  <Hero title="Explorá destinos" />
+
+  <SearchBar />
+
+  <section id="que-hacer" class="scroll-mt-24">
+    <div class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-16">
+      <SectionTitle title="¿Qué hacer en cada destino?" />
+      <div class="mt-8 grid grid-cols-3 gap-2 sm:gap-5">
+        {
+          provincias.map((provincia) => (
+            <ProvinceCard
+              nombre={provincia.data.name}
+              slug={provincia.data.slug}
+              imagen={getImage(provincia.data.imagen)}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="destinos" class="scroll-mt-24">
+    <div class="mx-auto w-full max-w-6xl px-5 pb-10 lg:px-8 lg:pb-16">
+      <div class="flex items-end justify-between gap-4">
+        <SectionTitle title="Destinos imperdibles del Norte" />
+        <a href="/salta/" class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
+          Ver todos los destinos
+        </a>
+      </div>
+      <div class="mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:pb-0 lg:grid-cols-5">
+        {
+          destinosParaMostrar.map((destino) => (
+            <DestinationCard
+              nombre={destino.data.name}
+              descripcion={destino.data.descripcion}
+              href={`/${destino.data.provincia}/${destino.data.slug}/`}
+              imagen={getImage(destino.data.imagen)}
+              extraClass="min-w-[42%] shrink-0 snap-start sm:min-w-0"
+            />
+          ))
+        }
+      </div>
+      <a href="/salta/" class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
+        Ver todos
+      </a>
+    </div>
+  </section>
+
+  <section id="experiencias" class="scroll-mt-24">
+    <div class="mx-auto w-full max-w-6xl px-5 pb-16 lg:px-8 lg:pb-24">
+      <div class="flex items-end justify-between gap-4">
+        <SectionTitle title="Experiencias que te van a encantar" />
+        <a href="/jujuy/" class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
+          Ver todas las experiencias
+        </a>
+      </div>
+      <div class="mt-8 grid grid-cols-4 gap-2 sm:gap-8">
+        {
+          experiencias.map((experiencia) => (
+            <ExperienceCard
+              nombre={experiencia.data.nombre}
+              descripcion={experiencia.data.descripcion}
+              icono={experiencia.data.icono}
+            />
+          ))
+        }
+      </div>
+      <a href="/jujuy/" class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
+        Ver todas
+      </a>
+    </div>
+  </section>
+</BaseLayout>

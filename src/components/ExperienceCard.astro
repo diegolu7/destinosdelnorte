@@ -1,0 +1,17 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  nombre: string;
+  descripcion: string;
+  icono: "aventura" | "cultura" | "gastronomia" | "naturaleza";
+}
+
+const { nombre, descripcion, icono } = Astro.props;
+---
+
+<article class="flex flex-col items-start gap-2 rounded-xl bg-tarjeta p-2.5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover lg:gap-3 lg:p-6">
+  <Icon name={icono} size={30} class="h-6 w-6 text-terracota lg:h-[30px] lg:w-[30px]" />
+  <h3 class="font-display text-[11px] font-semibold leading-tight text-navy sm:text-[13px] lg:text-[15px]">{nombre}</h3>
+  <p class="hidden text-xs leading-relaxed text-body-light lg:block">{descripcion}</p>
+</article>

@@ -1,0 +1,129 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const destinos = (await getCollection("destinos")).map((destino) => ({
+  nombre: destino.data.name,
+  slug: destino.data.slug,
+  provincia: destino.data.provincia,
+  descripcion: destino.data.descripcion,
+}));
+
+const provincias = (await getCollection("provincias")).map((provincia) => ({
+  nombre: provincia.data.name,
+  slug: provincia.data.slug,
+}));
+
+const experiencias = (await getCollection("experiencias")).map((experiencia) => ({
+  nombre: experiencia.data.nombre,
+  descripcion: experiencia.data.descripcion,
+}));
+---
+
+<BaseLayout
+  title="Búsqueda de destinos | Destinos del Norte"
+  description="Buscá destinos, lugares y experiencias turísticas del Norte Argentino: Salta, Jujuy y Tucumán."
+  noindex
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <h1 class="font-display text-2xl font-bold text-navy lg:text-3xl">Buscar destinos</h1>
+    <p class="mt-2 text-sm text-body lg:text-base">
+      Resultados para <strong id="query-label" class="text-terracota">tu búsqueda</strong>.
+    </p>
+
+    <div id="results-empty" class="mt-8 hidden rounded-xl bg-tarjeta p-6 text-sm text-body shadow-card">
+      No encontramos resultados para esa búsqueda. Probá con otro destino (por ejemplo: Cafayate, Purmamarca o Tafí del Valle).
+    </div>
+
+    <div id="results" class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ destinos, provincias, experiencias }} is:inline>
+  const queryLabel = document.getElementById("query-label");
+  const results = document.getElementById("results");
+  const resultsEmpty = document.getElementById("results-empty");
+
+  function normalize(value) {
+    return String(value)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function build() {
+    const params = new URLSearchParams(window.location.search);
+    const q = normalize(params.get("q") ?? "");
+    const tipo = params.get("tipo") ?? "";
+
+    const resultados = [];
+
+    provincias.forEach(function (provincia) {
+      if (!q || normalize(provincia.nombre).includes(q)) {
+        resultados.push({
+          nombre: provincia.nombre,
+          descripcion: "Descubrí qué hacer en " + provincia.nombre + ": lugares para visitar y experiencias.",
+          href: "/" + provincia.slug + "/",
+          etiqueta: "Provincia",
+        });
+      }
+    });
+
+    destinos.forEach(function (destino) {
+      if (!q || normalize(destino.nombre).includes(q)) {
+        resultados.push({
+          nombre: destino.nombre,
+          descripcion: destino.descripcion,
+          href: "/" + destino.provincia + "/" + destino.slug + "/",
+          etiqueta: "Destino",
+        });
+      }
+    });
+
+    experiencias.forEach(function (experiencia) {
+      const matchesTipo = !tipo || normalize(experiencia.nombre) === normalize(tipo);
+      const matchesQ = !q || normalize(experiencia.nombre).includes(q);
+      if (matchesTipo && matchesQ) {
+        resultados.push({
+          nombre: experiencia.nombre,
+          descripcion: experiencia.descripcion,
+          href: "/#experiencias",
+          etiqueta: "Experiencia",
+        });
+      }
+    });
+
+    const seen = new Set();
+    const unique = resultados.filter(function (item) {
+      if (seen.has(item.nombre)) return false;
+      seen.add(item.nombre);
+      return true;
+    });
+
+    queryLabel.textContent = params.get("q") || "resultados";
+
+    resultsEmpty.classList.toggle("hidden", unique.length > 0);
+
+    results.innerHTML = unique
+      .map(function (item) {
+        return (
+          '<a href="' +
+          item.href +
+          '" class="group block rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover">' +
+          '<span class="inline-flex rounded-full bg-terracota/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-terracota">' +
+          item.etiqueta +
+          "</span>" +
+          '<h2 class="mt-2 font-display text-base font-semibold text-navy group-hover:text-terracota">' +
+          item.nombre +
+          "</h2>" +
+          '<p class="mt-1 text-xs leading-relaxed text-body-light">' +
+          item.descripcion +
+          "</p>" +
+          "</a>"
+        );
+      })
+      .join("");
+  }
+
+  build();
+</script>

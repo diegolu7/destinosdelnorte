@@ -1,0 +1,372 @@
+{
+  "pagina": "Destinos del Norte - Home",
+  "secciones": [
+    {
+      "id": "header",
+      "nombre": "Header / Navegación principal",
+      "orden": 1,
+      "proposito": "identidad de marca y navegación global",
+      "contenidos": [
+        {
+          "tipo": "logo_texto",
+          "texto_literal": "Destinos del Norte",
+          "ubicacion": "superior izquierda",
+          "alineacion": "izquierda",
+          "notas": "partido en 2 líneas: 'Destinos' (regular) + 'del Norte' (bold), junto a isotipo circular"
+        },
+        {
+          "tipo": "nav_link",
+          "texto_literal": "Destinos",
+          "ubicacion": "superior centro-derecha",
+          "version": "ambas"
+        },
+        {
+          "tipo": "nav_link",
+          "texto_literal": "Qué hacer",
+          "ubicacion": "superior centro-derecha",
+          "version": "ambas"
+        },
+        {
+          "tipo": "nav_link",
+          "texto_literal": "Guías de viaje",
+          "ubicacion": "superior centro-derecha",
+          "version": "ambas"
+        },
+        {
+          "tipo": "nav_link",
+          "texto_literal": "Rutas",
+          "ubicacion": "superior centro-derecha",
+          "version": "ambas"
+        },
+        {
+          "tipo": "nav_link",
+          "texto_literal": "Blog",
+          "ubicacion": "superior centro-derecha",
+          "version": "ambas"
+        },
+        {
+          "tipo": "icono_funcional_sin_texto",
+          "texto_literal": "no visible / inferido (ícono de lupa, sin label)",
+          "ubicacion": "extremo superior derecho",
+          "version": "desktop"
+        },
+        {
+          "tipo": "icono_funcional_sin_texto",
+          "texto_literal": "no visible / inferido (ícono hamburguesa, sin label)",
+          "ubicacion": "extremo superior derecho",
+          "version": "mobile"
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "nombre": "Hero principal",
+      "orden": 2,
+      "proposito": "captar atención y comunicar la propuesta de valor",
+      "contenidos": [
+        {
+          "tipo": "H1",
+          "texto_literal": "Descubrí lo mejor del Norte Argentino",
+          "ubicacion": "superior izquierda, sobre imagen de fondo",
+          "alineacion": "izquierda",
+          "notas": "partido en 3 líneas: 'Descubrí' / 'lo mejor del' / 'Norte Argentino'. Segunda tanda ('Norte Argentino') en mayor peso visual",
+          "version": "ambas"
+        },
+        {
+          "tipo": "parrafo_subtitulo",
+          "texto_literal": "Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar.",
+          "ubicacion": "debajo del H1",
+          "alineacion": "izquierda",
+          "version": "ambas"
+        },
+        {
+          "tipo": "boton_cta",
+          "texto_literal": "Explorá destinos",
+          "ubicacion": "debajo del subtítulo",
+          "accion_inferida": "scroll o link a sección de destinos",
+          "version": "ambas"
+        }
+      ]
+    },
+    {
+      "id": "buscador",
+      "nombre": "Barra de búsqueda",
+      "orden": 3,
+      "proposito": "facilitar la búsqueda de destinos y experiencias",
+      "contenidos": [
+        {
+          "tipo": "placeholder_input",
+          "texto_literal": "¿A dónde querés ir?",
+          "icono_asociado": "pin de ubicación",
+          "ubicacion": "primer campo, izquierda",
+          "version": "ambas"
+        },
+        {
+          "tipo": "placeholder_input",
+          "texto_literal": "¿Cuándo?",
+          "icono_asociado": "calendario",
+          "ubicacion": "segundo campo, centro",
+          "version": "ambas"
+        },
+        {
+          "tipo": "placeholder_select",
+          "texto_literal": "Tipo de experiencia",
+          "icono_asociado": "embudo/filtro, con flecha desplegable",
+          "ubicacion": "tercer campo",
+          "version": "ambas"
+        },
+        {
+          "tipo": "boton_accion",
+          "texto_literal": "Buscar",
+          "ubicacion": "extremo derecho en desktop / debajo de los campos en mobile",
+          "version": "ambas"
+        }
+      ]
+    },
+    {
+      "id": "que_hacer",
+      "nombre": "Qué hacer en cada destino",
+      "orden": 4,
+      "proposito": "dirigir tráfico a sub-secciones por provincia",
+      "contenidos": [
+        {
+          "tipo": "H2",
+          "texto_literal": "¿Qué hacer en cada destino?",
+          "ubicacion": "superior, alineado a la izquierda del bloque",
+          "alineacion": "izquierda",
+          "notas": "lleva subrayado corto debajo de una palabra clave",
+          "version": "ambas"
+        }
+      ]
+    },
+    {
+      "id": "destinos_imperdibles",
+      "nombre": "Destinos imperdibles del Norte",
+      "orden": 5,
+      "proposito": "mostrar catálogo de lugares destacados y generar interés",
+      "contenidos": [
+        {
+          "tipo": "H2",
+          "texto_literal": "Destinos imperdibles del Norte",
+          "ubicacion": "superior izquierda del bloque",
+          "alineacion": "izquierda",
+          "version": "ambas"
+        },
+        {
+          "tipo": "link_ver_mas",
+          "texto_literal": "Ver todos los destinos",
+          "ubicacion": "superior derecha del bloque, misma línea que el H2",
+          "alineacion": "derecha",
+          "version": "desktop",
+          "notas": "en mobile aparece acortado como 'Ver todos'"
+        }
+      ]
+    },
+    {
+      "id": "experiencias",
+      "nombre": "Experiencias que te van a encantar",
+      "orden": 6,
+      "proposito": "segmentar por tipo de interés / motivación de viaje",
+      "contenidos": [
+        {
+          "tipo": "H2",
+          "texto_literal": "Experiencias que te van a encantar",
+          "ubicacion": "superior izquierda del bloque",
+          "alineacion": "izquierda",
+          "version": "ambas"
+        },
+        {
+          "tipo": "link_ver_mas",
+          "texto_literal": "Ver todas las experiencias",
+          "ubicacion": "superior derecha del bloque, misma línea que el H2",
+          "alineacion": "derecha",
+          "version": "desktop",
+          "notas": "en mobile aparece acortado como 'Ver todas'"
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "nombre": "Footer",
+      "orden": 7,
+      "proposito": "cierre de marca, navegación secundaria y captación de newsletter",
+      "contenidos": [
+        {
+          "tipo": "logo_texto",
+          "texto_literal": "Destinos del Norte",
+          "ubicacion": "superior izquierda del footer",
+          "version": "ambas"
+        },
+        {
+          "tipo": "parrafo_descripcion_marca",
+          "texto_literal": "Tu guía para descubrir los lugares más increíbles del Norte Argentino.",
+          "ubicacion": "debajo del logo",
+          "alineacion": "izquierda",
+          "version": "ambas"
+        },
+        {
+          "tipo": "iconos_sociales_sin_texto",
+          "texto_literal": "no visible / inferido (Instagram, Facebook, YouTube — sin labels de texto)",
+          "ubicacion": "derecha del bloque de marca",
+          "version": "mobile",
+          "notas": "en desktop no se ven explícitamente en esta captura, podrían estar más abajo o ausentes"
+        },
+        {
+          "tipo": "titulo_columna",
+          "texto_literal": "DESTINOS",
+          "ubicacion": "columna 2",
+          "version": "ambas"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Salta",
+          "ubicacion": "columna DESTINOS",
+          "version": "desktop"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Jujuy",
+          "ubicacion": "columna DESTINOS",
+          "version": "desktop"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Tucumán",
+          "ubicacion": "columna DESTINOS",
+          "version": "desktop"
+        },
+        {
+          "tipo": "titulo_columna",
+          "texto_literal": "GUÍAS",
+          "ubicacion": "columna 3",
+          "version": "ambas"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Cómo llegar",
+          "ubicacion": "columna GUÍAS",
+          "version": "desktop"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Mejor época",
+          "ubicacion": "columna GUÍAS",
+          "version": "desktop"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Consejos",
+          "ubicacion": "columna GUÍAS",
+          "version": "desktop"
+        },
+        {
+          "tipo": "titulo_columna",
+          "texto_literal": "INFORMACIÓN",
+          "ubicacion": "columna 4",
+          "version": "ambas"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Sobre nosotros",
+          "ubicacion": "columna INFORMACIÓN",
+          "version": "desktop"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Contacto",
+          "ubicacion": "columna INFORMACIÓN",
+          "version": "desktop"
+        },
+        {
+          "tipo": "link_footer",
+          "texto_literal": "Preguntas frecuentes",
+          "ubicacion": "columna INFORMACIÓN",
+          "version": "desktop"
+        },
+        {
+          "tipo": "titulo_columna",
+          "texto_literal": "NEWSLETTER",
+          "ubicacion": "columna 5",
+          "version": "ambas"
+        },
+        {
+          "tipo": "parrafo_newsletter",
+          "texto_literal": "Recibí guías y novedades del Norte en tu mail.",
+          "ubicacion": "debajo del título NEWSLETTER",
+          "version": "desktop"
+        },
+        {
+          "tipo": "placeholder_input",
+          "texto_literal": "Tu email",
+          "ubicacion": "campo de suscripción",
+          "version": "ambas"
+        },
+        {
+          "tipo": "boton_icono_sin_texto",
+          "texto_literal": "no visible / inferido (ícono de enviar/flecha, sin label)",
+          "ubicacion": "junto al input de email",
+          "version": "ambas"
+        }
+      ]
+    }
+  ],
+  "patrones_repetibles": [
+    {
+      "nombre": "tarjeta_categoria_que_hacer",
+      "formato": "'Qué hacer en' (línea 1, peso regular) + [Nombre de provincia] (línea 2, bold) + ícono flecha circular",
+      "ejemplos": [
+        "Qué hacer en Salta",
+        "Qué hacer en Jujuy",
+        "Qué hacer en Tucumán"
+      ],
+      "cantidad_items": 3,
+      "version": "ambas"
+    },
+    {
+      "nombre": "tarjeta_destino_imperdible",
+      "formato": "[Nombre del lugar] (bold, título) + descripción corta de 4 a 8 palabras (regular)",
+      "ejemplos": [
+        "Cafayate — Vinos, paisajes y tradición.",
+        "Purmamarca — El Cerro de los 7 Colores te espera.",
+        "Tilcara — Historia, cultura y paisajes únicos.",
+        "Tafí del Valle — Naturaleza y aire puro todo el año.",
+        "Amaicha del Valle — Cultura ancestral y tradiciones vivas."
+      ],
+      "cantidad_items": 5,
+      "notas": "en mobile las descripciones no son visibles, solo el nombre del lugar bajo la imagen",
+      "version": "ambas"
+    },
+    {
+      "nombre": "tarjeta_experiencia",
+      "formato": "ícono outline + [Nombre de categoría] (bold) + descripción corta de una línea (regular, solo desktop)",
+      "ejemplos": [
+        "Aventura — Trekking, montañismo y más.",
+        "Cultura — Pueblos, historia y tradiciones.",
+        "Gastronomía — Sabores del norte argentino.",
+        "Naturaleza — Paisajes únicos e inolvidables."
+      ],
+      "cantidad_items": 4,
+      "notas": "en mobile solo se muestra ícono + nombre de categoría, sin descripción",
+      "version": "ambas"
+    },
+    {
+      "nombre": "columna_footer_colapsable",
+      "formato": "[TÍTULO EN MAYÚSCULA] con ícono de flecha/chevron a la derecha",
+      "ejemplos": [
+        "DESTINOS",
+        "GUÍAS",
+        "INFORMACIÓN",
+        "NEWSLETTER"
+      ],
+      "notas": "en mobile las columnas se colapsan como acordeón, mostrando solo el título; en desktop se expanden mostrando todos los links",
+      "version": "mobile"
+    }
+  ],
+  "restricciones": [
+    "No inventar textos que no sean legibles en la captura; se marcaron como 'no visible / inferido' los íconos sin label (lupa, hamburguesa, redes sociales, enviar email)",
+    "Se mantiene el idioma y tono exacto de la fuente: informal, en 2ª persona ('Descubrí', 'querés', 'te van a enamorar')",
+    "Se diferenció claramente entre texto real de contenido y placeholder de input (ej: '¿A dónde querés ir?' es placeholder, no label fijo)",
+    "No se incluye información de estilos visuales (colores, fuentes, tamaños), solo contenido y estructura textual",
+    "Las descripciones de tarjetas de destino y experiencias no son legibles con precisión total en la versión mobile por el tamaño de la imagen; se infirieron a partir de la versión desktop equivalente"
+  ]
+}

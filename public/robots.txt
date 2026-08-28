@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /busqueda/
+
+Sitemap: https://diegolu7.github.io/destinosdelnorte/sitemap-index.xml
