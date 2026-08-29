@@ -137,11 +137,29 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       return track.scrollLeft + track.clientWidth >= track.scrollWidth - 12;
     }
 
+    function moveTo(target) {
+      const start = track.scrollLeft;
+      const distance = target - start;
+      if (reducedMotion || distance === 0) {
+        track.scrollLeft = target;
+        return;
+      }
+      const duration = 750;
+      const startTime = performance.now();
+      function tick(now) {
+        const p = Math.min((now - startTime) / duration, 1);
+        const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+        track.scrollLeft = start + distance * ease;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
     function advance() {
       if (nearEnd()) {
-        track.scrollTo({ left: 0, behavior: reducedMotion ? "auto" : "smooth" });
+        moveTo(0);
       } else {
-        track.scrollBy({ left: step(), behavior: reducedMotion ? "auto" : "smooth" });
+        moveTo(track.scrollLeft + step());
       }
     }
 
@@ -149,7 +167,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
     function start() {
       if (reducedMotion) return;
       if (timer) window.clearInterval(timer);
-      timer = window.setInterval(advance, 2500);
+      timer = window.setInterval(advance, 4000);
     }
     function stop() {
       if (timer) {
@@ -161,9 +179,9 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
     function go(dir) {
       stop();
       if (dir === 1 && nearEnd()) {
-        track.scrollTo({ left: 0, behavior: reducedMotion ? "auto" : "smooth" });
+        moveTo(0);
       } else {
-        track.scrollBy({ left: dir * step(), behavior: reducedMotion ? "auto" : "smooth" });
+        moveTo(track.scrollLeft + dir * step());
       }
       start();
     }
