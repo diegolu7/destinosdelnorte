@@ -1,0 +1,10 @@
+{
+  "destino": "ruinas-de-quilmes",
+  "resenas": [
+    { "autor": "María G.", "fecha": "2026-07-10", "valoracion": 5, "texto": "Un lugar impresionante, la historia se respira en cada muro. Imperdible." },
+    { "autor": "Juan P.", "valoracion": 4, "texto": "Muy lindo y bien conservado. Hay que ir con agua y protección solar." },
+    { "autor": "Ana L.", "fecha": "2026-06-20", "valoracion": 5, "texto": "Las vistas desde el pucará son espectaculares." },
+    { "autor": "Pedro R.", "valoracion": 5, "texto": "Vale muchísimo la pena el desvío. Historia ancestral increíble." },
+    { "autor": "Sofía M.", "fecha": "2026-05-30", "valoracion": 4, "texto": "Buen estado general y muy buena señalización." }
+  ]
+}

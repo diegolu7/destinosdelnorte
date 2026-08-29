@@ -7,6 +7,7 @@ import ExperienceGrid from "../../../components/ExperienceGrid.astro";
 import TravelInfo from "../../../components/TravelInfo.astro";
 import TravelTips from "../../../components/TravelTips.astro";
 import DestinationMap from "../../../components/DestinationMap.astro";
+import Reviews from "../../../components/Reviews.astro";
 import RelatedGuides from "../../../components/RelatedGuides.astro";
 import RelatedDestinations from "../../../components/RelatedDestinations.astro";
 import { resolveImage as getImage } from "../../../lib/images";
@@ -59,6 +60,23 @@ const destinosCercanos = (destino.data.destinosCercanos ?? [])
     href: `/${d.data.provincia}/${d.data.slug}/`,
     imagen: getImage(d.data.imagen),
   }));
+
+const resenasDestino = (await getCollection("resenas"))
+  .filter((r) => r.data.destino === destino.data.slug)
+  .flatMap((r) =>
+    r.data.resenas.map((rev) => ({
+      autor: rev.autor,
+      fecha: rev.fecha,
+      valoracion: rev.valoracion,
+      texto: rev.texto,
+    })),
+  )
+  .slice(0, 5);
+
+const linkVerGoogle =
+  destino.data.lat !== undefined && destino.data.lng !== undefined
+    ? `https://www.google.com/maps/search/?api=1&query=${destino.data.lat},${destino.data.lng}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destino.data.name)}`;
 
 const { Content } = await render(destino);
 
@@ -124,6 +142,8 @@ const touristDestination = {
       <TravelTips title="Consejos" tips={destino.data.consejos} />
     )
   }
+
+  <Reviews reviews={resenasDestino} linkVerGoogle={linkVerGoogle} />
 
   {
     destino.data.lat !== undefined && destino.data.lng !== undefined && (

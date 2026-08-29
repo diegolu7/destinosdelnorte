@@ -1,0 +1,73 @@
+---
+import SectionTitle from "./SectionTitle.astro";
+
+interface Resena {
+  autor: string;
+  fecha?: Date;
+  valoracion: number;
+  texto: string;
+}
+
+interface Props {
+  title?: string;
+  reviews: Resena[];
+  linkVerGoogle: string;
+}
+
+const { title = "Reseñas", reviews, linkVerGoogle } = Astro.props;
+
+function formatFecha(fecha?: Date): string {
+  if (!fecha) return "";
+  return new Intl.DateTimeFormat("es-AR", { month: "short", year: "numeric" }).format(fecha);
+}
+
+function stars(valoracion: number): boolean[] {
+  return Array.from({ length: 5 }, (_, i) => i < Math.round(valoracion));
+}
+---
+
+<section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+  <div class="flex items-end justify-between gap-4">
+    <SectionTitle title={title} />
+    <a
+      href={linkVerGoogle}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
+    >
+      Ver reseñas en Google
+    </a>
+  </div>
+
+  {
+    reviews.length > 0 ? (
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          reviews.map((review) => (
+            <figure class="rounded-xl bg-tarjeta p-5 shadow-card">
+              <div class="flex items-center gap-1" aria-label={`${review.valoracion} de 5 estrellas`}>
+                {
+                  stars(review.valoracion).map((on, i) => (
+                    <svg key={i} viewBox="0 0 20 20" class={`h-4 w-4 ${on ? "text-terracota" : "text-border-card"}`} fill="currentColor" aria-hidden="true">
+                      <path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.9L10 14.8l-5.3 2.9 1-5.9-4.2-4.1 5.9-.9L10 1.5z" />
+                    </svg>
+                  ))
+                }
+              </div>
+              <blockquote class="mt-3 text-sm leading-relaxed text-body">“{review.texto}”</blockquote>
+              <figcaption class="mt-3 text-xs text-body-light">
+                — {review.autor}
+                {review.fecha && <> · {formatFecha(review.fecha)}</>}
+                {" · Google"}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    ) : (
+      <p class="mt-8 text-sm leading-relaxed text-body">
+        Todavía no tenemos reseñas publicadas de este lugar. Conocé las opiniones de otros viajeros en Google.
+      </p>
+    )
+  }
+</section>

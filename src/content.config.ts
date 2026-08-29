@@ -77,4 +77,19 @@ const faqs = defineCollection({
   }),
 });
 
-export const collections = { provincias, destinos, guias, experiencias, faqs };
+const resenas = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/resenas" }),
+  schema: z.object({
+    destino: z.string(),
+    resenas: z.array(
+      z.object({
+        autor: z.string(),
+        fecha: z.coerce.date().optional(),
+        valoracion: z.number(),
+        texto: z.string(),
+      }),
+    ),
+  }),
+});
+
+export const collections = { provincias, destinos, guias, experiencias, faqs, resenas };
