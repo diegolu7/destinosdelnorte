@@ -16,7 +16,6 @@ const guiasProvincias = provincias.map((p) => ({
 const navMain = [
   { label: "Qué hacer", href: "/#que-hacer" },
   { label: "Destinos", href: "/#destinos" },
-  { label: "Blog", href: "/" },
 ];
 ---
 
@@ -79,6 +78,13 @@ const navMain = [
           }
         </ul>
       </div>
+
+      <a
+        href={url("/")}
+        class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
+      >
+        Blog
+      </a>
     </nav>
 
     <div class="flex items-center gap-2">
@@ -138,6 +144,12 @@ const navMain = [
           }
         </ul>
       </details>
+      <a
+        href={url("/")}
+        class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
+      >
+        Blog
+      </a>
       <a
         href={url("/#buscador")}
         class="mt-2 inline-flex items-center gap-2 py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
