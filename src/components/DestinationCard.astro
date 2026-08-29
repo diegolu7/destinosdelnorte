@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { url } from "../lib/site";
 
 interface Props {
   nombre: string;
@@ -13,7 +14,7 @@ const { nombre, descripcion, href, imagen, extraClass = "" } = Astro.props;
 ---
 
 <a
-  href={href}
+  href={url(href)}
   class={`group relative block aspect-[4/5] overflow-hidden rounded-xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover ${extraClass}`}
 >
   <Image

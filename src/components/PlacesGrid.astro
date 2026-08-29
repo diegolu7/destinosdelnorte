@@ -1,0 +1,22 @@
+---
+import SectionTitle from "./SectionTitle.astro";
+import PlaceCard from "./PlaceCard.astro";
+
+interface Props {
+  title: string;
+  places: { nombre: string; descripcion?: string }[];
+}
+
+const { title, places } = Astro.props;
+---
+
+<section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+  <SectionTitle title={title} />
+  <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      places.map((place, i) => (
+        <PlaceCard nombre={place.nombre} descripcion={place.descripcion} index={i} />
+      ))
+    }
+  </div>
+</section>

@@ -1,11 +1,12 @@
 ---
 import Icon from "./Icon.astro";
+import { url } from "../lib/site";
 ---
 
-<div class="relative z-10 -mt-12 px-5 lg:-mt-16 lg:px-8">
+<div class="relative z-10 px-5 pb-4 lg:px-8 lg:pb-6">
   <div class="mx-auto max-w-6xl rounded-[14px] bg-header p-3 shadow-search sm:p-4">
     <form
-      action="/busqueda/"
+      action={url("/busqueda/")}
       method="get"
       class="flex flex-col gap-2 sm:flex-row sm:items-center"
       role="search"

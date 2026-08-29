@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
+import { url } from "../lib/site";
 
 interface Props {
   nombre: string;
@@ -12,7 +13,7 @@ const { nombre, slug, imagen } = Astro.props;
 ---
 
 <a
-  href={`/${slug}/`}
+  href={url(`/${slug}/`)}
   class="group relative block h-28 overflow-hidden rounded-2xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover sm:h-auto sm:aspect-[4/3]"
 >
   <Image

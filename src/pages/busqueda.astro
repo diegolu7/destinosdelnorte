@@ -39,10 +39,14 @@ const experiencias = (await getCollection("experiencias")).map((experiencia) => 
   </section>
 </BaseLayout>
 
-<script define:vars={{ destinos, provincias, experiencias }} is:inline>
+<script define:vars={{ destinos, provincias, experiencias, base: import.meta.env.BASE_URL }} is:inline>
   const queryLabel = document.getElementById("query-label");
   const results = document.getElementById("results");
   const resultsEmpty = document.getElementById("results-empty");
+
+  function p(path) {
+    return base + path;
+  }
 
   function normalize(value) {
     return String(value)
@@ -63,7 +67,7 @@ const experiencias = (await getCollection("experiencias")).map((experiencia) => 
         resultados.push({
           nombre: provincia.nombre,
           descripcion: "Descubrí qué hacer en " + provincia.nombre + ": lugares para visitar y experiencias.",
-          href: "/" + provincia.slug + "/",
+          href: p("/" + provincia.slug + "/"),
           etiqueta: "Provincia",
         });
       }
@@ -74,7 +78,7 @@ const experiencias = (await getCollection("experiencias")).map((experiencia) => 
         resultados.push({
           nombre: destino.nombre,
           descripcion: destino.descripcion,
-          href: "/" + destino.provincia + "/" + destino.slug + "/",
+          href: p("/" + destino.provincia + "/" + destino.slug + "/"),
           etiqueta: "Destino",
         });
       }
@@ -87,7 +91,7 @@ const experiencias = (await getCollection("experiencias")).map((experiencia) => 
         resultados.push({
           nombre: experiencia.nombre,
           descripcion: experiencia.descripcion,
-          href: "/#experiencias",
+          href: p("/#experiencias"),
           etiqueta: "Experiencia",
         });
       }

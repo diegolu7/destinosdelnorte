@@ -1,0 +1,48 @@
+---
+import SectionTitle from "./SectionTitle.astro";
+import Icon from "./Icon.astro";
+
+interface Props {
+  title: string;
+  comoLlegar?: string;
+  mejorEpoca?: string;
+  diasRecomendados?: string;
+  dondeComer?: string;
+  dondeAlojarse?: string;
+}
+
+const { title, comoLlegar, mejorEpoca, diasRecomendados, dondeComer, dondeAlojarse } = Astro.props;
+
+const items = [
+  { icon: "pin" as const, label: "Cómo llegar", value: comoLlegar },
+  { icon: "calendar" as const, label: "Mejor época", value: mejorEpoca },
+  { icon: "time" as const, label: "Duración recomendada", value: diasRecomendados },
+  { icon: "gastronomia" as const, label: "Dónde comer", value: dondeComer },
+  { icon: "bed" as const, label: "Dónde alojarse", value: dondeAlojarse },
+].filter((item) => item.value);
+---
+
+{
+  items.length > 0 && (
+    <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+      <SectionTitle title={title} />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {
+          items.map((item) => (
+            <div class="flex items-start gap-4 rounded-xl bg-tarjeta p-5 shadow-card">
+              <span class="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-terracota/10 text-terracota">
+                <Icon name={item.icon} size={20} />
+              </span>
+              <div>
+                <h3 class="font-display text-sm font-semibold uppercase tracking-wide text-body-light">
+                  {item.label}
+                </h3>
+                <p class="mt-1 text-sm leading-relaxed text-body">{item.value}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  )
+}

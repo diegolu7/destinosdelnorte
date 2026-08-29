@@ -1,0 +1,47 @@
+---
+import SectionTitle from "./SectionTitle.astro";
+import DestinationCard from "./DestinationCard.astro";
+import { url } from "../lib/site";
+
+interface Props {
+  title: string;
+  linkLabel: string;
+  linkHref: string;
+  destinos: {
+    nombre: string;
+    descripcion: string;
+    href: string;
+    imagen: ImageMetadata;
+  }[];
+}
+
+const { title, linkLabel, linkHref, destinos } = Astro.props;
+---
+
+{
+  destinos.length > 0 && (
+    <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+      <div class="flex items-end justify-between gap-4">
+        <SectionTitle title={title} />
+        <a
+          href={url(linkHref)}
+          class="shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
+        >
+          {linkLabel}
+        </a>
+      </div>
+      <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {
+          destinos.map((destino) => (
+            <DestinationCard
+              nombre={destino.nombre}
+              descripcion={destino.descripcion}
+              href={destino.href}
+              imagen={destino.imagen}
+            />
+          ))
+        }
+      </div>
+    </section>
+  )
+}

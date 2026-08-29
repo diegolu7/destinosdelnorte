@@ -24,6 +24,37 @@ const destinos = defineCollection({
     descripcion: z.string(),
     keywords: z.array(z.string()),
     intro: z.string(),
+    lugaresImperdibles: z
+      .array(z.object({ nombre: z.string(), descripcion: z.string().optional() }))
+      .optional(),
+    experiencias: z.array(z.string()).optional(),
+    comoLlegar: z.string().optional(),
+    mejorEpoca: z.string().optional(),
+    diasRecomendados: z.string().optional(),
+    dondeComer: z.string().optional(),
+    dondeAlojarse: z.string().optional(),
+    consejos: z.array(z.string()).optional(),
+    destinosCercanos: z.array(z.string()).optional(),
+  }),
+});
+
+const guias = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/guias" }),
+  schema: z.object({
+    titulo: z.string(),
+    descripcion: z.string(),
+    provincia: z.string(),
+    destino: z.string(),
+    tipo: z.enum([
+      "como-llegar",
+      "mejor-epoca",
+      "consejos",
+      "que-hacer",
+      "itinerario",
+      "experiencia",
+    ]),
+    imagen: z.string().optional(),
+    fechaActualizacion: z.coerce.date().optional(),
   }),
 });
 
@@ -32,8 +63,8 @@ const experiencias = defineCollection({
   schema: z.object({
     nombre: z.string(),
     descripcion: z.string(),
-    icono: z.enum(["aventura", "cultura", "gastronomia", "naturaleza"]),
+    icono: z.enum(["aventura", "cultura", "gastronomia", "naturaleza", "bodegas", "senderismo"]),
   }),
 });
 
-export const collections = { provincias, destinos, experiencias };
+export const collections = { provincias, destinos, guias, experiencias };

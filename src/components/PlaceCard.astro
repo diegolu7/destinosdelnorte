@@ -1,0 +1,21 @@
+---
+interface Props {
+  nombre: string;
+  descripcion?: string;
+  index: number;
+}
+
+const { nombre, descripcion, index } = Astro.props;
+---
+
+<article class="rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover">
+  <span class="font-display text-2xl font-bold text-terracota/30" aria-hidden="true">
+    {String(index + 1).padStart(2, "0")}
+  </span>
+  <h3 class="mt-2 font-display text-lg font-semibold text-navy">{nombre}</h3>
+  {
+    descripcion && (
+      <p class="mt-1 text-sm leading-relaxed text-body-light">{descripcion}</p>
+    )
+  }
+</article>

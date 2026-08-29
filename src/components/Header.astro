@@ -1,6 +1,7 @@
 ---
 import logo from "../assets/logo_destinos_del_norte.png";
 import Icon from "./Icon.astro";
+import { url } from "../lib/site";
 
 const navLinks = [
   { label: "Destinos", href: "/#destinos" },
@@ -13,7 +14,7 @@ const navLinks = [
 
 <header class="sticky top-0 z-50 border-b border-border-input bg-header">
   <div class="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 lg:h-20 lg:px-8">
-    <a href="/" class="flex items-center" aria-label="Destinos del Norte — Inicio">
+    <a href={url("/")} class="flex items-center" aria-label="Destinos del Norte — Inicio">
       <img
         src={logo.src}
         width={logo.width}
@@ -28,7 +29,7 @@ const navLinks = [
       {
         navLinks.map((link) => (
           <a
-            href={link.href}
+            href={url(link.href)}
             class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
           >
             {link.label}
@@ -39,7 +40,7 @@ const navLinks = [
 
     <div class="flex items-center gap-2">
       <a
-        href="/busqueda/"
+        href={url("/busqueda/")}
         class="hidden rounded-full p-2 text-navy transition-colors duration-200 hover:text-terracota lg:inline-flex"
         aria-label="Buscar destinos"
       >
@@ -63,7 +64,7 @@ const navLinks = [
       {
         navLinks.map((link) => (
           <a
-            href={link.href}
+            href={url(link.href)}
             class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 last:border-0 hover:text-terracota"
           >
             {link.label}
@@ -71,7 +72,7 @@ const navLinks = [
         ))
       }
       <a
-        href="/busqueda/"
+        href={url("/busqueda/")}
         class="mt-2 inline-flex items-center gap-2 py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
         <Icon name="search" size={20} />

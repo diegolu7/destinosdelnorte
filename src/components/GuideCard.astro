@@ -1,0 +1,40 @@
+---
+import { url } from "../lib/site";
+
+const tipoLabels: Record<string, string> = {
+  "como-llegar": "Cómo llegar",
+  "mejor-epoca": "Mejor época",
+  "consejos": "Consejos",
+  "que-hacer": "Qué hacer",
+  "itinerario": "Itinerario",
+  "experiencia": "Experiencia",
+};
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  href: string;
+  tipo: string;
+  fecha?: string;
+}
+
+const { titulo, descripcion, href, tipo, fecha } = Astro.props;
+---
+
+<a
+  href={url(href)}
+  class="group flex flex-col rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover"
+>
+  <div class="flex items-center justify-between gap-3">
+    <span class="inline-flex rounded-full bg-terracota/10 px-2.5 py-0.5 text-[11px] font-semibold text-terracota">
+      {tipoLabels[tipo] ?? tipo}
+    </span>
+    {
+      fecha && <span class="text-[11px] text-body-light">{fecha}</span>
+    }
+  </div>
+  <h3 class="mt-3 font-display text-lg font-semibold text-navy transition-colors duration-200 group-hover:text-terracota">
+    {titulo}
+  </h3>
+  <p class="mt-1 text-sm leading-relaxed text-body-light">{descripcion}</p>
+</a>

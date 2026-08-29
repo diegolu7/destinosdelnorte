@@ -8,6 +8,7 @@ import ProvinceCard from "../components/ProvinceCard.astro";
 import DestinationCard from "../components/DestinationCard.astro";
 import ExperienceCard from "../components/ExperienceCard.astro";
 import { getImage } from "../lib/images";
+import { url } from "../lib/site";
 
 const provincias = (await getCollection("provincias")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name, "es"),
@@ -51,7 +52,7 @@ const destinosParaMostrar = destinos.slice(0, 5);
     <div class="mx-auto w-full max-w-6xl px-5 pb-10 lg:px-8 lg:pb-16">
       <div class="flex items-end justify-between gap-4">
         <SectionTitle title="Destinos imperdibles del Norte" />
-        <a href="/salta/" class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
+        <a href={url("/salta/")} class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
           Ver todos los destinos
         </a>
       </div>
@@ -68,7 +69,7 @@ const destinosParaMostrar = destinos.slice(0, 5);
           ))
         }
       </div>
-      <a href="/salta/" class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
+      <a href={url("/salta/")} class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
         Ver todos
       </a>
     </div>
@@ -78,7 +79,7 @@ const destinosParaMostrar = destinos.slice(0, 5);
     <div class="mx-auto w-full max-w-6xl px-5 pb-16 lg:px-8 lg:pb-24">
       <div class="flex items-end justify-between gap-4">
         <SectionTitle title="Experiencias que te van a encantar" />
-        <a href="/jujuy/" class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
+        <a href={url("/jujuy/")} class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
           Ver todas las experiencias
         </a>
       </div>
@@ -93,7 +94,7 @@ const destinosParaMostrar = destinos.slice(0, 5);
           ))
         }
       </div>
-      <a href="/jujuy/" class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
+      <a href={url("/jujuy/")} class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
         Ver todas
       </a>
     </div>

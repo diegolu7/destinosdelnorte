@@ -1,9 +1,13 @@
 ---
 import { getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import Breadcrumbs from "../../../components/Breadcrumbs.astro";
-import DestinationCard from "../../../components/DestinationCard.astro";
+import DestinationHero from "../../../components/DestinationHero.astro";
+import PlacesGrid from "../../../components/PlacesGrid.astro";
+import ExperienceGrid from "../../../components/ExperienceGrid.astro";
+import TravelInfo from "../../../components/TravelInfo.astro";
+import TravelTips from "../../../components/TravelTips.astro";
+import RelatedGuides from "../../../components/RelatedGuides.astro";
+import RelatedDestinations from "../../../components/RelatedDestinations.astro";
 import { getImage } from "../../../lib/images";
 
 export async function getStaticPaths() {
@@ -19,9 +23,41 @@ const { destino } = Astro.props;
 const provincias = await getCollection("provincias");
 const provincia = provincias.find((p) => p.data.slug === destino.data.provincia)!;
 
-const destinosCercanos = (await getCollection("destinos"))
-  .filter((d) => d.data.provincia === provincia.data.slug && d.data.slug !== destino.data.slug)
-  .sort((a, b) => a.data.name.localeCompare(b.data.name, "es"));
+const allDestinos = await getCollection("destinos");
+const destinoBySlug = new Map(allDestinos.map((d) => [d.data.slug, d]));
+
+const allExperiencias = await getCollection("experiencias");
+const expById = new Map(allExperiencias.map((e) => [e.id, e]));
+const experiencias = (destino.data.experiencias ?? [])
+  .map((id) => expById.get(id))
+  .filter((e): e is NonNullable<typeof e> => Boolean(e))
+  .map((e) => ({ nombre: e.data.nombre, descripcion: e.data.descripcion, icono: e.data.icono }));
+
+const allGuias = await getCollection("guias");
+const guiasDelDestino = allGuias
+  .filter((g) => g.data.destino === destino.data.slug)
+  .map((g) => ({
+    titulo: g.data.titulo,
+    descripcion: g.data.descripcion,
+    href: `/${provincia.data.slug}/${destino.data.slug}/${g.id.split("/").pop()}/`,
+    tipo: g.data.tipo,
+    fecha: g.data.fechaActualizacion
+      ? new Intl.DateTimeFormat("es-AR", { month: "short", year: "numeric" }).format(
+          g.data.fechaActualizacion,
+        )
+      : undefined,
+  }))
+  .sort((a, b) => a.titulo.localeCompare(b.titulo, "es"));
+
+const destinosCercanos = (destino.data.destinosCercanos ?? [])
+  .map((slug) => destinoBySlug.get(slug))
+  .filter((d): d is NonNullable<typeof d> => Boolean(d))
+  .map((d) => ({
+    nombre: d.data.name,
+    descripcion: d.data.descripcion,
+    href: `/${d.data.provincia}/${d.data.slug}/`,
+    imagen: getImage(d.data.imagen),
+  }));
 
 const { Content } = await render(destino);
 
@@ -46,61 +82,54 @@ const touristDestination = {
   ]}
   jsonLd={[touristDestination]}
 >
-  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
-    <Breadcrumbs
-      items={[
-        { name: provincia.data.name, path: `/${provincia.data.slug}/` },
-        { name: destino.data.name, path: `/${provincia.data.slug}/${destino.data.slug}/` },
-      ]}
-    />
+  <DestinationHero
+    titulo={`Qué hacer en ${destino.data.name}`}
+    intro={destino.data.intro}
+    provinciaName={provincia.data.name}
+    provinciaHref={`/${provincia.data.slug}/`}
+    imagen={getImage(destino.data.imagen)}
+    imagenAlt={destino.data.name}
+    breadcrumbs={[
+      { name: provincia.data.name, path: `/${provincia.data.slug}/` },
+      { name: destino.data.name, path: `/${provincia.data.slug}/${destino.data.slug}/` },
+    ]}
+  />
 
-    <h1 class="mt-4 font-display text-3xl font-bold text-navy lg:text-[42px] lg:leading-tight">
-      Qué hacer en {destino.data.name}
-    </h1>
+  {
+    destino.data.lugaresImperdibles && destino.data.lugaresImperdibles.length > 0 && (
+      <PlacesGrid title="Lugares imperdibles" places={destino.data.lugaresImperdibles} />
+    )
+  }
 
-    <p class="mt-4 max-w-3xl text-sm leading-relaxed text-body lg:text-base">
-      {destino.data.intro}
-    </p>
-
-    <div class="mt-8 overflow-hidden rounded-2xl shadow-card">
-      <Image
-        src={getImage(destino.data.imagen)}
-        alt={destino.data.name}
-        width={672}
-        height={621}
-        loading="eager"
-        class="h-auto w-full max-w-2xl object-cover"
-      />
-    </div>
-
-    <div class="prose-norte mt-8 max-w-3xl lg:mt-10">
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="prose-norte max-w-3xl">
       <Content />
     </div>
-
-    <div class="mt-12 border-t border-border-card pt-8">
-      <div class="flex items-center justify-between gap-4">
-        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">
-          Otros destinos de {provincia.data.name}
-        </h2>
-        <a
-          href={`/${provincia.data.slug}/`}
-          class="shrink-0 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
-        >
-          Ver {provincia.data.name}
-        </a>
-      </div>
-      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {
-          destinosCercanos.map((d) => (
-            <DestinationCard
-              nombre={d.data.name}
-              descripcion={d.data.descripcion}
-              href={`/${provincia.data.slug}/${d.data.slug}/`}
-              imagen={getImage(d.data.imagen)}
-            />
-          ))
-        }
-      </div>
-    </div>
   </section>
+
+  <ExperienceGrid title="Experiencias" experiencias={experiencias} />
+
+  <TravelInfo
+    title="Información práctica"
+    comoLlegar={destino.data.comoLlegar}
+    mejorEpoca={destino.data.mejorEpoca}
+    diasRecomendados={destino.data.diasRecomendados}
+    dondeComer={destino.data.dondeComer}
+    dondeAlojarse={destino.data.dondeAlojarse}
+  />
+
+  {
+    destino.data.consejos && destino.data.consejos.length > 0 && (
+      <TravelTips title="Consejos" tips={destino.data.consejos} />
+    )
+  }
+
+  <RelatedGuides title="Guías relacionadas" guides={guiasDelDestino} />
+
+  <RelatedDestinations
+    title="Destinos cercanos"
+    linkLabel={`Ver ${provincia.data.name}`}
+    linkHref={`/${provincia.data.slug}/`}
+    destinos={destinosCercanos}
+  />
 </BaseLayout>

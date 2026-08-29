@@ -1,0 +1,38 @@
+---
+import SectionTitle from "./SectionTitle.astro";
+import GuideCard from "./GuideCard.astro";
+
+interface Props {
+  title: string;
+  guides: {
+    titulo: string;
+    descripcion: string;
+    href: string;
+    tipo: string;
+    fecha?: string;
+  }[];
+}
+
+const { title, guides } = Astro.props;
+---
+
+{
+  guides.length > 0 && (
+    <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+      <SectionTitle title={title} />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          guides.map((guide) => (
+            <GuideCard
+              titulo={guide.titulo}
+              descripcion={guide.descripcion}
+              href={guide.href}
+              tipo={guide.tipo}
+              fecha={guide.fecha}
+            />
+          ))
+        }
+      </div>
+    </section>
+  )
+}

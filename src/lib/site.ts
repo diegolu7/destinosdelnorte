@@ -6,3 +6,10 @@ export const SITE = {
   locale: "es-AR",
   twitter: "@destinosdelnorte",
 } as const;
+
+export function url(path: string): string {
+  const base = import.meta.env.BASE_URL;
+  if (path.startsWith(base) || path.startsWith("http")) return path;
+  return (base + "/" + path).replace(/\/{2,}/g, "/");
+}
+
