@@ -82,22 +82,40 @@ const items = [
         />
       </label>
 
-      <label class="relative flex flex-1 items-center gap-2 rounded-[10px] border border-border-input bg-header px-4 py-3">
+      <div id="busqueda-tipo-wrap" class="relative flex flex-1 items-center gap-2 rounded-[10px] border border-border-input bg-header px-4 py-3">
         <Icon name="filter" size={20} class="shrink-0 text-terracota" />
-        <span class="sr-only">Tipo de experiencia</span>
-        <select
-          name="tipo"
-          class="w-full appearance-none bg-transparent text-sm text-body-light focus:outline-none"
+        <button
+          type="button"
+          id="busqueda-tipo-btn"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-controls="busqueda-tipo-list"
+          class="flex w-full items-center justify-between gap-2 text-sm focus:outline-none"
         >
-          <option value="" selected>Tipo de experiencia</option>
+          <span id="busqueda-tipo-label" class="truncate text-body-light">Tipo de experiencia</span>
+          <Icon name="chevron" size={16} class="pointer-events-none shrink-0 text-body-light" />
+        </button>
+        <input type="hidden" name="tipo" id="busqueda-tipo" value="" />
+        <ul
+          id="busqueda-tipo-list"
+          role="listbox"
+          aria-label="Tipo de experiencia"
+          hidden
+          class="absolute left-0 right-0 top-full z-20 mt-2 max-h-72 overflow-auto rounded-xl bg-header p-1.5 shadow-card"
+        >
           {
             experiencias.map((nombre) => (
-              <option value={nombre}>{nombre}</option>
+              <li
+                role="option"
+                data-tipo={nombre}
+                class="flex cursor-pointer items-center rounded-lg px-3 py-2 text-sm text-navy transition-colors duration-150 hover:bg-page"
+              >
+                <span class="truncate">{nombre}</span>
+              </li>
             ))
           }
-        </select>
-        <Icon name="chevron" size={16} class="pointer-events-none shrink-0 text-body-light" />
-      </label>
+        </ul>
+      </div>
 
       <button
         type="submit"
@@ -211,5 +229,52 @@ const items = [
       list.hidden = true;
       input.setAttribute("aria-expanded", "false");
     }, 120);
+  });
+
+  const tipoWrap = document.getElementById("busqueda-tipo-wrap");
+  const tipoBtn = document.getElementById("busqueda-tipo-btn");
+  const tipoList = document.getElementById("busqueda-tipo-list");
+  const tipoInput = document.getElementById("busqueda-tipo");
+  const tipoLabel = document.getElementById("busqueda-tipo-label");
+
+  function setTipo(value) {
+    tipoInput.value = value;
+    if (value) {
+      tipoLabel.textContent = value;
+      tipoLabel.classList.remove("text-body-light");
+      tipoLabel.classList.add("text-navy");
+    } else {
+      tipoLabel.textContent = "Tipo de experiencia";
+      tipoLabel.classList.add("text-body-light");
+      tipoLabel.classList.remove("text-navy");
+    }
+  }
+
+  function toggleTipo(force) {
+    const open = force !== undefined ? force : tipoList.hidden;
+    tipoList.hidden = !open;
+    tipoBtn.setAttribute("aria-expanded", String(!tipoList.hidden));
+  }
+
+  tipoBtn.addEventListener("click", () => toggleTipo());
+
+  tipoList.addEventListener("mousedown", (e) => {
+    const li = e.target.closest("[data-tipo]");
+    if (!li) return;
+    setTipo(li.dataset.tipo);
+    tipoList.querySelectorAll("[role=option]").forEach((o) => {
+      o.classList.toggle("bg-page", o === li);
+    });
+    toggleTipo(false);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!tipoList.hidden && tipoWrap && !tipoWrap.contains(e.target)) {
+      toggleTipo(false);
+    }
+  });
+
+  tipoBtn.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") toggleTipo(false);
   });
 </script>
