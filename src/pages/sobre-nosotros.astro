@@ -5,7 +5,7 @@ import SectionTitle from "../components/SectionTitle.astro";
 import ProvinceCard from "../components/ProvinceCard.astro";
 import Icon from "../components/Icon.astro";
 import { resolveImage } from "../lib/images";
-import { url } from "../lib/site";
+import { SITE, url } from "../lib/site";
 
 const provincias = (await getCollection("provincias")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name, "es"),
@@ -194,6 +194,12 @@ const aboutPage = {
       >
         Explorá destinos
       </a>
+      <p class="mt-5 text-sm text-navy-secondary">
+        ¿Tenés consultas? Escribinos a{" "}
+        <a href={`mailto:${SITE.email}`} class="font-medium text-white underline underline-offset-2 transition-colors duration-150 hover:text-terracota-light">
+          {SITE.email}
+        </a>
+      </p>
     </div>
   </section>
 </BaseLayout>

@@ -2,6 +2,7 @@
 import logo from "../assets/logo_destinos_del_norte_footer.png";
 import Icon from "./Icon.astro";
 import Newsletter from "./Newsletter.astro";
+import { SITE } from "../lib/site";
 import { url } from "../lib/site";
 
 const columns = [
@@ -25,7 +26,7 @@ const columns = [
     title: "Información",
     links: [
       { label: "Sobre nosotros", href: "/sobre-nosotros/" },
-      { label: "Contacto", href: "/" },
+      { label: "Contacto", href: `mailto:${SITE.email}` },
       { label: "Preguntas frecuentes", href: "/preguntas-frecuentes/" },
     ],
   },
@@ -49,6 +50,12 @@ const columns = [
         <p class="mt-4 max-w-[220px] text-[13px] leading-relaxed text-navy-secondary">
           Tu guía para descubrir los lugares más increíbles del Norte Argentino.
         </p>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="mt-3 inline-block break-all text-[13px] text-footer-link transition-colors duration-150 hover:text-white"
+        >
+          {SITE.email}
+        </a>
       </div>
 
       <div class="hidden gap-6 lg:grid lg:grid-cols-3 lg:col-span-3">

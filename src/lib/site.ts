@@ -4,6 +4,7 @@ export const SITE = {
     "Descubrí destinos, lugares y experiencias turísticas de Salta, Jujuy y Tucumán.",
   url: "https://diegolu7.github.io/destinosdelnorte",
   locale: "es-AR",
+  email: "delnorte.destinos@gmail.com",
   twitter: "@destinosdelnorte",
 } as const;
 
