@@ -29,12 +29,6 @@ const columns = [
     ],
   },
 ] as const;
-
-const social = [
-  { name: "instagram", label: "Instagram" },
-  { name: "facebook", label: "Facebook" },
-  { name: "youtube", label: "YouTube" },
-] as const;
 ---
 
 <footer class="bg-navy">
@@ -54,21 +48,6 @@ const social = [
         <p class="mt-4 max-w-[220px] text-[13px] leading-relaxed text-navy-secondary">
           Tu guía para descubrir los lugares más increíbles del Norte Argentino.
         </p>
-        <ul class="mt-5 flex gap-3 lg:hidden">
-          {
-            social.map((s) => (
-              <li>
-                <a
-                  href="/"
-                  class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-200 hover:bg-terracota"
-                  aria-label={s.label}
-                >
-                  <Icon name={s.name} size={18} />
-                </a>
-              </li>
-            ))
-          }
-        </ul>
       </div>
 
       <div class="hidden gap-6 lg:grid lg:grid-cols-3 lg:col-span-3">
@@ -123,24 +102,6 @@ const social = [
           </details>
         ))
       }
-    </div>
-
-    <div class="mt-6 hidden border-t border-footer-line pt-6 lg:block">
-      <ul class="flex gap-3">
-        {
-          social.map((s) => (
-            <li>
-              <a
-                href="/"
-                class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-200 hover:bg-terracota"
-                aria-label={s.label}
-              >
-                <Icon name={s.name} size={18} />
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </div>
 
     <div class="mt-6 flex flex-col items-start justify-between gap-2 border-t border-footer-line pt-5 lg:flex-row lg:items-center">
