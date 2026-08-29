@@ -69,4 +69,12 @@ const experiencias = defineCollection({
   }),
 });
 
-export const collections = { provincias, destinos, guias, experiencias };
+const faqs = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/faqs" }),
+  schema: z.object({
+    pregunta: z.string(),
+    categoria: z.string(),
+  }),
+});
+
+export const collections = { provincias, destinos, guias, experiencias, faqs };
