@@ -77,4 +77,14 @@ const faqs = defineCollection({
   }),
 });
 
-export const collections = { provincias, destinos, guias, experiencias, faqs };
+const rutas = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/rutas" }),
+  schema: z.object({
+    titulo: z.string(),
+    descripcion: z.string(),
+    dias: z.number(),
+    imagen: z.string().optional(),
+  }),
+});
+
+export const collections = { provincias, destinos, guias, experiencias, faqs, rutas };
