@@ -33,6 +33,7 @@ consejos:
   - "Comprá quesos y dulces artesanales directamente en la Villa de Tafí."
 destinosCercanos:
   - "amaicha-del-valle"
+  - "ruinas-de-quilmes"
 ---
 
 ## Qué hacer en Tafí del Valle

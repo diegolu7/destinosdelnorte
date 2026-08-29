@@ -32,6 +32,7 @@ consejos:
   - "La altura supera los 2.400 metros: movete con calma los primeros días."
 destinosCercanos:
   - "purmamarca"
+  - "humahuaca"
 ---
 
 ## Qué hacer en Tilcara

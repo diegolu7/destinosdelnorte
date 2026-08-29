@@ -8,7 +8,7 @@ import TravelInfo from "../../../components/TravelInfo.astro";
 import TravelTips from "../../../components/TravelTips.astro";
 import RelatedGuides from "../../../components/RelatedGuides.astro";
 import RelatedDestinations from "../../../components/RelatedDestinations.astro";
-import { getImage } from "../../../lib/images";
+import { resolveImage as getImage } from "../../../lib/images";
 
 export async function getStaticPaths() {
   const destinos = await getCollection("destinos");

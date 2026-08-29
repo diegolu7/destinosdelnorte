@@ -32,6 +32,8 @@ consejos:
   - "Reservá con antelación en las bodegas durante la vendimia y los fines de semana."
   - "La altura se nota: andá con calma el primer día."
 destinosCercanos:
+  - "cachi"
+  - "quebrada-de-las-conchas"
   - "amaicha-del-valle"
 ---
 

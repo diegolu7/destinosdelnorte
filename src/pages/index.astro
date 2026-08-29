@@ -7,7 +7,7 @@ import SectionTitle from "../components/SectionTitle.astro";
 import ProvinceCard from "../components/ProvinceCard.astro";
 import DestinationCard from "../components/DestinationCard.astro";
 import ExperienceCard from "../components/ExperienceCard.astro";
-import { getImage } from "../lib/images";
+import { resolveImage as getImage } from "../lib/images";
 import { url } from "../lib/site";
 
 const provincias = (await getCollection("provincias")).sort((a, b) =>

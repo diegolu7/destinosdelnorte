@@ -32,6 +32,7 @@ consejos:
   - "Llevá protector solar y agua; la altura se nota más de lo que parece."
 destinosCercanos:
   - "tilcara"
+  - "salinas-grandes"
 ---
 
 ## Qué hacer en Purmamarca

@@ -30,8 +30,9 @@ consejos:
   - "Llevá agua y protector solar; el clima es seco y la insolación fuerte."
   - "Respetá los sitios arqueológicos: no está permitido retirar piezas ni subirse a las ruinas."
 destinosCercanos:
-  - "cafayate"
   - "tafi-del-valle"
+  - "ruinas-de-quilmes"
+  - "cafayate"
 ---
 
 ## Qué hacer en Amaicha del Valle

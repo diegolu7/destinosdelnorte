@@ -15,6 +15,20 @@ export function getImage(name: string): ImageMetadata {
   return image;
 }
 
+export function hasImage(name: string): boolean {
+  return Boolean(images[`../assets/${name}`]);
+}
+
+export const PLACEHOLDERS = {
+  card: "que_hacer_card_placeholder.png",
+  section: "seccion_atractivo_placeholder.png",
+} as const;
+
+export function resolveImage(name: string): ImageMetadata {
+  if (hasImage(name)) return getImage(name);
+  return getImage(PLACEHOLDERS.section);
+}
+
 export const ASSET = {
   logo: "logo_destinos_del_norte.png",
   hero: "hero_img.png",

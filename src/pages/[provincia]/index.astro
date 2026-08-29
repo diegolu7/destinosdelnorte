@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import DestinationCard from "../../components/DestinationCard.astro";
-import { getImage } from "../../lib/images";
+import { resolveImage as getImage } from "../../lib/images";
 
 export async function getStaticPaths() {
   const provincias = await getCollection("provincias");
