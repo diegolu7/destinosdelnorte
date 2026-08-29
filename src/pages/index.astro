@@ -144,13 +144,18 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
         track.scrollLeft = target;
         return;
       }
+      track.classList.add("snap-none");
       const duration = 750;
       const startTime = performance.now();
       function tick(now) {
         const p = Math.min((now - startTime) / duration, 1);
         const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
         track.scrollLeft = start + distance * ease;
-        if (p < 1) requestAnimationFrame(tick);
+        if (p < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          track.classList.remove("snap-none");
+        }
       }
       requestAnimationFrame(tick);
     }
