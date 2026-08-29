@@ -113,7 +113,6 @@ const items = [
 <script is:inline>
   const input = document.getElementById("busqueda-q");
   const list = document.getElementById("busqueda-sugerencias");
-  const form = input.closest("form");
   const items = JSON.parse(input.getAttribute("data-items") || "[]");
 
   const MAX = 7;
@@ -173,9 +172,10 @@ const items = [
     const item = matches[i];
     if (!item) return;
     input.value = item.label;
+    matches = [];
     list.hidden = true;
     input.setAttribute("aria-expanded", "false");
-    form.submit();
+    input.focus();
   }
 
   input.addEventListener("input", render);
