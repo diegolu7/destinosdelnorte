@@ -36,7 +36,7 @@ const faqPageSchema = {
   mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.data.pregunta,
-    acceptedAnswer: { "@type": "Answer", text: plainText(f.body) },
+    acceptedAnswer: { "@type": "Answer", text: plainText(f.body ?? "") },
   })),
 };
 ---

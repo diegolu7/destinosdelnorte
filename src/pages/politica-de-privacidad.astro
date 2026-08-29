@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import { SITE } from "../lib/site";
+
+const updated = "Agosto 2026";
+---
+
+<BaseLayout
+  title="Política de privacidad | Destinos del Norte"
+  description="Conocé cómo Destinos del Norte protege y utiliza tu información personal: qué datos recopilamos, cómo los usamos y tus derechos."
+  breadcrumbs={[{ name: "Política de privacidad", path: "/politica-de-privacidad/" }]}
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="max-w-2xl">
+      <span class="inline-flex rounded-full bg-terracota/10 px-3 py-1 text-xs font-semibold text-terracota">
+        Privacidad
+      </span>
+      <h1 class="mt-4 font-display text-3xl font-bold leading-tight text-navy lg:text-[42px] lg:leading-tight">
+        Política de privacidad
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+        En Destinos del Norte nos tomamos en serio tu privacidad. Te explicamos de forma clara y sencilla qué información tratamos, con qué finalidad y cuáles son tus derechos. Última actualización: {updated}.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-3xl px-5 pb-4 lg:px-8">
+    <div class="space-y-6">
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="1. Responsable" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Destinos del Norte es un sitio web turístico dedicado a difundir destinos, guías y experiencias de Salta, Jujuy y Tucumán. Ante cualquier consulta sobre tus datos podés escribirnos a{" "}
+          <a href={`mailto:${SITE.email}`} class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
+            {SITE.email}
+          </a>
+          .
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="2. Qué información recopilamos" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Recopilamos el mínimo necesario para brindarte la información del sitio:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li><strong>Datos que nos envías voluntariamente</strong>: por ejemplo, el email que completás en el formulario de newsletter. Actualmente el formulario funciona solo en la interfaz y no almacena ni transmite datos a un sistema externo.</li>
+          <li><strong>Datos de uso</strong>: en caso de implementarse herramientas de analítica (por ejemplo, Google Analytics), recopilaríamos datos agregados de navegación (páginas visitadas, dispositivo, tiempo de sesión) sin identificar personalmente a cada usuario.</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          No solicitamos, ni almacenamos, datos sensibles ni información personal de contacto más allá de lo indicado.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="3. Cómo usamos la información" />
+        <ul class="prose-norte mt-4 max-w-none">
+          <li>Responder consultas y comunicarnos contigo si nos escribís.</li>
+          <li>Enviar, en caso de activarse, guías y novedades del Norte si te suscribís al newsletter.</li>
+          <li>Mejorar la experiencia y el contenido del sitio mediante datos agregados de uso.</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          No vendemos, alquilamos ni cedemos tus datos personales a terceros con fines comerciales.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="4. Cookies y tecnologías de terceros" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Nuestro sitio no utiliza cookies de rastreo propias. Sin embargo, algunas páginas incorporan contenido de terceros que pueden utilizar cookies propias:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li><strong>Google Maps</strong>: en las páginas de cada destino se embebe un mapa que puede utilizar cookies de Google según su propia política de privacidad.</li>
+          <li><strong>Analítica (futura)</strong>: si implementamos Google Analytics, informaremos aquí su uso y cómo deshabilitarlo.</li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="5. Servicios de terceros" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Utilizamos servicios de terceros únicamente cuando aportan valor al contenido:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li><strong>Google Maps</strong> (mapas embebidos en los destinos).</li>
+          <li><strong>Google Fonts / fuentes locales</strong>: nuestras fuentes se cargan de forma local, sin enviar datos a terceros.</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          Cada proveedor aplica su propia política de privacidad. Te recomendamos revisarlas para conocer cómo tratan los datos.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="6. Tus derechos" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          De acuerdo con la Ley 25.326 de Protección de Datos Personales de la Argentina (y, cuando corresponda, el RGPD de la Unión Europea), tenés derecho a:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li>Solicitar <strong>acceso</strong> a tus datos.</li>
+          <li>Solicitar su <strong>rectificación</strong> si son inexactos.</li>
+          <li>Solicitar su <strong>supresión</strong> cuando ya no sean necesarios.</li>
+          <li>Revocar el consentimiento otorgado.</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          Para ejercer cualquiera de estos derechos, escribinos a{" "}
+          <a href={`mailto:${SITE.email}`} class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
+            {SITE.email}
+          </a>
+          .
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="7. Contacto y actualizaciones" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Esta política puede actualizarse para reflejar cambios en el sitio o en la legislación. Publicaremos la versión vigente en esta página con su fecha de actualización. Ante cualquier duda, podés escribirnos a{" "}
+          <a href={`mailto:${SITE.email}`} class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
+            {SITE.email}
+          </a>
+          .
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="rounded-2xl bg-navy px-6 py-10 text-center lg:px-10">
+      <h2 class="font-display text-2xl font-bold text-white lg:text-3xl">
+        ¿Tenés alguna consulta?
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-sm text-navy-secondary lg:text-base">
+        Escribinos y te ayudamos a resolver tus dudas sobre el sitio o tus datos.
+      </p>
+      <a
+        href={`mailto:${SITE.email}`}
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
+      >
+        Contactanos
+      </a>
+    </div>
+  </section>
+</BaseLayout>

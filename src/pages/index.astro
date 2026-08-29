@@ -152,7 +152,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
     let timer: number | undefined;
 
     function unit(): number {
-      const card = track.firstElementChild;
+      const card = track!.firstElementChild as HTMLElement | null;
       return card ? card.offsetWidth + GAP : 0;
     }
 
@@ -171,16 +171,16 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       if (n < count) n += count;
       if (n !== index) {
         index = n;
-        track.style.transition = "none";
-        track.style.transform = "translateX(" + -index * unit() + "px)";
+        track!.style.transition = "none";
+        track!.style.transform = "translateX(" + -index * unit() + "px)";
         updateDots();
       }
     }
 
     function animateTo(i: number, animated: boolean): void {
       index = i;
-      track.style.transition = animated ? "transform 500ms ease-in-out" : "none";
-      track.style.transform = "translateX(" + -index * unit() + "px)";
+      track!.style.transition = animated ? "transform 500ms ease-in-out" : "none";
+      track!.style.transform = "translateX(" + -index * unit() + "px)";
       updateDots();
       if (animated) {
         window.setTimeout(normalize, 520);
