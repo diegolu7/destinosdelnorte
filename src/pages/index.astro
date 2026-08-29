@@ -129,7 +129,8 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function step() {
-      return Math.max(track.clientWidth * 0.9, 100);
+      const card = track.firstElementChild;
+      return (card ? card.offsetWidth : 100) + 16; // 16px = gap-4
     }
 
     function nearEnd() {
@@ -148,7 +149,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
     function start() {
       if (reducedMotion) return;
       if (timer) window.clearInterval(timer);
-      timer = window.setInterval(advance, 4500);
+      timer = window.setInterval(advance, 2500);
     }
     function stop() {
       if (timer) {
