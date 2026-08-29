@@ -35,6 +35,8 @@ consejos:
 destinosCercanos:
   - "cafayate"
   - "quebrada-de-las-conchas"
+lat: -25.123
+lng: -66.16
 ---
 
 ## Qué hacer en Cachi

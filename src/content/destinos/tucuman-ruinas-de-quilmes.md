@@ -33,6 +33,8 @@ destinosCercanos:
   - "amaicha-del-valle"
   - "tafi-del-valle"
   - "cafayate"
+lat: -26.475
+lng: -66.02
 ---
 
 ## Qué hacer en las Ruinas de Quilmes

@@ -35,6 +35,8 @@ const destinos = defineCollection({
     dondeAlojarse: z.string().optional(),
     consejos: z.array(z.string()).optional(),
     destinosCercanos: z.array(z.string()).optional(),
+    lat: z.number().optional(),
+    lng: z.number().optional(),
   }),
 });
 

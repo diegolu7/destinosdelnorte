@@ -32,6 +32,8 @@ consejos:
 destinosCercanos:
   - "humahuaca"
   - "salinas-grandes"
+lat: -23.24
+lng: -65.21
 ---
 
 ## Qué hacer en el Hornocal

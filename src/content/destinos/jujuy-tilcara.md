@@ -33,6 +33,8 @@ consejos:
 destinosCercanos:
   - "purmamarca"
   - "humahuaca"
+lat: -23.577
+lng: -65.394
 ---
 
 ## Qué hacer en Tilcara

@@ -1,0 +1,48 @@
+---
+import SectionTitle from "./SectionTitle.astro";
+
+interface Props {
+  nombre: string;
+  provinciaName: string;
+  lat: number;
+  lng: number;
+}
+
+const { nombre, provinciaName, lat, lng } = Astro.props;
+
+const q = `${lat},${lng}`;
+const embedSrc = `https://maps.google.com/maps?q=${q}&z=14&output=embed`;
+const linkSrc = `https://www.google.com/maps/search/?api=1&query=${q}`;
+---
+
+<section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+  <SectionTitle title="Ubicación" />
+  <div class="mt-8 grid gap-6 lg:grid-cols-2 lg:items-start">
+    <div>
+      <p class="text-sm leading-relaxed text-body lg:text-base">
+        {nombre} se encuentra en la provincia de <strong class="font-semibold text-navy">{provinciaName}</strong>, en el Norte Argentino.
+      </p>
+      <a
+        href={linkSrc}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-4 inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-navy-deeper"
+      >
+        Ver en Google Maps
+      </a>
+    </div>
+    <div class="overflow-hidden rounded-2xl shadow-card">
+      <iframe
+        src={embedSrc}
+        title={`Mapa de ${nombre}`}
+        width="100%"
+        height="320"
+        style="border:0"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+        class="block h-72 w-full sm:h-80"
+      ></iframe>
+    </div>
+  </div>
+</section>

@@ -33,6 +33,8 @@ consejos:
 destinosCercanos:
   - "purmamarca"
   - "hornocal"
+lat: -23.633
+lng: -65.75
 ---
 
 ## Qué hacer en las Salinas Grandes

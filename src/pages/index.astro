@@ -141,20 +141,22 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
   const track = document.getElementById("destinos-track");
   const prevBtn = document.getElementById("destinos-prev");
   const nextBtn = document.getElementById("destinos-next");
-  const dotBtns = Array.from(document.querySelectorAll("#destinos-dots [data-dot]"));
+  const dotBtns = Array.from(
+    document.querySelectorAll("#destinos-dots [data-dot]"),
+  ) as HTMLElement[];
 
   if (viewport && track) {
     const count = Number(viewport.getAttribute("data-count")) || 0;
     const GAP = 16;
     let index = count;
-    let timer;
+    let timer: number | undefined;
 
-    function unit() {
+    function unit(): number {
       const card = track.firstElementChild;
       return card ? card.offsetWidth + GAP : 0;
     }
 
-    function updateDots() {
+    function updateDots(): void {
       const current = ((index % count) + count) % count;
       dotBtns.forEach((d, i) => {
         const on = i === current;
@@ -163,7 +165,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       });
     }
 
-    function normalize() {
+    function normalize(): void {
       let n = index;
       if (n >= 2 * count) n -= count;
       if (n < count) n += count;
@@ -175,7 +177,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       }
     }
 
-    function animateTo(i, animated) {
+    function animateTo(i: number, animated: boolean): void {
       index = i;
       track.style.transition = animated ? "transform 500ms ease-in-out" : "none";
       track.style.transform = "translateX(" + -index * unit() + "px)";
@@ -185,22 +187,22 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       }
     }
 
-    function go(dir) {
-      stopAutoplay();
-      animateTo(index + dir, true);
-      startAutoplay();
-    }
-
-    function startAutoplay() {
+    function startAutoplay(): void {
       if (timer) window.clearInterval(timer);
       timer = window.setInterval(() => animateTo(index + 1, true), 3500);
     }
 
-    function stopAutoplay() {
+    function stopAutoplay(): void {
       if (timer) {
         window.clearInterval(timer);
         timer = undefined;
       }
+    }
+
+    function go(dir: number): void {
+      stopAutoplay();
+      animateTo(index + dir, true);
+      startAutoplay();
     }
 
     prevBtn?.addEventListener("click", () => go(-1));
@@ -221,7 +223,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
     viewport.addEventListener("touchstart", stopAutoplay, { passive: true });
     viewport.addEventListener("touchend", () => setTimeout(startAutoplay, 3500));
 
-    let startX = null;
+    let startX: number | null = null;
     viewport.addEventListener("pointerdown", (e) => {
       startX = e.clientX;
       stopAutoplay();
@@ -234,7 +236,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       else startAutoplay();
     });
 
-    let rTimer;
+    let rTimer: number | undefined;
     window.addEventListener("resize", () => {
       window.clearTimeout(rTimer);
       rTimer = window.setTimeout(() => animateTo(index, false), 150);

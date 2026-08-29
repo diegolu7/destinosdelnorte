@@ -6,6 +6,7 @@ import PlacesGrid from "../../../components/PlacesGrid.astro";
 import ExperienceGrid from "../../../components/ExperienceGrid.astro";
 import TravelInfo from "../../../components/TravelInfo.astro";
 import TravelTips from "../../../components/TravelTips.astro";
+import DestinationMap from "../../../components/DestinationMap.astro";
 import RelatedGuides from "../../../components/RelatedGuides.astro";
 import RelatedDestinations from "../../../components/RelatedDestinations.astro";
 import { resolveImage as getImage } from "../../../lib/images";
@@ -121,6 +122,17 @@ const touristDestination = {
   {
     destino.data.consejos && destino.data.consejos.length > 0 && (
       <TravelTips title="Consejos" tips={destino.data.consejos} />
+    )
+  }
+
+  {
+    destino.data.lat !== undefined && destino.data.lng !== undefined && (
+      <DestinationMap
+        nombre={destino.data.name}
+        provinciaName={provincia.data.name}
+        lat={destino.data.lat}
+        lng={destino.data.lng}
+      />
     )
   }
 

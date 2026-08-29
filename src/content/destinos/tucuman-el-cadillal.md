@@ -32,6 +32,8 @@ consejos:
 destinosCercanos:
   - "tafi-del-valle"
   - "amaicha-del-valle"
+lat: -26.645
+lng: -65.18
 ---
 
 ## Qué hacer en El Cadillal

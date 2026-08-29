@@ -33,6 +33,8 @@ consejos:
 destinosCercanos:
   - "tilcara"
   - "salinas-grandes"
+lat: -23.745
+lng: -65.495
 ---
 
 ## Qué hacer en Purmamarca

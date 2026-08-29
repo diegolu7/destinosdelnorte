@@ -33,6 +33,8 @@ consejos:
 destinosCercanos:
   - "hornocal"
   - "tilcara"
+lat: -23.204
+lng: -65.35
 ---
 
 ## Qué hacer en Humahuaca

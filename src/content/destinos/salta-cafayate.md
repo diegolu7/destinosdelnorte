@@ -35,6 +35,8 @@ destinosCercanos:
   - "cachi"
   - "quebrada-de-las-conchas"
   - "amaicha-del-valle"
+lat: -26.074
+lng: -65.977
 ---
 
 ## Qué hacer en Cafayate

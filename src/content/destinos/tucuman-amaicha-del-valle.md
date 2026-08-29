@@ -33,6 +33,8 @@ destinosCercanos:
   - "tafi-del-valle"
   - "ruinas-de-quilmes"
   - "cafayate"
+lat: -26.594
+lng: -65.927
 ---
 
 ## Qué hacer en Amaicha del Valle

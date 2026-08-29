@@ -34,6 +34,8 @@ consejos:
 destinosCercanos:
   - "amaicha-del-valle"
   - "ruinas-de-quilmes"
+lat: -26.851
+lng: -65.697
 ---
 
 ## Qué hacer en Tafí del Valle

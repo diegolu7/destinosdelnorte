@@ -33,6 +33,8 @@ consejos:
 destinosCercanos:
   - "cachi"
   - "quebrada-de-las-conchas"
+lat: -24.219
+lng: -66.317
 ---
 
 ## Qué hacer en el Tren a las Nubes
