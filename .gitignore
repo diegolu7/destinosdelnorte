@@ -32,6 +32,9 @@ dist/
 /que_hacer_card_placeholder.png
 /seccion_atractivo_placeholder.png
 
+# Imágenes fuente provistas (se copian a src/assets/)
+/faltantes/
+
 # Asset futuro (aún sin usar en el build)
 /hero_img_tafi_del_valle.png
 /hero_img_cafayate.png
