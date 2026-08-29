@@ -67,10 +67,13 @@ const resenasData = (
   string,
   {
     destino: string;
+    fuente_resenas?: string;
+    url_fuente_resenas?: string;
     resenas: { autor: string; fecha?: string; valoracion: number; texto: string }[];
   }
 >;
-const resenasDestino = (resenasData[destino.data.slug]?.resenas ?? [])
+const resenasEntry = resenasData[destino.data.slug];
+const resenasDestino = (resenasEntry?.resenas ?? [])
   .map((rev) => ({
     autor: rev.autor,
     fecha: rev.fecha ? new Date(rev.fecha) : undefined,
@@ -78,6 +81,10 @@ const resenasDestino = (resenasData[destino.data.slug]?.resenas ?? [])
     texto: rev.texto,
   }))
   .slice(0, 5);
+
+const fuenteResenas = resenasEntry?.fuente_resenas ?? "Google";
+const urlFuenteRaw = resenasEntry?.url_fuente_resenas ?? "";
+const urlFuente = (urlFuenteRaw.match(/\(([^)]+)\)/) ?? [])[1] ?? urlFuenteRaw;
 
 const linkVerGoogle =
   destino.data.lat !== undefined && destino.data.lng !== undefined
@@ -149,7 +156,11 @@ const touristDestination = {
     )
   }
 
-  <Reviews reviews={resenasDestino} linkVerGoogle={linkVerGoogle} />
+  <Reviews
+    reviews={resenasDestino}
+    linkVerGoogle={urlFuente || linkVerGoogle}
+    fuente={fuenteResenas}
+  />
 
   {
     destino.data.lat !== undefined && destino.data.lng !== undefined && (

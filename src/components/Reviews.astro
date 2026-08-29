@@ -12,9 +12,10 @@ interface Props {
   title?: string;
   reviews: Resena[];
   linkVerGoogle: string;
+  fuente?: string;
 }
 
-const { title = "Reseñas", reviews, linkVerGoogle } = Astro.props;
+const { title = "Reseñas", reviews, linkVerGoogle, fuente = "Google" } = Astro.props;
 
 function formatFecha(fecha?: Date): string {
   if (!fecha) return "";
@@ -35,7 +36,7 @@ function stars(valoracion: number): boolean[] {
       rel="noopener noreferrer"
       class="shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
     >
-      Ver reseñas en Google
+      Ver reseñas en {fuente}
     </a>
   </div>
 
@@ -58,7 +59,7 @@ function stars(valoracion: number): boolean[] {
               <figcaption class="mt-3 text-xs text-body-light">
                 — {review.autor}
                 {review.fecha && <> · {formatFecha(review.fecha)}</>}
-                {" · Google"}
+                {fuente && <> · {fuente}</>}
               </figcaption>
             </figure>
           ))
