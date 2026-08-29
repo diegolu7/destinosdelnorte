@@ -1,0 +1,126 @@
+{
+  "cafayate": {
+    "destino": "cafayate",
+    "resenas": [
+      { "autor": "Gustavo A", "fecha": "2025-02-25", "valoracion": 5, "texto": "Destino muy lindo e interesante del Noroeste Argentino por su clima, paisajes, bodegas, empanadas y su gente." },
+      { "autor": "CARMEN M", "fecha": "2025-01-15", "valoracion": 5, "texto": "Una ciudad bella, con lindas vistas y agradable para descansar." },
+      { "autor": "G2 S", "fecha": "2024-02-12", "valoracion": 5, "texto": "Hermoso; dos días alcanzan para conocer sus viñedos, médanos y bares." },
+      { "autor": "Guido G", "fecha": "2023-08-11", "valoracion": 5, "texto": "Una localidad hermosa y muy segura, con gente predispuesta y preparada para recibir al turismo." },
+      { "autor": "Rosa G", "fecha": "2023-02-27", "valoracion": 4, "texto": "La Serenata a Cafayate reúne grandes exponentes de la música popular y del folklore nacional." }
+    ]
+  },
+  "cachi": {
+    "destino": "cachi",
+    "resenas": [
+      { "autor": "Oscar V", "fecha": "2025-11-26", "valoracion": 5, "texto": "Muy bella." },
+      { "autor": "Horacio L", "fecha": "2025-07-17", "valoracion": 5, "texto": "Un lugar agradable para visitar." },
+      { "autor": "Gabriela C", "fecha": "2023-07-19", "valoracion": 4, "texto": "Linda." },
+      { "autor": "Ana", "fecha": "2023-06-21", "valoracion": 5, "texto": "Buen lugar para descansar en Cachi, con artesanías cerca de la iglesia y del museo antropológico." },
+      { "autor": "Robo C", "fecha": "2022-12-20", "valoracion": 5, "texto": "Linda plaza en el centro de Cachi." }
+    ]
+  },
+  "quebrada-de-las-conchas": {
+    "destino": "quebrada-de-las-conchas",
+    "resenas": [
+      { "autor": "Santo D", "fecha": "2026-03-19", "valoracion": 5, "texto": "Una zona hermosa de unos 70 kilómetros, rodeada de colores y paisajes increíbles. Recomienda recorrerla con tiempo e ir haciendo paradas." },
+      { "autor": "Patricio I", "fecha": "2026-01-08", "valoracion": 5, "texto": "Un paisaje espectacular y cambiante, con formaciones como el Anfiteatro y la Garganta del Diablo. Recomienda recorrerlo en bicicleta para disfrutarlo con calma." },
+      { "autor": "Agustin N", "fecha": "2025-12-06", "valoracion": 5, "texto": "Una parada obligada entre los grandes paisajes del país. Para donde mires hay algo hermoso." },
+      { "autor": "Danilo Z", "fecha": "2025-09-20", "valoracion": 5, "texto": "Recorrer este camino en auto es increíble; los colores, las formaciones y los paisajes invitan a detenerse constantemente." },
+      { "autor": "Mariana T", "fecha": "2025-08-18", "valoracion": 5, "texto": "Un recorrido hermoso. Destaca especialmente la Garganta del Diablo y el Anfiteatro." }
+    ]
+  },
+  "tren-a-las-nubes": {
+    "destino": "tren-a-las-nubes",
+    "resenas": [
+      { "autor": "Sand T", "fecha": "2026-01-18", "valoracion": 5, "texto": "Excelente excursión, con paisajes impresionantes y muy buena atención del guía. Destaca el recorrido hasta el Viaducto La Polvorilla." },
+      { "autor": "Roxanne S", "fecha": "2024-11-17", "valoracion": 4, "texto": "Paisajes muy lindos y una excursión bien organizada. La recomienda especialmente para quienes quieran hacer una experiencia de montaña en Salta." }
+    ]
+  },
+  "purmamarca": {
+    "destino": "purmamarca",
+    "resenas": [
+      { "autor": "Edwin P", "fecha": "2026-01-26", "valoracion": 5, "texto": "Purmamarca fue un destino impactante, con amaneceres increíbles, montañas de colores, gente cálida, buena comida y artesanías." },
+      { "autor": "Petra", "fecha": "2025-10-08", "valoracion": 4, "texto": "Un pueblo muy pintoresco rodeado de montañas coloridas, con numerosas calles, tiendas y restaurantes para explorar." },
+      { "autor": "Kinga R", "fecha": "2025-06-29", "valoracion": 5, "texto": "Un lugar increíble e imperdible. El paseo alrededor de las montañas vale la pena por las vistas." },
+      { "autor": "A W", "fecha": "2025-05-17", "valoracion": 5, "texto": "Los cerros de colores sorprenden desde antes de llegar. El pueblo ofrece numerosos comercios, puestos, restaurantes y rincones para recorrer." },
+      { "autor": "Virgil D", "fecha": "2025-04-19", "valoracion": 4, "texto": "La ciudad y su ambiente son muy agradables. Recomienda dedicar tiempo a disfrutar Purmamarca más allá de sus montañas." }
+    ]
+  },
+  "tilcara": {
+    "destino": "tilcara",
+    "resenas": [
+      { "autor": "Marilu", "fecha": "2026-01-22", "valoracion": 5, "texto": "Un lugar bellísimo, con muchos sitios cercanos para recorrer y una gran variedad de opciones para comprar." },
+      { "autor": "KUSI T", "fecha": "2026-01-17", "valoracion": 5, "texto": "Tilcara es ideal como base para recorrer la Quebrada de Humahuaca por su oferta gastronómica, hotelera y buena conexión con otros destinos." },
+      { "autor": "David L", "fecha": "2026-01-10", "valoracion": 5, "texto": "Recomienda hospedarse en Tilcara para recorrer el norte porque permite llegar fácilmente a distintos lugares y regresar al pueblo." },
+      { "autor": "René P", "fecha": "2025-11-16", "valoracion": 5, "texto": "Destaca los paisajes de la Quebrada de Humahuaca y también la gastronomía y la cultura de la zona." },
+      { "autor": "Adriana", "fecha": "2025-10-12", "valoracion": 5, "texto": "Tilcara tiene plaza, artesanos, tranquilidad, rica comida, calles para recorrer y arte por todos lados." }
+    ]
+  },
+  "humahuaca": {
+    "destino": "humahuaca",
+    "resenas": [
+      { "autor": "Kike B", "fecha": "2024-06-29", "valoracion": 4, "texto": "Un hermoso lugar para visitar, al que también se puede llegar en transporte público desde Tilcara." },
+      { "autor": "Mara R", "fecha": "2024-06-17", "valoracion": 4, "texto": "Un pueblo bellísimo y encantador." },
+      { "autor": "Julia A", "fecha": "2024-05-05", "valoracion": 5, "texto": "Uno de los pueblos más lindos de Jujuy, con hermosas callecitas y puestos para recorrer." },
+      { "autor": "Gaby D", "fecha": "2024-03-31", "valoracion": 4, "texto": "Un lugar bello por donde se lo mire y con un enorme atractivo turístico." }
+    ]
+  },
+  "salinas-grandes": {
+    "destino": "salinas-grandes",
+    "resenas": [
+      { "autor": "Leandro S", "fecha": "2025-08-31", "valoracion": 5, "texto": "Un lugar increíble. Destaca la visita guiada a las zonas de extracción de sal y al ojo del salar por su belleza única." },
+      { "autor": "ROBERTO T", "fecha": "2025-08-25", "valoracion": 5, "texto": "Se llega por una ruta escénica a más de 4.000 metros de altura. Los guías explican el origen del salar y ayudan a tomar fotografías." },
+      { "autor": "Patricia M", "fecha": "2025-01-06", "valoracion": 5, "texto": "Muy linda experiencia escuchar las explicaciones de la guía. Es un lugar muy bello que vale la pena conocer." },
+      { "autor": "Ignacio I", "fecha": "2024-12-22", "valoracion": 5, "texto": "Hermoso lugar. Recomienda llevar efectivo y realizar el recorrido con guía para aprovechar mejor la experiencia." },
+      { "autor": "Matias M", "fecha": "2024-09-04", "valoracion": 5, "texto": "Un lugar muy lindo para sacar fotos. Recomienda llevar protector solar y agua porque el sol es muy intenso." }
+    ]
+  },
+  "hornocal": {
+    "destino": "hornocal",
+    "resenas": [
+      { "autor": "Joshua V", "fecha": "2026-01-25", "valoracion": 5, "texto": "Vistas increíbles. Advierte que, por la altura, el clima puede cambiar muy rápidamente." },
+      { "autor": "Nikki J", "fecha": "2025-05-12", "valoracion": 5, "texto": "Una vez arriba, las molestias del trayecto quedan olvidadas. Describe el paisaje como un espectáculo incomparable." },
+      { "autor": "Paul T", "fecha": "2025-05-06", "valoracion": 5, "texto": "Un lugar excepcional e impresionante, incluso más espectacular de lo que muestran las fotografías." },
+      { "autor": "Virgil D", "fecha": "2025-04-19", "valoracion": 5, "texto": "Un lugar maravilloso. Recomienda visitarlo al atardecer para observar cómo cambian rápidamente los colores de las montañas." },
+      { "autor": "Jessi C", "fecha": "2023-12-12", "valoracion": 5, "texto": "Uno de los paisajes de montaña con colores más hermosos que ha visto. Recomienda prepararse para la altura y el frío." }
+    ]
+  },
+  "tafi-del-valle": {
+    "destino": "tafi-del-valle",
+    "resenas": [
+      { "autor": "Natalia A", "fecha": "2026-01-21", "valoracion": 5, "texto": "Hermoso lugar para descansar en familia, caminar, correr, andar en bicicleta, hacer trekking y disfrutar del río." },
+      { "autor": "Juan L", "fecha": "2025-11-01", "valoracion": 5, "texto": "Un encantador pueblo de montaña rodeado de valles verdes y cerros. Ideal para relajarse, disfrutar la naturaleza y conocer la cultura local." },
+      { "autor": "Lorena T", "fecha": "2025-06-21", "valoracion": 5, "texto": "Bellísimo." },
+      { "autor": "Sergio S", "fecha": "2025-04-15", "valoracion": 5, "texto": "Un destino para descansar y disfrutar de vistas privilegiadas, sus calles, el lago, la gastronomía y los quesos." },
+      { "autor": "Monica L", "fecha": "2025-03-13", "valoracion": 5, "texto": "El trayecto es bellísimo, con vegetación selvática, cascadas naturales, río y mariposas. Recomienda volver con tiempo para recorrer mejor." }
+    ]
+  },
+  "amaicha-del-valle": {
+    "destino": "amaicha-del-valle",
+    "resenas": [
+      { "autor": "Juan P", "fecha": "2026-02-04", "valoracion": 4, "texto": "Un lugar hermoso, con artesanías a buen precio y mucha historia. Destaca especialmente su identidad como comunidad." },
+      { "autor": "Lilian T", "fecha": "2023-06-26", "valoracion": 5, "texto": "Hermoso lugar para descansar y disfrutar de los paisajes. Recomienda especialmente visitar el Museo de la Pachamama." },
+      { "autor": "Noelia C", "fecha": "2023-05-01", "valoracion": 5, "texto": "Un pueblo pequeño, acogedor y alegre. Recomienda visitarlo y conocer sus espacios tradicionales." },
+      { "autor": "Ricardo G", "fecha": "2022-07-23", "valoracion": 4, "texto": "Destaca una interesante galería de arte con productos artesanales de alta calidad y piezas muy particulares." }
+    ]
+  },
+  "ruinas-de-quilmes": {
+    "destino": "ruinas-de-quilmes",
+    "resenas": [
+      { "autor": "Waguri", "fecha": "2026-04-02", "valoracion": 5, "texto": "Una experiencia que vale la pena. Destaca el museo, la historia, la amabilidad del personal y la posibilidad de recorrer libremente las ruinas." },
+      { "autor": "Marcos Q", "fecha": "2026-02-26", "valoracion": 4, "texto": "Excelente centro de interpretación, instalaciones muy limpias y ruinas bien conservadas. Considera que el resto de la experiencia fue muy bueno." },
+      { "autor": "Valeria C", "fecha": "2026-02-05", "valoracion": 5, "texto": "Hermoso lugar y muy recomendable. Los miradores permiten apreciar las ruinas desde distintos ángulos y el museo ayuda a comprender su historia." },
+      { "autor": "María G", "fecha": "2025-03-10", "valoracion": 5, "texto": "Sublime." },
+      { "autor": "Julia M", "fecha": "2024-09-07", "valoracion": 5, "texto": "Un lugar maravilloso para visitar. El museo aporta información útil para comprender las ruinas y las vistas son espectaculares." }
+    ]
+  },
+  "el-cadillal": {
+    "destino": "el-cadillal",
+    "resenas": [
+      { "autor": "Vero", "fecha": "2025-04-18", "valoracion": 5, "texto": "Hermoso lugar para pasar el rato, tomar mate y comer. Lo describe como increíblemente bello." },
+      { "autor": "Max C", "fecha": "2023-03-13", "valoracion": 5, "texto": "Un entorno natural muy agradable." },
+      { "autor": "Alejandra P", "fecha": "2021-07-22", "valoracion": 5, "texto": "Bellísimo." },
+      { "autor": "Ricardo H", "fecha": "2019-07-15", "valoracion": 5, "texto": "Bellísimo." }
+    ]
+  }
+}

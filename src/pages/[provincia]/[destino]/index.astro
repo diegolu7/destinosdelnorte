@@ -61,16 +61,22 @@ const destinosCercanos = (destino.data.destinosCercanos ?? [])
     imagen: getImage(d.data.imagen),
   }));
 
-const resenasDestino = (await getCollection("resenas"))
-  .filter((r) => r.data.destino === destino.data.slug)
-  .flatMap((r) =>
-    r.data.resenas.map((rev) => ({
-      autor: rev.autor,
-      fecha: rev.fecha,
-      valoracion: rev.valoracion,
-      texto: rev.texto,
-    })),
-  )
+const resenasData = (
+  await import("../../../data/resenas.json")
+).default as Record<
+  string,
+  {
+    destino: string;
+    resenas: { autor: string; fecha?: string; valoracion: number; texto: string }[];
+  }
+>;
+const resenasDestino = (resenasData[destino.data.slug]?.resenas ?? [])
+  .map((rev) => ({
+    autor: rev.autor,
+    fecha: rev.fecha ? new Date(rev.fecha) : undefined,
+    valoracion: rev.valoracion,
+    texto: rev.texto,
+  }))
   .slice(0, 5);
 
 const linkVerGoogle =
