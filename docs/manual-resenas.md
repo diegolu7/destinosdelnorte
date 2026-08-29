@@ -72,34 +72,51 @@ Se cargan **hasta 5 reseñas por destino**. Si hay menos, se cargan las que exis
 
 ## 4. Prompt para la IA
 
-Cuando tengas la tabla Markdown generada por GPT (o el texto copiado) de las 5 reseñas, usá este prompt:
+Podés pasarle las reseñas de **uno o varios destinos** a la vez (cada uno en su tabla Markdown con columnas `Fecha | Usuario | ⭐ | Texto`). La IA devuelve **un solo JSON** con todas las reseñas, **separadas por destino**.
 
 ````text
-Te paso las reseñas de Google de un destino turístico en formato de tabla Markdown con columnas: Fecha | Usuario | ⭐ | Resumen.
+Te paso reseñas de Google de uno o varios destinos turísticos. Cada destino viene en una tabla Markdown con columnas: Fecha | Usuario | ⭐ | Texto.
 
-Generá un único archivo JSON con exactamente esta estructura:
+Generá UN SOLO archivo JSON con todas las reseñas, separadas por destino (una clave por slug de destino). Estructura:
 
 {
-  "destino": "<SLUG_DEL_DESTINO>",
-  "resenas": [
-    { "autor": "<Usuario>", "fecha": "<YYYY-MM-DD>", "valoracion": <1-5>, "texto": "<Texto literal de la reseña, acortado>" }
-  ]
+  "<slug1>": {
+    "destino": "<slug1>",
+    "resenas": [
+      { "autor": "<Usuario>", "fecha": "<YYYY-MM-DD>", "valoracion": <1-5>, "texto": "<Texto literal de la reseña, acortado>" }
+    ]
+  },
+  "<slug2>": {
+    "destino": "<slug2>",
+    "resenas": [ ... ]
+  }
 }
 
 Reglas:
-- destino: "<SLUG_DEL_DESTINO>" (del destino <NOMBRE_DEL_DESTINO>).
+- Una clave por destino, usando su slug (ver lista del punto 5).
 - autor: tomalo de la columna Usuario.
 - valoracion: tomá el número de la columna ⭐ (si dice "5/5" → 5).
 - fecha: convertí el formato, ej. "19 mar 2026" → "2026-03-19". Si una reseña no tiene fecha, omití el campo `fecha` en esa reseña.
-- texto: copiá el texto LITERAL de la reseña (no el Resumen), acortado a 1-2 frases si es muy largo.
-- Incluí las 5 reseñas en el arreglo `resenas` (o las que haya).
+- texto: copiá el texto LITERAL de la reseña (columna Texto), acortado a 1-2 frases si es muy largo.
+- Incluí hasta 5 reseñas por destino (o las que haya).
 - No agregues enlaces por reseña (las reseñas de Google no tienen URL individual).
 - Devolvé solo JSON válido, sin comentarios ni texto extra.
 ````
 
-> Reemplazá `<SLUG_DEL_DESTINO>` y `<NOMBRE_DEL_DESTINO>` con el destino correspondiente (ver lista del punto 5).
+> Reemplazá `<slug1>`, `<slug2>`, etc. con los slugs de los destinos que estés procesando (ver lista del punto 5).
 
-Luego **copiá el JSON** generado en `src/content/resenas/<destino>.json` (reemplazando el contenido anterior si existía).
+Luego, desde ese **JSON único**, copiá el bloque de cada destino en su archivo `src/content/resenas/<destino>.json`. Por ejemplo, para Quebrada de las Conchas:
+
+```text
+src/content/resenas/quebrada-de-las-conchas.json
+```
+
+```json
+{
+  "destino": "quebrada-de-las-conchas",
+  "resenas": [ ... ]
+}
+```
 
 ---
 
