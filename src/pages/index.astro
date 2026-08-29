@@ -33,7 +33,7 @@ const destinosParaMostrar = destinos.slice(0, 5);
   <section id="que-hacer" class="scroll-mt-24">
     <div class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-16">
       <SectionTitle title="¿Qué hacer en cada destino?" />
-      <div class="mt-8 grid grid-cols-3 gap-2 sm:gap-5">
+      <div class="mt-8 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-5">
         {
           provincias.map((provincia) => (
             <ProvinceCard
