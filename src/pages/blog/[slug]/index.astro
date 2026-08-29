@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import { url } from "../../../lib/site";
+
+export async function getStaticPaths() {
+  const articulos = await getCollection("blog");
+  return articulos.map((articulo) => ({
+    params: { slug: articulo.id.split("/").pop()! },
+    props: { articulo },
+  }));
+}
+
+const { articulo } = Astro.props;
+const slug = articulo.id.split("/").pop()!;
+const { Content } = await render(articulo);
+
+const title = `${articulo.data.titulo} | Destinos del Norte`;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: articulo.data.titulo,
+  description: articulo.data.descripcion,
+  datePublished: articulo.data.fecha,
+  dateModified: articulo.data.fecha,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  author: { "@type": "Organization", name: "Destinos del Norte" },
+  publisher: { "@type": "Organization", name: "Destinos del Norte" },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={articulo.data.descripcion}
+  breadcrumbs={[
+    { name: "Blog", path: "/blog/" },
+    { name: articulo.data.titulo, path: `/blog/${slug}/` },
+  ]}
+  jsonLd={[articleSchema]}
+>
+  <section class="mx-auto w-full max-w-3xl px-5 py-8 lg:px-8 lg:py-12">
+    <Breadcrumbs
+      items={[
+        { name: "Blog", path: "/blog/" },
+        { name: articulo.data.titulo, path: `/blog/${slug}/` },
+      ]}
+    />
+
+    <div class="mt-5 flex items-center gap-3">
+      <span class="inline-flex rounded-full bg-terracota/10 px-3 py-1 text-xs font-semibold text-terracota">
+        {articulo.data.categoria ?? "Blog"}
+      </span>
+      <span class="text-xs text-body-light">
+        {new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "long", year: "numeric" }).format(
+          articulo.data.fecha,
+        )}
+      </span>
+    </div>
+    <h1 class="mt-4 font-display text-3xl font-bold leading-tight text-navy lg:text-[42px] lg:leading-tight">
+      {articulo.data.titulo}
+    </h1>
+    <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">{articulo.data.descripcion}</p>
+
+    <div class="prose-norte mt-8 max-w-none border-t border-border-card pt-6">
+      <Content />
+    </div>
+
+    <div class="mt-10">
+      <a
+        href={url("/blog/")}
+        class="inline-flex items-center gap-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
+      >
+        <span class="rotate-180" aria-hidden="true">➔</span> Volver al blog
+      </a>
+    </div>
+  </section>
+</BaseLayout>

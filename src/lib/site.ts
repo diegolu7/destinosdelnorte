@@ -10,7 +10,9 @@ export const SITE = {
 
 export function url(path: string): string {
   const base = import.meta.env.BASE_URL;
-  if (path.startsWith(base) || path.startsWith("http")) return path;
+  if (path.startsWith(base) || path.startsWith("http") || path.startsWith("mailto:")) {
+    return path;
+  }
   return (base + "/" + path).replace(/\/{2,}/g, "/");
 }
 
