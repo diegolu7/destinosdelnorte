@@ -61,37 +61,40 @@ Se cargan **hasta 5 reseñas por destino**. Si hay menos, se cargan las que exis
 - Cada reseña:
   - `autor`: nombre del autor.
   - `valoracion`: número entero de **1 a 5**.
-  - `texto`: el texto real de la reseña (sin modificarlo ni inventarlo).
+  - `texto`: el **texto literal** de la reseña, acortado a 1-2 frases si es muy largo (sin inventar).
   - `fecha`: solo si la reseña la tiene, con formato `YYYY-MM-DD`. Si no, **se omite la línea**.
 - `resenas`: arreglo de hasta 5 reseñas.
 - Omitir un campo opcional (como `fecha`) deja el JSON válido.
+
+> **Enlace a reseñas:** las reseñas de Google no tienen una URL individual por reseña. El enlace general **"Ver reseñas en Google"** ya está en la sección (no se agrega en cada reseña).
 
 ---
 
 ## 4. Prompt para la IA
 
-Cuando tengas la captura (o el texto copiado) de las 5 reseñas, usá este prompt:
+Cuando tengas la tabla Markdown generada por GPT (o el texto copiado) de las 5 reseñas, usá este prompt:
 
 ````text
-Te paso las últimas reseñas de Google de un destino turístico del Norte Argentino.
-Cada reseña tiene: nombre del autor, puntaje (1-5), fecha (opcional) y texto.
+Te paso las reseñas de Google de un destino turístico en formato de tabla Markdown con columnas: Fecha | Usuario | ⭐ | Resumen.
 
 Generá un único archivo JSON con exactamente esta estructura:
 
 {
   "destino": "<SLUG_DEL_DESTINO>",
   "resenas": [
-    { "autor": "<NOMBRE_DEL_AUTOR>", "valoracion": <1-5>, "texto": "<Texto de la reseña tal cual>" }
+    { "autor": "<Usuario>", "fecha": "<YYYY-MM-DD>", "valoracion": <1-5>, "texto": "<Texto literal de la reseña, acortado>" }
   ]
 }
 
 Reglas:
-- El destino al que pertenecen es: <NOMBRE_DEL_DESTINO> → slug "<SLUG_DEL_DESTINO>".
+- destino: "<SLUG_DEL_DESTINO>" (del destino <NOMBRE_DEL_DESTINO>).
+- autor: tomalo de la columna Usuario.
+- valoracion: tomá el número de la columna ⭐ (si dice "5/5" → 5).
+- fecha: convertí el formato, ej. "19 mar 2026" → "2026-03-19". Si una reseña no tiene fecha, omití el campo `fecha` en esa reseña.
+- texto: copiá el texto LITERAL de la reseña (no el Resumen), acortado a 1-2 frases si es muy largo.
 - Incluí las 5 reseñas en el arreglo `resenas` (o las que haya).
-- Si una reseña tiene fecha, agregá el campo `"fecha": "<YYYY-MM-DD>"`.
-- Si NO tiene fecha, omití el campo `fecha` en esa reseña.
-- No inventes ni modifiques el texto de las reseñas.
-- Respetá el formato JSON válido (sin comentarios).
+- No agregues enlaces por reseña (las reseñas de Google no tienen URL individual).
+- Devolvé solo JSON válido, sin comentarios ni texto extra.
 ````
 
 > Reemplazá `<SLUG_DEL_DESTINO>` y `<NOMBRE_DEL_DESTINO>` con el destino correspondiente (ver lista del punto 5).
