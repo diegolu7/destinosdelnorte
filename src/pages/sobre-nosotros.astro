@@ -1,0 +1,199 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ProvinceCard from "../components/ProvinceCard.astro";
+import Icon from "../components/Icon.astro";
+import { resolveImage } from "../lib/images";
+import { url } from "../lib/site";
+
+const provincias = (await getCollection("provincias")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, "es"),
+);
+const destinos = await getCollection("destinos");
+const experiencias = await getCollection("experiencias");
+const guias = await getCollection("guias");
+
+const numeros = [
+  { valor: provincias.length, etiqueta: "Provincias" },
+  { valor: destinos.length, etiqueta: "Destinos" },
+  { valor: experiencias.length, etiqueta: "Experiencias" },
+  { valor: guias.length, etiqueta: "Guías de viaje" },
+];
+
+const oferta = [
+  {
+    icono: "pin" as const,
+    titulo: "Destinos",
+    texto: "Landings turísticas completas de cada lugar del Norte Argentino.",
+  },
+  {
+    icono: "arrow" as const,
+    titulo: "Guías de viaje",
+    texto: "Cómo llegar, mejor época, consejos e itinerarios útiles para planificar.",
+  },
+  {
+    icono: "aventura" as const,
+    titulo: "Experiencias",
+    texto: "Aventura, cultura, gastronomía, naturaleza, bodegas y senderismo.",
+  },
+  {
+    icono: "search" as const,
+    titulo: "Buscador",
+    texto: "Encontrá el destino perfecto con sugerencias al instante.",
+  },
+];
+
+const valores = [
+  {
+    titulo: "Contenido útil y verificado",
+    texto: "Información clara y honesta para que planifiques con confianza.",
+  },
+  {
+    titulo: "Pensado para el viajero",
+    texto: "Mobile-first, rápido y fácil de usar, en cualquier dispositivo.",
+  },
+  {
+    titulo: "SEO-first",
+    texto: "Cada página está pensada para que la encuentres en los buscadores.",
+  },
+  {
+    titulo: "En crecimiento",
+    texto: "Sumamos destinos y contenido constantemente para que nunca te quedes sin lugares por conocer.",
+  },
+];
+
+const aboutPage = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "Sobre nosotros",
+  description:
+    "Destinos del Norte es una guía para descubrir los lugares más increíbles del Norte Argentino: Salta, Jujuy y Tucumán.",
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+};
+---
+
+<BaseLayout
+  title="Sobre nosotros | Destinos del Norte"
+  description="Destinos del Norte es tu guía para descubrir el Norte Argentino: destinos, guías de viaje y experiencias en Salta, Jujuy y Tucumán."
+  breadcrumbs={[{ name: "Sobre nosotros", path: "/sobre-nosotros/" }]}
+  jsonLd={[aboutPage]}
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="max-w-2xl">
+      <span class="inline-flex rounded-full bg-terracota/10 px-3 py-1 text-xs font-semibold text-terracota">
+        Sobre Destinos del Norte
+      </span>
+      <h1 class="mt-4 font-display text-3xl font-bold leading-tight text-navy lg:text-[42px] lg:leading-tight">
+        Tu guía para descubrir el Norte Argentino
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+        Ayudamos a los viajeros a descubrir destinos, lugares y experiencias del Norte de la Argentina, con contenido útil y organizado para que cada viaje sea más fácil de planificar.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <div class="grid items-start gap-8 lg:grid-cols-2">
+      <div class="rounded-2xl shadow-card overflow-hidden">
+        <img
+          src={resolveImage("seccion_atractivo_cerro_7_colores.png").src}
+          alt="Cerro de los Siete Colores en Purmamarca, Jujuy"
+          width={1200}
+          height={1100}
+          loading="lazy"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div>
+        <SectionTitle title="¿Qué es Destinos del Norte?" />
+        <p class="mt-6 text-sm leading-relaxed text-body lg:text-base">
+          Destinos del Norte es una guía digital dedicada a los paisajes, los pueblos y la cultura de Salta, Jujuy y Tucumán. Reunimos en un solo lugar la información que el viajero necesita: qué hacer en cada destino, los lugares imperdibles, cómo llegar, cuándo visitar y qué experiencias vivir.
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Nuestro objetivo es simple: que descubrir el Norte Argentino sea fácil, inspirador y memorable, con contenido claro, verificado y pensado para acompañarte en cada etapa del viaje.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="Destinos del Norte en números" />
+    <div class="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {
+        numeros.map((n) => (
+          <div class="rounded-xl bg-tarjeta p-5 text-center shadow-card">
+            <p class="font-display text-4xl font-bold text-terracota lg:text-5xl">{n.valor}</p>
+            <p class="mt-1 text-sm font-medium text-body">{n.etiqueta}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="Qué ofrecemos" />
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        oferta.map((o) => (
+          <div class="rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover">
+            <Icon name={o.icono} size={28} class="text-terracota" />
+            <h3 class="mt-3 font-display text-base font-semibold text-navy">{o.titulo}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-body-light">{o.texto}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="Cómo trabajamos" />
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {
+        valores.map((v) => (
+          <div class="flex items-start gap-4 rounded-xl bg-tarjeta p-5 shadow-card">
+            <span aria-hidden="true" class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-terracota text-white text-xs">
+              ✓
+            </span>
+            <div>
+              <h3 class="font-display text-base font-semibold text-navy">{v.titulo}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-body-light">{v.texto}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="Explorá el Norte" />
+    <div class="mt-8 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-5">
+      {
+        provincias.map((provincia) => (
+          <ProvinceCard
+            nombre={provincia.data.name}
+            slug={provincia.data.slug}
+            imagen={resolveImage(provincia.data.imagen)}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-14">
+    <div class="rounded-2xl bg-navy px-6 py-10 text-center lg:px-10">
+      <h2 class="font-display text-2xl font-bold text-white lg:text-3xl">
+        ¿Listo para viajar?
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-sm text-navy-secondary lg:text-base">
+        Explorá los destinos imperdibles y empezá a armar tu próxima aventura por el Norte Argentino.
+      </p>
+      <a
+        href={url("/#destinos")}
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
+      >
+        Explorá destinos
+      </a>
+    </div>
+  </section>
+</BaseLayout>
