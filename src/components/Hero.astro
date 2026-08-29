@@ -64,32 +64,38 @@ const slides = [
 
   <div class="absolute inset-0 flex items-center">
     <div class="mx-auto w-full max-w-6xl px-5 lg:px-8">
-      <div class="max-w-2xl">
-        <h1 class="font-display font-bold leading-tight text-navy">
-          <span class="block text-[28px] lg:text-[42px]">Descubrí</span>
-          <span class="block text-[28px] lg:text-[42px]">lo mejor del</span>
-          <span class="block text-[28px] font-extrabold lg:text-[42px]">Norte Argentino</span>
-        </h1>
-        <div class="mt-4 grid">
-          {
-            slides.map((slide, i) => (
-              <p
-                data-text={i}
-                class={`col-start-1 row-start-1 max-w-md text-sm leading-relaxed text-body transition-opacity duration-1000 ease-in-out lg:text-base lg:leading-relaxed ${
-                  i === 0 ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                {slide.texto}
-              </p>
-            ))
-          }
-        </div>
-        <a
-          href="/#destinos"
-          class="mt-7 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover lg:px-6"
-        >
+      <div class="relative max-w-2xl">
+        <div
+          aria-hidden="true"
+          class="absolute -inset-x-4 -inset-y-3 rounded-2xl bg-[linear-gradient(90deg,rgba(247,245,241,0.72),rgba(247,245,241,0.35)_55%,rgba(247,245,241,0))]"
+        ></div>
+        <div class="relative">
+          <h1 class="font-display font-bold leading-tight text-navy">
+            <span class="block text-[28px] lg:text-[42px]">Descubrí</span>
+            <span class="block text-[28px] lg:text-[42px]">lo mejor del</span>
+            <span class="block text-[28px] font-extrabold lg:text-[42px]">Norte Argentino</span>
+          </h1>
+          <div class="mt-4 grid">
+            {
+              slides.map((slide, i) => (
+                <p
+                  data-text={i}
+                  class={`col-start-1 row-start-1 max-w-md text-sm leading-relaxed text-body transition-opacity duration-1000 ease-in-out lg:text-base lg:leading-relaxed ${
+                    i === 0 ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  {slide.texto}
+                </p>
+              ))
+            }
+          </div>
+          <a
+            href="/#destinos"
+            class="mt-7 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover lg:px-6"
+          >
           {title}
         </a>
+        </div>
       </div>
     </div>
   </div>
