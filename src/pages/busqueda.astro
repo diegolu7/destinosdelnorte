@@ -189,17 +189,17 @@ const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) =
           '" alt="' +
           item.nombre +
           '" loading="lazy" class="h-36 w-full object-cover sm:h-40">' +
-          '<div class="p-5">' +
+          '<div class="flex flex-col p-5">' +
           '<span class="inline-flex rounded-full bg-terracota/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-terracota">' +
           item.etiqueta +
           "</span>" +
           '<h2 class="mt-2 font-display text-base font-semibold text-navy group-hover:text-terracota">' +
           item.nombre +
           "</h2>" +
-          '<p class="mt-1 text-xs leading-relaxed text-body-light">' +
+          '<p class="mt-1 line-clamp-2 min-h-[2.5rem] text-xs leading-relaxed text-body-light">' +
           item.descripcion +
           "</p>" +
-          '<span class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-terracota transition-colors duration-150 group-hover:text-terracota-hover">' +
+          '<span class="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-medium text-terracota transition-colors duration-150 group-hover:text-terracota-hover">' +
           cta +
           ' <span aria-hidden="true">➔</span>' +
           "</span>" +
