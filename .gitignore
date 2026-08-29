@@ -25,6 +25,9 @@ dist/
 # Referencia visual no utilizada en el sitio
 /mockup_del_sitio.png
 
+# Favicon fuente (se copia a public/)
+/favicon.ico
+
 # Asset futuro (aún sin usar en el build)
 /hero_img_tafi_del_valle.png
 /hero_img_cafayate.png
