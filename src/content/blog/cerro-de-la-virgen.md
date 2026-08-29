@@ -12,7 +12,7 @@ El **Cerro de la Virgen** es una colina a las afueras de la ciudad de **Salta**,
 
 ## Cómo llegar
 
-El acceso se hace **a pie**, con una caminata desde la zona urbana. Es un plan popular entre locales y viajeros por ser **gratuito** y accesible.
+El acceso se hace **a pie, desde la ciudad**: no hace falta tour ni transporte, por lo que es 100% **gratuito** y fácil de hacer en el día mientras visitás Salta.
 
 ## Consejo
 

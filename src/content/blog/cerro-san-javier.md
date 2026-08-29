@@ -12,7 +12,7 @@ El **Cerro San Javier** es una elevación cerca de **San Miguel de Tucumán**, r
 
 ## Por qué visitarlo
 
-Es una escapada popular de **fin de semana** para quienes están en la capital tucumana. Al ser gratuito, solo requiere ir y recorrer los senderos y miradores.
+Está a un paso de la capital tucumana, así que se llega **en el día sin necesidad de tour**. La visita en sí es **gratuita**; solo se paga el transporte si no tenés auto propio para llegar.
 
 ## Cómo incorporarlo
 

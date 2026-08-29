@@ -12,7 +12,7 @@ El **Cerro Elefante** es una formación rocosa cuya silueta recuerda a un elefan
 
 ## Por qué visitarlo
 
-Se trata de un **atractivo gratuito**: alcanza con ir, detenerte en el mirador y contemplar el paisaje de montañas y cardones. Es una parada ideal para sacar fotos durante el recorrido por los Valles Calchaquíes.
+La vista del **Cerro Elefante** es un **atractivo gratuito**: la formación se contempla desde el mirador, sin costo de ingreso. Lo que sí se paga, si no vas en auto propio, es el **transporte o la excursión** para llegar a la zona de **[Cachi](/salta/cachi/)**.
 
 ## Cómo incorporarlo
 
