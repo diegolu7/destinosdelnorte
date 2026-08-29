@@ -7,6 +7,7 @@ import SectionTitle from "../components/SectionTitle.astro";
 import ProvinceCard from "../components/ProvinceCard.astro";
 import DestinationCard from "../components/DestinationCard.astro";
 import ExperienceCard from "../components/ExperienceCard.astro";
+import Icon from "../components/Icon.astro";
 import { resolveImage as getImage } from "../lib/images";
 import { url } from "../lib/site";
 
@@ -19,8 +20,6 @@ const destinos = (await getCollection("destinos")).sort((a, b) =>
 const experiencias = (await getCollection("experiencias")).sort((a, b) =>
   a.data.nombre.localeCompare(b.data.nombre, "es"),
 );
-
-const destinosParaMostrar = destinos.slice(0, 5);
 ---
 
 <BaseLayout
@@ -56,18 +55,38 @@ const destinosParaMostrar = destinos.slice(0, 5);
           Ver todos los destinos
         </a>
       </div>
-      <div class="mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:pb-0 lg:grid-cols-5">
-        {
-          destinosParaMostrar.map((destino) => (
-            <DestinationCard
-              nombre={destino.data.name}
-              descripcion={destino.data.descripcion}
-              href={`/${destino.data.provincia}/${destino.data.slug}/`}
-              imagen={getImage(destino.data.imagen)}
-              extraClass="min-w-[42%] shrink-0 snap-start sm:min-w-0"
-            />
-          ))
-        }
+      <div class="relative mt-8">
+        <div id="destinos-track" class="flex snap-x snap-mandatory gap-4 overflow-x-auto scrollbar-none">
+          {
+            destinos.map((destino) => (
+              <DestinationCard
+                nombre={destino.data.name}
+                descripcion={destino.data.descripcion}
+                href={`/${destino.data.provincia}/${destino.data.slug}/`}
+                imagen={getImage(destino.data.imagen)}
+                extraClass="w-[72%] shrink-0 snap-start sm:w-[46%] lg:w-[31%] xl:w-[24%]"
+              />
+            ))
+          }
+        </div>
+        <button
+          id="destinos-prev"
+          type="button"
+          aria-label="Destinos anteriores"
+          class="absolute -left-2 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:-left-3"
+        >
+          <span class="rotate-180">
+            <Icon name="arrow" size={20} />
+          </span>
+        </button>
+        <button
+          id="destinos-next"
+          type="button"
+          aria-label="Destinos siguientes"
+          class="absolute -right-2 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:-right-3"
+        >
+          <Icon name="arrow" size={20} />
+        </button>
       </div>
       <a href={url("/salta/")} class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
         Ver todos
@@ -100,3 +119,62 @@ const destinosParaMostrar = destinos.slice(0, 5);
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const track = document.getElementById("destinos-track");
+  const prevBtn = document.getElementById("destinos-prev");
+  const nextBtn = document.getElementById("destinos-next");
+
+  if (track) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function step() {
+      return Math.max(track.clientWidth * 0.9, 100);
+    }
+
+    function nearEnd() {
+      return track.scrollLeft + track.clientWidth >= track.scrollWidth - 12;
+    }
+
+    function advance() {
+      if (nearEnd()) {
+        track.scrollTo({ left: 0, behavior: reducedMotion ? "auto" : "smooth" });
+      } else {
+        track.scrollBy({ left: step(), behavior: reducedMotion ? "auto" : "smooth" });
+      }
+    }
+
+    let timer;
+    function start() {
+      if (reducedMotion) return;
+      if (timer) window.clearInterval(timer);
+      timer = window.setInterval(advance, 4500);
+    }
+    function stop() {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    }
+
+    function go(dir) {
+      stop();
+      if (dir === 1 && nearEnd()) {
+        track.scrollTo({ left: 0, behavior: reducedMotion ? "auto" : "smooth" });
+      } else {
+        track.scrollBy({ left: dir * step(), behavior: reducedMotion ? "auto" : "smooth" });
+      }
+      start();
+    }
+
+    nextBtn?.addEventListener("click", () => go(1));
+    prevBtn?.addEventListener("click", () => go(-1));
+
+    track.addEventListener("mouseenter", stop);
+    track.addEventListener("mouseleave", start);
+    track.addEventListener("touchstart", stop, { passive: true });
+    track.addEventListener("touchend", () => setTimeout(start, 3500));
+
+    start();
+  }
+</script>

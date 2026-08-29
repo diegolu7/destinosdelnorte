@@ -60,6 +60,13 @@
   background: linear-gradient(180deg, rgba(20, 20, 20, 0) 40%, rgba(0, 0, 0, 0.65) 100%);
 }
 
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer components {
   .prose-norte {
     @apply text-sm leading-relaxed text-body lg:text-base;
