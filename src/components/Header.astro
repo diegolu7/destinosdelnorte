@@ -1,12 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import logo from "../assets/logo_destinos_del_norte.png";
 import Icon from "./Icon.astro";
 import { url } from "../lib/site";
 
-const navLinks = [
+const provincias = (await getCollection("provincias")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, "es"),
+);
+
+const guiasProvincias = provincias.map((p) => ({
+  label: p.data.name,
+  href: url(`/${p.data.slug}/`),
+}));
+
+const navMain = [
   { label: "Qué hacer", href: "/#que-hacer" },
   { label: "Destinos", href: "/#destinos" },
-  { label: "Guías de viaje", href: "/" },
   { label: "Rutas", href: "/" },
   { label: "Blog", href: "/" },
 ];
@@ -27,7 +36,7 @@ const navLinks = [
 
     <nav class="hidden items-center gap-7 lg:flex" aria-label="Navegación principal">
       {
-        navLinks.map((link) => (
+        navMain.map((link) => (
           <a
             href={url(link.href)}
             class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
@@ -36,6 +45,41 @@ const navLinks = [
           </a>
         ))
       }
+
+      <div class="relative group">
+        <button
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          class="flex items-center gap-1 text-sm font-medium text-navy transition-colors duration-200 group-hover:text-terracota group-focus-within:text-terracota focus:outline-none"
+        >
+          Guías de viaje
+          <Icon
+            name="chevron"
+            size={14}
+            class="shrink-0 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+          />
+        </button>
+        <ul
+          role="menu"
+          aria-label="Guías por provincia"
+          class="invisible absolute left-0 top-full z-20 mt-3 w-52 translate-y-1 rounded-xl bg-header p-1.5 opacity-0 shadow-card transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
+        >
+          {
+            guiasProvincias.map((p) => (
+              <li role="none">
+                <a
+                  role="menuitem"
+                  href={p.href}
+                  class="block rounded-lg px-3 py-2 text-sm text-navy transition-colors duration-150 hover:bg-page hover:text-terracota"
+                >
+                  {p.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </nav>
 
     <div class="flex items-center gap-2">
@@ -62,7 +106,7 @@ const navLinks = [
   <div id="mobile-menu" class="hidden border-t border-border-input bg-header lg:hidden">
     <nav class="flex flex-col px-5 py-4" aria-label="Navegación móvil">
       {
-        navLinks.map((link) => (
+        navMain.map((link) => (
           <a
             href={url(link.href)}
             class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 last:border-0 hover:text-terracota"
@@ -71,6 +115,30 @@ const navLinks = [
           </a>
         ))
       }
+      <details class="group border-b border-border-input">
+        <summary class="flex cursor-pointer list-none items-center justify-between py-3 text-sm font-medium text-navy">
+          Guías de viaje
+          <Icon
+            name="chevron"
+            size={16}
+            class="shrink-0 text-body-light transition-transform duration-200 group-open:rotate-180"
+          />
+        </summary>
+        <ul class="space-y-1 pb-3">
+          {
+            guiasProvincias.map((p) => (
+              <li>
+                <a
+                  href={p.href}
+                  class="block py-1.5 text-sm text-navy transition-colors duration-150 hover:text-terracota"
+                >
+                  {p.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
       <a
         href={url("/#buscador")}
         class="mt-2 inline-flex items-center gap-2 py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
