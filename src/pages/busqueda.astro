@@ -1,6 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ProvinceCard from "../components/ProvinceCard.astro";
+import { resolveImage } from "../lib/images";
+import { url } from "../lib/site";
 
 const destinos = (await getCollection("destinos")).map((destino) => ({
   nombre: destino.data.name,
@@ -19,9 +23,16 @@ const provincias = (await getCollection("provincias")).map((provincia) => ({
   slug: provincia.data.slug,
 }));
 
+const provinciasCards = await getCollection("provincias");
+
 const experiencias = (await getCollection("experiencias")).map((experiencia) => ({
   nombre: experiencia.data.nombre,
   descripcion: experiencia.data.descripcion,
+}));
+
+const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) => ({
+  nombre,
+  href: `${url("/busqueda/")}?q=${encodeURIComponent(nombre)}`,
 }));
 ---
 
@@ -36,16 +47,55 @@ const experiencias = (await getCollection("experiencias")).map((experiencia) => 
       Resultados para <strong id="query-label" class="text-terracota">tu búsqueda</strong>.
     </p>
 
-    <div id="results-empty" class="mt-8 hidden rounded-xl bg-tarjeta p-6 text-sm text-body shadow-card">
-      No encontramos resultados para esa búsqueda. Probá con otro destino (por ejemplo: Cafayate, Purmamarca o Tafí del Valle).
+    <div id="results-empty" class="mt-8 hidden rounded-xl bg-tarjeta p-6 shadow-card">
+      <h2 class="font-display text-lg font-bold text-navy lg:text-xl">
+        No encontramos resultados para <span id="empty-query" class="text-terracota">tu búsqueda</span>.
+      </h2>
+      <p class="mt-2 text-sm leading-relaxed text-body">
+        Probá con otra palabra o elegí uno de estos destinos sugeridos:
+      </p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {
+          sugerencias.map((s) => (
+            <a
+              href={s.href}
+              class="rounded-full bg-terracota/10 px-4 py-1.5 text-sm font-medium text-terracota transition-colors duration-150 hover:bg-terracota/20"
+            >
+              {s.nombre}
+            </a>
+          ))
+        }
+      </div>
+      <a
+        href={url("/#destinos")}
+        class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
+      >
+        Ver todos los destinos
+      </a>
     </div>
 
     <div id="results" class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <SectionTitle title="¿Qué hacer en cada destino?" />
+    <div class="mt-8 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-5">
+      {
+        provinciasCards.map((provincia) => (
+          <ProvinceCard
+            nombre={provincia.data.name}
+            slug={provincia.data.slug}
+            imagen={resolveImage(provincia.data.imagen)}
+          />
+        ))
+      }
+    </div>
   </section>
 </BaseLayout>
 
 <script define:vars={{ destinos, provincias, experiencias, base: import.meta.env.BASE_URL }} is:inline>
   const queryLabel = document.getElementById("query-label");
+  const emptyQuery = document.getElementById("empty-query");
   const results = document.getElementById("results");
   const resultsEmpty = document.getElementById("results-empty");
 
@@ -110,7 +160,9 @@ const experiencias = (await getCollection("experiencias")).map((experiencia) => 
       return true;
     });
 
-    queryLabel.textContent = params.get("q") || "resultados";
+    const rawQ = params.get("q");
+    queryLabel.textContent = rawQ || "resultados";
+    if (emptyQuery) emptyQuery.textContent = rawQ || "esta búsqueda";
 
     resultsEmpty.classList.toggle("hidden", unique.length > 0);
 
