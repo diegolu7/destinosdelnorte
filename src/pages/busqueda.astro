@@ -7,6 +7,11 @@ const destinos = (await getCollection("destinos")).map((destino) => ({
   slug: destino.data.slug,
   provincia: destino.data.provincia,
   descripcion: destino.data.descripcion,
+  terminos: [
+    destino.data.name,
+    ...(destino.data.keywords ?? []),
+    ...(destino.data.lugaresImperdibles ?? []).map((l) => l.nombre),
+  ].join(" "),
 }));
 
 const provincias = (await getCollection("provincias")).map((provincia) => ({
@@ -74,7 +79,8 @@ const experiencias = (await getCollection("experiencias")).map((experiencia) => 
     });
 
     destinos.forEach(function (destino) {
-      if (!q || normalize(destino.nombre).includes(q)) {
+      const hayDestino = normalize(destino.terminos);
+      if (!q || hayDestino.includes(q)) {
         resultados.push({
           nombre: destino.nombre,
           descripcion: destino.descripcion,
