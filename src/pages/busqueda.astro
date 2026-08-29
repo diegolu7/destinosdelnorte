@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
 import ProvinceCard from "../components/ProvinceCard.astro";
-import { resolveImage } from "../lib/images";
+import { resolveImage, PLACEHOLDERS } from "../lib/images";
 import { url } from "../lib/site";
 
 const destinos = (await getCollection("destinos")).map((destino) => ({
@@ -11,6 +11,7 @@ const destinos = (await getCollection("destinos")).map((destino) => ({
   slug: destino.data.slug,
   provincia: destino.data.provincia,
   descripcion: destino.data.descripcion,
+  imagen: resolveImage(destino.data.imagen).src,
   terminos: [
     destino.data.name,
     ...(destino.data.keywords ?? []),
@@ -21,6 +22,7 @@ const destinos = (await getCollection("destinos")).map((destino) => ({
 const provincias = (await getCollection("provincias")).map((provincia) => ({
   nombre: provincia.data.name,
   slug: provincia.data.slug,
+  imagen: resolveImage(provincia.data.imagen).src,
 }));
 
 const provinciasCards = await getCollection("provincias");
@@ -28,6 +30,7 @@ const provinciasCards = await getCollection("provincias");
 const experiencias = (await getCollection("experiencias")).map((experiencia) => ({
   nombre: experiencia.data.nombre,
   descripcion: experiencia.data.descripcion,
+  imagen: resolveImage(PLACEHOLDERS.section).src,
 }));
 
 const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) => ({
@@ -124,6 +127,7 @@ const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) =
           descripcion: "Descubrí qué hacer en " + provincia.nombre + ": lugares para visitar y experiencias.",
           href: p("/" + provincia.slug + "/"),
           etiqueta: "Provincia",
+          imagen: provincia.imagen,
         });
       }
     });
@@ -136,6 +140,7 @@ const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) =
           descripcion: destino.descripcion,
           href: p("/" + destino.provincia + "/" + destino.slug + "/"),
           etiqueta: "Destino",
+          imagen: destino.imagen,
         });
       }
     });
@@ -149,6 +154,7 @@ const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) =
           descripcion: experiencia.descripcion,
           href: p("/#experiencias"),
           etiqueta: "Experiencia",
+          imagen: experiencia.imagen,
         });
       }
     });
@@ -171,7 +177,13 @@ const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) =
         return (
           '<a href="' +
           item.href +
-          '" class="group block rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover">' +
+          '" class="group block overflow-hidden rounded-xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover">' +
+          '<img src="' +
+          item.imagen +
+          '" alt="' +
+          item.nombre +
+          '" loading="lazy" class="h-36 w-full object-cover sm:h-40">' +
+          '<div class="p-5">' +
           '<span class="inline-flex rounded-full bg-terracota/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-terracota">' +
           item.etiqueta +
           "</span>" +
@@ -181,6 +193,7 @@ const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) =
           '<p class="mt-1 text-xs leading-relaxed text-body-light">' +
           item.descripcion +
           "</p>" +
+          "</div>" +
           "</a>"
         );
       })
