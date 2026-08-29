@@ -59,7 +59,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
         <div id="destinos-viewport" data-count={destinos.length} class="overflow-hidden">
           <div id="destinos-track" class="flex gap-4" style="transform: translateX(0);">
             {
-              destinos.map((destino) => (
+              [...destinos, ...destinos, ...destinos].map((destino) => (
                 <DestinationCard
                   nombre={destino.data.name}
                   descripcion={destino.data.descripcion}
@@ -146,7 +146,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
   if (viewport && track) {
     const count = Number(viewport.getAttribute("data-count")) || 0;
     const GAP = 16;
-    let index = 0;
+    let index = count;
     let timer;
 
     function unit() {
@@ -155,11 +155,24 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
     }
 
     function updateDots() {
+      const current = ((index % count) + count) % count;
       dotBtns.forEach((d, i) => {
-        const on = i === index;
+        const on = i === current;
         d.classList.toggle("bg-navy", on);
         d.classList.toggle("bg-navy/20", !on);
       });
+    }
+
+    function normalize() {
+      let n = index;
+      if (n >= 2 * count) n -= count;
+      if (n < count) n += count;
+      if (n !== index) {
+        index = n;
+        track.style.transition = "none";
+        track.style.transform = "translateX(" + -index * unit() + "px)";
+        updateDots();
+      }
     }
 
     function animateTo(i, animated) {
@@ -167,23 +180,20 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       track.style.transition = animated ? "transform 500ms ease-in-out" : "none";
       track.style.transform = "translateX(" + -index * unit() + "px)";
       updateDots();
+      if (animated) {
+        window.setTimeout(normalize, 520);
+      }
     }
 
     function go(dir) {
       stopAutoplay();
-      const target =
-        dir === 1 ? (index === count - 1 ? 0 : index + 1) : index === 0 ? count - 1 : index - 1;
-      const wrap = (target === 0 && index === count - 1) || (target === count - 1 && index === 0);
-      animateTo(target, !wrap);
+      animateTo(index + dir, true);
       startAutoplay();
     }
 
     function startAutoplay() {
       if (timer) window.clearInterval(timer);
-      timer = window.setInterval(() => {
-        const target = index === count - 1 ? 0 : index + 1;
-        animateTo(target, target !== 0);
-      }, 3500);
+      timer = window.setInterval(() => animateTo(index + 1, true), 3500);
     }
 
     function stopAutoplay() {
@@ -200,7 +210,8 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       d.addEventListener("click", () => {
         stopAutoplay();
         const target = Number(d.dataset.dot);
-        animateTo(target, Math.abs(target - index) <= 2);
+        const current = ((index % count) + count) % count;
+        animateTo(index + (target - current), Math.abs(target - current) <= 2);
         startAutoplay();
       });
     });
@@ -229,7 +240,7 @@ const experiencias = (await getCollection("experiencias")).sort((a, b) =>
       rTimer = window.setTimeout(() => animateTo(index, false), 150);
     });
 
-    animateTo(0, false);
+    animateTo(count, false);
     startAutoplay();
   }
 </script>
