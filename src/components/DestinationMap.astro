@@ -11,7 +11,7 @@ interface Props {
 const { nombre, provinciaName, lat, lng } = Astro.props;
 
 const q = `${lat},${lng}`;
-const embedSrc = `https://maps.google.com/maps?q=${q}&z=14&t=p&output=embed`;
+const embedSrc = `https://maps.google.com/maps?q=${q}&z=14&t=k&output=embed`;
 const linkSrc = `https://www.google.com/maps/search/?api=1&query=${q}`;
 ---
 
