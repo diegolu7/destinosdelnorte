@@ -9,7 +9,7 @@ export const SITE = {
 } as const;
 
 export const NEWSLETTER_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbzukiEws5XN8khwcKMIRVlhtvi6gqJr-mDcpRBlfQMNDauvakfmls9Uk32yFDammJgIzQ/exec";
+  "https://script.google.com/macros/s/AKfycbwU8hIZKiJClmyRcEGBWeuEazjiBX_4BN49Dl0QORSpWxSDjnL-n7f_xIpg3uYyMhXUYQ/exec";
 
 export const NEWSLETTER_TOKEN = "ddn-news-2026";
 
