@@ -8,6 +8,11 @@ export const SITE = {
   twitter: "@destinosdelnorte",
 } as const;
 
+export const NEWSLETTER_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbzukiEws5XN8khwcKMIRVlhtvi6gqJr-mDcpRBlfQMNDauvakfmls9Uk32yFDammJgIzQ/exec";
+
+export const NEWSLETTER_TOKEN = "ddn-news-2026";
+
 export function url(path: string): string {
   const base = import.meta.env.BASE_URL;
   if (path.startsWith(base) || path.startsWith("http") || path.startsWith("mailto:")) {

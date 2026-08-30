@@ -17,36 +17,57 @@ Guía para conectar el formulario de newsletter del sitio con una hoja de Google
 En la hoja, andá a **Extensiones → Apps Script** y pegá el siguiente código completo:
 
 ```javascript
+var TOKEN = "ddn-news-2026";
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.tryLock(10000);
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Newsletter");
+    var sheet =
+      SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Newsletter");
     var data = JSON.parse(e.postData.contents);
     var email = String(data.email || "").trim();
+    var token = String(data.token || "");
+    var website = String(data.website || "").trim();
 
+    // Anti-spam: token incorrecto
+    if (token !== TOKEN) {
+      return json({ ok: false });
+    }
+    // Anti-spam: honeypot completado (bot)
+    if (website !== "") {
+      return json({ ok: true }); // responder éxito sin guardar
+    }
+    // Validación de email
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return ContentService
-        .createTextOutput(JSON.stringify({ ok: false }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return json({ ok: false });
+    }
+    // Anti-duplicados: ya existe el email
+    var emails = sheet.getRange(2, 2, sheet.getLastRow() - 1, 1).getValues();
+    for (var i = 0; i < emails.length; i++) {
+      if (String(emails[i][0]).trim().toLowerCase() === email.toLowerCase()) {
+        return json({ ok: true }); // responder éxito sin duplicar
+      }
     }
 
     sheet.appendRow([new Date(), email]);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return json({ ok: true });
   } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: false }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return json({ ok: false });
   } finally {
     lock.releaseLock();
   }
 }
+
+function json(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 ```
 
 > Guardá el proyecto (ícono de disco o Ctrl/Cmd+S) y dale un nombre.
+
+> **Importante:** el `TOKEN` debe coincidir con el del sitio (`NEWSLETTER_TOKEN` en `src/lib/site.ts`). Si lo cambiás, actualizalo en ambos lugares y **re-publicá** la aplicación web.
 
 ---
 
