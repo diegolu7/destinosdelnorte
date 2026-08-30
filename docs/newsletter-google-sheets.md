@@ -23,12 +23,11 @@ function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.tryLock(10000);
   try {
-    var sheet =
-      SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Newsletter");
-    var data = JSON.parse(e.postData.contents);
-    var email = String(data.email || "").trim();
-    var token = String(data.token || "");
-    var website = String(data.website || "").trim();
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName("Newsletter") || ss.getSheets()[0];
+    var email = String(e.parameter.email || "").trim();
+    var token = String(e.parameter.token || "");
+    var website = String(e.parameter.website || "").trim();
 
     // Anti-spam: token incorrecto
     if (token !== TOKEN) {
@@ -43,7 +42,9 @@ function doPost(e) {
       return json({ ok: false });
     }
     // Anti-duplicados: ya existe el email
-    var emails = sheet.getRange(2, 2, sheet.getLastRow() - 1, 1).getValues();
+    var emails = sheet
+      .getRange(2, 2, Math.max(sheet.getLastRow() - 1, 1), 1)
+      .getValues();
     for (var i = 0; i < emails.length; i++) {
       if (String(emails[i][0]).trim().toLowerCase() === email.toLowerCase()) {
         return json({ ok: true }); // responder éxito sin duplicar
@@ -60,15 +61,18 @@ function doPost(e) {
 }
 
 function json(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
-    ContentService.MimeType.JSON,
-  );
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 ```
 
 > Guardá el proyecto (ícono de disco o Ctrl/Cmd+S) y dale un nombre.
 
-> **Importante:** el `TOKEN` debe coincidir con el del sitio (`NEWSLETTER_TOKEN` en `src/lib/site.ts`). Si lo cambiás, actualizalo en ambos lugares y **re-publicá** la aplicación web.
+> **Importante:**
+> - El `TOKEN` debe coincidir con el del sitio (`NEWSLETTER_TOKEN` en `src/lib/site.ts`).
+> - El formulario envía datos en **form-encoded** (`application/x-www-form-urlencoded`), por eso se leen con `e.parameter.email`, `e.parameter.token` y `e.parameter.website`.
+> - La pestaña de la hoja debe llamarse **`Newsletter`** (si no se encuentra, se usa la primera pestaña).
+> - Después de pegar este código, **re-publicá** la aplicación web (Implementar → Nueva implementación).
 
 ---
 
