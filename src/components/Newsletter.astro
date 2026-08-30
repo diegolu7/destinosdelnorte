@@ -47,7 +47,7 @@ import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
       </span>
     </label>
   </form>
-  <p id="newsletter-status" class="mt-2 hidden text-xs text-terracota-light" role="status"></p>
+  <p id="newsletter-status" class="mt-2 hidden text-xs font-medium" role="status"></p>
 </div>
 
 <script>
@@ -56,6 +56,13 @@ import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
   const consent = document.getElementById("newsletter-consent") as HTMLInputElement;
 
   if (form && status && consent) {
+    function setStatus(message: string, ok: boolean) {
+      status.textContent = message;
+      status.classList.remove("text-green-400", "text-terracota-light");
+      status.classList.add(ok ? "text-green-400" : "text-terracota-light");
+      status.classList.remove("hidden");
+    }
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
@@ -64,13 +71,11 @@ import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
       const honeypot = (form.querySelector('input[name="website"]') as HTMLInputElement).value;
 
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        status.textContent = "Ingresá un email válido.";
-        status.classList.remove("hidden");
+        setStatus("Ingresá un email válido.", false);
         return;
       }
       if (!consent.checked) {
-        status.textContent = "Necesitás aceptar el consentimiento.";
-        status.classList.remove("hidden");
+        setStatus("Necesitás aceptar el consentimiento.", false);
         return;
       }
 
@@ -84,12 +89,10 @@ import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({ email, token, website: honeypot }),
         });
-        status.textContent = "¡Gracias! Te llegará una confirmación pronto.";
-        status.classList.remove("hidden");
+        setStatus("¡Gracias! Te llegará una confirmación pronto.", true);
         form.reset();
       } catch (err) {
-        status.textContent = "No pudimos procesar tu suscripción. Probá de nuevo.";
-        status.classList.remove("hidden");
+        setStatus("No pudimos procesar tu suscripción. Probá de nuevo.", false);
       }
     });
   }
