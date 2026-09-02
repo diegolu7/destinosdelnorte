@@ -12,7 +12,7 @@ export const NEWSLETTER_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbyqweLAau-iP2-9ub4qgaKJm3Dldv5SMeibXYoannZ9_jNhEx55NJrh9-TMeF7l8d7p/exec";
 
 export const CONTACT_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbwFcIUgok2LbOS1vieoKh3AHhR1Zm1ovhRkROt7R_ZNp37oAQkag3Wl28zhrRgpETs/exec";
+  "https://script.google.com/macros/s/AKfycbxExkBY37D3lRB8Kplg04Ug9__Uc5R7O2oKiAKyBW5Y2qR2xyrU_JUYrowmZIjXj22p/exec";
 
 export function baseDir(): string {
   const b = import.meta.env.BASE_URL;
