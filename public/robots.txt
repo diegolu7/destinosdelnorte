@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /busqueda/
 
-Sitemap: https://diegolu7.github.io/destinosdelnorte/sitemap-index.xml
+Sitemap: https://destinosdelnorte.ar/sitemap-index.xml

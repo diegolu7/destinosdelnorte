@@ -2,7 +2,7 @@ export const SITE = {
   name: "Destinos del Norte",
   description:
     "Descubrí destinos, lugares y experiencias turísticas de Salta, Jujuy y Tucumán.",
-  url: "https://diegolu7.github.io/destinosdelnorte",
+  url: "https://destinosdelnorte.ar",
   locale: "es-AR",
   email: "delnorte.destinos@gmail.com",
   twitter: "@destinosdelnorte",
@@ -13,11 +13,15 @@ export const NEWSLETTER_ENDPOINT =
 
 export const NEWSLETTER_TOKEN = "ddn-news-2026";
 
+export function baseDir(): string {
+  const b = import.meta.env.BASE_URL;
+  return b === "/" || b === "" ? "" : b;
+}
+
 export function url(path: string): string {
-  const base = import.meta.env.BASE_URL;
-  if (path.startsWith(base) || path.startsWith("http") || path.startsWith("mailto:")) {
-    return path;
-  }
-  return (base + "/" + path).replace(/\/{2,}/g, "/");
+  const base = baseDir();
+  if (base && path.startsWith(base)) return path;
+  if (path.startsWith("http") || path.startsWith("mailto:")) return path;
+  return base + path;
 }
 

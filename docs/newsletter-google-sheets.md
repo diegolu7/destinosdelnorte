@@ -61,14 +61,16 @@ function doPost(e) {
 }
 
 function json(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
+    ContentService.MimeType.JSON,
+  );
 }
 ```
 
 > Guardá el proyecto (ícono de disco o Ctrl/Cmd+S) y dale un nombre.
 
 > **Importante:**
+>
 > - El `TOKEN` debe coincidir con el del sitio (`NEWSLETTER_TOKEN` en `src/lib/site.ts`).
 > - El formulario envía datos en **form-encoded** (`application/x-www-form-urlencoded`), por eso se leen con `e.parameter.email`, `e.parameter.token` y `e.parameter.website`.
 > - La pestaña de la hoja debe llamarse **`Newsletter`** (si no se encuentra, se usa la primera pestaña).
