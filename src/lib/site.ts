@@ -9,7 +9,7 @@ export const SITE = {
 } as const;
 
 export const NEWSLETTER_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbzw5GGgSG0nZbkvI6XusJY3CysNFYEZUyDr7gpUpBcgzksD6AmaL9I2oZFPKeBjjrbs/exec";
+  "https://script.google.com/macros/s/AKfycbyqweLAau-iP2-9ub4qgaKJm3Dldv5SMeibXYoannZ9_jNhEx55NJrh9-TMeF7l8d7p/exec";
 
 export function baseDir(): string {
   const b = import.meta.env.BASE_URL;
