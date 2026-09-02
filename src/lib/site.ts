@@ -9,9 +9,7 @@ export const SITE = {
 } as const;
 
 export const NEWSLETTER_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbwU8hIZKiJClmyRcEGBWeuEazjiBX_4BN49Dl0QORSpWxSDjnL-n7f_xIpg3uYyMhXUYQ/exec";
-
-export const NEWSLETTER_TOKEN = "ddn-news-2026";
+  "https://script.google.com/macros/s/AKfycbzw5GGgSG0nZbkvI6XusJY3CysNFYEZUyDr7gpUpBcgzksD6AmaL9I2oZFPKeBjjrbs/exec";
 
 export function baseDir(): string {
   const b = import.meta.env.BASE_URL;

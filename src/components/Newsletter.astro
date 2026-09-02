@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
+import { NEWSLETTER_ENDPOINT } from "../lib/site";
 ---
 
 <div>
@@ -8,7 +8,7 @@ import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
   <p class="mt-3 hidden text-[13px] leading-relaxed text-footer-link lg:block">
     Recibí guías y novedades del Norte en tu mail.
   </p>
-  <form id="newsletter-form" class="mt-3" novalidate data-endpoint={NEWSLETTER_ENDPOINT} data-token={NEWSLETTER_TOKEN}>
+  <form id="newsletter-form" class="mt-3" novalidate data-endpoint={NEWSLETTER_ENDPOINT}>
     <div class="flex items-center gap-0">
       <label class="sr-only" for="newsletter-email">Tu email</label>
       <input
@@ -20,8 +20,9 @@ import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
         class="w-full min-w-0 rounded-l-lg border border-white/20 bg-white/10 px-3 py-2.5 text-sm text-white placeholder:text-navy-secondary focus:border-terracota focus:outline-none"
       />
       <button
+        id="newsletter-submit"
         type="submit"
-        class="inline-flex shrink-0 items-center rounded-r-lg bg-terracota px-3 py-2.5 text-white transition-colors duration-200 hover:bg-terracota-hover"
+        class="inline-flex shrink-0 items-center rounded-r-lg bg-terracota px-3 py-2.5 text-white transition-colors duration-200 hover:bg-terracota-hover disabled:cursor-not-allowed disabled:opacity-60"
         aria-label="Suscribirse al newsletter"
       >
         <Icon name="send" size={18} />
@@ -54,45 +55,69 @@ import { NEWSLETTER_ENDPOINT, NEWSLETTER_TOKEN } from "../lib/site";
   const form = document.getElementById("newsletter-form") as HTMLFormElement;
   const status = document.getElementById("newsletter-status");
   const consent = document.getElementById("newsletter-consent") as HTMLInputElement;
+  const submitBtn = document.getElementById("newsletter-submit") as HTMLButtonElement;
 
-  if (form && status && consent) {
-    function setStatus(message: string, ok: boolean) {
+  let loading = false;
+
+  if (form && status && consent && submitBtn) {
+    function setStatus(message: string, kind: "ok" | "error" | "neutral") {
       status.textContent = message;
-      status.classList.remove("text-green-400", "text-terracota-light");
-      status.classList.add(ok ? "text-green-400" : "text-terracota-light");
+      status.classList.remove("text-green-400", "text-terracota-light", "text-white/70");
+      if (kind === "ok") status.classList.add("text-green-400");
+      else if (kind === "error") status.classList.add("text-terracota-light");
+      else status.classList.add("text-white/70");
       status.classList.remove("hidden");
     }
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (loading) return;
 
       const input = form.querySelector('input[name="email"]') as HTMLInputElement;
       const email = input.value.trim();
-      const honeypot = (form.querySelector('input[name="website"]') as HTMLInputElement).value;
 
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setStatus("Ingresá un email válido.", false);
+        setStatus("Ingresá un email válido.", "error");
         return;
       }
       if (!consent.checked) {
-        setStatus("Necesitás aceptar el consentimiento.", false);
+        setStatus("Necesitás aceptar el consentimiento.", "error");
         return;
       }
 
       const ep = form.getAttribute("data-endpoint") || "";
-      const token = form.getAttribute("data-token") || "";
+      const dispositivo = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)
+        ? "Mobile"
+        : "Desktop";
+      const origen = window.location.pathname;
+
+      loading = true;
+      submitBtn.disabled = true;
+      setStatus("Enviando…", "neutral");
 
       try {
-        await fetch(ep, {
+        const res = await fetch(ep, {
           method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ email, token, website: honeypot }).toString(),
+          body: JSON.stringify({ email, dispositivo, origen }),
         });
-        setStatus("¡Gracias! Te llegará una confirmación pronto.", true);
-        form.reset();
+        let ok = res.ok;
+        try {
+          const data = await res.json();
+          if (data && typeof data.ok === "boolean") ok = data.ok;
+        } catch {
+          /* sin JSON */
+        }
+        if (ok) {
+          setStatus("¡Gracias! Te llegará una confirmación pronto.", "ok");
+          form.reset();
+        } else {
+          setStatus("No pudimos procesar tu suscripción. Probá de nuevo.", "error");
+        }
       } catch (err) {
-        setStatus("No pudimos procesar tu suscripción. Probá de nuevo.", false);
+        setStatus("No pudimos procesar tu suscripción. Probá de nuevo.", "error");
+      } finally {
+        loading = false;
+        submitBtn.disabled = false;
       }
     });
   }
