@@ -1,0 +1,169 @@
+---
+import Icon from "./Icon.astro";
+import { CONTACT_ENDPOINT, SITE } from "../lib/site";
+---
+
+<div class="rounded-2xl bg-tarjeta p-6 shadow-card sm:p-8">
+  <form id="contact-form" class="space-y-4" novalidate data-endpoint={CONTACT_ENDPOINT}>
+    <div>
+      <label for="contact-nombre" class="mb-1 block text-sm font-medium text-navy">Nombre</label>
+      <input
+        id="contact-nombre"
+        name="nombre"
+        type="text"
+        required
+        autocomplete="name"
+        class="w-full rounded-[10px] border border-border-input bg-header px-4 py-3 text-sm text-navy placeholder:text-body-light focus:border-terracota focus:outline-none"
+        placeholder="Tu nombre"
+      />
+    </div>
+
+    <div>
+      <label for="contact-email" class="mb-1 block text-sm font-medium text-navy">Email</label>
+      <input
+        id="contact-email"
+        name="email"
+        type="email"
+        required
+        autocomplete="email"
+        class="w-full rounded-[10px] border border-border-input bg-header px-4 py-3 text-sm text-navy placeholder:text-body-light focus:border-terracota focus:outline-none"
+        placeholder="tu@email.com"
+      />
+    </div>
+
+    <div>
+      <label for="contact-mensaje" class="mb-1 block text-sm font-medium text-navy">Mensaje</label>
+      <textarea
+        id="contact-mensaje"
+        name="mensaje"
+        rows={5}
+        required
+        class="w-full resize-y rounded-[10px] border border-border-input bg-header px-4 py-3 text-sm text-navy placeholder:text-body-light focus:border-terracota focus:outline-none"
+        placeholder="Contanos tu consulta…"
+      ></textarea>
+    </div>
+
+    <input
+      type="text"
+      name="website"
+      value=""
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+      class="absolute left-[-9999px] h-0 w-0 opacity-0"
+    />
+
+    <label class="flex items-start gap-2 text-xs text-body-light">
+      <input id="contact-consent" type="checkbox" class="mt-0.5 accent-terracota" required />
+      <span>
+        Acepto que se guarden mis datos para responder mi consulta y conozco la{" "}
+        <a href="/politica-de-privacidad/" class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
+          política de privacidad
+        </a>
+        .
+      </span>
+    </label>
+
+    <button
+      id="contact-submit"
+      type="submit"
+      class="inline-flex items-center justify-center gap-2 rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      <Icon name="send" size={18} />
+      Enviar consulta
+    </button>
+    <p id="contact-status" class="hidden text-xs font-medium" role="status"></p>
+  </form>
+
+  <div class="mt-6 border-t border-border-card pt-5">
+    <p class="text-xs text-body-light">¿Preferís escribirnos directo?</p>
+    <a href={`mailto:${SITE.email}`} class="mt-1 inline-block text-sm font-medium text-terracota hover:text-terracota-hover">
+      {SITE.email}
+    </a>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("contact-status");
+  const consent = document.getElementById("contact-consent") as HTMLInputElement;
+  const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement;
+  let loading = false;
+
+  function setStatus(message: string, kind: "ok" | "error" | "neutral") {
+    status.textContent = message;
+    status.classList.remove("text-green-600", "text-terracota", "text-body-light");
+    if (kind === "ok") status.classList.add("text-green-600");
+    else if (kind === "error") status.classList.add("text-terracota");
+    else status.classList.add("text-body-light");
+    status.classList.remove("hidden");
+  }
+
+  if (form && status && consent && submitBtn) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (loading) return;
+
+      const nombre = (form.querySelector('[name="nombre"]') as HTMLInputElement).value.trim();
+      const email = (form.querySelector('[name="email"]') as HTMLInputElement).value.trim();
+      const mensaje = (form.querySelector('[name="mensaje"]') as HTMLTextAreaElement).value.trim();
+
+      if (!nombre) {
+        setStatus("Ingresá tu nombre.", "error");
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setStatus("Ingresá un email válido.", "error");
+        return;
+      }
+      if (!mensaje) {
+        setStatus("Escribí tu consulta.", "error");
+        return;
+      }
+      if (!consent.checked) {
+        setStatus("Necesitás aceptar el tratamiento de tus datos.", "error");
+        return;
+      }
+
+      const ep = form.getAttribute("data-endpoint") || "";
+      if (!ep) {
+        setStatus("El formulario aún no está conectado. Volvé a intentar más tarde.", "error");
+        return;
+      }
+
+      const dispositivo = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)
+        ? "Mobile"
+        : "Desktop";
+      const origen = window.location.pathname;
+
+      loading = true;
+      submitBtn.disabled = true;
+      setStatus("Enviando…", "neutral");
+
+      try {
+        const res = await fetch(ep, {
+          method: "POST",
+          body: JSON.stringify({ nombre, email, mensaje, dispositivo, origen }),
+        });
+        let ok = res.ok;
+        try {
+          const data = await res.json();
+          if (data && typeof data.ok === "boolean") ok = data.ok;
+        } catch {
+          /* sin JSON */
+        }
+        if (ok) {
+          setStatus("¡Gracias! Tu consulta fue enviada.", "ok");
+          form.reset();
+        } else {
+          setStatus("No pudimos enviar tu consulta. Probá de nuevo.", "error");
+        }
+      } catch (err) {
+        setStatus("No pudimos enviar tu consulta. Probá de nuevo.", "error");
+      } finally {
+        loading = false;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+</script>

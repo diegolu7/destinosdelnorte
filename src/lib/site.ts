@@ -11,6 +11,9 @@ export const SITE = {
 export const NEWSLETTER_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbyqweLAau-iP2-9ub4qgaKJm3Dldv5SMeibXYoannZ9_jNhEx55NJrh9-TMeF7l8d7p/exec";
 
+// Pendiente: pegar la URL del Web App de Contacto (ver docs/contacto-google-sheets.md)
+export const CONTACT_ENDPOINT = "";
+
 export function baseDir(): string {
   const b = import.meta.env.BASE_URL;
   return b === "/" || b === "" ? "" : b;
