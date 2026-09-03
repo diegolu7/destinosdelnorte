@@ -61,12 +61,13 @@ import { NEWSLETTER_ENDPOINT } from "../lib/site";
 
   if (form && status && consent && submitBtn) {
     function setStatus(message: string, kind: "ok" | "error" | "neutral") {
-      status.textContent = message;
-      status.classList.remove("text-green-400", "text-terracota-light", "text-white/70");
-      if (kind === "ok") status.classList.add("text-green-400");
-      else if (kind === "error") status.classList.add("text-terracota-light");
-      else status.classList.add("text-white/70");
-      status.classList.remove("hidden");
+      const el = status as HTMLElement;
+      el.textContent = message;
+      el.classList.remove("text-green-400", "text-terracota-light", "text-white/70");
+      if (kind === "ok") el.classList.add("text-green-400");
+      else if (kind === "error") el.classList.add("text-terracota-light");
+      else el.classList.add("text-white/70");
+      el.classList.remove("hidden");
     }
 
     form.addEventListener("submit", async (event) => {

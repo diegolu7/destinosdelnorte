@@ -88,15 +88,16 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
   const status = document.getElementById("contact-status");
   const consent = document.getElementById("contact-consent") as HTMLInputElement;
   const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement;
+  const statusEl = status as HTMLElement;
   let loading = false;
 
   function setStatus(message: string, kind: "ok" | "error" | "neutral") {
-    status.textContent = message;
-    status.classList.remove("text-green-600", "text-terracota", "text-body-light");
-    if (kind === "ok") status.classList.add("text-green-600");
-    else if (kind === "error") status.classList.add("text-terracota");
-    else status.classList.add("text-body-light");
-    status.classList.remove("hidden");
+    statusEl.textContent = message;
+    statusEl.classList.remove("text-green-600", "text-terracota", "text-body-light");
+    if (kind === "ok") statusEl.classList.add("text-green-600");
+    else if (kind === "error") statusEl.classList.add("text-terracota");
+    else statusEl.classList.add("text-body-light");
+    statusEl.classList.remove("hidden");
   }
 
   if (form && status && consent && submitBtn) {
