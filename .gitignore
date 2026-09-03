@@ -8,34 +8,5 @@ dist/
 .env
 .env.*
 
-# Assets originales en la raíz (duplicados en src/assets para el build)
-/logo_destinos_del_norte.png
-/logo_destinos_del_norte_footer.png
-/hero_img.png
-/salta_que_hacer_card.png
-/jujuy_que_hacer_card.png
-/tucuman_que_hacer_card.png
-/seccion_atractivo_cafayate.png
-/seccion_atractivo_cerro_7_colores.png
-/seccion_atractivo_purmamarca.png
-/seccion_atractivo_tafi_del_valle.png
-/seccion_atractivo_tilcara.png
-/seccion_atractivo_amicha.png
-
-# Referencia visual no utilizada en el sitio
-/mockup_del_sitio.png
-
-# Favicon fuente (se copia a public/)
+# Favicon fuente en la raíz (se sirve desde public/)
 /favicon.ico
-
-# Placeholders fuente (se copian a src/assets/)
-/que_hacer_card_placeholder.png
-/seccion_atractivo_placeholder.png
-
-# Imágenes fuente provistas (se copian a src/assets/)
-/faltantes/
-
-# Asset futuro (aún sin usar en el build)
-/hero_img_tafi_del_valle.png
-/hero_img_cafayate.png
-/hero_img_purmamarca.png
