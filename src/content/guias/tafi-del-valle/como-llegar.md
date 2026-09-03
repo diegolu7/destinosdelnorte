@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a Tafí del Valle desde San Miguel de Tucumán por la
 provincia: "tucuman"
 destino: "tafi-del-valle"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_tafi_del_valle.png"
+imagen: "seccion_atractivo_tafi_del_valle.webp"
 fechaActualizacion: 2026-08-01
 ---
 

@@ -2,7 +2,7 @@
 titulo: "Norte Argentino en 7 días"
 descripcion: "Un itinerario de 7 días para descubrir lo mejor de Salta y Jujuy: Cafayate, la Quebrada de Humahuaca, Salinas Grandes y los pueblos con color."
 dias: 7
-imagen: "seccion_atractivo_cerro_7_colores.png"
+imagen: "seccion_atractivo_cerro_7_colores.webp"
 ---
 
 ## Día 1 · Llegada a Salta

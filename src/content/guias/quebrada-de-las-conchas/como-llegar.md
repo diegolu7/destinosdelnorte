@@ -4,7 +4,7 @@ descripcion: "Cómo recorrer la Quebrada de las Conchas entre Salta y Cafayate p
 provincia: "salta"
 destino: "quebrada-de-las-conchas"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_quebrada_de_las_conchas.png"
+imagen: "seccion_atractivo_quebrada_de_las_conchas.webp"
 fechaActualizacion: 2026-08-01
 ---
 

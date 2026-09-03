@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a Amaicha del Valle desde Tafí del Valle, Cafayate o
 provincia: "tucuman"
 destino: "amaicha-del-valle"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_amicha.png"
+imagen: "seccion_atractivo_amicha.webp"
 fechaActualizacion: 2026-08-01
 ---
 

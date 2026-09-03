@@ -3,7 +3,7 @@ titulo: "Atractivos gratuitos en Salta"
 descripcion: "Lugares para visitar gratis en Salta: cerros, miradores y paisajes que solo exigen llegar y caminar."
 fecha: 2026-08-01
 categoria: "Atractivos gratuitos"
-imagen: "seccion_atractivo_cachi.png"
+imagen: "seccion_atractivo_cachi.webp"
 ---
 
 Salta ofrece varios atractivos que **no se cobran al ingresar** y solo piden ir y disfrutar. Acá van algunos imperdibles.

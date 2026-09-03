@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a El Cadillal desde San Miguel de Tucumán por la Rut
 provincia: "tucuman"
 destino: "el-cadillal"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_el_cadillal.png"
+imagen: "seccion_atractivo_el_cadillal.webp"
 fechaActualizacion: 2026-08-01
 ---
 

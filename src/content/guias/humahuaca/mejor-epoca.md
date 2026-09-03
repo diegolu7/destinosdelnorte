@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar a Humahuaca para disfrutar el pueblo y los miradore
 provincia: "jujuy"
 destino: "humahuaca"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_humahuaca.png"
+imagen: "seccion_atractivo_humahuaca.webp"
 fechaActualizacion: 2026-08-01
 ---
 

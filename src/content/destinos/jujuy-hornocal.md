@@ -2,7 +2,7 @@
 name: "Hornocal"
 slug: "hornocal"
 provincia: "jujuy"
-imagen: "seccion_atractivo_hornocal.png"
+imagen: "seccion_atractivo_hornocal.webp"
 descripcion: "El cerro de los catorce colores."
 keywords:
   - "Hornocal"

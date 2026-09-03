@@ -2,7 +2,7 @@
 name: "Amaicha del Valle"
 slug: "amaicha-del-valle"
 provincia: "tucuman"
-imagen: "seccion_atractivo_amicha.png"
+imagen: "seccion_atractivo_amicha.webp"
 descripcion: "Cultura ancestral y tradiciones vivas."
 keywords:
   - "qué hacer en Amaicha del Valle"

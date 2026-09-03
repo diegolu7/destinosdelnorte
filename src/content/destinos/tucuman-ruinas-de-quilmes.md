@@ -2,7 +2,7 @@
 name: "Ruinas de Quilmes"
 slug: "ruinas-de-quilmes"
 provincia: "tucuman"
-imagen: "seccion_atractivo_ruinas_de_quilmes.png"
+imagen: "seccion_atractivo_ruinas_de_quilmes.webp"
 descripcion: "El yacimiento arqueológico más grande del país."
 keywords:
   - "Ruinas de Quilmes"

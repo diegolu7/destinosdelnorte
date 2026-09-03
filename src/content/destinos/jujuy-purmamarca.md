@@ -2,7 +2,7 @@
 name: "Purmamarca"
 slug: "purmamarca"
 provincia: "jujuy"
-imagen: "seccion_atractivo_cerro_7_colores.png"
+imagen: "seccion_atractivo_cerro_7_colores.webp"
 descripcion: "El Cerro de los 7 Colores te espera."
 keywords:
   - "qué hacer en Purmamarca"

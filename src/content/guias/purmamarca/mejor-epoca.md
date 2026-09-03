@@ -4,7 +4,7 @@ descripcion: "Cuándo visitar Purmamarca y el Cerro de los Siete Colores para ve
 provincia: "jujuy"
 destino: "purmamarca"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_cerro_7_colores.png"
+imagen: "seccion_atractivo_cerro_7_colores.webp"
 fechaActualizacion: 2026-08-01
 ---
 

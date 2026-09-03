@@ -20,8 +20,8 @@ export function hasImage(name: string): boolean {
 }
 
 export const PLACEHOLDERS = {
-  card: "que_hacer_card_placeholder.png",
-  section: "seccion_atractivo_placeholder.png",
+  card: "que_hacer_card_placeholder.webp",
+  section: "seccion_atractivo_placeholder.webp",
 } as const;
 
 export function resolveImage(name: string): ImageMetadata {
@@ -30,9 +30,9 @@ export function resolveImage(name: string): ImageMetadata {
 }
 
 export const ASSET = {
-  logo: "logo_destinos_del_norte.png",
-  hero: "hero_img.png",
-  cardSalta: "salta_que_hacer_card.png",
-  cardJujuy: "jujuy_que_hacer_card.png",
-  cardTucuman: "tucuman_que_hacer_card.png",
+  logo: "logo_destinos_del_norte.webp",
+  hero: "hero_img.webp",
+  cardSalta: "salta_que_hacer_card.webp",
+  cardJujuy: "jujuy_que_hacer_card.webp",
+  cardTucuman: "tucuman_que_hacer_card.webp",
 } as const;

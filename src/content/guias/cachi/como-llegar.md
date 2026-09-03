@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a Cachi desde Salta por la Cuesta del Obispo y el Par
 provincia: "salta"
 destino: "cachi"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_cachi.png"
+imagen: "seccion_atractivo_cachi.webp"
 fechaActualizacion: 2026-08-01
 ---
 

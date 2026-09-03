@@ -4,7 +4,7 @@ descripcion: "Cuándo hacer el Tren a las Nubes para disfrutar los paisajes de l
 provincia: "salta"
 destino: "tren-a-las-nubes"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_tren_a_las_nubes.png"
+imagen: "seccion_atractivo_tren_a_las_nubes.webp"
 fechaActualizacion: 2026-08-01
 ---
 

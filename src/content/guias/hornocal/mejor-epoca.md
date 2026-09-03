@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar al Cerro del Hornocal para ver sus colores en la me
 provincia: "jujuy"
 destino: "hornocal"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_hornocal.png"
+imagen: "seccion_atractivo_hornocal.webp"
 fechaActualizacion: 2026-08-01
 ---
 

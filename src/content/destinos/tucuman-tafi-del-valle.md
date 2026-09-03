@@ -2,7 +2,7 @@
 name: "Tafí del Valle"
 slug: "tafi-del-valle"
 provincia: "tucuman"
-imagen: "seccion_atractivo_tafi_del_valle.png"
+imagen: "seccion_atractivo_tafi_del_valle.webp"
 descripcion: "Naturaleza y aire puro todo el año."
 keywords:
   - "qué hacer en Tafí del Valle"

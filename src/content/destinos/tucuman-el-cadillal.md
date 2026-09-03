@@ -2,7 +2,7 @@
 name: "El Cadillal"
 slug: "el-cadillal"
 provincia: "tucuman"
-imagen: "seccion_atractivo_el_cadillal.png"
+imagen: "seccion_atractivo_el_cadillal.webp"
 descripcion: "Un lago de montaña a pocos minutos de la capital."
 keywords:
   - "El Cadillal"

@@ -4,7 +4,7 @@ descripcion: "Toda la información para llegar a Cafayate desde Salta por los Va
 provincia: "salta"
 destino: "cafayate"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_cafayate.png"
+imagen: "seccion_atractivo_cafayate.webp"
 fechaActualizacion: 2026-08-01
 ---
 

@@ -2,7 +2,7 @@
 titulo: "Tucumán en 4 días"
 descripcion: "Un itinerario de 4 días por Tucumán: Tafí del Valle, Amaicha del Valle, Ruinas de Quilmes y El Cadillal."
 dias: 4
-imagen: "seccion_atractivo_amicha.png"
+imagen: "seccion_atractivo_amicha.webp"
 ---
 
 ## Día 1 · San Miguel de Tucumán a Tafí del Valle

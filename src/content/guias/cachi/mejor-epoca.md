@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar a Cachi para recorrer los Valles Calchaquíes con e
 provincia: "salta"
 destino: "cachi"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_cachi.png"
+imagen: "seccion_atractivo_cachi.webp"
 fechaActualizacion: 2026-08-01
 ---
 

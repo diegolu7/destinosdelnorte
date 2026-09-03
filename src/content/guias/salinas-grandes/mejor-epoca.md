@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar a las Salinas Grandes para ver el salar en su mejor
 provincia: "jujuy"
 destino: "salinas-grandes"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_salinas_grandes.png"
+imagen: "seccion_atractivo_salinas_grandes.webp"
 fechaActualizacion: 2026-08-01
 ---
 

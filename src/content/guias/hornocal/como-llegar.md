@@ -4,7 +4,7 @@ descripcion: "Cómo llegar al Cerro del Hornocal desde Humahuaca por la Ruta Pro
 provincia: "jujuy"
 destino: "hornocal"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_hornocal.png"
+imagen: "seccion_atractivo_hornocal.webp"
 fechaActualizacion: 2026-08-01
 ---
 

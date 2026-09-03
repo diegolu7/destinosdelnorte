@@ -2,7 +2,7 @@
 name: "Tucumán"
 slug: "tucuman"
 region: "Tucumán"
-imagen: "tucuman_que_hacer_card.png"
+imagen: "tucuman_que_hacer_card.webp"
 descripcion: "Descubrí qué hacer en Tucumán: Tafí del Valle, Amaicha del Valle, las ruinas de Quilmes y el corazón histórico de San Miguel de Tucumán."
 keywords:
   - "qué hacer en Tucumán"

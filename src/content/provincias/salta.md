@@ -2,7 +2,7 @@
 name: "Salta"
 slug: "salta"
 region: "Salta"
-imagen: "salta_que_hacer_card.png"
+imagen: "salta_que_hacer_card.webp"
 descripcion: "Descubrí qué hacer en Salta: la ciudad, la Quebrada de Escoipe, Cafayate, valles calchaquíes y paisajes de montaña únicos en el Norte Argentino."
 keywords:
   - "qué hacer en Salta"

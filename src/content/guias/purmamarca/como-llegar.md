@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a Purmamarca desde San Salvador de Jujuy y desde la Q
 provincia: "jujuy"
 destino: "purmamarca"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_cerro_7_colores.png"
+imagen: "seccion_atractivo_cerro_7_colores.webp"
 fechaActualizacion: 2026-08-01
 ---
 

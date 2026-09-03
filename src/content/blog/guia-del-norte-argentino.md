@@ -3,7 +3,7 @@ titulo: "Guía del Norte Argentino: cómo llegar, mejor época y transporte"
 descripcion: "Todo lo que necesitás saber antes de viajar por el Norte Argentino: cómo llegar, cuándo ir y cómo moverte entre Salta, Jujuy y Tucumán."
 fecha: 2026-08-01
 categoria: "Guías"
-imagen: "hero_img.png"
+imagen: "hero_img.webp"
 ---
 
 ## Cómo llegar

@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a las Ruinas de Quilmes desde Amaicha del Valle por l
 provincia: "tucuman"
 destino: "ruinas-de-quilmes"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_ruinas_de_quilmes.png"
+imagen: "seccion_atractivo_ruinas_de_quilmes.webp"
 fechaActualizacion: 2026-08-01
 ---
 

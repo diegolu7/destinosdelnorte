@@ -35,7 +35,7 @@ const robots = [
 
 const ogImageUrl = ogImage
   ? new URL(ogImage.src, Astro.site).toString()
-  : new URL("/logo_destinos_del_norte.png", Astro.site).toString();
+  : new URL("/logo_destinos_del_norte.webp", Astro.site).toString();
 
 const websiteSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
@@ -50,7 +50,7 @@ const websiteSchema: Record<string, unknown> = {
       "@type": "Organization",
       name: SITE.name,
       url: homeUrl,
-      logo: new URL("/logo_destinos_del_norte.png", Astro.site).toString(),
+      logo: new URL("/logo_destinos_del_norte.webp", Astro.site).toString(),
       email: SITE.email,
     },
   ],

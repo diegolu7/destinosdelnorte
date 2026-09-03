@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar a Tafí del Valle: un destino de montaña que se di
 provincia: "tucuman"
 destino: "tafi-del-valle"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_tafi_del_valle.png"
+imagen: "seccion_atractivo_tafi_del_valle.webp"
 fechaActualizacion: 2026-08-01
 ---
 

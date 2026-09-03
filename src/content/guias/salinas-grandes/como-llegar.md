@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a las Salinas Grandes desde Purmamarca por la Cuesta 
 provincia: "jujuy"
 destino: "salinas-grandes"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_salinas_grandes.png"
+imagen: "seccion_atractivo_salinas_grandes.webp"
 fechaActualizacion: 2026-08-01
 ---
 

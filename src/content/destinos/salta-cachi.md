@@ -2,7 +2,7 @@
 name: "Cachi"
 slug: "cachi"
 provincia: "salta"
-imagen: "seccion_atractivo_cachi.png"
+imagen: "seccion_atractivo_cachi.webp"
 descripcion: "Un pueblo colonial en plenos Valles Calchaquíes."
 keywords:
   - "qué hacer en Cachi"

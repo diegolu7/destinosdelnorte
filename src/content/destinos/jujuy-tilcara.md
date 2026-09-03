@@ -2,7 +2,7 @@
 name: "Tilcara"
 slug: "tilcara"
 provincia: "jujuy"
-imagen: "seccion_atractivo_tilcara.png"
+imagen: "seccion_atractivo_tilcara.webp"
 descripcion: "Historia, cultura y paisajes únicos."
 keywords:
   - "qué hacer en Tilcara"

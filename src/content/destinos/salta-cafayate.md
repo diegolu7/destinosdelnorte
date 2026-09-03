@@ -2,7 +2,7 @@
 name: "Cafayate"
 slug: "cafayate"
 provincia: "salta"
-imagen: "seccion_atractivo_cafayate.png"
+imagen: "seccion_atractivo_cafayate.webp"
 descripcion: "Vinos, paisajes y tradición."
 keywords:
   - "qué hacer en Cafayate"

@@ -2,7 +2,7 @@
 titulo: "Salta y Jujuy en 5 días"
 descripcion: "Un plan de 5 días para conocer los imprescindibles de Salta y la Quebrada de Humahuaca sin apuro."
 dias: 5
-imagen: "seccion_atractivo_cafayate.png"
+imagen: "seccion_atractivo_cafayate.webp"
 ---
 
 ## Día 1 · Salta

@@ -2,7 +2,7 @@
 name: "Salinas Grandes"
 slug: "salinas-grandes"
 provincia: "jujuy"
-imagen: "seccion_atractivo_salinas_grandes.png"
+imagen: "seccion_atractivo_salinas_grandes.webp"
 descripcion: "Un mar de sal a más de 3.000 metros."
 keywords:
   - "Salinas Grandes"

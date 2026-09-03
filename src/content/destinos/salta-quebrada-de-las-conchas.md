@@ -2,7 +2,7 @@
 name: "Quebrada de las Conchas"
 slug: "quebrada-de-las-conchas"
 provincia: "salta"
-imagen: "seccion_atractivo_quebrada_de_las_conchas.png"
+imagen: "seccion_atractivo_quebrada_de_las_conchas.webp"
 descripcion: "Formaciones rocosas esculpidas por el viento."
 keywords:
   - "Quebrada de las Conchas"

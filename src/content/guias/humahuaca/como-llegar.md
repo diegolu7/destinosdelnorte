@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a Humahuaca desde San Salvador de Jujuy por la Quebra
 provincia: "jujuy"
 destino: "humahuaca"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_humahuaca.png"
+imagen: "seccion_atractivo_humahuaca.webp"
 fechaActualizacion: 2026-08-01
 ---
 

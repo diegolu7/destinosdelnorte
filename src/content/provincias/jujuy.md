@@ -2,7 +2,7 @@
 name: "Jujuy"
 slug: "jujuy"
 region: "Jujuy"
-imagen: "jujuy_que_hacer_card.png"
+imagen: "jujuy_que_hacer_card.webp"
 descripcion: "Descubrí qué hacer en Jujuy: la Quebrada de Humahuaca, Purmamarca, Tilcara, las Salinas Grandes y sus pueblos con historia y color."
 keywords:
   - "qué hacer en Jujuy"

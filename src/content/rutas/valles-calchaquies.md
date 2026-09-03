@@ -2,7 +2,7 @@
 titulo: "Ruta de los Valles Calchaquíes"
 descripcion: "Un circuito por los Valles Calchaquíes entre Salta, Cafayate, Cachi, Amaicha del Valle y Tafí del Valle."
 dias: 6
-imagen: "seccion_atractivo_tafi_del_valle.png"
+imagen: "seccion_atractivo_tafi_del_valle.webp"
 ---
 
 ## Día 1 · Salta a Cachi

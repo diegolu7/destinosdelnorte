@@ -2,7 +2,7 @@
 name: "Tren a las Nubes"
 slug: "tren-a-las-nubes"
 provincia: "salta"
-imagen: "seccion_atractivo_tren_a_las_nubes.png"
+imagen: "seccion_atractivo_tren_a_las_nubes.webp"
 descripcion: "Uno de los ferrocarriles más altos del mundo."
 keywords:
   - "Tren a las Nubes"

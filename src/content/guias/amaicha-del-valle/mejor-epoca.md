@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar a Amaicha del Valle para disfrutar el pueblo y las 
 provincia: "tucuman"
 destino: "amaicha-del-valle"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_amicha.png"
+imagen: "seccion_atractivo_amicha.webp"
 fechaActualizacion: 2026-08-01
 ---
 

@@ -3,7 +3,7 @@ titulo: "Cerro San Javier: naturaleza gratuita en Tucumán"
 descripcion: "El cerro San Javier, en Tucumán, es un destino gratuito de montaña ideal para escapar de la ciudad y disfrutar la naturaleza."
 fecha: 2026-08-01
 categoria: "Atractivos gratuitos"
-imagen: "seccion_atractivo_tafi_del_valle.png"
+imagen: "seccion_atractivo_tafi_del_valle.webp"
 ---
 
 ## Qué es

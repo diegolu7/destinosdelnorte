@@ -4,7 +4,7 @@ descripcion: "Cómo llegar a Tilcara desde San Salvador de Jujuy para visitar el
 provincia: "jujuy"
 destino: "tilcara"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_tilcara.png"
+imagen: "seccion_atractivo_tilcara.webp"
 fechaActualizacion: 2026-08-01
 ---
 

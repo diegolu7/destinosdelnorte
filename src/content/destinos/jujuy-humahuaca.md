@@ -2,7 +2,7 @@
 name: "Humahuaca"
 slug: "humahuaca"
 provincia: "jujuy"
-imagen: "seccion_atractivo_humahuaca.png"
+imagen: "seccion_atractivo_humahuaca.webp"
 descripcion: "El pueblo más alto de la Quebrada de Humahuaca."
 keywords:
   - "qué hacer en Humahuaca"

@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar al lago de El Cadillal, cerca de San Miguel de Tucu
 provincia: "tucuman"
 destino: "el-cadillal"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_el_cadillal.png"
+imagen: "seccion_atractivo_el_cadillal.webp"
 fechaActualizacion: 2026-08-01
 ---
 

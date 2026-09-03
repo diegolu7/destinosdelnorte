@@ -4,7 +4,7 @@ descripcion: "Cómo es el recorrido del Tren a las Nubes desde Salta hasta el vi
 provincia: "salta"
 destino: "tren-a-las-nubes"
 tipo: "como-llegar"
-imagen: "seccion_atractivo_tren_a_las_nubes.png"
+imagen: "seccion_atractivo_tren_a_las_nubes.webp"
 fechaActualizacion: 2026-08-01
 ---
 

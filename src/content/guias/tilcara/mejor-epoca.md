@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar a Tilcara para visitar el Pucará y la Garganta del
 provincia: "jujuy"
 destino: "tilcara"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_tilcara.png"
+imagen: "seccion_atractivo_tilcara.webp"
 fechaActualizacion: 2026-08-01
 ---
 

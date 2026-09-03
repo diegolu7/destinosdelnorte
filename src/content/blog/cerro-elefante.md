@@ -3,7 +3,7 @@ titulo: "Cerro Elefante: un mirador gratuito en los Valles Calchaquíes"
 descripcion: "El Cerro Elefante, una formación con silueta de elefante en la zona de Cachi, es un atractivo gratuito ideal para fotografiar el paisaje."
 fecha: 2026-08-01
 categoria: "Atractivos gratuitos"
-imagen: "seccion_atractivo_cachi.png"
+imagen: "seccion_atractivo_cachi.webp"
 ---
 
 ## Qué es

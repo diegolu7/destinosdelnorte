@@ -4,7 +4,7 @@ descripcion: "Cuándo viajar a Cafayate: vendimia, clima, lluvias y la mejor ép
 provincia: "salta"
 destino: "cafayate"
 tipo: "mejor-epoca"
-imagen: "seccion_atractivo_cafayate.png"
+imagen: "seccion_atractivo_cafayate.webp"
 fechaActualizacion: 2026-08-01
 ---
 
