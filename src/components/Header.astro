@@ -9,9 +9,12 @@ import { t } from "../lib/ui";
 
 const lang: Lang = langFromPath(Astro.url.pathname);
 
-const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === lang).sort((a, b) =>
-  a.data.name.localeCompare(b.data.name, "es"),
-);
+const provinciasSource =
+  lang === "es" ? await getCollection("provincias") : lang === "en" ? await getCollection("provinciasEn") : await getCollection("provinciasPt");
+
+const provincias = provinciasSource
+  .filter((p) => p.data.lang === lang)
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, "es"));
 
 const guiasProvincias = provincias.map((p) => ({
   label: p.data.name,
