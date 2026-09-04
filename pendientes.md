@@ -50,31 +50,19 @@ Lista de tareas pendientes y futuras del proyecto. Se actualiza a medida que se 
 
 ---
 
-## 7 · Internacionalización (EN ✓ — PT pendiente)
+## 7 · Internacionalización (EN ✓ — PT ✓)
 
-### Hecho (EN completo, en producción)
-- [x] Arquitectura i18n: `src/lib/i18n.ts` (locales es/en/pt, `localeHref`), `ui.ts` (dict chrome), `LangSwitcher`, `html lang` + hreflang en `BaseLayout`.
-- [x] Contenido EN bajo `/en/`: Home, 3 provincias, 13 destinos, 26 guías, 4 rutas, 5 posts blog, 11 FAQ, sobre nosotros, contacto, política de privacidad, búsqueda.
-- [x] Colecciones por idioma (evitan colisión del `slug`/id reservado): `provinciasEn`, `destinosEn`, `guiasEn`, `rutasEn`, `blogEn`, `faqsEn`.
-- [x] `ContactForm` y `Newsletter` localizados (es/en/pt) vía prop `lang` + dict en el `<script>`.
-- [x] Nav/footer/breadcrumbs y `ProvinceCard` locale-aware (`localeHref`).
+### Hecho (completo, en producción)
+- [x] Arquitectura i18n: `src/lib/i18n.ts` (locales es/en/pt, `localeHref`, `I18N_SWITCHER_ENABLED=true`), `ui.ts` (dict chrome), `LangSwitcher`, `html lang` + hreflang absolutos en `BaseLayout`.
+- [x] Contenido EN bajo `/en/`: Home, 3 provincias, 13 destinos, 26 guías, 4 rutas, 5 posts blog, 11 FAQ, sobre nosotros, contacto, privacidad, búsqueda.
+- [x] Contenido PT bajo `/pt/` (mismo alcance completo): `provinciasPt`, `destinosPt`, `guiasPt`, `rutasPt`, `blogPt`, `faqsPt` + páginas estáticas y Home PT.
+- [x] Colecciones por idioma (evitan colisión del `slug`/id reservado): sufijos `-En` / `-Pt`.
+- [x] `ContactForm`, `Newsletter`, `ProvinceCard`, `Breadcrumbs`, Header/Footer locale-aware (es/en/pt).
+- [x] hreflang absolutos (`es-AR`, `en`, `pt-BR`, `x-default`); `LangSwitcher` activo.
 
-### Cómo funciona el patrón EN (a replicar en PT)
-1. Carpeta propia por colección: `src/content/<coleccion>-en/` → para PT `-pt/`.
-2. Colección hermana en `content.config.ts` con el **mismo schema**; registrar en `export const collections`.
-3. Páginas espejo bajo `src/pages/en/...` → para PT `src/pages/pt/...`, con `lang="pt"` y `t(lang, …)`.
-4. Id de archivo = basename (rutas planas) o `carpeta/basename` (subcarpetas); **no** usar campo `slug` (reservado).
-5. Links internos en el cuerpo MD usan prefijo de idioma (`/pt/…`).
-
-### Roadmap PT (por bloques, 1 sesión cada uno)
-- [ ] **Fase A — PT base**: colecciones `provinciasPt` + traducción de provincias; páginas `/pt/{provincia}/`. Sin destinos aún → la página de provincia debe **no** listar destinos no traducidos (o listar solo los existentes en PT) para evitar 404.
-- [ ] **Fase B — PT destinos**: colección `destinosPt` (13), páginas `/pt/{prov}/{slug}/`; recién ahí enlazar cards desde provincias/Home.
-- [ ] **Fase C — PT guías**: colección `guiasPt` (26) + sección "Travel guides" en páginas destino PT.
-- [ ] **Fase D — PT rutas + blog + FAQ**: `rutasPt`, `blogPt`, `faqsPt` + páginas `/pt/…`.
-- [ ] **Fase E — PT estáticas**: sobre nosotros, contacto, privacidad, búsqueda; textos de rutas con links internos `/pt/…`.
-- [ ] **Fase F — cierre**: activar `I18N_SWITCHER_ENABLED = true`; auditar hreflang para que no apunte a páginas inexistentes; `astro check` + verificar que `es` y `en` sigan intactos.
-
-> Nota: traducir **después** de cada fase con `npm run check` y `npm run build`; commitear y pushear por bloque. El selector de idioma permanece oculto hasta que PT cubra las páginas principales.
+### Pendientes menores (opcional)
+- [ ] Auditar 1:1 que ningún link interno (es/en/pt) apunte a páginas inexistentes (spot-check por idioma).
+- [ ] Revisar textos del `ui.ts` (dict chrome) cuando se traduzcan nuevas secciones.
 
 ---
 
