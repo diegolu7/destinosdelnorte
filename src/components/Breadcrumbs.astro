@@ -14,7 +14,7 @@ const homeLabel = lang === "es" ? "Inicio" : lang === "pt" ? "Início" : "Home";
 <nav aria-label="Ruta de navegación">
   <ol class="flex flex-wrap items-center gap-1.5 text-sm text-body-light">
     <li>
-      <a href={url(lang === "es" ? "/" : `/${lang}/`)} class="transition-colors duration-150 hover:text-terracota">
+      <a href={url("/")} class="transition-colors duration-150 hover:text-terracota">
         {homeLabel}
       </a>
     </li>

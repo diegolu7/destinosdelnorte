@@ -7,6 +7,9 @@ export const LOCALES = {
 export type Lang = keyof typeof LOCALES;
 export const DEFAULT_LANG: Lang = "es";
 
+// Habilita el selector de idioma solo cuando la cobertura EN/PT sea amplia (evita links 404).
+export const I18N_SWITCHER_ENABLED = false;
+
 export function langFromPath(path: string): Lang {
   const first = path.split("/")[1];
   if (first === "en") return "en";
