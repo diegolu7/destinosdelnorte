@@ -123,6 +123,17 @@ const blog = defineCollection({
   }),
 });
 
+const blogEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog-en" }),
+  schema: z.object({
+    titulo: z.string(),
+    descripcion: z.string(),
+    fecha: z.coerce.date(),
+    categoria: z.string().optional(),
+    imagen: z.string().optional(),
+  }),
+});
+
 const destinosEn = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/destinos-en" }),
   schema: z.object({
@@ -181,4 +192,5 @@ export const collections = {
   rutas,
   rutasEn,
   blog,
+  blogEn,
 };
