@@ -16,6 +16,7 @@ export const UI = {
       verTodos: "Ver todos",
       verTodosDestinos: "Ver todos los destinos",
       verTodasExperiencias: "Ver todas las experiencias",
+      dias: "días",
     },
   },
   en: {
@@ -33,6 +34,7 @@ export const UI = {
       verTodos: "See all",
       verTodosDestinos: "See all destinations",
       verTodasExperiencias: "See all experiences",
+      dias: "days",
     },
   },
   pt: {
@@ -50,6 +52,7 @@ export const UI = {
       verTodos: "Ver todos",
       verTodosDestinos: "Ver todos os destinos",
       verTodasExperiencias: "Ver todas as experiências",
+      dias: "dias",
     },
   },
 } as const;

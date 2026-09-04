@@ -4,7 +4,7 @@ import Icon from "./Icon.astro";
 import Newsletter from "./Newsletter.astro";
 import { SITE } from "../lib/site";
 import { url } from "../lib/site";
-import { langFromPath, type Lang } from "../lib/i18n";
+import { langFromPath, localeHref, type Lang } from "../lib/i18n";
 
 const lang: Lang = langFromPath(Astro.url.pathname);
 
@@ -45,22 +45,23 @@ const FOOTER = {
 } as const;
 
 const f = FOOTER[lang];
+const lh = (path: string) => localeHref(path, lang);
 
 const columns = [
   {
     title: f.destinos,
     links: [
-      { label: "Salta", href: "/salta/" },
-      { label: "Jujuy", href: "/jujuy/" },
-      { label: "Tucumán", href: "/tucuman/" },
+      { label: "Salta", href: lh("/salta/") },
+      { label: "Jujuy", href: lh("/jujuy/") },
+      { label: "Tucumán", href: lh("/tucuman/") },
     ],
   },
   {
     title: f.guias,
     links: [
-      { label: f.queHacer("Salta"), href: "/salta/" },
-      { label: f.queHacer("Jujuy"), href: "/jujuy/" },
-      { label: f.queHacer("Tucumán"), href: "/tucuman/" },
+      { label: f.queHacer("Salta"), href: lh("/salta/") },
+      { label: f.queHacer("Jujuy"), href: lh("/jujuy/") },
+      { label: f.queHacer("Tucumán"), href: lh("/tucuman/") },
     ],
   },
   {

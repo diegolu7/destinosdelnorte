@@ -4,7 +4,7 @@ import logo from "../assets/logo_destinos_del_norte.webp";
 import Icon from "./Icon.astro";
 import LangSwitcher from "./LangSwitcher.astro";
 import { url } from "../lib/site";
-import { langFromPath, type Lang } from "../lib/i18n";
+import { langFromPath, localeHref, type Lang } from "../lib/i18n";
 import { t } from "../lib/ui";
 
 const lang: Lang = langFromPath(Astro.url.pathname);
@@ -85,7 +85,7 @@ const navMain = [
       </div>
 
       <a
-        href={url("/rutas/")}
+        href={url(localeHref("/rutas/", lang))}
         class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
         {t(lang, "nav.rutas")}
@@ -163,7 +163,7 @@ const navMain = [
         </ul>
       </details>
       <a
-        href={url("/rutas/")}
+        href={url(localeHref("/rutas/", lang))}
         class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
         {t(lang, "nav.rutas")}

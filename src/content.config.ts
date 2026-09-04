@@ -102,6 +102,16 @@ const rutas = defineCollection({
   }),
 });
 
+const rutasEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/rutas-en" }),
+  schema: z.object({
+    titulo: z.string(),
+    descripcion: z.string(),
+    dias: z.number(),
+    imagen: z.string().optional(),
+  }),
+});
+
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
   schema: z.object({
@@ -169,5 +179,6 @@ export const collections = {
   experiencias,
   faqs,
   rutas,
+  rutasEn,
   blog,
 };
