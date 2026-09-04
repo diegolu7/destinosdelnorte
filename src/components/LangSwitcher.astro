@@ -1,0 +1,26 @@
+---
+import { LOCALES, type Lang, langFromPath, localeHref } from "../lib/i18n";
+
+const currentLang: Lang = langFromPath(Astro.url.pathname);
+const currentPath = Astro.url.pathname;
+---
+
+<nav aria-label="Cambiar idioma" class="flex items-center gap-1">
+  {
+    (Object.keys(LOCALES) as Lang[]).map((lang) => (
+      <a
+        href={localeHref(currentPath, lang)}
+        class={`rounded-md px-1.5 py-1 text-sm font-medium leading-none transition-colors duration-150 ${
+          lang === currentLang
+            ? "text-terracota underline underline-offset-4"
+            : "text-navy hover:text-terracota"
+        }`}
+        title={LOCALES[lang].label}
+        aria-label={`${LOCALES[lang].label} (${LOCALES[lang].flag})`}
+        aria-current={lang === currentLang ? "true" : undefined}
+      >
+        <span aria-hidden="true">{LOCALES[lang].flag}</span>
+      </a>
+    ))
+  }
+</nav>

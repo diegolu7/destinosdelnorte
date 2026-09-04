@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import logo from "../assets/logo_destinos_del_norte.webp";
 import Icon from "./Icon.astro";
+import LangSwitcher from "./LangSwitcher.astro";
 import { url } from "../lib/site";
 
 const provincias = (await getCollection("provincias")).sort((a, b) =>
@@ -107,6 +108,7 @@ const navMain = [
       >
         <Icon name="search" size={22} />
       </a>
+      <LangSwitcher />
       <button
         id="menu-toggle"
         type="button"
@@ -181,6 +183,9 @@ const navMain = [
         <Icon name="search" size={20} />
         Buscar
       </a>
+      <div class="pt-3">
+        <LangSwitcher />
+      </div>
     </nav>
   </div>
 </header>
