@@ -19,8 +19,8 @@ const guiasProvincias = provincias.map((p) => ({
 }));
 
 const navMain = [
-  { label: t(lang, "nav.queHacer"), href: "/#que-hacer" },
-  { label: t(lang, "nav.destinos"), href: "/#destinos" },
+  { label: t(lang, "nav.queHacer"), href: localeHref("/#que-hacer", lang) },
+  { label: t(lang, "nav.destinos"), href: localeHref("/#destinos", lang) },
 ];
 ---
 
@@ -106,7 +106,7 @@ const navMain = [
 
     <div class="flex items-center gap-2">
       <a
-        href={url("/#buscador")}
+        href={url(lang === "es" ? "/#buscador" : localeHref("/busqueda/", lang))}
         class="hidden rounded-full p-2 text-navy transition-colors duration-200 hover:text-terracota lg:inline-flex"
         aria-label={t(lang, "nav.buscar")}
       >
@@ -181,7 +181,7 @@ const navMain = [
         {t(lang, "nav.contacto")}
       </a>
       <a
-        href={url("/#buscador")}
+        href={url(lang === "es" ? "/#buscador" : localeHref("/busqueda/", lang))}
         class="mt-2 inline-flex items-center gap-2 py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
         <Icon name="search" size={20} />

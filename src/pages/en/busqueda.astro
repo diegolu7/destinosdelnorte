@@ -1,0 +1,198 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import ProvinceCard from "../../components/ProvinceCard.astro";
+import { resolveImage } from "../../lib/images";
+import { url } from "../../lib/site";
+import { langFromPath, type Lang } from "../../lib/i18n";
+
+const lang: Lang = langFromPath(Astro.url.pathname);
+
+const destinos = (await getCollection("destinosEn")).map((destino) => ({
+  nombre: destino.data.name,
+  slug: destino.data.slug,
+  provincia: destino.data.provincia,
+  descripcion: destino.data.descripcion,
+  imagen: resolveImage(destino.data.imagen).src,
+  terminos: [
+    destino.data.name,
+    ...(destino.data.keywords ?? []),
+    ...(destino.data.lugaresImperdibles ?? []).map((l) => l.nombre),
+  ].join(" "),
+}));
+
+const provincias = (await getCollection("provinciasEn")).map((provincia) => ({
+  nombre: provincia.data.name,
+  slug: provincia.data.slug,
+  imagen: resolveImage(provincia.data.imagen).src,
+}));
+
+const provinciasCards = await getCollection("provinciasEn");
+
+const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) => ({
+  nombre,
+  href: `${url("/en/busqueda/")}?q=${encodeURIComponent(nombre)}`,
+}));
+---
+
+<BaseLayout
+  lang="en"
+  title="Destination search | Destinos del Norte"
+  description="Search destinations, places and tourist experiences in the Argentine North: Salta, Jujuy and Tucumán."
+  noindex
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <h1 class="font-display text-2xl font-bold text-navy lg:text-3xl">Search destinations</h1>
+    <p class="mt-2 text-sm text-body lg:text-base">
+      Results for <strong id="query-label" class="text-terracota">your search</strong>.
+    </p>
+
+    <div id="results-empty" class="mt-8 hidden rounded-xl bg-tarjeta p-6 shadow-card">
+      <h2 class="font-display text-lg font-bold text-navy lg:text-xl">
+        We couldn't find results for <span id="empty-query" class="text-terracota">your search</span>.
+      </h2>
+      <p class="mt-2 text-sm leading-relaxed text-body">
+        Try another word or pick one of these suggested destinations:
+      </p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {
+          sugerencias.map((s) => (
+            <a
+              href={s.href}
+              class="rounded-full bg-terracota/10 px-4 py-1.5 text-sm font-medium text-terracota transition-colors duration-150 hover:bg-terracota/20"
+            >
+              {s.nombre}
+            </a>
+          ))
+        }
+      </div>
+      <a
+        href={url("/en/#destinos")}
+        class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
+      >
+        See all destinations
+      </a>
+    </div>
+
+    <div id="results" class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <SectionTitle title="What to do in each destination?" />
+    <div class="mt-8 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-5">
+      {
+        provinciasCards.map((provincia) => (
+          <ProvinceCard
+            nombre={provincia.data.name}
+            slug={provincia.data.slug}
+            imagen={resolveImage(provincia.data.imagen)}
+            lang={lang}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ destinos, provincias, base: import.meta.env.BASE_URL }} is:inline>
+  const queryLabel = document.getElementById("query-label");
+  const emptyQuery = document.getElementById("empty-query");
+  const results = document.getElementById("results");
+  const resultsEmpty = document.getElementById("results-empty");
+
+  function p(path) {
+    return base + path;
+  }
+
+  function normalize(value) {
+    return String(value)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function build() {
+    const params = new URLSearchParams(window.location.search);
+    const q = normalize(params.get("q") ?? "");
+
+    const resultados = [];
+
+    provincias.forEach(function (provincia) {
+      if (!q || normalize(provincia.nombre).includes(q)) {
+        resultados.push({
+          nombre: provincia.nombre,
+          descripcion: "Discover what to do in " + provincia.nombre + ": places to visit and experiences.",
+          href: p("/en/" + provincia.slug + "/"),
+          etiqueta: "Province",
+          imagen: provincia.imagen,
+        });
+      }
+    });
+
+    destinos.forEach(function (destino) {
+      const hayDestino = normalize(destino.terminos);
+      if (!q || hayDestino.includes(q)) {
+        resultados.push({
+          nombre: destino.nombre,
+          descripcion: destino.descripcion,
+          href: p("/en/" + destino.provincia + "/" + destino.slug + "/"),
+          etiqueta: "Destination",
+          imagen: destino.imagen,
+        });
+      }
+    });
+
+    const seen = new Set();
+    const unique = resultados.filter(function (item) {
+      if (seen.has(item.nombre)) return false;
+      seen.add(item.nombre);
+      return true;
+    });
+
+    const rawQ = params.get("q");
+    queryLabel.textContent = rawQ || "results";
+    if (emptyQuery) emptyQuery.textContent = rawQ || "this search";
+
+    resultsEmpty.classList.toggle("hidden", unique.length > 0);
+
+    results.innerHTML = unique
+      .map(function (item) {
+        var cta =
+          item.etiqueta === "Province"
+            ? "See province"
+            : item.etiqueta === "Destination"
+              ? "See destination"
+              : "See experiences";
+        return (
+          '<a href="' +
+          item.href +
+          '" class="group block overflow-hidden rounded-xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover">' +
+          '<img src="' +
+          item.imagen +
+          '" alt="' +
+          item.nombre +
+          '" loading="lazy" class="h-36 w-full object-cover sm:h-40">' +
+          '<div class="flex flex-col p-5">' +
+          '<span class="self-start inline-flex rounded-full bg-terracota/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-terracota">' +
+          item.etiqueta +
+          "</span>" +
+          '<h2 class="mt-2 font-display text-base font-semibold text-navy group-hover:text-terracota">' +
+          item.nombre +
+          "</h2>" +
+          '<p class="mt-1 line-clamp-2 min-h-[2.5rem] text-xs leading-relaxed text-body-light">' +
+          item.descripcion +
+          "</p>" +
+          '<span class="mt-auto self-start inline-flex items-center gap-1 pt-3 text-sm font-medium text-terracota transition-colors duration-150 group-hover:text-terracota-hover">' +
+          cta +
+          ' <span aria-hidden="true">➔</span>' +
+          "</span>" +
+          "</div>" +
+          "</a>"
+        );
+      })
+      .join("");
+  }
+
+  build();
+</script>
