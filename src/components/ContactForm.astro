@@ -1,12 +1,60 @@
 ---
 import Icon from "./Icon.astro";
 import { CONTACT_ENDPOINT, SITE } from "../lib/site";
+import { localeHref, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+
+const L = {
+  es: {
+    nombre: "Nombre",
+    nombrePh: "Tu nombre",
+    email: "Email",
+    emailPh: "tu@email.com",
+    mensaje: "Mensaje",
+    mensajePh: "Contanos tu consulta…",
+    consent: "Acepto las políticas de privacidad.",
+    privacidad: "políticas de privacidad",
+    enviar: "Enviar consulta",
+    directo: "¿Preferís escribirnos directo?",
+  },
+  en: {
+    nombre: "Name",
+    nombrePh: "Your name",
+    email: "Email",
+    emailPh: "you@email.com",
+    mensaje: "Message",
+    mensajePh: "Tell us your question…",
+    consent: "I accept the privacy policy.",
+    privacidad: "privacy policy",
+    enviar: "Send message",
+    directo: "Prefer to write to us directly?",
+  },
+  pt: {
+    nombre: "Nome",
+    nombrePh: "Seu nome",
+    email: "E-mail",
+    emailPh: "voce@email.com",
+    mensaje: "Mensagem",
+    mensajePh: "Conte-nos sua dúvida…",
+    consent: "Aceito a política de privacidade.",
+    privacidad: "política de privacidade",
+    enviar: "Enviar mensagem",
+    directo: "Prefere escrever diretamente?",
+  },
+} as const;
+
+const l = L[lang];
 ---
 
 <div class="rounded-2xl bg-tarjeta p-6 shadow-card sm:p-8">
-  <form id="contact-form" class="space-y-4" novalidate data-endpoint={CONTACT_ENDPOINT}>
+  <form id="contact-form" class="space-y-4" novalidate data-endpoint={CONTACT_ENDPOINT} data-lang={lang}>
     <div>
-      <label for="contact-nombre" class="mb-1 block text-sm font-medium text-navy">Nombre</label>
+      <label for="contact-nombre" class="mb-1 block text-sm font-medium text-navy">{l.nombre}</label>
       <input
         id="contact-nombre"
         name="nombre"
@@ -14,12 +62,12 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
         required
         autocomplete="name"
         class="w-full rounded-[10px] border border-border-input bg-header px-4 py-3 text-sm text-navy placeholder:text-body-light focus:border-terracota focus:outline-none"
-        placeholder="Tu nombre"
+        placeholder={l.nombrePh}
       />
     </div>
 
     <div>
-      <label for="contact-email" class="mb-1 block text-sm font-medium text-navy">Email</label>
+      <label for="contact-email" class="mb-1 block text-sm font-medium text-navy">{l.email}</label>
       <input
         id="contact-email"
         name="email"
@@ -27,19 +75,19 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
         required
         autocomplete="email"
         class="w-full rounded-[10px] border border-border-input bg-header px-4 py-3 text-sm text-navy placeholder:text-body-light focus:border-terracota focus:outline-none"
-        placeholder="tu@email.com"
+        placeholder={l.emailPh}
       />
     </div>
 
     <div>
-      <label for="contact-mensaje" class="mb-1 block text-sm font-medium text-navy">Mensaje</label>
+      <label for="contact-mensaje" class="mb-1 block text-sm font-medium text-navy">{l.mensaje}</label>
       <textarea
         id="contact-mensaje"
         name="mensaje"
         rows={5}
         required
         class="w-full resize-y rounded-[10px] border border-border-input bg-header px-4 py-3 text-sm text-navy placeholder:text-body-light focus:border-terracota focus:outline-none"
-        placeholder="Contanos tu consulta…"
+        placeholder={l.mensajePh}
       ></textarea>
     </div>
 
@@ -56,11 +104,13 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
     <label class="flex items-start gap-2 text-xs text-body-light">
       <input id="contact-consent" type="checkbox" class="mt-0.5 accent-terracota" required />
       <span>
-        Acepto las{" "}
-        <a href="/politica-de-privacidad/" class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
-          políticas de privacidad
+        {l.consent.replace(l.privacidad, "")}
+        <a
+          href={localeHref("/politica-de-privacidad/", lang)}
+          class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover"
+        >
+          {l.privacidad}
         </a>
-        .
       </span>
     </label>
 
@@ -70,13 +120,13 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
       class="inline-flex items-center justify-center gap-2 rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover disabled:cursor-not-allowed disabled:opacity-60"
     >
       <Icon name="send" size={18} />
-      Enviar consulta
+      {l.enviar}
     </button>
     <p id="contact-status" class="hidden text-xs font-medium" role="status"></p>
   </form>
 
   <div class="mt-6 border-t border-border-card pt-5">
-    <p class="text-xs text-body-light">¿Preferís escribirnos directo?</p>
+    <p class="text-xs text-body-light">{l.directo}</p>
     <a href={`mailto:${SITE.email}`} class="mt-1 inline-block text-sm font-medium text-terracota hover:text-terracota-hover">
       {SITE.email}
     </a>
@@ -90,6 +140,42 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
   const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement;
   const statusEl = status as HTMLElement;
   let loading = false;
+
+  const MSG = {
+    es: {
+      nombre: "Ingresá tu nombre.",
+      email: "Ingresá un email válido.",
+      mensaje: "Escribí tu consulta.",
+      consent: "Necesitás aceptar el tratamiento de tus datos.",
+      desconectado: "El formulario aún no está conectado. Volvé a intentar más tarde.",
+      enviando: "Enviando…",
+      ok: "¡Gracias! Tu consulta fue enviada.",
+      error: "No pudimos enviar tu consulta. Probá de nuevo.",
+    },
+    en: {
+      nombre: "Please enter your name.",
+      email: "Please enter a valid email.",
+      mensaje: "Please write your message.",
+      consent: "You need to accept how your data is processed.",
+      desconectado: "The form is not connected yet. Please try again later.",
+      enviando: "Sending…",
+      ok: "Thank you! Your message was sent.",
+      error: "We couldn't send your message. Please try again.",
+    },
+    pt: {
+      nombre: "Digite seu nome.",
+      email: "Digite um e-mail válido.",
+      mensaje: "Escreva sua mensagem.",
+      consent: "Você precisa aceitar o tratamento dos seus dados.",
+      desconectado: "O formulário ainda não está conectado. Tente novamente mais tarde.",
+      enviando: "Enviando…",
+      ok: "Obrigado! Sua mensagem foi enviada.",
+      error: "Não foi possível enviar sua mensagem. Tente novamente.",
+    },
+  } as const;
+
+  const langEl = (form.dataset.lang ?? "es") as keyof typeof MSG;
+  const msg = MSG[langEl] ?? MSG.es;
 
   function setStatus(message: string, kind: "ok" | "error" | "neutral") {
     statusEl.textContent = message;
@@ -110,25 +196,25 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
       const mensaje = (form.querySelector('[name="mensaje"]') as HTMLTextAreaElement).value.trim();
 
       if (!nombre) {
-        setStatus("Ingresá tu nombre.", "error");
+        setStatus(msg.nombre, "error");
         return;
       }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setStatus("Ingresá un email válido.", "error");
+        setStatus(msg.email, "error");
         return;
       }
       if (!mensaje) {
-        setStatus("Escribí tu consulta.", "error");
+        setStatus(msg.mensaje, "error");
         return;
       }
       if (!consent.checked) {
-        setStatus("Necesitás aceptar el tratamiento de tus datos.", "error");
+        setStatus(msg.consent, "error");
         return;
       }
 
       const ep = form.getAttribute("data-endpoint") || "";
       if (!ep) {
-        setStatus("El formulario aún no está conectado. Volvé a intentar más tarde.", "error");
+        setStatus(msg.desconectado, "error");
         return;
       }
 
@@ -139,7 +225,7 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
 
       loading = true;
       submitBtn.disabled = true;
-      setStatus("Enviando…", "neutral");
+      setStatus(msg.enviando, "neutral");
 
       try {
         const res = await fetch(ep, {
@@ -154,13 +240,13 @@ import { CONTACT_ENDPOINT, SITE } from "../lib/site";
           /* sin JSON */
         }
         if (ok) {
-          setStatus("¡Gracias! Tu consulta fue enviada.", "ok");
+          setStatus(msg.ok, "ok");
           form.reset();
         } else {
-          setStatus("No pudimos enviar tu consulta. Probá de nuevo.", "error");
+          setStatus(msg.error, "error");
         }
       } catch (err) {
-        setStatus("No pudimos enviar tu consulta. Probá de nuevo.", "error");
+        setStatus(msg.error, "error");
       } finally {
         loading = false;
         submitBtn.disabled = false;

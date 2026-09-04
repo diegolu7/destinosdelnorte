@@ -97,7 +97,7 @@ const navMain = [
         {t(lang, "nav.blog")}
       </a>
       <a
-        href={url("/contacto/")}
+        href={url(localeHref("/contacto/", lang))}
         class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
         {t(lang, "nav.contacto")}
@@ -175,7 +175,7 @@ const navMain = [
         {t(lang, "nav.blog")}
       </a>
       <a
-        href={url("/contacto/")}
+        href={url(localeHref("/contacto/", lang))}
         class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
         {t(lang, "nav.contacto")}

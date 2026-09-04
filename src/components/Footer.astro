@@ -68,7 +68,7 @@ const columns = [
     title: f.informacion,
     links: [
       { label: f.nosotros, href: lh("/sobre-nosotros/") },
-      { label: f.contacto, href: "/contacto/" },
+      { label: f.contacto, href: lh("/contacto/") },
       { label: f.faq, href: lh("/preguntas-frecuentes/") },
       { label: f.privacidad, href: lh("/politica-de-privacidad/") },
     ],
@@ -123,7 +123,7 @@ const columns = [
       </div>
 
       <div class="lg:col-span-1">
-        <Newsletter />
+        <Newsletter lang={lang} />
       </div>
     </div>
 

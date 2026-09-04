@@ -1,21 +1,60 @@
 ---
 import Icon from "./Icon.astro";
 import { NEWSLETTER_ENDPOINT } from "../lib/site";
+import { localeHref, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+
+const L = {
+  es: {
+    titulo: "Newsletter",
+    texto: "Recibí guías y novedades del Norte en tu mail.",
+    emailPh: "Tu email",
+    suscribir: "Suscribirse al newsletter",
+    consent:
+      "Acepto recibir guías y novedades y conozco la política de privacidad.",
+    privacidad: "política de privacidad",
+  },
+  en: {
+    titulo: "Newsletter",
+    texto: "Get guides and news from the North in your inbox.",
+    emailPh: "Your email",
+    suscribir: "Subscribe to the newsletter",
+    consent:
+      "I agree to receive guides and news and I know the privacy policy.",
+    privacidad: "privacy policy",
+  },
+  pt: {
+    titulo: "Newsletter",
+    texto: "Receba guias e novidades do Norte no seu e-mail.",
+    emailPh: "Seu e-mail",
+    suscribir: "Assinar a newsletter",
+    consent:
+      "Aceito receber guias e novidades e conheço a política de privacidade.",
+    privacidad: "política de privacidade",
+  },
+} as const;
+
+const l = L[lang];
 ---
 
 <div>
-  <p class="font-body text-xs font-bold uppercase tracking-[0.8px] text-footer-label">Newsletter</p>
+  <p class="font-body text-xs font-bold uppercase tracking-[0.8px] text-footer-label">{l.titulo}</p>
   <p class="mt-3 hidden text-[13px] leading-relaxed text-footer-link lg:block">
-    Recibí guías y novedades del Norte en tu mail.
+    {l.texto}
   </p>
-  <form id="newsletter-form" class="mt-3" novalidate data-endpoint={NEWSLETTER_ENDPOINT}>
+  <form id="newsletter-form" class="mt-3" novalidate data-endpoint={NEWSLETTER_ENDPOINT} data-lang={lang}>
     <div class="flex items-center gap-0">
-      <label class="sr-only" for="newsletter-email">Tu email</label>
+      <label class="sr-only" for="newsletter-email">{l.emailPh}</label>
       <input
         id="newsletter-email"
         type="email"
         name="email"
-        placeholder="Tu email"
+        placeholder={l.emailPh}
         required
         class="w-full min-w-0 rounded-l-lg border border-white/20 bg-white/10 px-3 py-2.5 text-sm text-white placeholder:text-navy-secondary focus:border-terracota focus:outline-none"
       />
@@ -23,7 +62,7 @@ import { NEWSLETTER_ENDPOINT } from "../lib/site";
         id="newsletter-submit"
         type="submit"
         class="inline-flex shrink-0 items-center rounded-r-lg bg-terracota px-3 py-2.5 text-white transition-colors duration-200 hover:bg-terracota-hover disabled:cursor-not-allowed disabled:opacity-60"
-        aria-label="Suscribirse al newsletter"
+        aria-label={l.suscribir}
       >
         <Icon name="send" size={18} />
       </button>
@@ -40,11 +79,10 @@ import { NEWSLETTER_ENDPOINT } from "../lib/site";
     <label class="mt-3 flex items-start gap-2 text-xs text-navy-secondary">
       <input id="newsletter-consent" type="checkbox" class="mt-0.5 accent-terracota" required />
       <span>
-        Acepto recibir guías y novedades y conozco la{" "}
-        <a href="/politica-de-privacidad/" class="underline underline-offset-2 hover:text-white">
-          política de privacidad
+        {l.consent.replace(l.privacidad, "")}
+        <a href={localeHref("/politica-de-privacidad/", lang)} class="underline underline-offset-2 hover:text-white">
+          {l.privacidad}
         </a>
-        .
       </span>
     </label>
   </form>
@@ -58,6 +96,33 @@ import { NEWSLETTER_ENDPOINT } from "../lib/site";
   const submitBtn = document.getElementById("newsletter-submit") as HTMLButtonElement;
 
   let loading = false;
+
+  const MSG = {
+    es: {
+      email: "Ingresá un email válido.",
+      consent: "Necesitás aceptar el consentimiento.",
+      enviando: "Enviando…",
+      ok: "¡Gracias! Te llegará una confirmación pronto.",
+      error: "No pudimos procesar tu suscripción. Probá de nuevo.",
+    },
+    en: {
+      email: "Please enter a valid email.",
+      consent: "You need to accept the consent.",
+      enviando: "Sending…",
+      ok: "Thank you! A confirmation will arrive soon.",
+      error: "We couldn't process your subscription. Please try again.",
+    },
+    pt: {
+      email: "Digite um e-mail válido.",
+      consent: "Você precisa aceitar o consentimento.",
+      enviando: "Enviando…",
+      ok: "Obrigado! Uma confirmação chegará em breve.",
+      error: "Não foi possível processar sua inscrição. Tente novamente.",
+    },
+  } as const;
+
+  const langEl = (form.dataset.lang ?? "es") as keyof typeof MSG;
+  const msg = MSG[langEl] ?? MSG.es;
 
   if (form && status && consent && submitBtn) {
     function setStatus(message: string, kind: "ok" | "error" | "neutral") {
@@ -78,11 +143,11 @@ import { NEWSLETTER_ENDPOINT } from "../lib/site";
       const email = input.value.trim();
 
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setStatus("Ingresá un email válido.", "error");
+        setStatus(msg.email, "error");
         return;
       }
       if (!consent.checked) {
-        setStatus("Necesitás aceptar el consentimiento.", "error");
+        setStatus(msg.consent, "error");
         return;
       }
 
@@ -94,7 +159,7 @@ import { NEWSLETTER_ENDPOINT } from "../lib/site";
 
       loading = true;
       submitBtn.disabled = true;
-      setStatus("Enviando…", "neutral");
+      setStatus(msg.enviando, "neutral");
 
       try {
         const res = await fetch(ep, {
@@ -109,13 +174,13 @@ import { NEWSLETTER_ENDPOINT } from "../lib/site";
           /* sin JSON */
         }
         if (ok) {
-          setStatus("¡Gracias! Te llegará una confirmación pronto.", "ok");
+          setStatus(msg.ok, "ok");
           form.reset();
         } else {
-          setStatus("No pudimos procesar tu suscripción. Probá de nuevo.", "error");
+          setStatus(msg.error, "error");
         }
       } catch (err) {
-        setStatus("No pudimos procesar tu suscripción. Probá de nuevo.", "error");
+        setStatus(msg.error, "error");
       } finally {
         loading = false;
         submitBtn.disabled = false;
