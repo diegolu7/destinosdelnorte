@@ -6,7 +6,7 @@ import DestinationCard from "../../components/DestinationCard.astro";
 import { resolveImage as getImage } from "../../lib/images";
 
 export async function getStaticPaths() {
-  const provincias = await getCollection("provincias");
+  const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === "es");
   return provincias.map((provincia) => ({
     params: { provincia: provincia.data.slug },
     props: { provincia },

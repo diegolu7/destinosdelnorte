@@ -7,7 +7,7 @@ const experiencias = (await getCollection("experiencias"))
   .map((e) => e.data.nombre)
   .sort((a, b) => a.localeCompare(b, "es"));
 
-const provincias = await getCollection("provincias");
+const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === "es");
 const destinos = await getCollection("destinos");
 const provinciaNombre = (slug: string) =>
   provincias.find((p) => p.data.slug === slug)?.data.name ?? "";

@@ -1,0 +1,96 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import { resolveImage } from "../../../lib/images";
+
+const EN_DESTINO_DESC: Record<string, string> = {
+  cafayate: "Wines, landscapes and tradition.",
+  cachi: "A colonial town in the Calchaquí Valleys.",
+  "quebrada-de-las-conchas": "Rock formations shaped by the wind.",
+  "tren-a-las-nubes": "One of the highest railways in the world.",
+  purmamarca: "The Hill of Seven Colors awaits you.",
+  tilcara: "History, culture and unique landscapes.",
+  humahuaca: "The highest town of the Humahuaca Gorge.",
+  "salinas-grandes": "A sea of salt at high altitude.",
+  hornocal: "The hill of the fourteen colors.",
+  "tafi-del-valle": "Nature and fresh air all year round.",
+  "amaicha-del-valle": "Ancestral culture and living traditions.",
+  "ruinas-de-quilmes": "The largest archaeological site in the country.",
+  "el-cadillal": "A mountain lake minutes from the capital.",
+};
+
+export async function getStaticPaths() {
+  const provincias = await getCollection("provinciasEn");
+  return provincias.map((provincia) => ({
+    params: { provincia: provincia.data.slug },
+    props: { provincia },
+  }));
+}
+
+const { provincia } = Astro.props;
+
+const destinos = (await getCollection("destinos"))
+  .filter((destino) => destino.data.provincia === provincia.data.slug)
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, "es"));
+
+const { Content } = await render(provincia);
+
+const title = `Things to do in ${provincia.data.name}: places to visit | Destinos del Norte`;
+
+const touristDestination = {
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  name: provincia.data.name,
+  description: provincia.data.intro,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  image: new URL(resolveImage(provincia.data.imagen).src, Astro.site).toString(),
+};
+---
+
+<BaseLayout
+  lang="en"
+  title={title}
+  description={provincia.data.descripcion}
+  breadcrumbs={[{ name: provincia.data.name, path: `/en/${provincia.data.slug}/` }]}
+  jsonLd={[touristDestination]}
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <Breadcrumbs items={[{ name: provincia.data.name, path: `/en/${provincia.data.slug}/` }]} />
+
+    <h1 class="mt-4 font-display text-3xl font-bold text-navy lg:text-[42px] lg:leading-tight">
+      Things to do in {provincia.data.name}
+    </h1>
+
+    <p class="mt-4 max-w-3xl text-sm leading-relaxed text-body lg:text-base">
+      {provincia.data.intro}
+    </p>
+
+    <div class="mt-10">
+      <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Featured destinations</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          destinos.map((destino) => (
+            <li>
+              <a
+                href={`/${provincia.data.slug}/${destino.data.slug}/`}
+                class="group block rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover"
+              >
+                <span class="font-display text-base font-semibold text-navy transition-colors duration-200 group-hover:text-terracota">
+                  {destino.data.name}
+                </span>
+                <span class="mt-1 block text-xs leading-relaxed text-body-light">
+                  {EN_DESTINO_DESC[destino.data.slug] ?? destino.data.descripcion}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="prose-norte mt-10 max-w-3xl lg:mt-12">
+      <Content />
+    </div>
+  </section>
+</BaseLayout>

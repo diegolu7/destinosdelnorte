@@ -7,7 +7,7 @@ import Icon from "../components/Icon.astro";
 import { resolveImage } from "../lib/images";
 import { SITE, url } from "../lib/site";
 
-const provincias = (await getCollection("provincias")).sort((a, b) =>
+const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === "es").sort((a, b) =>
   a.data.name.localeCompare(b.data.name, "es"),
 );
 const destinos = await getCollection("destinos");

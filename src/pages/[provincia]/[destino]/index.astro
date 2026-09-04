@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
 const { destino } = Astro.props;
 
-const provincias = await getCollection("provincias");
+const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === "es");
 const provincia = provincias.find((p) => p.data.slug === destino.data.provincia)!;
 
 const allDestinos = await getCollection("destinos");

@@ -11,6 +11,21 @@ const provincias = defineCollection({
     descripcion: z.string(),
     keywords: z.array(z.string()),
     intro: z.string(),
+    lang: z.enum(["es", "en", "pt"]).default("es"),
+  }),
+});
+
+const provinciasEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/provincias-en" }),
+  schema: z.object({
+    name: z.string(),
+    slug: z.string(),
+    region: z.string(),
+    imagen: z.string(),
+    descripcion: z.string(),
+    keywords: z.array(z.string()),
+    intro: z.string(),
+    lang: z.enum(["es", "en", "pt"]).default("en"),
   }),
 });
 
@@ -98,4 +113,13 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { provincias, destinos, guias, experiencias, faqs, rutas, blog };
+export const collections = {
+  provincias,
+  provinciasEn,
+  destinos,
+  guias,
+  experiencias,
+  faqs,
+  rutas,
+  blog,
+};

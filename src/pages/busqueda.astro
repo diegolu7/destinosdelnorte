@@ -19,13 +19,13 @@ const destinos = (await getCollection("destinos")).map((destino) => ({
   ].join(" "),
 }));
 
-const provincias = (await getCollection("provincias")).map((provincia) => ({
+const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === "es").map((provincia) => ({
   nombre: provincia.data.name,
   slug: provincia.data.slug,
   imagen: resolveImage(provincia.data.imagen).src,
 }));
 
-const provinciasCards = await getCollection("provincias");
+const provinciasCards = (await getCollection("provincias")).filter((p) => p.data.lang === "es");
 
 const experiencias = (await getCollection("experiencias")).map((experiencia) => ({
   nombre: experiencia.data.nombre,

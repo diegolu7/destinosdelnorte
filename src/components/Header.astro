@@ -9,7 +9,7 @@ import { t } from "../lib/ui";
 
 const lang: Lang = langFromPath(Astro.url.pathname);
 
-const provincias = (await getCollection("provincias")).sort((a, b) =>
+const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === lang).sort((a, b) =>
   a.data.name.localeCompare(b.data.name, "es"),
 );
 
@@ -19,8 +19,8 @@ const guiasProvincias = provincias.map((p) => ({
 }));
 
 const navMain = [
-  { label: t(lang, "nav.queHacer"), href: lang === "es" ? "/#que-hacer" : `/${lang}/#que-hacer` },
-  { label: t(lang, "nav.destinos"), href: lang === "es" ? "/#destinos" : `/${lang}/#destinos` },
+  { label: t(lang, "nav.queHacer"), href: "/#que-hacer" },
+  { label: t(lang, "nav.destinos"), href: "/#destinos" },
 ];
 ---
 
