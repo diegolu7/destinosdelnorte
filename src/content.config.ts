@@ -139,12 +139,33 @@ const destinosEn = defineCollection({
   }),
 });
 
+const guiasEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/guias-en" }),
+  schema: z.object({
+    titulo: z.string(),
+    descripcion: z.string(),
+    provincia: z.string(),
+    destino: z.string(),
+    tipo: z.enum([
+      "como-llegar",
+      "mejor-epoca",
+      "consejos",
+      "que-hacer",
+      "itinerario",
+      "experiencia",
+    ]),
+    imagen: z.string().optional(),
+    fechaActualizacion: z.coerce.date().optional(),
+  }),
+});
+
 export const collections = {
   provincias,
   provinciasEn,
   destinos,
   destinosEn,
   guias,
+  guiasEn,
   experiencias,
   faqs,
   rutas,
