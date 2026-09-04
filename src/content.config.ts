@@ -92,6 +92,14 @@ const faqs = defineCollection({
   }),
 });
 
+const faqsEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/faqs-en" }),
+  schema: z.object({
+    pregunta: z.string(),
+    categoria: z.string(),
+  }),
+});
+
 const rutas = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/rutas" }),
   schema: z.object({
@@ -189,6 +197,7 @@ export const collections = {
   guiasEn,
   experiencias,
   faqs,
+  faqsEn,
   rutas,
   rutasEn,
   blog,
