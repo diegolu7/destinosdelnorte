@@ -1,0 +1,181 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../../components/Breadcrumbs.astro";
+import { url } from "../../../../lib/site";
+import { resolveImage } from "../../../../lib/images";
+
+export async function getStaticPaths() {
+  const destinos = await getCollection("destinosPt");
+  return destinos.map((destino) => ({
+    params: { provincia: destino.data.provincia, destino: destino.data.slug },
+    props: { destino },
+  }));
+}
+
+const { destino } = Astro.props;
+
+const provincias = await getCollection("provinciasPt");
+const provincia = provincias.find((p) => p.data.slug === destino.data.provincia)!;
+
+const guias = (await getCollection("guiasPt"))
+  .filter((g) => g.data.destino === destino.data.slug)
+  .map((g) => ({
+    titulo: g.data.titulo,
+    href: `/pt/${destino.data.provincia}/${destino.data.slug}/${g.id.split("/").pop()}/`,
+  }))
+  .sort((a, b) => a.titulo.localeCompare(b.titulo, "pt"));
+
+const expMap: Record<string, string> = {
+  aventura: "Aventura",
+  cultura: "Cultura",
+  gastronomia: "Gastronomia e vinhos",
+  naturaleza: "Natureza",
+  bodegas: "Vinícolas",
+  senderismo: "Trilhas",
+};
+
+const exp = (destino.data.experiencias ?? [])
+  .map((e) => expMap[e] ?? e)
+  .join(" · ");
+
+const info: { label: string; icon: string; value?: string }[] = [
+  { label: "Como chegar", icon: "pin", value: destino.data.comoLlegar },
+  { label: "Melhor época para visitar", icon: "calendar", value: destino.data.mejorEpoca },
+  { label: "Dias recomendados", icon: "time", value: destino.data.diasRecomendados },
+  { label: "Onde comer", icon: "gastronomia", value: destino.data.dondeComer },
+  { label: "Onde se hospedar", icon: "bed", value: destino.data.dondeAlojarse },
+].filter((i) => i.value);
+
+const { Content } = await render(destino);
+
+const title = `O que fazer em ${destino.data.name}: lugares para visitar | Destinos del Norte`;
+const linkMap =
+  destino.data.lat !== undefined && destino.data.lng !== undefined
+    ? `https://www.google.com/maps/search/?api=1&query=${destino.data.lat},${destino.data.lng}`
+    : "";
+---
+
+<BaseLayout
+  lang="pt"
+  title={title}
+  description={destino.data.descripcion}
+  breadcrumbs={[
+    { name: provincia.data.name, path: `/pt/${provincia.data.slug}/` },
+    { name: destino.data.name, path: `/pt/${provincia.data.slug}/${destino.data.slug}/` },
+  ]}
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <Breadcrumbs
+      items={[
+        { name: provincia.data.name, path: `/pt/${provincia.data.slug}/` },
+        { name: destino.data.name, path: `/pt/${provincia.data.slug}/${destino.data.slug}/` },
+      ]}
+    />
+
+    <div class="mt-6 grid items-center gap-8 lg:grid-cols-2">
+      <div>
+        <h1 class="font-display text-3xl font-bold leading-tight text-navy lg:text-[42px]">
+          O que fazer em {destino.data.name}
+        </h1>
+        <p class="mt-4 max-w-xl text-sm leading-relaxed text-body lg:text-base">
+          {destino.data.intro}
+        </p>
+        {exp && <p class="mt-3 text-xs font-medium uppercase tracking-wide text-terracota">{exp}</p>}
+      </div>
+      <img
+        src={resolveImage(destino.data.imagen).src}
+        alt={destino.data.name}
+        width={672}
+        height={621}
+        loading="eager"
+        class="h-auto w-full max-w-2xl rounded-2xl object-cover shadow-card"
+      />
+    </div>
+
+    <div class="mt-10 prose-norte max-w-3xl">
+      <Content />
+    </div>
+
+    {destino.data.lugaresImperdibles && destino.data.lugaresImperdibles.length > 0 && (
+      <div class="mt-10">
+        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Lugares imperdíveis</h2>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {destino.data.lugaresImperdibles.map((l, i) => (
+            <li class="rounded-xl bg-tarjeta p-5 shadow-card">
+              <span class="font-display text-2xl font-bold text-terracota/30" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <p class="mt-1 font-display font-semibold text-navy">{l.nombre}</p>
+              {l.descripcion && <p class="mt-1 text-sm text-body-light">{l.descripcion}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {info.length > 0 && (
+      <div class="mt-10">
+        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Informações práticas</h2>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {info.map((i) => (
+            <div class="rounded-xl bg-tarjeta p-5 shadow-card">
+              <p class="text-xs font-semibold uppercase tracking-wide text-body-light">{i.label}</p>
+              <p class="mt-1 text-sm leading-relaxed text-body">{i.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {destino.data.consejos && destino.data.consejos.length > 0 && (
+      <div class="mt-10">
+        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Dicas</h2>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {destino.data.consejos.map((c) => (
+            <li class="rounded-xl bg-tarjeta p-4 shadow-card text-sm text-body">• {c}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {guias.length > 0 && (
+      <div class="mt-10">
+        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Guias de viagem</h2>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {guias.map((g) => (
+            <li>
+              <a
+                href={g.href}
+                class="flex items-center justify-between gap-2 rounded-xl bg-tarjeta p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+              >
+                <span class="font-medium text-navy">{g.titulo}</span>
+                <span aria-hidden="true" class="text-terracota">➔</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {linkMap && (
+      <div class="mt-10">
+        <a
+          href={linkMap}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy-deeper"
+        >
+          Ver no Google Maps
+        </a>
+      </div>
+    )}
+
+    <a
+      href={url(`/pt/${provincia.data.slug}/`)}
+      class="mt-10 inline-flex text-sm font-medium text-terracota hover:text-terracota-hover"
+    >
+      ← Voltar para {provincia.data.name}
+    </a>
+  </section>
+</BaseLayout>
