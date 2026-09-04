@@ -1,0 +1,209 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import ProvinceCard from "../../components/ProvinceCard.astro";
+import Icon from "../../components/Icon.astro";
+import { resolveImage } from "../../lib/images";
+import { SITE, url } from "../../lib/site";
+import { langFromPath, type Lang } from "../../lib/i18n";
+
+const lang: Lang = langFromPath(Astro.url.pathname);
+
+const provincias = (await getCollection("provinciasPt")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, "pt"),
+);
+const destinos = await getCollection("destinosPt");
+const guias = await getCollection("guiasPt");
+
+const numeros = [
+  { valor: provincias.length, etiqueta: "Províncias" },
+  { valor: destinos.length, etiqueta: "Destinos" },
+  { valor: guias.length, etiqueta: "Guias de viagem" },
+  { valor: 6, etiqueta: "Experiências" },
+];
+
+const oferta = [
+  {
+    icono: "pin" as const,
+    titulo: "Destinos",
+    texto: "Landings turísticas completas de cada lugar do Norte Argentino.",
+  },
+  {
+    icono: "arrow" as const,
+    titulo: "Guias de viagem",
+    texto: "Como chegar, melhor época, dicas e roteiros úteis para planejar.",
+  },
+  {
+    icono: "aventura" as const,
+    titulo: "Experiências",
+    texto: "Aventura, cultura, gastronomia, natureza, vinícolas e trilhas.",
+  },
+  {
+    icono: "search" as const,
+    titulo: "Busca",
+    texto: "Encontre o destino perfeito com sugestões na hora.",
+  },
+];
+
+const valores = [
+  {
+    titulo: "Conteúdo útil e verificado",
+    texto: "Informação clara e honesta para você planejar com confiança.",
+  },
+  {
+    titulo: "Feito para o viajante",
+    texto: "Mobile-first, rápido e fácil de usar em qualquer dispositivo.",
+  },
+  {
+    titulo: "SEO-first",
+    texto: "Cada página é pensada para ser encontrada nos buscadores.",
+  },
+  {
+    titulo: "Em crescimento",
+    texto: "Somamos destinos e conteúdo constantemente para você nunca ficar sem lugares para conhecer.",
+  },
+];
+
+const aboutPage = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "Sobre nós",
+  description:
+    "Destinos del Norte é um guia para descobrir os lugares mais incríveis do Norte Argentino: Salta, Jujuy e Tucumán.",
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+};
+---
+
+<BaseLayout
+  lang="pt"
+  title="Sobre nós | Destinos del Norte"
+  description="Destinos del Norte é o seu guia para descobrir o Norte Argentino: destinos, guias de viagem e experiências em Salta, Jujuy e Tucumán."
+  breadcrumbs={[{ name: "Sobre nós", path: "/pt/sobre-nosotros/" }]}
+  jsonLd={[aboutPage]}
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="max-w-2xl">
+      <span class="inline-flex rounded-full bg-terracota/10 px-3 py-1 text-xs font-semibold text-terracota">
+        Sobre Destinos del Norte
+      </span>
+      <h1 class="mt-4 font-display text-3xl font-bold leading-tight text-navy lg:text-[42px] lg:leading-tight">
+        Seu guia para descobrir o Norte Argentino
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+        Ajudamos viajantes a descobrir destinos, lugares e experiências do Norte da Argentina, com conteúdo útil e organizado para que cada viagem seja mais fácil de planejar.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <div class="grid items-start gap-8 lg:grid-cols-2">
+      <div class="rounded-2xl shadow-card overflow-hidden">
+        <img
+          src={resolveImage("seccion_atractivo_cerro_7_colores.webp").src}
+          alt="Cerro das Sete Cores em Purmamarca, Jujuy"
+          width={1200}
+          height={1100}
+          loading="lazy"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div>
+        <SectionTitle title="O que é Destinos del Norte?" />
+        <p class="mt-6 text-sm leading-relaxed text-body lg:text-base">
+          Destinos del Norte é um guia digital dedicado às paisagens, vilas e cultura de Salta, Jujuy e Tucumán. Reunimos em um só lugar a informação de que o viajante precisa: o que fazer em cada destino, os lugares imperdíveis, como chegar, quando visitar e que experiências viver.
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Nosso objetivo é simples: fazer com que descobrir o Norte Argentino seja fácil, inspirador e memorável, com conteúdo claro, verificado e pensado para acompanhar você em cada etapa da viagem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="Destinos del Norte em números" />
+    <div class="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {
+        numeros.map((n) => (
+          <div class="rounded-xl bg-tarjeta p-5 text-center shadow-card">
+            <p class="font-display text-4xl font-bold text-terracota lg:text-5xl">{n.valor}</p>
+            <p class="mt-1 text-sm font-medium text-body">{n.etiqueta}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="O que oferecemos" />
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        oferta.map((o) => (
+          <div class="rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover">
+            <Icon name={o.icono} size={28} class="text-terracota" />
+            <h3 class="mt-3 font-display text-base font-semibold text-navy">{o.titulo}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-body-light">{o.texto}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="Como trabalhamos" />
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {
+        valores.map((v) => (
+          <div class="flex items-start gap-4 rounded-xl bg-tarjeta p-5 shadow-card">
+            <span aria-hidden="true" class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-terracota text-white text-xs">
+              ✓
+            </span>
+            <div>
+              <h3 class="font-display text-base font-semibold text-navy">{v.titulo}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-body-light">{v.texto}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SectionTitle title="Explore o Norte" />
+    <div class="mt-8 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-5">
+      {
+        provincias.map((provincia) => (
+          <ProvinceCard
+            nombre={provincia.data.name}
+            slug={provincia.data.slug}
+            imagen={resolveImage(provincia.data.imagen)}
+            lang={lang}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-14">
+    <div class="rounded-2xl bg-navy px-6 py-10 text-center lg:px-10">
+      <h2 class="font-display text-2xl font-bold text-white lg:text-3xl">
+        Pronto para viajar?
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-sm text-navy-secondary lg:text-base">
+        Explore os destinos imperdíveis e comece a montar sua próxima aventura pelo Norte Argentino.
+      </p>
+      <a
+        href={url("/pt/#destinos")}
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
+      >
+        Explorar destinos
+      </a>
+      <p class="mt-5 text-sm text-navy-secondary">
+        Tem dúvidas? Escreva para nós em{" "}
+        <a href={`mailto:${SITE.email}`} class="font-medium text-white underline underline-offset-2 transition-colors duration-150 hover:text-terracota-light">
+          {SITE.email}
+        </a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,144 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import { SITE } from "../../lib/site";
+
+const updated = "Agosto 2026";
+---
+
+<BaseLayout
+  lang="pt"
+  title="Política de privacidade | Destinos del Norte"
+  description="Saiba como Destinos del Norte protege e utiliza suas informações pessoais: quais dados coletamos, como os usamos e seus direitos."
+  breadcrumbs={[{ name: "Política de privacidade", path: "/pt/politica-de-privacidad/" }]}
+>
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="max-w-2xl">
+      <span class="inline-flex rounded-full bg-terracota/10 px-3 py-1 text-xs font-semibold text-terracota">
+        Privacidade
+      </span>
+      <h1 class="mt-4 font-display text-3xl font-bold leading-tight text-navy lg:text-[42px] lg:leading-tight">
+        Política de privacidade
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+        Na Destinos del Norte levamos sua privacidade a sério. Explicamos de forma clara e simples quais informações tratamos, para que finalidade e quais são seus direitos. Última atualização: {updated}.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-3xl px-5 pb-4 lg:px-8">
+    <div class="space-y-6">
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="1. Responsável" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Destinos del Norte é um site de turismo dedicado a divulgar destinos, guias e experiências de Salta, Jujuy e Tucumán. Para qualquer dúvida sobre seus dados, escreva para nós em{" "}
+          <a href={`mailto:${SITE.email}`} class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
+            {SITE.email}
+          </a>
+          .
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="2. Quais informações coletamos" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Coletamos o mínimo necessário para fornecer as informações do site:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li><strong>Dados que você nos envia voluntariamente</strong>: por exemplo, o e-mail preenchido no formulário de newsletter. Esses dados são armazenados em uma planilha do Google à qual só nós temos acesso, para enviar guias e novidades do Norte se você aceitar o consentimento.</li>
+          <li><strong>Consultas do formulário de contato</strong>: quando você escreve, guardamos seu nome, e-mail e mensagem em uma planilha do Google apenas para responder sua consulta. Não são usados para fins comerciais.</li>
+          <li><strong>Dados de uso</strong>: usamos ferramentas de análise (como o Google Analytics) que coletam dados agregados de navegação (páginas visitadas, dispositivo, tempo de sessão) sem identificar pessoalmente cada usuário.</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          Não solicitamos nem armazenamos dados sensíveis nem informações de contato além do indicado.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="3. Como usamos as informações" />
+        <ul class="prose-norte mt-4 max-w-none">
+          <li>Responder consultas e nos comunicar com você se você escrever.</li>
+          <li>Enviar guias e novidades do Norte se você assinar a newsletter.</li>
+          <li>Melhorar a experiência e o conteúdo do site por meio de dados agregados de uso.</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          Não vendemos, alugamos nem cedemos seus dados pessoais a terceiros para fins comerciais.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="4. Cookies e tecnologias de terceiros" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Nosso site não usa cookies próprios de rastreamento. Porém, algumas páginas incorporam conteúdo de terceiros que pode usar cookies próprios:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li><strong>Google Maps</strong>: cada página de destino incorpora um mapa que pode usar cookies do Google conforme sua própria política de privacidade.</li>
+          <li><strong>Análises</strong>: usamos o Google Analytics, que pode definir cookies para coletar dados agregados de uso. Você pode desativá-lo pelas ferramentas do Google ou pelas configurações do navegador.</li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="5. Serviços de terceiros" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Usamos serviços de terceiros apenas quando agregam valor ao conteúdo:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li><strong>Google Maps</strong> (mapas incorporados nos destinos).</li>
+          <li><strong>Google Fonts / fontes locais</strong>: nossas fontes carregam localmente, sem enviar dados a terceiros.</li>
+          <li><strong>Google Analytics e Microsoft Clarity</strong> (análises agregadas de uso).</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          Cada provedor aplica sua própria política de privacidade. Recomendamos revisá-las para saber como tratam os dados.
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="6. Seus direitos" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          De acordo com a Lei 25.326 de Proteção de Dados Pessoais da Argentina (e, quando aplicável, o GDPR da União Europeia), você tem o direito de:
+        </p>
+        <ul class="prose-norte mt-3 max-w-none">
+          <li>Solicitar <strong>acesso</strong> aos seus dados.</li>
+          <li>Solicitar sua <strong>retificação</strong> se estiverem incorretos.</li>
+          <li>Solicitar sua <strong>exclusão</strong> quando não forem mais necessários.</li>
+          <li>Revogar o consentimento dado.</li>
+        </ul>
+        <p class="mt-3 text-sm leading-relaxed text-body lg:text-base">
+          Para exercer qualquer um desses direitos, escreva para nós em{" "}
+          <a href={`mailto:${SITE.email}`} class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
+            {SITE.email}
+          </a>
+          .
+        </p>
+      </div>
+
+      <div class="rounded-2xl bg-tarjeta p-6 shadow-card">
+        <SectionTitle title="7. Contato e atualizações" />
+        <p class="mt-4 text-sm leading-relaxed text-body lg:text-base">
+          Esta política pode ser atualizada para refletir mudanças no site ou na legislação. Publicaremos a versão vigente nesta página, com sua data de atualização. Para qualquer dúvida, escreva para nós em{" "}
+          <a href={`mailto:${SITE.email}`} class="font-medium text-terracota underline underline-offset-2 hover:text-terracota-hover">
+            {SITE.email}
+          </a>
+          .
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="rounded-2xl bg-navy px-6 py-10 text-center lg:px-10">
+      <h2 class="font-display text-2xl font-bold text-white lg:text-3xl">
+        Tem alguma dúvida?
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-sm text-navy-secondary lg:text-base">
+        Escreva para nós e ajudaremos você a resolver suas dúvidas sobre o site ou seus dados.
+      </p>
+      <a
+        href={`mailto:${SITE.email}`}
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
+      >
+        Fale conosco
+      </a>
+    </div>
+  </section>
+</BaseLayout>
