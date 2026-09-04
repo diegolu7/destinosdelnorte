@@ -2,23 +2,28 @@
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { url } from "../lib/site";
+import { localeHref, type Lang } from "../lib/i18n";
 
 interface Props {
   nombre: string;
   slug: string;
   imagen: ImageMetadata;
+  lang?: Lang;
 }
 
-const { nombre, slug, imagen } = Astro.props;
+const { nombre, slug, imagen, lang = "es" } = Astro.props;
+
+const queHacer = { es: "Qué hacer en", en: "Things to do in", pt: "O que fazer em" } as const;
+const imgAlt = `${queHacer[lang]} ${nombre}`;
 ---
 
 <a
-  href={url(`/${slug}/`)}
+  href={url(localeHref(`/${slug}/`, lang))}
   class="group relative block h-28 overflow-hidden rounded-2xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover sm:h-auto sm:aspect-[4/3]"
 >
   <Image
     src={imagen}
-    alt={`Qué hacer en ${nombre}`}
+    alt={imgAlt}
     width={1448}
     height={1086}
     loading="lazy"
@@ -28,7 +33,7 @@ const { nombre, slug, imagen } = Astro.props;
   <div class="absolute inset-0 flex items-center justify-between gap-3 p-4 sm:items-end">
     <div>
       <p class="font-display text-[11px] font-medium text-white sm:text-[11px] lg:text-[13px]">
-        Qué hacer en
+        {queHacer[lang]}
       </p>
       <p class="font-display text-sm font-bold text-white sm:text-sm lg:text-xl">{nombre}</p>
     </div>
@@ -40,3 +45,4 @@ const { nombre, slug, imagen } = Astro.props;
     </span>
   </div>
 </a>
+
