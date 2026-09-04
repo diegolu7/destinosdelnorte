@@ -66,5 +66,49 @@ Lista de tareas pendientes y futuras del proyecto. Se actualiza a medida que se 
 
 ---
 
+## 8 · Propuesta de líder de producto (monetización / sostenibilidad)
+
+### 8.1 Diagnóstico rápido
+- Sitio **estático y gratuito** (GitHub Pages) con costos reales bajos pero crecientes: dominio `.ar`, tiempo de contenido y, a futuro, posible migración a hosting/analytics premium.
+- Audiencia **internacional** (es/en/pt), mayormente **visitante de una sola vez** que consume guías SEO antes de viajar (bajo apego al sitio, alto valor en el momento exacto de lectura).
+- Producto: contenido confiable y sin publicidad intrusiva = **activo de marca**. La monetización no debe dañar la confianza ni el SEO.
+
+### 8.2 Estrategia recomendada (fases)
+- **Fase 1 (recomendada, corto plazo): donaciones por suscripción de "gracias" con PayPal.**
+  - Un botón **PayPal Donate** (no necesita backend, se integra por URL en sitio estático) + enlace **Mercado Pago** para donantes argentinos (región del owner). Alternativa global sin plataforma extra.
+  - Ubicación de alta conversión y baja fricción: pie de página (ícono discreto), bloque en "Sobre nosotros" y **CTA contextual al final de las guías más leídas** (cómo llegar / mejor época) y del blog. Pedir solo cuando ya se entregó valor.
+  - Copy neutral en los 3 idiomas (keys en `ui.ts`), p. ej. "¿Te sirvió esta guía? Apoyá Destinos del Norte para seguir creciendo".
+  - **Nunca** popups ni interstitials que tapen contenido (dañan SEO/UX).
+- **Fase 2 (mediana): medir y optimizar** — evento GA4 `donation_click` (gtag) para ver qué página/idioma convierte; A/B del mensaje y posición.
+- **Fase 3 (a futuro, solo si hay tráfico alto):**
+  - Afiliación turística (transporte/seguros/alojamiento) — alto valor editorial pero exige cuidado con la confianza y disclosures.
+  - Suscripción/membresía (Patreon/Ko-fi Gold) solo cuando exista comunidad estable.
+  - Publicidad display: **evitar** mientras el sitio no supere decenas de miles de visitas/mes; degrada la experiencia.
+
+### 8.3 Análisis de opciones (Fase 1)
+| Opción | Pros | Contras | Veredicto |
+|---|---|---|---|
+| **PayPal Donate** | Universal (cubre donantes internacionales es/en/pt), botón estático sin backend, sin suscripción para el donante, fees bajos en donaciones | Requiere cuenta PayPal del owner (en AR se puede recibir, retiro con tipo de cambio propio) | **Recomendado** |
+| **Mercado Pago** | Cero fricción para donantes argentinos/regional | No lo tienen visitantes de otros países | Complemento para AR |
+| **Ko-fi / Buy Me a Coffee** | Muy simple, bonito, sin fees en donaciones (Ko-fi) | Página de terceros (abandono), recolecta datos, menos "profesional" | Alternativa si no se quiere gestionar PayPal |
+| **Patreon** | Comunidad/recurrente | Exige contenido exclusivo y constancia; overkill hoy | No por ahora |
+| **GitHub Sponsors** | Cero fees, visibilidad dev | Solo si existiera comunidad técnica; irrelevante para turismo | Descartar |
+| **Ads (AdSense)** | Ingreso "pasivo" | UX/SEO negativo, requiere volumen y aplicar consentimiento (GDPR) | Fase 3+ |
+
+### 8.4 Plan de implementación (checklist)
+- [ ] Crear cuenta/credenciales PayPal (botón Donate) y/o enlace Mercado Pago; definir `SUPPORT_URLS` en `src/lib/site.ts` (paypal, mercado pago opcional).
+- [ ] Agregar keys de UI en `ui.ts` (es/en/pt): título "Apoyar el proyecto", copy y label del botón.
+- [ ] Componente `SupportButton.astro` (enlace externo `rel="noopener noreferrer"`, ícono, discreto) y ubicarlo en: Footer, sobre nosotros (es/en/pt) y CTA final de guías/blog.
+- [ ] Registrar evento GA4: `gtag('event','donation_click',{location, lang})` solo en PROD (BaseLayout/script inline en el botón).
+- [ ] Test manual en los 3 idiomas (link abre ventana correcta) + `npm run build`/`check`.
+- [ ] **Medición posterior (30 días)**: clics, página e idioma que convierten; decidir si se agrega afiliación (Fase 3).
+
+### 8.5 Cumplimiento / confianza
+- Etiquetar siempre como **"donación / apoyo"** (no venta de bienes/servicios); sin promesas de beneficios a cambio.
+- Política de privacidad: indicar que el pago se procesa en PayPal/Mercado Pago bajo sus propios términos (no almacenamos datos de pago).
+- No usar patrones oscuros (no "recordatorios" agresivos); un solo pedido contextual por página.
+
+---
+
 ## Nota de historial git
 El proyecto acumula trabajo local; verificar siempre que el push esté al día (`git status`/`git push`) antes de darlo por cerrado.
