@@ -34,6 +34,9 @@ const destinos = (await getCollection("destinos"))
   .filter((destino) => destino.data.provincia === provincia.data.slug)
   .sort((a, b) => a.data.name.localeCompare(b.data.name, "es"));
 
+const destinosEn = await getCollection("destinosEn");
+const enSlugs = new Set(destinosEn.map((d) => d.data.slug));
+
 const { Content } = await render(provincia);
 
 const title = `Things to do in ${provincia.data.name}: places to visit | Destinos del Norte`;
@@ -73,7 +76,11 @@ const touristDestination = {
           destinos.map((destino) => (
             <li>
               <a
-                href={`/${provincia.data.slug}/${destino.data.slug}/`}
+                href={
+                  enSlugs.has(destino.data.slug)
+                    ? `/en/${provincia.data.slug}/${destino.data.slug}/`
+                    : `/${provincia.data.slug}/${destino.data.slug}/`
+                }
                 class="group block rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <span class="font-display text-base font-semibold text-navy transition-colors duration-200 group-hover:text-terracota">

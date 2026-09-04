@@ -113,10 +113,37 @@ const blog = defineCollection({
   }),
 });
 
+const destinosEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/destinos-en" }),
+  schema: z.object({
+    name: z.string(),
+    slug: z.string(),
+    provincia: z.string(),
+    imagen: z.string(),
+    descripcion: z.string(),
+    keywords: z.array(z.string()),
+    intro: z.string(),
+    lugaresImperdibles: z
+      .array(z.object({ nombre: z.string(), descripcion: z.string().optional() }))
+      .optional(),
+    experiencias: z.array(z.string()).optional(),
+    comoLlegar: z.string().optional(),
+    mejorEpoca: z.string().optional(),
+    diasRecomendados: z.string().optional(),
+    dondeComer: z.string().optional(),
+    dondeAlojarse: z.string().optional(),
+    consejos: z.array(z.string()).optional(),
+    destinosCercanos: z.array(z.string()).optional(),
+    lat: z.number().optional(),
+    lng: z.number().optional(),
+  }),
+});
+
 export const collections = {
   provincias,
   provinciasEn,
   destinos,
+  destinosEn,
   guias,
   experiencias,
   faqs,
