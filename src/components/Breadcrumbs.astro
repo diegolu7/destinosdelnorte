@@ -1,6 +1,6 @@
 ---
 import { url } from "../lib/site";
-import { langFromPath, type Lang } from "../lib/i18n";
+import { langFromPath, localeHref, type Lang } from "../lib/i18n";
 
 interface Props {
   items: { name: string; path: string }[];
@@ -14,7 +14,7 @@ const homeLabel = lang === "es" ? "Inicio" : lang === "pt" ? "Início" : "Home";
 <nav aria-label="Ruta de navegación">
   <ol class="flex flex-wrap items-center gap-1.5 text-sm text-body-light">
     <li>
-      <a href={url("/")} class="transition-colors duration-150 hover:text-terracota">
+      <a href={url(localeHref("/", lang))} class="transition-colors duration-150 hover:text-terracota">
         {homeLabel}
       </a>
     </li>

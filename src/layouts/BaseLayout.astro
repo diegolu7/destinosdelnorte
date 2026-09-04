@@ -42,7 +42,7 @@ const lang: Lang = langProp ?? langFromPath(Astro.url.pathname);
 const currentPath = Astro.url.pathname;
 const alternates = (Object.keys(LOCALES) as Lang[]).map((l) => ({
   lang: l,
-  href: localeHref(currentPath, l),
+  href: new URL(localeHref(currentPath, l), Astro.site).toString(),
 }));
 ---
 
