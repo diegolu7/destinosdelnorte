@@ -4,6 +4,10 @@ import logo from "../assets/logo_destinos_del_norte.webp";
 import Icon from "./Icon.astro";
 import LangSwitcher from "./LangSwitcher.astro";
 import { url } from "../lib/site";
+import { langFromPath, type Lang } from "../lib/i18n";
+import { t } from "../lib/ui";
+
+const lang: Lang = langFromPath(Astro.url.pathname);
 
 const provincias = (await getCollection("provincias")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name, "es"),
@@ -11,12 +15,12 @@ const provincias = (await getCollection("provincias")).sort((a, b) =>
 
 const guiasProvincias = provincias.map((p) => ({
   label: p.data.name,
-  href: url(`/${p.data.slug}/`),
+  href: lang === "es" ? url(`/${p.data.slug}/`) : url(`/${lang}/${p.data.slug}/`),
 }));
 
 const navMain = [
-  { label: "Qué hacer", href: "/#que-hacer" },
-  { label: "Destinos", href: "/#destinos" },
+  { label: t(lang, "nav.queHacer"), href: lang === "es" ? "/#que-hacer" : `/${lang}/#que-hacer` },
+  { label: t(lang, "nav.destinos"), href: lang === "es" ? "/#destinos" : `/${lang}/#destinos` },
 ];
 ---
 
@@ -52,7 +56,7 @@ const navMain = [
           aria-expanded="false"
           class="flex items-center gap-1 text-sm font-medium text-navy transition-colors duration-200 group-hover:text-terracota group-focus-within:text-terracota focus:outline-none"
         >
-          Guías de viaje
+          {t(lang, "nav.guias")}
           <Icon
             name="chevron"
             size={14}
@@ -84,19 +88,19 @@ const navMain = [
         href={url("/rutas/")}
         class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
-        Rutas
+        {t(lang, "nav.rutas")}
       </a>
       <a
         href={url("/blog/")}
         class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
-        Blog
+        {t(lang, "nav.blog")}
       </a>
       <a
         href={url("/contacto/")}
         class="text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
-        Contacto
+        {t(lang, "nav.contacto")}
       </a>
     </nav>
 
@@ -104,7 +108,7 @@ const navMain = [
       <a
         href={url("/#buscador")}
         class="hidden rounded-full p-2 text-navy transition-colors duration-200 hover:text-terracota lg:inline-flex"
-        aria-label="Buscar destinos"
+        aria-label={t(lang, "nav.buscar")}
       >
         <Icon name="search" size={22} />
       </a>
@@ -136,7 +140,7 @@ const navMain = [
       }
       <details class="group border-b border-border-input">
         <summary class="flex cursor-pointer list-none items-center justify-between py-3 text-sm font-medium text-navy">
-          Guías de viaje
+          {t(lang, "nav.guias")}
           <Icon
             name="chevron"
             size={16}
@@ -162,26 +166,26 @@ const navMain = [
         href={url("/rutas/")}
         class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
-        Rutas
+        {t(lang, "nav.rutas")}
       </a>
       <a
         href={url("/blog/")}
         class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
-        Blog
+        {t(lang, "nav.blog")}
       </a>
       <a
         href={url("/contacto/")}
         class="border-b border-border-input py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
-        Contacto
+        {t(lang, "nav.contacto")}
       </a>
       <a
         href={url("/#buscador")}
         class="mt-2 inline-flex items-center gap-2 py-3 text-sm font-medium text-navy transition-colors duration-200 hover:text-terracota"
       >
         <Icon name="search" size={20} />
-        Buscar
+        {t(lang, "nav.buscar")}
       </a>
       <div class="pt-3">
         <LangSwitcher />
