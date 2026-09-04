@@ -18,6 +18,14 @@ const { destino } = Astro.props;
 const provincias = await getCollection("provinciasEn");
 const provincia = provincias.find((p) => p.data.slug === destino.data.provincia)!;
 
+const guias = (await getCollection("guiasEn"))
+  .filter((g) => g.data.destino === destino.data.slug)
+  .map((g) => ({
+    titulo: g.data.titulo,
+    href: `/en/${destino.data.provincia}/${destino.data.slug}/${g.id.split("/").pop()}/`,
+  }))
+  .sort((a, b) => a.titulo.localeCompare(b.titulo, "en"));
+
 const expMap: Record<string, string> = {
   aventura: "Adventure",
   cultura: "Culture",
@@ -126,6 +134,25 @@ const linkMap =
         <ul class="mt-6 grid gap-3 sm:grid-cols-2">
           {destino.data.consejos.map((c) => (
             <li class="rounded-xl bg-tarjeta p-4 shadow-card text-sm text-body">• {c}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {guias.length > 0 && (
+      <div class="mt-10">
+        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Travel guides</h2>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {guias.map((g) => (
+            <li>
+              <a
+                href={g.href}
+                class="flex items-center justify-between gap-2 rounded-xl bg-tarjeta p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+              >
+                <span class="font-medium text-navy">{g.titulo}</span>
+                <span aria-hidden="true" class="text-terracota">➔</span>
+              </a>
+            </li>
           ))}
         </ul>
       </div>
