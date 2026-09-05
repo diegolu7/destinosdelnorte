@@ -1,9 +1,11 @@
 ---
 import { SITE } from "../lib/site";
+import { LOCALES, type Lang } from "../lib/i18n";
 
 interface Props {
   title: string;
   description: string;
+  lang?: Lang;
   noindex?: boolean;
   nofollow?: boolean;
   ogImage?: ImageMetadata;
@@ -15,6 +17,7 @@ interface Props {
 const {
   title,
   description,
+  lang = "es",
   noindex = false,
   nofollow = false,
   ogImage,
@@ -22,6 +25,10 @@ const {
   breadcrumbs = [],
   jsonLd = [],
 } = Astro.props;
+
+const metaLang = LOCALES[lang].lang;
+const ogLocale = lang === "es" ? "es_AR" : lang === "pt" ? "pt_BR" : "en_US";
+const homeLabel = lang === "es" ? "Inicio" : lang === "pt" ? "Início" : "Home";
 
 const url = new URL(Astro.url.pathname, Astro.site);
 const canonical = url.toString();
@@ -44,7 +51,7 @@ const websiteSchema: Record<string, unknown> = {
       "@type": "WebSite",
       name: SITE.name,
       url: homeUrl,
-      inLanguage: "es-AR",
+      inLanguage: metaLang,
     },
     {
       "@type": "Organization",
@@ -60,7 +67,7 @@ const breadcrumbSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Inicio", item: homeUrl },
+    { "@type": "ListItem", position: 1, name: homeLabel, item: homeUrl },
     ...breadcrumbs.map((crumb, index) => ({
       "@type": "ListItem",
       position: index + 2,
@@ -75,11 +82,11 @@ const breadcrumbSchema: Record<string, unknown> = {
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 <meta name="robots" content={robots} />
-<meta name="language" content="es-AR" />
+<meta name="language" content={metaLang} />
 <meta name="theme-color" content="#1B2A4A" />
 
 <meta property="og:type" content={ogType} />
-<meta property="og:locale" content="es_AR" />
+<meta property="og:locale" content={ogLocale} />
 <meta property="og:site_name" content={SITE.name} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

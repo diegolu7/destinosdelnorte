@@ -9,9 +9,10 @@ interface Props {
 const { items } = Astro.props;
 const lang: Lang = langFromPath(Astro.url.pathname);
 const homeLabel = lang === "es" ? "Inicio" : lang === "pt" ? "Início" : "Home";
+const navLabel = lang === "es" ? "Ruta de navegación" : lang === "pt" ? "Trilha de navegação" : "Breadcrumb";
 ---
 
-<nav aria-label="Ruta de navegación">
+<nav aria-label={navLabel}>
   <ol class="flex flex-wrap items-center gap-1.5 text-sm text-body-light">
     <li>
       <a href={url(localeHref("/", lang))} class="transition-colors duration-150 hover:text-terracota">
