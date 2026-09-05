@@ -84,6 +84,24 @@ const experiencias = defineCollection({
   }),
 });
 
+const experienciasEn = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/experiencias-en" }),
+  schema: z.object({
+    nombre: z.string(),
+    descripcion: z.string(),
+    icono: z.enum(["aventura", "cultura", "gastronomia", "naturaleza", "bodegas", "senderismo"]),
+  }),
+});
+
+const experienciasPt = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/experiencias-pt" }),
+  schema: z.object({
+    nombre: z.string(),
+    descripcion: z.string(),
+    icono: z.enum(["aventura", "cultura", "gastronomia", "naturaleza", "bodegas", "senderismo"]),
+  }),
+});
+
 const faqs = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/faqs" }),
   schema: z.object({
@@ -288,6 +306,8 @@ export const collections = {
   guiasEn,
   guiasPt,
   experiencias,
+  experienciasEn,
+  experienciasPt,
   faqs,
   faqsEn,
   faqsPt,
