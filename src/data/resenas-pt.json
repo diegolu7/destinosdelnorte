@@ -1,0 +1,155 @@
+{
+  "cafayate": {
+    "destino": "cafayate",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/es/place/details/7534338/plaza-de-cafayate](https://wanderlog.com/es/place/details/7534338/plaza-de-cafayate)",
+    "resenas": [
+      { "autor": "Alejandro R", "fecha": "2026-02-09", "valoracion": 5, "texto": "Lugar excelente, muito pitoresco e com muitos artesãos. Totalmente recomendável." },
+      { "autor": "Maxi G", "fecha": "2026-02-06", "valoracion": 5, "texto": "Um lugar lindo ao qual sempre volto pelas paisagens e pela qualidade do seu povo." },
+      { "autor": "David G", "fecha": "2026-01-24", "valoracion": 5, "texto": "A praça é muito bem pensada; os lampiões, as feiras e os comércios ao redor a tornam muito agradável." },
+      { "autor": "Silvio Z", "fecha": "2025-11-16", "valoracion": 5, "texto": "Uma praça muito colonial, bem cuidada e com artesãos. Um bom lugar para descansar, se distrair e aproveitar Cafayate." },
+      { "autor": "Nadia A", "fecha": "2025-10-07", "valoracion": 5, "texto": "Lugar lindo, Cafayate. A atenção do seu povo é linda; não basta fazer uma excursão, é preciso mais tempo para conhecê-lo." }
+    ]
+  },
+  "cachi": {
+    "destino": "cachi",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/4043823/plaza-9-de-julio](https://wanderlog.com/place/details/4043823/plaza-9-de-julio)",
+    "resenas": [
+      { "autor": "Oscar V", "fecha": "2025-11-26", "valoracion": 5, "texto": "Linda." },
+      { "autor": "Horacio L", "fecha": "2025-07-17", "valoracion": 5, "texto": "Um lugar bonito para visitar." },
+      { "autor": "Gabriela C", "fecha": "2023-07-19", "valoracion": 4, "texto": "Bonita." },
+      { "autor": "Ana", "fecha": "2023-06-21", "valoracion": 5, "texto": "Um bom lugar para descansar em Cachi, com artesanato por perto, a igreja antiga e o museu antropológico." },
+      { "autor": "Robo C", "fecha": "2022-12-20", "valoracion": 5, "texto": "Praça bonita no centro de Cachi." }
+    ]
+  },
+  "quebrada-de-las-conchas": {
+    "destino": "quebrada-de-las-conchas",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/es/place/details/471641/quebrada-de-las-conchas](https://wanderlog.com/es/place/details/471641/quebrada-de-las-conchas)",
+    "resenas": [
+      { "autor": "Santo D", "fecha": "2026-03-19", "valoracion": 5, "texto": "Uma área linda de uns 70 km, cercada de cores e paisagens incríveis. Se for de Salta a Cafayate, vale percorrê-la com calma e ir parando." },
+      { "autor": "Patricio I", "fecha": "2026-01-08", "valoracion": 5, "texto": "Uma paisagem espetacular e mutável, com formações icônicas como o Anfiteatro e a Garganta del Diablo." },
+      { "autor": "Agustin N", "fecha": "2025-12-06", "valoracion": 5, "texto": "É uma parada obrigatória entre as grandes paisagens do nosso país. Para onde você olha há algo lindo." },
+      { "autor": "Danilo Z", "fecha": "2025-09-20", "valoracion": 5, "texto": "Fazer esse caminho de carro é incrível. As cores, as formações e as paisagens fazem você querer parar constantemente." },
+      { "autor": "Mariana T", "fecha": "2025-08-18", "valoracion": 5, "texto": "Um percurso lindo. A Garganta del Diablo é o melhor e o Anfiteatro vem logo depois." }
+    ]
+  },
+  "tren-a-las-nubes": {
+    "destino": "tren-a-las-nubes",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/es/place/details/9795841/el-tren-a-las-nubes](https://wanderlog.com/es/place/details/9795841/el-tren-a-las-nubes)",
+    "resenas": [
+      { "autor": "Amparo M", "fecha": "2025-05-04", "valoracion": 4, "texto": "Muito bom, com vista espetacular. Na volta eles fazem trocar de lado para aproveitar as duas paisagens e os guias ajudam com a foto no viaduto." },
+      { "autor": "Claudia Q", "fecha": "2025-03-25", "valoracion": 5, "texto": "Amei, a vista é espetacular. O passeio dura cerca de três horas e os assentos são confortáveis." },
+      { "autor": "Elizabeth", "fecha": "2024-08-20", "valoracion": 5, "texto": "Encantador, lindo; um lugar para voltar sem dúvidas." },
+      { "autor": "Jesica R", "fecha": "2024-06-30", "valoracion": 5, "texto": "O ônibus e o serviço foram excelentes, com café da manhã, lanche e assistência da equipe durante todo o trajeto. Recomendo a excursão, que ocupa praticamente o dia todo." },
+      { "autor": "Ornella D", "fecha": "2024-06-20", "valoracion": 5, "texto": "A excursão foi excelente, muito bem organizada, com ônibus em boas condições, guia, enfermeiro, café da manhã e lanche. Vale a pena a experiência." }
+    ]
+  },
+  "purmamarca": {
+    "destino": "purmamarca",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/8266740/purmamarca](https://wanderlog.com/place/details/8266740/purmamarca)",
+    "resenas": [
+      { "autor": "Ariel B", "fecha": "2023-07-27", "valoracion": 5, "texto": "Um lugar que permanece no tempo, com uma feira para passear, comprar ou almoçar. A caminhada até o mirante do Cerro das Sete Cores é curta e fácil." },
+      { "autor": "Micaela C", "fecha": "2023-07-24", "valoracion": 5, "texto": "Lugar lindo. Recomendo entrar para ver o Cerro das Sete Cores, passear pelas feiras da praça e provar as tortilhas recheadas." },
+      { "autor": "Beatriz G", "fecha": "2023-05-20", "valoracion": 5, "texto": "Vila linda ao pé do Cerro das Sete Cores, cheia de bares e pousadas, com sua igreja típica, praça e mercado de artesanato." },
+      { "autor": "Kadi T", "fecha": "2023-05-03", "valoracion": 5, "texto": "O caminho até Purmamarca é lindo, ao lado de montanhas rochosas em tons de verde e cobre. Recomendo acordar cedo para ver o amanhecer e a neblina." },
+      { "autor": "A P", "fecha": "2021-07-31", "valoracion": 5, "texto": "Bonito!" }
+    ]
+  },
+  "tilcara": {
+    "destino": "tilcara",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/10014379/tilcara](https://wanderlog.com/place/details/10014379/tilcara)",
+    "resenas": [
+      { "autor": "Marilu", "fecha": "2026-01-22", "valoracion": 5, "texto": "Um lugar belíssimo, com muitos lugares próximos para conhecer e muitas opções para comprar a bons preços." },
+      { "autor": "KUSI T", "fecha": "2026-01-17", "valoracion": 5, "texto": "Tilcara é ideal como base para visitar a Quebrada de Humahuaca pela oferta gastronômica, hoteleira e acessibilidade a outros lugares da rota." },
+      { "autor": "David L", "fecha": "2026-01-10", "valoracion": 5, "texto": "Se você quer percorrer o norte, recomendo se hospedar em Tilcara porque tem tudo por perto e dá para visitar vários lugares sempre voltando à vila." },
+      { "autor": "René P", "fecha": "2025-11-16", "valoracion": 5, "texto": "Toda a Quebrada de Humahuaca é um lugar mágico. Além das paisagens, a gastronomia e a cultura são impressionantes." },
+      { "autor": "Adriana", "fecha": "2025-10-12", "valoracion": 5, "texto": "Amei Tilcara. Tem praça, artesãos, tranquilidade, comida boa, ruas para passear e arte por toda parte." }
+    ]
+  },
+  "humahuaca": {
+    "destino": "humahuaca",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/10540007/humahuaca](https://wanderlog.com/place/details/10540007/humahuaca)",
+    "resenas": [
+      { "autor": "Kike B", "fecha": "2024-06-29", "valoracion": 4, "texto": "Lugar lindo para visitar. Também dá para chegar de transporte público desde Tilcara." },
+      { "autor": "Mara R", "fecha": "2024-06-17", "valoracion": 4, "texto": "Uma vila belíssima e encantadora." },
+      { "autor": "Julia A", "fecha": "2024-05-05", "valoracion": 5, "texto": "Depois de Purmamarca, uma das vilas mais lindas de Jujuy. Percorre-se rápido e tem ruelas e barracas lindas; imperdível." },
+      { "autor": "Gaby D", "fecha": "2024-03-31", "valoracion": 4, "texto": "Linda por onde se olha. Considerando que é um lugar tão turístico, deveria ter mais investimento em infraestrutura." }
+    ]
+  },
+  "salinas-grandes": {
+    "destino": "salinas-grandes",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/9477333/salinas-grandes](https://wanderlog.com/place/details/9477333/salinas-grandes)",
+    "resenas": [
+      { "autor": "Leandro S", "fecha": "2025-08-31", "valoracion": 5, "texto": "Um lugar incrível. A visita guiada às áreas de extração de sal e ao olho do salar se destaca pela beleza única." },
+      { "autor": "ROBERTO T", "fecha": "2025-08-25", "valoracion": 5, "texto": "Chega-se por uma rota cênica, subindo a mais de 4.000 metros acima do nível do mar. Os guias explicam a origem do salar e ajudam a tirar fotos." },
+      { "autor": "Patricia M", "fecha": "2025-01-06", "valoracion": 5, "texto": "Uma experiência muito gostosa ouvir a guia explicar o lugar. Não deixem de fazer, é muito lindo." },
+      { "autor": "Ignacio I", "fecha": "2024-12-22", "valoracion": 5, "texto": "Lugar lindo. Recomendo levar dinheiro porque o sinal do celular não funciona bem e fazer o passeio com guia para aproveitar melhor a experiência." },
+      { "autor": "Matias M", "fecha": "2024-09-04", "valoracion": 5, "texto": "Um lugar muito bonito para tirar fotos. Recomendo levar protetor solar e água porque o sol é muito forte; vale a pena conhecer." }
+    ]
+  },
+  "hornocal": {
+    "destino": "hornocal",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/36144/serran%C3%ADa-de-hornocal](https://wanderlog.com/place/details/36144/serran%C3%ADa-de-hornocal)",
+    "resenas": [
+      { "autor": "Joshua V", "fecha": "2026-01-25", "valoracion": 5, "texto": "Vistas incríveis. Naquela altitude o clima pode mudar muito rápido." },
+      { "autor": "Nikki J", "fecha": "2025-05-12", "valoracion": 5, "texto": "Chegando lá em cima, os desconfortos do trajeto ficam esquecidos. É realmente um espetáculo incomparável e muito recomendável." },
+      { "autor": "Paul T", "fecha": "2025-05-06", "valoracion": 5, "texto": "Um lugar excepcional e impressionante, até melhor do que as fotografias mostram." },
+      { "autor": "Virgil D", "fecha": "2025-04-19", "valoracion": 5, "texto": "Um lugar maravilhoso. Recomendo visitá-lo ao entardecer e se aproximar caminhando para ver como as cores das montanhas mudam rapidamente." },
+      { "autor": "Jessi C", "fecha": "2023-12-12", "valoracion": 5, "texto": "Uma das paisagens de montanha coloridas mais lindas que já vi. Recomendo se preparar para a altitude e levar roupas quentes." }
+    ]
+  },
+  "tafi-del-valle": {
+    "destino": "tafi-del-valle",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/6457125/taf%C3%AD-del-valle](https://wanderlog.com/place/details/6457125/taf%C3%AD-del-valle)",
+    "resenas": [
+      { "autor": "Natalia A", "fecha": "2026-01-21", "valoracion": 5, "texto": "Lugar lindo para descansar em família. O clima permite caminhar, correr, andar de bicicleta, fazer trilhas e aproveitar o rio." },
+      { "autor": "Juan L", "fecha": "2025-11-01", "valoracion": 5, "texto": "Uma vila de montanha encantadora cercada de vales verdes e serras imponentes. Ideal para relaxar, curtir a natureza e conhecer a cultura local." },
+      { "autor": "Lorena T", "fecha": "2025-06-21", "valoracion": 5, "texto": "Belíssimo." },
+      { "autor": "Sergio S", "fecha": "2025-04-15", "valoracion": 5, "texto": "Um destino para descansar e aproveitar vistas privilegiadas tanto no verão quanto no inverno. Destacam-se suas ruas, o lago, a gastronomia e os queijos." },
+      { "autor": "Monica L", "fecha": "2025-03-13", "valoracion": 5, "texto": "O trajeto é lindíssimo, com vegetação de selva, cachoeiras naturais, rio e borboletas. Recomendo voltar com mais tempo para conhecê-lo melhor." }
+    ]
+  },
+  "amaicha-del-valle": {
+    "destino": "amaicha-del-valle",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/1938673/amaicha-del-valle](https://wanderlog.com/place/details/1938673/amaicha-del-valle)",
+    "resenas": [
+      { "autor": "Juan P", "fecha": "2026-02-04", "valoracion": 4, "texto": "O lugar é lindo. Encontram-se artesanatos a bons preços e tem muita história." },
+      { "autor": "Lilian T", "fecha": "2023-06-26", "valoracion": 5, "texto": "Lugar lindo para descansar e aproveitar as paisagens. O Museu da Pachamama é imperdível." },
+      { "autor": "Noelia C", "fecha": "2023-05-01", "valoracion": 5, "texto": "Não percam esta vila. É pequena, acolhedora e muito alegre." },
+      { "autor": "Ricardo G", "fecha": "2022-07-23", "valoracion": 4, "texto": "Em Amaicha del Valle há uma galeria de arte muito interessante, com produtos artesanais de alta qualidade e peças muito particulares." }
+    ]
+  },
+  "ruinas-de-quilmes": {
+    "destino": "ruinas-de-quilmes",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/10537615/ruinas-de-quilmes](https://wanderlog.com/place/details/10537615/ruinas-de-quilmes)",
+    "resenas": [
+      { "autor": "Waguri", "fecha": "2026-04-02", "valoracion": 5, "texto": "Uma experiência que vale a pena. Destacam-se o museu, a história, a simpatia da equipe e a possibilidade de percorrer livremente as ruínas." },
+      { "autor": "Marcos Q", "fecha": "2026-02-26", "valoracion": 4, "texto": "Excelente centro de interpretação, banheiros impecáveis e ruínas bem conservadas. No geral, a experiência foi muito boa." },
+      { "autor": "Valeria C", "fecha": "2026-02-05", "valoracion": 5, "texto": "Lugar lindo e super recomendável. Os mirantes permitem apreciar as ruínas de vários ângulos e o museu ajuda a compreender sua história." },
+      { "autor": "María G", "fecha": "2025-03-10", "valoracion": 5, "texto": "Sublime." },
+      { "autor": "Julia M", "fecha": "2024-09-07", "valoracion": 5, "texto": "Um lugar maravilhoso para visitar. O museu traz informações úteis para entender as ruínas e as vistas são espetaculares." }
+    ]
+  },
+  "el-cadillal": {
+    "destino": "el-cadillal",
+    "fuente_resenas": "Wanderlog",
+    "url_fuente_resenas": "[https://wanderlog.com/place/details/228006/dique-celestino-gelsi-el-cadillal](https://wanderlog.com/place/details/228006/dique-celestino-gelsi-el-cadillal)",
+    "resenas": [
+      { "autor": "Vero", "fecha": "2025-04-18", "valoracion": 5, "texto": "Lugar lindo para passar o tempo, tomar mate e comer. É incrivelmente bonito." },
+      { "autor": "Max C", "fecha": "2023-03-13", "valoracion": 5, "texto": "Natural." },
+      { "autor": "Alejandra P", "fecha": "2021-07-22", "valoracion": 5, "texto": "Belíssimo." },
+      { "autor": "Ricardo H", "fecha": "2019-07-15", "valoracion": 5, "texto": "Belíssimo." }
+    ]
+  }
+}
