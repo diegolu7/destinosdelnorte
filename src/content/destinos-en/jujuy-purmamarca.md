@@ -32,6 +32,7 @@ consejos:
   - "Bring sunscreen and water; the altitude is more noticeable than it seems."
 destinosCercanos:
   - "tilcara"
+  - "salinas-grandes"
 lat: -23.745
 lng: -65.495
 ---

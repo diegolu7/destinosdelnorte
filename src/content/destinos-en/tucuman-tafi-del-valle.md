@@ -33,6 +33,7 @@ consejos:
   - "Buy artisanal cheeses and sweets directly in Villa de Tafí."
 destinosCercanos:
   - "amaicha-del-valle"
+  - "ruinas-de-quilmes"
 lat: -26.851
 lng: -65.697
 ---

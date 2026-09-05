@@ -1,6 +1,7 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
 import Icon from "./Icon.astro";
+import { langFromPath, type Lang } from "../lib/i18n";
 
 interface Props {
   title: string;
@@ -12,13 +13,39 @@ interface Props {
 }
 
 const { title, comoLlegar, mejorEpoca, diasRecomendados, dondeComer, dondeAlojarse } = Astro.props;
+const lang: Lang = langFromPath(Astro.url.pathname);
 
+const LABELS: Record<Lang, Record<string, string>> = {
+  es: {
+    comoLlegar: "Cómo llegar",
+    mejorEpoca: "Mejor época",
+    dias: "Duración recomendada",
+    comer: "Dónde comer",
+    alojarse: "Dónde alojarse",
+  },
+  en: {
+    comoLlegar: "How to get there",
+    mejorEpoca: "Best time to visit",
+    dias: "Recommended stay",
+    comer: "Where to eat",
+    alojarse: "Where to stay",
+  },
+  pt: {
+    comoLlegar: "Como chegar",
+    mejorEpoca: "Melhor época",
+    dias: "Duração recomendada",
+    comer: "Onde comer",
+    alojarse: "Onde se hospedar",
+  },
+};
+
+const l = LABELS[lang];
 const items = [
-  { icon: "pin" as const, label: "Cómo llegar", value: comoLlegar },
-  { icon: "calendar" as const, label: "Mejor época", value: mejorEpoca },
-  { icon: "time" as const, label: "Duración recomendada", value: diasRecomendados },
-  { icon: "gastronomia" as const, label: "Dónde comer", value: dondeComer },
-  { icon: "bed" as const, label: "Dónde alojarse", value: dondeAlojarse },
+  { icon: "pin" as const, label: l.comoLlegar, value: comoLlegar },
+  { icon: "calendar" as const, label: l.mejorEpoca, value: mejorEpoca },
+  { icon: "time" as const, label: l.dias, value: diasRecomendados },
+  { icon: "gastronomia" as const, label: l.comer, value: dondeComer },
+  { icon: "bed" as const, label: l.alojarse, value: dondeAlojarse },
 ].filter((item) => item.value);
 ---
 

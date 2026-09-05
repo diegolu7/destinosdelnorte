@@ -33,6 +33,7 @@ consejos:
   - "Compre queijos e doces artesanais diretamente na Villa de Tafí."
 destinosCercanos:
   - "amaicha-del-valle"
+  - "ruinas-de-quilmes"
 lat: -26.851
 lng: -65.697
 ---

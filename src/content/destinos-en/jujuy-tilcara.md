@@ -32,6 +32,7 @@ consejos:
   - "The altitude is over 2,400 m: move slowly the first days."
 destinosCercanos:
   - "purmamarca"
+  - "humahuaca"
 lat: -23.577
 lng: -65.394
 ---

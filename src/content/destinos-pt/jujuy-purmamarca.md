@@ -32,6 +32,7 @@ consejos:
   - "Leve protetor solar e água; a altitude é mais sentida do que parece."
 destinosCercanos:
   - "tilcara"
+  - "salinas-grandes"
 lat: -23.745
 lng: -65.495
 ---

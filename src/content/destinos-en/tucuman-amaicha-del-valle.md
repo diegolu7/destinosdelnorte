@@ -30,8 +30,9 @@ consejos:
   - "Bring water and sunscreen; the climate is dry and the sun strong."
   - "Respect archaeological sites: do not remove pieces or climb the ruins."
 destinosCercanos:
-  - "cafayate"
   - "tafi-del-valle"
+  - "ruinas-de-quilmes"
+  - "cafayate"
 lat: -26.594
 lng: -65.927
 ---

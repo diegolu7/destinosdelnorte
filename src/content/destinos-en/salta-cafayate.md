@@ -32,6 +32,8 @@ consejos:
   - "Book wineries ahead during harvest and weekends."
   - "The altitude is noticeable: take it easy on your first day."
 destinosCercanos:
+  - "cachi"
+  - "quebrada-de-las-conchas"
   - "amaicha-del-valle"
 lat: -26.074
 lng: -65.977

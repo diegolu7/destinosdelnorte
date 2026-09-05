@@ -32,6 +32,7 @@ consejos:
   - "A altitude passa de 2.400 m: mova-se devagar nos primeiros dias."
 destinosCercanos:
   - "purmamarca"
+  - "humahuaca"
 lat: -23.577
 lng: -65.394
 ---

@@ -1,5 +1,6 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
+import { langFromPath, type Lang } from "../lib/i18n";
 
 interface Resena {
   autor: string;
@@ -15,11 +16,22 @@ interface Props {
   fuente?: string;
 }
 
-const { title = "Reseñas", reviews, linkVerGoogle, fuente = "Google" } = Astro.props;
+const { reviews, linkVerGoogle, fuente } = Astro.props;
+const lang: Lang = langFromPath(Astro.url.pathname);
+
+const T = {
+  es: { title: "Reseñas", verEn: "Ver reseñas en", vacio: "Todavía no tenemos reseñas publicadas de este lugar. Conocé las opiniones de otros viajeros en Google.", locale: "es-AR", estrellas: "de 5 estrellas" },
+  en: { title: "Reviews", verEn: "See reviews on", vacio: "We don't have published reviews of this place yet. Check what other travelers say on Google.", locale: "en-US", estrellas: "out of 5 stars" },
+  pt: { title: "Avaliações", verEn: "Ver avaliações em", vacio: "Ainda não temos avaliações publicadas deste lugar. Conheça as opiniões de outros viajantes no Google.", locale: "pt-BR", estrellas: "de 5 estrelas" },
+} as const;
+
+const t = T[lang];
+const title = Astro.props.title ?? t.title;
+const fuenteResenas = fuente ?? "Google";
 
 function formatFecha(fecha?: Date): string {
   if (!fecha) return "";
-  return new Intl.DateTimeFormat("es-AR", { month: "short", year: "numeric" }).format(fecha);
+  return new Intl.DateTimeFormat(t.locale, { month: "short", year: "numeric" }).format(fecha);
 }
 
 function stars(valoracion: number): boolean[] {
@@ -36,7 +48,7 @@ function stars(valoracion: number): boolean[] {
       rel="noopener noreferrer"
       class="shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover"
     >
-      Ver reseñas en {fuente}
+      {t.verEn} {fuenteResenas}
     </a>
   </div>
 
@@ -46,7 +58,7 @@ function stars(valoracion: number): boolean[] {
         {
           reviews.map((review) => (
             <figure class="rounded-xl bg-tarjeta p-5 shadow-card">
-              <div class="flex items-center gap-1" aria-label={`${review.valoracion} de 5 estrellas`}>
+              <div class="flex items-center gap-1" aria-label={`${review.valoracion} ${t.estrellas}`}>
                 {
                   stars(review.valoracion).map((on) => (
                     <svg viewBox="0 0 20 20" class={`h-4 w-4 ${on ? "text-terracota" : "text-border-card"}`} fill="currentColor" aria-hidden="true">
@@ -59,16 +71,14 @@ function stars(valoracion: number): boolean[] {
               <figcaption class="mt-3 text-xs text-body-light">
                 — {review.autor}
                 {review.fecha && <> · {formatFecha(review.fecha)}</>}
-                {fuente && <> · {fuente}</>}
+                {fuenteResenas && <> · {fuenteResenas}</>}
               </figcaption>
             </figure>
           ))
         }
       </div>
     ) : (
-      <p class="mt-8 text-sm leading-relaxed text-body">
-        Todavía no tenemos reseñas publicadas de este lugar. Conocé las opiniones de otros viajeros en Google.
-      </p>
+      <p class="mt-8 text-sm leading-relaxed text-body">{t.vacio}</p>
     )
   }
 </section>

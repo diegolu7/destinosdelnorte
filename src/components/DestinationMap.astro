@@ -1,5 +1,6 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
+import { langFromPath, type Lang } from "../lib/i18n";
 
 interface Props {
   nombre: string;
@@ -9,6 +10,15 @@ interface Props {
 }
 
 const { nombre, provinciaName, lat, lng } = Astro.props;
+const lang: Lang = langFromPath(Astro.url.pathname);
+
+const T = {
+  es: { title: "Ubicación", verEn: "Ver en Google Maps", frase: "se encuentra en la provincia de", mapaDe: "Mapa de" },
+  en: { title: "Location", verEn: "View on Google Maps", frase: "is located in the province of", mapaDe: "Map of" },
+  pt: { title: "Localização", verEn: "Ver no Google Maps", frase: "fica na província de", mapaDe: "Mapa de" },
+} as const;
+
+const t = T[lang];
 
 const q = `${lat},${lng}`;
 const embedSrc = `https://maps.google.com/maps?q=${q}&z=14&t=k&output=embed`;
@@ -16,11 +26,11 @@ const linkSrc = `https://www.google.com/maps/search/?api=1&query=${q}`;
 ---
 
 <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
-  <SectionTitle title="Ubicación" />
+  <SectionTitle title={t.title} />
   <div class="mt-8 grid gap-6 lg:grid-cols-2 lg:items-start">
     <div>
       <p class="text-sm leading-relaxed text-body lg:text-base">
-        {nombre} se encuentra en la provincia de <strong class="font-semibold text-navy">{provinciaName}</strong>, en el Norte Argentino.
+        {nombre} {t.frase} <strong class="font-semibold text-navy">{provinciaName}</strong>, en el Norte Argentino.
       </p>
       <a
         href={linkSrc}
@@ -28,13 +38,13 @@ const linkSrc = `https://www.google.com/maps/search/?api=1&query=${q}`;
         rel="noopener noreferrer"
         class="mt-4 inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-navy-deeper"
       >
-        Ver en Google Maps
+        {t.verEn}
       </a>
     </div>
     <div class="overflow-hidden rounded-2xl shadow-card">
       <iframe
         src={embedSrc}
-        title={`Mapa de ${nombre}`}
+        title={`${t.mapaDe} ${nombre}`}
         width="100%"
         height="320"
         style="border:0"

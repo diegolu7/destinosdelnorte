@@ -1,9 +1,16 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
-import Breadcrumbs from "../../../../components/Breadcrumbs.astro";
-import { url } from "../../../../lib/site";
-import { resolveImage } from "../../../../lib/images";
+import DestinationHero from "../../../../components/DestinationHero.astro";
+import PlacesGrid from "../../../../components/PlacesGrid.astro";
+import ExperienceGrid from "../../../../components/ExperienceGrid.astro";
+import TravelInfo from "../../../../components/TravelInfo.astro";
+import TravelTips from "../../../../components/TravelTips.astro";
+import DestinationMap from "../../../../components/DestinationMap.astro";
+import Reviews from "../../../../components/Reviews.astro";
+import RelatedGuides from "../../../../components/RelatedGuides.astro";
+import RelatedDestinations from "../../../../components/RelatedDestinations.astro";
+import { resolveImage as getImage } from "../../../../lib/images";
 
 export async function getStaticPaths() {
   const destinos = await getCollection("destinosEn");
@@ -18,42 +25,84 @@ const { destino } = Astro.props;
 const provincias = await getCollection("provinciasEn");
 const provincia = provincias.find((p) => p.data.slug === destino.data.provincia)!;
 
-const guias = (await getCollection("guiasEn"))
+const allDestinos = await getCollection("destinosEn");
+const destinoBySlug = new Map(allDestinos.map((d) => [d.data.slug, d]));
+
+const allExperiencias = await getCollection("experienciasEn");
+const expById = new Map(allExperiencias.map((e) => [e.id, e]));
+const experiencias = (destino.data.experiencias ?? [])
+  .map((id) => expById.get(id))
+  .filter((e): e is NonNullable<typeof e> => Boolean(e))
+  .map((e) => ({ nombre: e.data.nombre, descripcion: e.data.descripcion, icono: e.data.icono }));
+
+const allGuias = await getCollection("guiasEn");
+const guiasDelDestino = allGuias
   .filter((g) => g.data.destino === destino.data.slug)
   .map((g) => ({
     titulo: g.data.titulo,
-    href: `/en/${destino.data.provincia}/${destino.data.slug}/${g.id.split("/").pop()}/`,
+    descripcion: g.data.descripcion,
+    href: `/en/${provincia.data.slug}/${destino.data.slug}/${g.id.split("/").pop()}/`,
+    tipo: g.data.tipo,
+    fecha: g.data.fechaActualizacion
+      ? new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(
+          g.data.fechaActualizacion,
+        )
+      : undefined,
   }))
   .sort((a, b) => a.titulo.localeCompare(b.titulo, "en"));
 
-const expMap: Record<string, string> = {
-  aventura: "Adventure",
-  cultura: "Culture",
-  gastronomia: "Food & wine",
-  naturaleza: "Nature",
-  bodegas: "Wineries",
-  senderismo: "Hiking",
-};
+const destinosCercanos = (destino.data.destinosCercanos ?? [])
+  .map((slug) => destinoBySlug.get(slug))
+  .filter((d): d is NonNullable<typeof d> => Boolean(d))
+  .map((d) => ({
+    nombre: d.data.name,
+    descripcion: d.data.descripcion,
+    href: `/en/${d.data.provincia}/${d.data.slug}/`,
+    imagen: getImage(d.data.imagen),
+  }));
 
-const exp = (destino.data.experiencias ?? [])
-  .map((e) => expMap[e] ?? e)
-  .join(" · ");
+const resenasData = (
+  await import("../../../../data/resenas.json")
+).default as Record<
+  string,
+  {
+    destino: string;
+    fuente_resenas?: string;
+    url_fuente_resenas?: string;
+    resenas: { autor: string; fecha?: string; valoracion: number; texto: string }[];
+  }
+>;
+const resenasEntry = resenasData[destino.data.slug];
+const resenasDestino = (resenasEntry?.resenas ?? [])
+  .map((rev) => ({
+    autor: rev.autor,
+    fecha: rev.fecha ? new Date(rev.fecha) : undefined,
+    valoracion: rev.valoracion,
+    texto: rev.texto,
+  }))
+  .slice(0, 5);
 
-const info: { label: string; icon: string; value?: string }[] = [
-  { label: "How to get there", icon: "pin", value: destino.data.comoLlegar },
-  { label: "Best time to visit", icon: "calendar", value: destino.data.mejorEpoca },
-  { label: "Recommended stay", icon: "time", value: destino.data.diasRecomendados },
-  { label: "Where to eat", icon: "gastronomia", value: destino.data.dondeComer },
-  { label: "Where to stay", icon: "bed", value: destino.data.dondeAlojarse },
-].filter((i) => i.value);
+const fuenteResenas = resenasEntry?.fuente_resenas ?? "Google";
+const urlFuenteRaw = resenasEntry?.url_fuente_resenas ?? "";
+const urlFuente = (urlFuenteRaw.match(/\(([^)]+)\)/) ?? [])[1] ?? urlFuenteRaw;
+
+const linkVerGoogle =
+  destino.data.lat !== undefined && destino.data.lng !== undefined
+    ? `https://www.google.com/maps/search/?api=1&query=${destino.data.lat},${destino.data.lng}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destino.data.name)}`;
 
 const { Content } = await render(destino);
 
 const title = `Things to do in ${destino.data.name}: places to visit | Destinos del Norte`;
-const linkMap =
-  destino.data.lat !== undefined && destino.data.lng !== undefined
-    ? `https://www.google.com/maps/search/?api=1&query=${destino.data.lat},${destino.data.lng}`
-    : "";
+
+const touristDestination = {
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  name: destino.data.name,
+  description: destino.data.intro,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  image: new URL(getImage(destino.data.imagen).src, Astro.site).toString(),
+};
 ---
 
 <BaseLayout
@@ -64,118 +113,73 @@ const linkMap =
     { name: provincia.data.name, path: `/en/${provincia.data.slug}/` },
     { name: destino.data.name, path: `/en/${provincia.data.slug}/${destino.data.slug}/` },
   ]}
+  jsonLd={[touristDestination]}
 >
-  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
-    <Breadcrumbs
-      items={[
-        { name: provincia.data.name, path: `/en/${provincia.data.slug}/` },
-        { name: destino.data.name, path: `/en/${provincia.data.slug}/${destino.data.slug}/` },
-      ]}
-    />
+  <DestinationHero
+    titulo={`Things to do in ${destino.data.name}`}
+    intro={destino.data.intro}
+    provinciaName={provincia.data.name}
+    provinciaHref={`/en/${provincia.data.slug}/`}
+    imagen={getImage(destino.data.imagen)}
+    imagenAlt={destino.data.name}
+    breadcrumbs={[
+      { name: provincia.data.name, path: `/en/${provincia.data.slug}/` },
+      { name: destino.data.name, path: `/en/${provincia.data.slug}/${destino.data.slug}/` },
+    ]}
+  />
 
-    <div class="mt-6 grid items-center gap-8 lg:grid-cols-2">
-      <div>
-        <h1 class="font-display text-3xl font-bold leading-tight text-navy lg:text-[42px]">
-          Things to do in {destino.data.name}
-        </h1>
-        <p class="mt-4 max-w-xl text-sm leading-relaxed text-body lg:text-base">
-          {destino.data.intro}
-        </p>
-        {exp && <p class="mt-3 text-xs font-medium uppercase tracking-wide text-terracota">{exp}</p>}
-      </div>
-      <img
-        src={resolveImage(destino.data.imagen).src}
-        alt={destino.data.name}
-        width={672}
-        height={621}
-        loading="eager"
-        class="h-auto w-full max-w-2xl rounded-2xl object-cover shadow-card"
-      />
-    </div>
+  {
+    destino.data.lugaresImperdibles && destino.data.lugaresImperdibles.length > 0 && (
+      <PlacesGrid title="Must-see places" places={destino.data.lugaresImperdibles} />
+    )
+  }
 
-    <div class="mt-10 prose-norte max-w-3xl">
+  <section class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-14">
+    <div class="prose-norte max-w-3xl">
       <Content />
     </div>
-
-    {destino.data.lugaresImperdibles && destino.data.lugaresImperdibles.length > 0 && (
-      <div class="mt-10">
-        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Must-see places</h2>
-        <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {destino.data.lugaresImperdibles.map((l, i) => (
-            <li class="rounded-xl bg-tarjeta p-5 shadow-card">
-              <span class="font-display text-2xl font-bold text-terracota/30" aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p class="mt-1 font-display font-semibold text-navy">{l.nombre}</p>
-              {l.descripcion && <p class="mt-1 text-sm text-body-light">{l.descripcion}</p>}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-
-    {info.length > 0 && (
-      <div class="mt-10">
-        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Practical info</h2>
-        <div class="mt-6 grid gap-4 sm:grid-cols-2">
-          {info.map((i) => (
-            <div class="rounded-xl bg-tarjeta p-5 shadow-card">
-              <p class="text-xs font-semibold uppercase tracking-wide text-body-light">{i.label}</p>
-              <p class="mt-1 text-sm leading-relaxed text-body">{i.value}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    )}
-
-    {destino.data.consejos && destino.data.consejos.length > 0 && (
-      <div class="mt-10">
-        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Tips</h2>
-        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-          {destino.data.consejos.map((c) => (
-            <li class="rounded-xl bg-tarjeta p-4 shadow-card text-sm text-body">• {c}</li>
-          ))}
-        </ul>
-      </div>
-    )}
-
-    {guias.length > 0 && (
-      <div class="mt-10">
-        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Travel guides</h2>
-        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-          {guias.map((g) => (
-            <li>
-              <a
-                href={g.href}
-                class="flex items-center justify-between gap-2 rounded-xl bg-tarjeta p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
-              >
-                <span class="font-medium text-navy">{g.titulo}</span>
-                <span aria-hidden="true" class="text-terracota">➔</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-
-    {linkMap && (
-      <div class="mt-10">
-        <a
-          href={linkMap}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy-deeper"
-        >
-          View on Google Maps
-        </a>
-      </div>
-    )}
-
-    <a
-      href={url(`/en/${provincia.data.slug}/`)}
-      class="mt-10 inline-flex text-sm font-medium text-terracota hover:text-terracota-hover"
-    >
-      ← Back to {provincia.data.name}
-    </a>
   </section>
+
+  <ExperienceGrid title="Experiences" experiencias={experiencias} />
+
+  <TravelInfo
+    title="Practical info"
+    comoLlegar={destino.data.comoLlegar}
+    mejorEpoca={destino.data.mejorEpoca}
+    diasRecomendados={destino.data.diasRecomendados}
+    dondeComer={destino.data.dondeComer}
+    dondeAlojarse={destino.data.dondeAlojarse}
+  />
+
+  {
+    destino.data.consejos && destino.data.consejos.length > 0 && (
+      <TravelTips title="Tips" tips={destino.data.consejos} />
+    )
+  }
+
+  <Reviews
+    reviews={resenasDestino}
+    linkVerGoogle={urlFuente || linkVerGoogle}
+    fuente={fuenteResenas}
+  />
+
+  {
+    destino.data.lat !== undefined && destino.data.lng !== undefined && (
+      <DestinationMap
+        nombre={destino.data.name}
+        provinciaName={provincia.data.name}
+        lat={destino.data.lat}
+        lng={destino.data.lng}
+      />
+    )
+  }
+
+  <RelatedGuides title="Related guides" guides={guiasDelDestino} />
+
+  <RelatedDestinations
+    title="Nearby destinations"
+    linkLabel={`See ${provincia.data.name}`}
+    linkHref={`/en/${provincia.data.slug}/`}
+    destinos={destinosCercanos}
+  />
 </BaseLayout>

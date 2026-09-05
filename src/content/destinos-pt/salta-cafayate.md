@@ -32,6 +32,8 @@ consejos:
   - "Reserve as vinícolas com antecedência na safra e nos fins de semana."
   - "A altitude é sentida: vá com calma no primeiro dia."
 destinosCercanos:
+  - "cachi"
+  - "quebrada-de-las-conchas"
   - "amaicha-del-valle"
 lat: -26.074
 lng: -65.977

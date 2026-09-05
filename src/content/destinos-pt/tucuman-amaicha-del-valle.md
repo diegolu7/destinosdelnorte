@@ -30,8 +30,9 @@ consejos:
   - "Leve água e protetor solar; o clima é seco e o sol forte."
   - "Respeite os sítios arqueológicos: não retire peças nem suba nas ruínas."
 destinosCercanos:
-  - "cafayate"
   - "tafi-del-valle"
+  - "ruinas-de-quilmes"
+  - "cafayate"
 lat: -26.594
 lng: -65.927
 ---
