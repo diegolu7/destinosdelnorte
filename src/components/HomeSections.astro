@@ -1,0 +1,294 @@
+---
+import { getCollection } from "astro:content";
+import SectionTitle from "./SectionTitle.astro";
+import ProvinceCard from "./ProvinceCard.astro";
+import DestinationCard from "./DestinationCard.astro";
+import ExperienceCard from "./ExperienceCard.astro";
+import Icon from "./Icon.astro";
+import { resolveImage as getImage } from "../lib/images";
+import { url } from "../lib/site";
+import { langFromPath, type Lang } from "../lib/i18n";
+
+const lang: Lang = langFromPath(Astro.url.pathname);
+
+const PROV: Record<Lang, "provincias" | "provinciasEn" | "provinciasPt"> = { es: "provincias", en: "provinciasEn", pt: "provinciasPt" };
+const DEST: Record<Lang, "destinos" | "destinosEn" | "destinosPt"> = { es: "destinos", en: "destinosEn", pt: "destinosPt" };
+const EXP: Record<Lang, "experiencias" | "experienciasEn" | "experienciasPt"> = { es: "experiencias", en: "experienciasEn", pt: "experienciasPt" };
+
+const T = {
+  es: {
+    queHacer: "¿Qué hacer en cada destino?",
+    destinos: "Destinos imperdibles del Norte",
+    verTodosDestinos: "Ver todos los destinos",
+    verTodos: "Ver todos",
+    experiencias: "Experiencias que te van a encantar",
+    verTodasExperiencias: "Ver todas las experiencias",
+    verTodas: "Ver todas",
+    anterior: "Destino anterior",
+    siguiente: "Destino siguiente",
+    irAl: "Ir al destino",
+  },
+  en: {
+    queHacer: "What to do in each destination?",
+    destinos: "Unmissable destinations of the North",
+    verTodosDestinos: "See all destinations",
+    verTodos: "See all",
+    experiencias: "Experiences you will love",
+    verTodasExperiencias: "See all experiences",
+    verTodas: "See all",
+    anterior: "Previous destination",
+    siguiente: "Next destination",
+    irAl: "Go to destination",
+  },
+  pt: {
+    queHacer: "O que fazer em cada destino?",
+    destinos: "Destinos imperdíveis do Norte",
+    verTodosDestinos: "Ver todos os destinos",
+    verTodos: "Ver todos",
+    experiencias: "Experiências que você vai amar",
+    verTodasExperiencias: "Ver todas as experiências",
+    verTodas: "Ver todas",
+    anterior: "Destino anterior",
+    siguiente: "Próximo destino",
+    irAl: "Ir para o destino",
+  },
+} as const;
+
+const t = T[lang];
+const prefix = lang === "es" ? "" : `/${lang}`;
+
+const provincias = (await getCollection(PROV[lang])).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name, lang),
+);
+const refDestinos = await getCollection("destinos");
+const refSlugs = refDestinos
+  .map((d) => ({ slug: d.data.slug, name: d.data.name }))
+  .sort((a, b) => a.name.localeCompare(b.name, "es"))
+  .map((d) => d.slug);
+const slugIndex = new Map(refSlugs.map((s, i) => [s, i]));
+const destinos = (await getCollection(DEST[lang])).sort(
+  (a, b) => (slugIndex.get(a.data.slug) ?? 0) - (slugIndex.get(b.data.slug) ?? 0),
+);
+const experiencias = (await getCollection(EXP[lang])).sort((a, b) =>
+  a.id.localeCompare(b.id, "en"),
+);
+const saltaSlug = provincias.find((p) => p.data.slug === "salta")?.data.slug ?? "salta";
+const jujuySlug = provincias.find((p) => p.data.slug === "jujuy")?.data.slug ?? "jujuy";
+---
+
+<section id="que-hacer" class="scroll-mt-24">
+  <div class="mx-auto w-full max-w-6xl px-5 py-10 lg:px-8 lg:py-16">
+    <SectionTitle title={t.queHacer} />
+    <div class="mt-8 flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-5">
+      {
+        provincias.map((provincia) => (
+          <ProvinceCard
+            nombre={provincia.data.name}
+            slug={provincia.data.slug}
+            imagen={getImage(provincia.data.imagen)}
+            lang={lang}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section id="destinos" class="scroll-mt-24">
+  <div class="mx-auto w-full max-w-6xl px-5 pb-10 lg:px-8 lg:pb-16">
+    <div class="flex items-end justify-between gap-4">
+      <SectionTitle title={t.destinos} />
+      <a href={url(`${prefix}/${saltaSlug}/`)} class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
+        {t.verTodosDestinos}
+      </a>
+    </div>
+    <div class="relative mt-8">
+      <div id="destinos-viewport" data-count={destinos.length} class="overflow-hidden">
+        <div id="destinos-track" class="flex gap-4" style="transform: translateX(0);">
+          {
+            [...destinos, ...destinos, ...destinos].map((destino) => (
+              <DestinationCard
+                nombre={destino.data.name}
+                descripcion={destino.data.descripcion}
+                href={`${prefix}/${destino.data.provincia}/${destino.data.slug}/`}
+                imagen={getImage(destino.data.imagen)}
+                extraClass="w-[72%] shrink-0 sm:w-[46%] lg:w-[31%] xl:w-[24%]"
+              />
+            ))
+          }
+        </div>
+      </div>
+      <button
+        id="destinos-prev"
+        type="button"
+        aria-label={t.anterior}
+        class="absolute -left-2 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:-left-3"
+      >
+        <span class="rotate-180">
+          <Icon name="arrow" size={20} />
+        </span>
+      </button>
+      <button
+        id="destinos-next"
+        type="button"
+        aria-label={t.siguiente}
+        class="absolute -right-2 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:-right-3"
+      >
+        <Icon name="arrow" size={20} />
+      </button>
+    </div>
+    <div id="destinos-dots" class="mt-5 flex items-center justify-center gap-2">
+      {
+        destinos.map((_, i) => (
+          <button
+            type="button"
+            data-dot={i}
+            aria-label={`${t.irAl} ${i + 1}`}
+            class={`h-2.5 w-2.5 rounded-full transition-colors duration-300 ${
+              i === 0 ? "bg-navy" : "bg-navy/20"
+            }`}
+          ></button>
+        ))
+      }
+    </div>
+    <a href={url(`${prefix}/${saltaSlug}/`)} class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
+      {t.verTodos}
+    </a>
+  </div>
+</section>
+
+<section id="experiencias" class="scroll-mt-24">
+  <div class="mx-auto w-full max-w-6xl px-5 pb-16 lg:px-8 lg:pb-24">
+    <div class="flex items-end justify-between gap-4">
+      <SectionTitle title={t.experiencias} />
+      <a href={url(`${prefix}/${jujuySlug}/`)} class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
+        {t.verTodasExperiencias}
+      </a>
+    </div>
+    <div class="mt-8 grid grid-cols-4 gap-2 sm:gap-8">
+      {
+        experiencias.map((experiencia) => (
+          <ExperienceCard
+            nombre={experiencia.data.nombre}
+            descripcion={experiencia.data.descripcion}
+            icono={experiencia.data.icono}
+          />
+        ))
+      }
+    </div>
+    <a href={url(`${prefix}/${jujuySlug}/`)} class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
+      {t.verTodas}
+    </a>
+  </div>
+</section>
+
+<script>
+  const viewport = document.getElementById("destinos-viewport");
+  const track = document.getElementById("destinos-track");
+  const prevBtn = document.getElementById("destinos-prev");
+  const nextBtn = document.getElementById("destinos-next");
+  const dotBtns = Array.from(
+    document.querySelectorAll("#destinos-dots [data-dot]"),
+  ) as HTMLElement[];
+
+  if (viewport && track) {
+    const count = Number(viewport.getAttribute("data-count")) || 0;
+    const GAP = 16;
+    let index = count;
+    let timer: number | undefined;
+
+    function unit(): number {
+      const card = track!.firstElementChild as HTMLElement | null;
+      return card ? card.offsetWidth + GAP : 0;
+    }
+
+    function updateDots(): void {
+      const current = ((index % count) + count) % count;
+      dotBtns.forEach((d, i) => {
+        const on = i === current;
+        d.classList.toggle("bg-navy", on);
+        d.classList.toggle("bg-navy/20", !on);
+      });
+    }
+
+    function normalize(): void {
+      let n = index;
+      if (n >= 2 * count) n -= count;
+      if (n < count) n += count;
+      if (n !== index) {
+        index = n;
+        track!.style.transition = "none";
+        track!.style.transform = "translateX(" + -index * unit() + "px)";
+        updateDots();
+      }
+    }
+
+    function animateTo(i: number, animated: boolean): void {
+      index = i;
+      track!.style.transition = animated ? "transform 500ms ease-in-out" : "none";
+      track!.style.transform = "translateX(" + -index * unit() + "px)";
+      updateDots();
+      if (animated) {
+        window.setTimeout(normalize, 520);
+      }
+    }
+
+    function startAutoplay(): void {
+      if (timer) window.clearInterval(timer);
+      timer = window.setInterval(() => animateTo(index + 1, true), 3500);
+    }
+
+    function stopAutoplay(): void {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    }
+
+    function go(dir: number): void {
+      stopAutoplay();
+      animateTo(index + dir, true);
+      startAutoplay();
+    }
+
+    prevBtn?.addEventListener("click", () => go(-1));
+    nextBtn?.addEventListener("click", () => go(1));
+
+    dotBtns.forEach((d) => {
+      d.addEventListener("click", () => {
+        stopAutoplay();
+        const target = Number(d.dataset.dot);
+        const current = ((index % count) + count) % count;
+        animateTo(index + (target - current), Math.abs(target - current) <= 2);
+        startAutoplay();
+      });
+    });
+
+    viewport.addEventListener("mouseenter", stopAutoplay);
+    viewport.addEventListener("mouseleave", startAutoplay);
+    viewport.addEventListener("touchstart", stopAutoplay, { passive: true });
+    viewport.addEventListener("touchend", () => setTimeout(startAutoplay, 3500));
+
+    let startX: number | null = null;
+    viewport.addEventListener("pointerdown", (e) => {
+      startX = e.clientX;
+      stopAutoplay();
+    });
+    viewport.addEventListener("pointerup", (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+      else startAutoplay();
+    });
+
+    let rTimer: number | undefined;
+    window.addEventListener("resize", () => {
+      window.clearTimeout(rTimer);
+      rTimer = window.setTimeout(() => animateTo(index, false), 150);
+    });
+
+    animateTo(count, false);
+    startAutoplay();
+  }
+</script>

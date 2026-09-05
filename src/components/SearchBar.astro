@@ -2,35 +2,63 @@
 import { getCollection } from "astro:content";
 import Icon from "./Icon.astro";
 import { url } from "../lib/site";
+import { langFromPath, type Lang } from "../lib/i18n";
 
-const experiencias = (await getCollection("experiencias"))
+const lang: Lang = langFromPath(Astro.url.pathname);
+
+const PROV_COLLECTION: Record<Lang, "provincias" | "provinciasEn" | "provinciasPt"> = {
+  es: "provincias",
+  en: "provinciasEn",
+  pt: "provinciasPt",
+};
+const DEST_COLLECTION: Record<Lang, "destinos" | "destinosEn" | "destinosPt"> = {
+  es: "destinos",
+  en: "destinosEn",
+  pt: "destinosPt",
+};
+const EXP_COLLECTION: Record<Lang, "experiencias" | "experienciasEn" | "experienciasPt"> = {
+  es: "experiencias",
+  en: "experienciasEn",
+  pt: "experienciasPt",
+};
+
+const T = {
+  es: { destino: "Destino", fecha: "Fecha", cuando: "¿Cuándo?", tipo: "Tipo de experiencia", adonde: "¿A dónde querés ir?", sugerencias: "Sugerencias", buscar: "Buscar", provincia: "Provincia", lugar: "Lugar" },
+  en: { destino: "Destination", fecha: "Date", cuando: "When?", tipo: "Type of experience", adonde: "Where do you want to go?", sugerencias: "Suggestions", buscar: "Search", provincia: "Province", lugar: "Place" },
+  pt: { destino: "Destino", fecha: "Data", cuando: "Quando?", tipo: "Tipo de experiência", adonde: "Para onde você quer ir?", sugerencias: "Sugestões", buscar: "Buscar", provincia: "Província", lugar: "Lugar" },
+} as const;
+
+const t = T[lang];
+
+const experiencias = (await getCollection(EXP_COLLECTION[lang]))
   .map((e) => e.data.nombre)
-  .sort((a, b) => a.localeCompare(b, "es"));
+  .sort((a, b) => a.localeCompare(b, lang));
 
-const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === "es");
-const destinos = await getCollection("destinos");
+const provincias = await getCollection(PROV_COLLECTION[lang]);
+const destinos = await getCollection(DEST_COLLECTION[lang]);
 const provinciaNombre = (slug: string) =>
   provincias.find((p) => p.data.slug === slug)?.data.name ?? "";
+const prefix = lang === "es" ? "" : `/${lang}`;
 
 const items = [
   ...provincias.map((p) => ({
     label: p.data.name,
-    sub: "Provincia",
-    href: url(`/${p.data.slug}/`),
-    type: "Provincia",
+    sub: t.provincia,
+    href: url(`${prefix}/${p.data.slug}/`),
+    type: t.provincia,
   })),
   ...destinos.map((d) => ({
     label: d.data.name,
     sub: provinciaNombre(d.data.provincia),
-    href: url(`/${d.data.provincia}/${d.data.slug}/`),
-    type: "Destino",
+    href: url(`${prefix}/${d.data.provincia}/${d.data.slug}/`),
+    type: t.destino,
   })),
   ...destinos.flatMap((d) =>
     (d.data.lugaresImperdibles ?? []).map((lugar) => ({
       label: lugar.nombre,
       sub: d.data.name,
-      href: url(`/${d.data.provincia}/${d.data.slug}/`),
-      type: "Lugar",
+      href: url(`${prefix}/${d.data.provincia}/${d.data.slug}/`),
+      type: t.lugar,
     })),
   ),
 ];
@@ -39,14 +67,14 @@ const items = [
 <div id="buscador" class="relative z-10 scroll-mt-24 px-5 pb-4 lg:px-8 lg:pb-6">
   <div class="mx-auto max-w-6xl rounded-[14px] bg-header p-3 shadow-search sm:p-4">
     <form
-      action={url("/busqueda/")}
+      action={url(prefix === "" ? "/busqueda/" : `${prefix}/busqueda/`)}
       method="get"
       class="flex flex-col gap-2 sm:flex-row sm:items-center"
       role="search"
     >
       <label class="relative flex flex-1 items-center gap-2 rounded-[10px] border border-border-input bg-header px-4 py-3">
         <Icon name="pin" size={20} class="shrink-0 text-terracota" />
-        <span class="sr-only">Destino</span>
+        <span class="sr-only">{t.destino}</span>
         <input
           type="text"
           name="q"
@@ -55,8 +83,8 @@ const items = [
           aria-autocomplete="list"
           aria-expanded="false"
           aria-controls="busqueda-sugerencias"
-          aria-label="¿A dónde querés ir?"
-          placeholder="¿A dónde querés ir?"
+          aria-label={t.adonde}
+          placeholder={t.adonde}
           autocomplete="off"
           data-items={JSON.stringify(items)}
           class="w-full bg-transparent text-sm text-navy placeholder:text-body-light focus:outline-none"
@@ -64,7 +92,7 @@ const items = [
         <ul
           id="busqueda-sugerencias"
           role="listbox"
-          aria-label="Sugerencias"
+          aria-label={t.sugerencias}
           hidden
           class="absolute left-0 right-0 top-full z-20 mt-2 max-h-72 overflow-auto rounded-xl bg-header p-1.5 shadow-card"
         ></ul>
@@ -72,11 +100,11 @@ const items = [
 
       <label class="relative flex flex-1 items-center gap-2 rounded-[10px] border border-border-input bg-header px-4 py-3 opacity-60">
         <Icon name="calendar" size={20} class="shrink-0 text-body-light" />
-        <span class="sr-only">Fecha</span>
+        <span class="sr-only">{t.fecha}</span>
         <input
           type="text"
           name="fecha"
-          placeholder="¿Cuándo?"
+          placeholder={t.cuando}
           disabled
           class="w-full cursor-not-allowed bg-transparent text-sm text-navy placeholder:text-body-light focus:outline-none"
         />
@@ -92,14 +120,14 @@ const items = [
           aria-controls="busqueda-tipo-list"
           class="flex w-full items-center justify-between gap-2 text-sm focus:outline-none"
         >
-          <span id="busqueda-tipo-label" class="truncate text-body-light">Tipo de experiencia</span>
+          <span id="busqueda-tipo-label" class="truncate text-body-light" data-default={t.tipo}>{t.tipo}</span>
           <Icon name="chevron" size={16} class="pointer-events-none shrink-0 text-body-light" />
         </button>
         <input type="hidden" name="tipo" id="busqueda-tipo" value="" />
         <ul
           id="busqueda-tipo-list"
           role="listbox"
-          aria-label="Tipo de experiencia"
+          aria-label={t.tipo}
           hidden
           class="absolute left-0 right-0 top-full z-20 mt-2 max-h-72 overflow-auto rounded-xl bg-header p-1.5 shadow-card"
         >
@@ -122,7 +150,7 @@ const items = [
         class="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-navy-deeper"
       >
         <Icon name="search" size={18} />
-        Buscar
+        {t.buscar}
       </button>
     </form>
   </div>
@@ -236,6 +264,7 @@ const items = [
   const tipoList = document.getElementById("busqueda-tipo-list");
   const tipoInput = document.getElementById("busqueda-tipo");
   const tipoLabel = document.getElementById("busqueda-tipo-label");
+  const tipoDefault = tipoLabel.dataset.default || "Tipo de experiencia";
 
   function setTipo(value) {
     tipoInput.value = value;
@@ -244,7 +273,7 @@ const items = [
       tipoLabel.classList.remove("text-body-light");
       tipoLabel.classList.add("text-navy");
     } else {
-      tipoLabel.textContent = "Tipo de experiencia";
+      tipoLabel.textContent = tipoDefault;
       tipoLabel.classList.add("text-body-light");
       tipoLabel.classList.remove("text-navy");
     }

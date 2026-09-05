@@ -6,34 +6,67 @@ import heroImgPurmamarca from "../assets/hero_img_purmamarca.webp";
 import heroImgTafi from "../assets/hero_img_tafi_del_valle.webp";
 import Icon from "./Icon.astro";
 import { url } from "../lib/site";
+import { langFromPath, type Lang } from "../lib/i18n";
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+const lang: Lang = langFromPath(Astro.url.pathname);
+
+const T = {
+  es: {
+    linea1: "Descubrí",
+    linea2: "lo mejor del",
+    linea3: "Norte Argentino",
+    verSlide: "Ver slide",
+    anterior: "Slide anterior",
+    siguiente: "Slide siguiente",
+    slides: [
+      { alt: "Paisaje del Norte Argentino con montañas y cactus", texto: "Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar." },
+      { alt: "Viñedos de Cafayate, Salta", texto: "Vinos de altura y la Quebrada de las Conchas. — Cafayate, Salta" },
+      { alt: "Cerro de los Siete Colores en Purmamarca, Jujuy", texto: "El Cerro de los Siete Colores te espera. — Purmamarca, Jujuy" },
+      { alt: "Montañas del valle en Tafí del Valle, Tucumán", texto: "Naturaleza y aire puro entre montañas. — Tafí del Valle, Tucumán" },
+    ],
+  },
+  en: {
+    linea1: "Discover",
+    linea2: "the best of the",
+    linea3: "Argentine Northwest",
+    verSlide: "View slide",
+    anterior: "Previous slide",
+    siguiente: "Next slide",
+    slides: [
+      { alt: "Landscape of the Argentine Northwest with mountains and cacti", texto: "Colorful mountains, towns with history, living culture and experiences you will love." },
+      { alt: "Cafayate vineyards, Salta", texto: "High-altitude wines and the Quebrada de las Conchas. — Cafayate, Salta" },
+      { alt: "Hill of Seven Colors in Purmamarca, Jujuy", texto: "The Hill of Seven Colors is waiting for you. — Purmamarca, Jujuy" },
+      { alt: "Valley mountains in Tafí del Valle, Tucumán", texto: "Nature and fresh air among the mountains. — Tafí del Valle, Tucumán" },
+    ],
+  },
+  pt: {
+    linea1: "Descubra",
+    linea2: "o melhor do",
+    linea3: "Noroeste Argentino",
+    verSlide: "Ver slide",
+    anterior: "Slide anterior",
+    siguiente: "Próximo slide",
+    slides: [
+      { alt: "Paisagem do Noroeste Argentino com montanhas e cactos", texto: "Montanhas coloridas, vilas com história, cultura viva e experiências que vão conquistar você." },
+      { alt: "Vinhedos de Cafayate, Salta", texto: "Vinhos de altitude e a Quebrada de las Conchas. — Cafayate, Salta" },
+      { alt: "Cerro das Sete Cores em Purmamarca, Jujuy", texto: "O Cerro das Sete Cores espera por você. — Purmamarca, Jujuy" },
+      { alt: "Montanhas do vale em Tafí del Valle, Tucumán", texto: "Natureza e ar puro entre as montanhas. — Tafí del Valle, Tucumán" },
+    ],
+  },
+} as const;
+
+const t = T[lang];
 
 const slides = [
-  {
-    img: heroImg,
-    alt: "Paisaje del Norte Argentino con montañas y cactus",
-    texto: "Montañas de colores, pueblos con historia, cultura viva y experiencias que te van a enamorar.",
-  },
-  {
-    img: heroImgCafayate,
-    alt: "Viñedos de Cafayate, Salta",
-    texto: "Vinos de altura y la Quebrada de las Conchas. — Cafayate, Salta",
-  },
-  {
-    img: heroImgPurmamarca,
-    alt: "Cerro de los Siete Colores en Purmamarca, Jujuy",
-    texto: "El Cerro de los Siete Colores te espera. — Purmamarca, Jujuy",
-  },
-  {
-    img: heroImgTafi,
-    alt: "Montañas del valle en Tafí del Valle, Tucumán",
-    texto: "Naturaleza y aire puro entre montañas. — Tafí del Valle, Tucumán",
-  },
+  { img: heroImg, ...t.slides[0] },
+  { img: heroImgCafayate, ...t.slides[1] },
+  { img: heroImgPurmamarca, ...t.slides[2] },
+  { img: heroImgTafi, ...t.slides[3] },
 ];
 ---
 
@@ -67,9 +100,9 @@ const slides = [
     <div class="mx-auto w-full max-w-6xl px-5 lg:px-8">
       <div class="max-w-2xl">
         <h1 class="font-display font-bold leading-tight text-navy [text-shadow:0_1px_2px_rgba(247,245,241,0.85),0_2px_5px_rgba(247,245,241,0.55)]">
-          <span class="block text-[28px] lg:text-[42px]">Descubrí</span>
-          <span class="block text-[28px] lg:text-[42px]">lo mejor del</span>
-          <span class="block text-[28px] font-extrabold lg:text-[42px]">Norte Argentino</span>
+          <span class="block text-[28px] lg:text-[42px]">{t.linea1}</span>
+          <span class="block text-[28px] lg:text-[42px]">{t.linea2}</span>
+          <span class="block text-[28px] font-extrabold lg:text-[42px]">{t.linea3}</span>
         </h1>
         <div class="mt-4 grid">
           {
@@ -101,7 +134,7 @@ const slides = [
         <button
           type="button"
           data-dot={i}
-          aria-label={`Ver slide ${i + 1}`}
+          aria-label={`${t.verSlide} ${i + 1}`}
           class={`h-2.5 w-2.5 rounded-full transition-colors duration-300 ${
             i === 0 ? "bg-white ring-2 ring-white/60" : "bg-white/40 ring-2 ring-white/20"
           }`}
@@ -113,7 +146,7 @@ const slides = [
   <button
     id="hero-prev"
     type="button"
-    aria-label="Slide anterior"
+    aria-label={t.anterior}
     class="absolute left-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:inline-flex"
   >
     <span class="rotate-180">
@@ -123,7 +156,7 @@ const slides = [
   <button
     id="hero-next"
     type="button"
-    aria-label="Slide siguiente"
+    aria-label={t.siguiente}
     class="absolute right-4 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-card transition-transform duration-200 hover:scale-110 lg:inline-flex"
   >
     <Icon name="arrow" size={20} />
