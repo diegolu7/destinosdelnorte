@@ -61,7 +61,9 @@ Lista de tareas pendientes y futuras del proyecto. Se actualiza a medida que se 
 - [x] hreflang absolutos (`es-AR`, `en`, `pt-BR`, `x-default`); `LangSwitcher` activo.
 
 ### Pendientes menores (opcional)
-- [ ] Auditar 1:1 que ningún link interno (es/en/pt) apunte a páginas inexistentes (spot-check por idioma).
+- [x] Paridad de estructura/estilos ES↔EN↔PT (ES = fuente de verdad): **0 divergencias** — `npm run i18n:structure` (harness `scripts/check-i18n-structure.mjs`) compara el esqueleto DOM; correr siempre tras cambios de plantillas.
+- [x] Chrome i18n: aria-labels (Header/Breadcrumbs/Footer), `meta language`/`og:locale`, JSON-LD `inLanguage` y breadcrumb "Inicio", copyright del footer por idioma.
+- [ ] **Reseñas por idioma**: `src/data/resenas.json` sigue en español; EN/PT muestran ese texto (estructura ya es idéntica). Traducir el dataset a `resenas-en.json` / `resenas-pt.json` (autor/texto) y consumirlo según `lang`.
 - [ ] Revisar textos del `ui.ts` (dict chrome) cuando se traduzcan nuevas secciones.
 
 ---
