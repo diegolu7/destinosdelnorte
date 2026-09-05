@@ -2,7 +2,8 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
-import { resolveImage } from "../../../lib/images";
+import DestinationCard from "../../../components/DestinationCard.astro";
+import { resolveImage as getImage } from "../../../lib/images";
 
 export async function getStaticPaths() {
   const provincias = await getCollection("provinciasPt");
@@ -28,7 +29,7 @@ const touristDestination = {
   name: provincia.data.name,
   description: provincia.data.intro,
   url: new URL(Astro.url.pathname, Astro.site).toString(),
-  image: new URL(resolveImage(provincia.data.imagen).src, Astro.site).toString(),
+  image: new URL(getImage(provincia.data.imagen).src, Astro.site).toString(),
 };
 ---
 
@@ -50,28 +51,23 @@ const touristDestination = {
       {provincia.data.intro}
     </p>
 
-    {destinos.length > 0 && (
-      <div class="mt-10">
-        <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Destinos em destaque</h2>
-        <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {destinos.map((destino) => (
-            <li>
-              <a
-                href={`/pt/${provincia.data.slug}/${destino.data.slug}/`}
-                class="group block rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover"
-              >
-                <span class="font-display text-base font-semibold text-navy transition-colors duration-200 group-hover:text-terracota">
-                  {destino.data.name}
-                </span>
-                <span class="mt-1 block text-xs leading-relaxed text-body-light">
-                  {destino.data.descripcion}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+    <div class="mt-10">
+      <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">
+        Destinos em destaque
+      </h2>
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {
+          destinos.map((destino) => (
+            <DestinationCard
+              nombre={destino.data.name}
+              descripcion={destino.data.descripcion}
+              href={`/pt/${provincia.data.slug}/${destino.data.slug}/`}
+              imagen={getImage(destino.data.imagen)}
+            />
+          ))
+        }
       </div>
-    )}
+    </div>
 
     <div class="prose-norte mt-10 max-w-3xl lg:mt-12">
       <Content />

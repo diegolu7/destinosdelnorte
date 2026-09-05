@@ -2,23 +2,8 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
-import { resolveImage } from "../../../lib/images";
-
-const EN_DESTINO_DESC: Record<string, string> = {
-  cafayate: "Wines, landscapes and tradition.",
-  cachi: "A colonial town in the Calchaquí Valleys.",
-  "quebrada-de-las-conchas": "Rock formations shaped by the wind.",
-  "tren-a-las-nubes": "One of the highest railways in the world.",
-  purmamarca: "The Hill of Seven Colors awaits you.",
-  tilcara: "History, culture and unique landscapes.",
-  humahuaca: "The highest town of the Humahuaca Gorge.",
-  "salinas-grandes": "A sea of salt at high altitude.",
-  hornocal: "The hill of the fourteen colors.",
-  "tafi-del-valle": "Nature and fresh air all year round.",
-  "amaicha-del-valle": "Ancestral culture and living traditions.",
-  "ruinas-de-quilmes": "The largest archaeological site in the country.",
-  "el-cadillal": "A mountain lake minutes from the capital.",
-};
+import DestinationCard from "../../../components/DestinationCard.astro";
+import { resolveImage as getImage } from "../../../lib/images";
 
 export async function getStaticPaths() {
   const provincias = await getCollection("provinciasEn");
@@ -30,12 +15,9 @@ export async function getStaticPaths() {
 
 const { provincia } = Astro.props;
 
-const destinos = (await getCollection("destinos"))
+const destinos = (await getCollection("destinosEn"))
   .filter((destino) => destino.data.provincia === provincia.data.slug)
-  .sort((a, b) => a.data.name.localeCompare(b.data.name, "es"));
-
-const destinosEn = await getCollection("destinosEn");
-const enSlugs = new Set(destinosEn.map((d) => d.data.slug));
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, "en"));
 
 const { Content } = await render(provincia);
 
@@ -47,7 +29,7 @@ const touristDestination = {
   name: provincia.data.name,
   description: provincia.data.intro,
   url: new URL(Astro.url.pathname, Astro.site).toString(),
-  image: new URL(resolveImage(provincia.data.imagen).src, Astro.site).toString(),
+  image: new URL(getImage(provincia.data.imagen).src, Astro.site).toString(),
 };
 ---
 
@@ -70,30 +52,21 @@ const touristDestination = {
     </p>
 
     <div class="mt-10">
-      <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">Featured destinations</h2>
-      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">
+        Featured destinations
+      </h2>
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {
           destinos.map((destino) => (
-            <li>
-              <a
-                href={
-                  enSlugs.has(destino.data.slug)
-                    ? `/en/${provincia.data.slug}/${destino.data.slug}/`
-                    : `/${provincia.data.slug}/${destino.data.slug}/`
-                }
-                class="group block rounded-xl bg-tarjeta p-5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover"
-              >
-                <span class="font-display text-base font-semibold text-navy transition-colors duration-200 group-hover:text-terracota">
-                  {destino.data.name}
-                </span>
-                <span class="mt-1 block text-xs leading-relaxed text-body-light">
-                  {EN_DESTINO_DESC[destino.data.slug] ?? destino.data.descripcion}
-                </span>
-              </a>
-            </li>
+            <DestinationCard
+              nombre={destino.data.name}
+              descripcion={destino.data.descripcion}
+              href={`/en/${provincia.data.slug}/${destino.data.slug}/`}
+              imagen={getImage(destino.data.imagen)}
+            />
           ))
         }
-      </ul>
+      </div>
     </div>
 
     <div class="prose-norte mt-10 max-w-3xl lg:mt-12">
