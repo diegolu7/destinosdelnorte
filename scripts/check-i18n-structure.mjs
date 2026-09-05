@@ -35,6 +35,18 @@ function esRoutes() {
  *  el LangSwitcher marca el idioma ACTIVO con estilos distintos por página. */
 const SWITCH_TOKENS = new Set(["text-terracota", "text-navy", "underline", "underline-offset-4", "hover:text-terracota"]);
 
+/** Colapsa el interior de los contenedores prose-norte (contenido markdown cuya
+ *  enfatización/link inline puede variar legítimamente entre traducciones). */
+function collapseProse(body) {
+  const re = /(<(div|ul|p)\b[^>]*class="[^"]*prose-norte[^"]*"[^>]*>)[\s\S]*?(<\/\2>)/g;
+  let prev;
+  do {
+    prev = body;
+    body = body.replace(re, "$1$3");
+  } while (body !== prev);
+  return body;
+}
+
 /** Esqueleto: tags con su class, sin texto ni atributos que varíen por idioma. */
 function skeleton(htmlFile) {
   const html = readFileSync(htmlFile, "utf8")
@@ -42,7 +54,8 @@ function skeleton(htmlFile) {
     .replace(/<script[\s\S]*?<\/script>/gi, "")
     .replace(/<style[\s\S]*?<\/style>/gi, "")
     .replace(/<!--[\s\S]*?-->/g, "");
-  const body = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? "";
+  let body = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? "";
+  body = collapseProse(body);
   const tokens = [];
   const re = /<\/?([a-zA-Z][a-zA-Z0-9]*)((?:\s+[a-zA-Z-]+(?:\s*=\s*"[^"]*")?)*)\s*\/?>/g;
   let m;

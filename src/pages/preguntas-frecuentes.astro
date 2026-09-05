@@ -3,10 +3,13 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
 import Icon from "../components/Icon.astro";
+import { FAQ_CATEGORY_ORDER } from "../lib/ui";
 import { url } from "../lib/site";
 
+const catOrder = FAQ_CATEGORY_ORDER.es;
+
 const faqs = (await getCollection("faqs")).sort((a, b) => {
-  const c = a.data.categoria.localeCompare(b.data.categoria, "es");
+  const c = catOrder.indexOf(a.data.categoria) - catOrder.indexOf(b.data.categoria);
   return c !== 0 ? c : a.data.pregunta.localeCompare(b.data.pregunta, "es");
 });
 

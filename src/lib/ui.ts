@@ -75,3 +75,10 @@ export function provinciaLabel(lang: Lang, name: string): string {
   };
   return names[name]?.[lang] ?? name;
 }
+
+// Orden canónico de categorías de FAQ (el MISMO en los 3 idiomas: sigue el orden ES).
+export const FAQ_CATEGORY_ORDER: Record<Lang, string[]> = {
+  es: ["Clima y mejor época", "Cómo llegar", "Consejos", "Destinos", "Experiencias", "Planificar el viaje"],
+  en: ["Climate and best time", "How to get there", "Tips", "Destinations", "Experiences", "Planning your trip"],
+  pt: ["Clima e melhor época", "Como chegar", "Dicas", "Destinos", "Experiências", "Planejando a viagem"],
+};
