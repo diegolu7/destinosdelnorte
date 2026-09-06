@@ -13,16 +13,20 @@ const { nombre, descripcion, icono, ejemplos, provincias } = Astro.props;
 const hasExtra = (ejemplos?.length ?? 0) > 0;
 ---
 
-<article class={`flex flex-col items-start rounded-xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover lg:p-6 ${hasExtra ? "gap-3 p-5" : "gap-2 p-2.5 lg:gap-3"}`}>
-  <Icon name={icono} size={30} class="h-6 w-6 text-terracota lg:h-[30px] lg:w-[30px]" />
-  <h3 class="font-display text-[13px] font-semibold leading-tight text-navy sm:text-[15px] lg:text-lg">{nombre}</h3>
+<article class={`flex h-full flex-col items-start rounded-xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover lg:p-6 ${hasExtra ? "gap-3 p-5" : "gap-2 p-2.5 lg:gap-3"}`}>
+  <div class="flex items-center gap-3">
+    <Icon name={icono} size={24} class={`shrink-0 text-terracota lg:h-7 lg:w-7 ${hasExtra ? "h-6 w-6" : "h-5 w-5"}`} />
+    <h3 class={`font-display font-semibold leading-tight text-navy ${hasExtra ? "text-[17px] sm:text-xl" : "text-[13px] sm:text-[15px]"}`}>
+      {nombre}
+    </h3>
+  </div>
 
   {
     hasExtra ? (
       <>
         <p class="text-sm leading-relaxed text-body-light">{descripcion}</p>
         {ejemplos!.length > 0 && (
-          <ul class="mt-1 flex flex-wrap gap-1.5">
+          <ul class="flex flex-wrap gap-1.5">
             {ejemplos!.map((ejemplo) => (
               <li>
                 <a
@@ -36,7 +40,7 @@ const hasExtra = (ejemplos?.length ?? 0) > 0;
           </ul>
         )}
         {provincias && (
-          <p class="mt-1 text-[11px] font-semibold uppercase tracking-wider text-navy/60">
+          <p class="mt-auto pt-1 text-[11px] font-semibold uppercase tracking-wider text-navy/60">
             {provincias}
           </p>
         )}
