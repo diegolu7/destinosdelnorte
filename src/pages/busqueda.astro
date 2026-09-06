@@ -103,7 +103,8 @@ const sugerencias = ["Cafayate", "Purmamarca", "Tafí del Valle"].map((nombre) =
   const resultsEmpty = document.getElementById("results-empty");
 
   function p(path) {
-    return base + path;
+    const root = base === "/" ? "" : base;
+    return root + path;
   }
 
   function normalize(value) {
