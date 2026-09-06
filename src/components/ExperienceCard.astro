@@ -5,13 +5,44 @@ interface Props {
   nombre: string;
   descripcion: string;
   icono: "aventura" | "cultura" | "gastronomia" | "naturaleza" | "bodegas" | "senderismo";
+  ejemplos?: { nombre: string; href: string }[];
+  provincias?: string;
 }
 
-const { nombre, descripcion, icono } = Astro.props;
+const { nombre, descripcion, icono, ejemplos, provincias } = Astro.props;
+const hasExtra = (ejemplos?.length ?? 0) > 0;
 ---
 
-<article class="flex flex-col items-start gap-2 rounded-xl bg-tarjeta p-2.5 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover lg:gap-3 lg:p-6">
+<article class={`flex flex-col items-start rounded-xl bg-tarjeta shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-card-hover lg:p-6 ${hasExtra ? "gap-3 p-5" : "gap-2 p-2.5 lg:gap-3"}`}>
   <Icon name={icono} size={30} class="h-6 w-6 text-terracota lg:h-[30px] lg:w-[30px]" />
-  <h3 class="font-display text-[11px] font-semibold leading-tight text-navy sm:text-[13px] lg:text-[15px]">{nombre}</h3>
-  <p class="hidden text-xs leading-relaxed text-body-light lg:block">{descripcion}</p>
+  <h3 class="font-display text-[13px] font-semibold leading-tight text-navy sm:text-[15px] lg:text-lg">{nombre}</h3>
+
+  {
+    hasExtra ? (
+      <>
+        <p class="text-sm leading-relaxed text-body-light">{descripcion}</p>
+        {ejemplos!.length > 0 && (
+          <ul class="mt-1 flex flex-wrap gap-1.5">
+            {ejemplos!.map((ejemplo) => (
+              <li>
+                <a
+                  href={ejemplo.href}
+                  class="inline-flex rounded-full bg-terracota/10 px-3 py-1 text-xs font-medium text-terracota transition-colors duration-150 hover:bg-terracota/20"
+                >
+                  {ejemplo.nombre}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {provincias && (
+          <p class="mt-1 text-[11px] font-semibold uppercase tracking-wider text-navy/60">
+            {provincias}
+          </p>
+        )}
+      </>
+    ) : (
+      <p class="hidden text-xs leading-relaxed text-body-light lg:block">{descripcion}</p>
+    )
+  }
 </article>
