@@ -1,0 +1,78 @@
+---
+import { langFromPath, type Lang } from "../lib/i18n";
+import { SUPPORT_BANK, supportCopy } from "../lib/support";
+
+interface Props {
+  open?: boolean;
+}
+
+const { open = false } = Astro.props;
+const lang: Lang = langFromPath(Astro.url.pathname);
+const c = supportCopy(lang);
+
+const fields = [
+  { key: "titular", label: c.bankTitular, value: SUPPORT_BANK.titular },
+  { key: "cuit", label: c.bankCuit, value: SUPPORT_BANK.cuit },
+  { key: "cvu", label: c.bankCvu, value: SUPPORT_BANK.cvu },
+  { key: "alias", label: c.bankAlias, value: SUPPORT_BANK.alias },
+];
+---
+
+<details class="rounded-xl border border-border-card bg-header" open={open}>
+  <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-3 text-sm font-semibold text-navy">
+    {c.bankTitle}
+    <span aria-hidden="true" class="text-body-light transition-transform duration-200 group-open:rotate-180">▾</span>
+  </summary>
+
+  <div class="space-y-2.5 border-t border-border-card px-5 py-4">
+    <p class="text-xs leading-relaxed text-body-light">{c.bankNote}</p>
+    {fields.map((f) => (
+      <div class="flex items-center justify-between gap-3">
+        <div class="min-w-0">
+          <p class="text-[11px] font-medium uppercase tracking-wide text-body-light">{f.label}</p>
+          <p class="break-all font-mono text-sm text-navy">{f.value}</p>
+        </div>
+        <button
+          type="button"
+          data-copy={f.value}
+          class="shrink-0 rounded-md border border-border-input px-2.5 py-1 text-xs font-medium text-navy transition-colors duration-150 hover:border-terracota hover:text-terracota"
+        >
+          {c.copyLabel}
+        </button>
+      </div>
+    ))}
+  </div>
+</details>
+
+<script is:inline>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const value = btn.dataset.copy ?? "";
+      const original = btn.textContent ?? "";
+      const ok = () => {
+        btn.textContent = "✓";
+        window.setTimeout(() => {
+          btn.textContent = original;
+        }, 1600);
+      };
+      try {
+        await navigator.clipboard.writeText(value);
+        ok();
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = value;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          ok();
+        } catch {
+          /* sin acción */
+        }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>

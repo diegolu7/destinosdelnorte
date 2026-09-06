@@ -1,12 +1,18 @@
 import type { Lang } from "./i18n";
 
-// TODO: reemplazar con las URLs reales que te pase el usuario.
 export const SUPPORT_URLS = {
-  koFi: "https://ko-fi.com/REEMPLAZAR_USUARIO",
-  mercadoPago: "https://link.mercadopago.com.ar/REEMPLAZAR_ALIAS",
+  koFi: "https://ko-fi.com/destinosdelnorte",
 } as const;
 
-export type SupportProvider = "ko-fi" | "mercado-pago";
+// Datos públicos para recibir transferencias (Argentina, vía CVU Mercado Pago).
+export const SUPPORT_BANK = {
+  titular: "Diego Fernando Luis Castro",
+  cuit: "23-36128179-9",
+  cvu: "0000003100043255045190",
+  alias: "destinos.norte",
+} as const;
+
+export type SupportProvider = "ko-fi" | "bank-transfer";
 
 const COPY = {
   es: {
@@ -16,8 +22,10 @@ const COPY = {
       "Explorar el Norte nos lleva tiempo e investigación real. Si lo que leíste te ayudó a planear tu viaje, considerá apoyar Destinos del Norte para que siga siendo gratuito y sin publicidad.",
     note: "Va al dominio, la fotografía y el tiempo de investigar y actualizar cada destino.",
     koFiLabel: "Apoyar con Ko‑fi",
-    mpLabel: "Apoyar desde Argentina (Mercado Pago)",
-    mpHint: "Argentina y varios países de Latinoamérica",
+    mpLabel: "Apoyar por transferencia (Argentina)",
+    mpLine:
+      "Transferencia bancaria vía CVU (Mercado Pago), sin costo para el donante. Ideal desde Argentina.",
+    mpHint: "Transferencia desde Argentina",
     panelTitle: "Ayudanos a mantener el Norte al alcance de todos",
     panelBody:
       "Este sitio es gratuito y sin anuncios. Lo que donás cubre el dominio y nos permite dedicar tiempo a investigar cada pueblo, ruta y experiencia.",
@@ -34,7 +42,7 @@ const COPY = {
     ],
     howTitle: "Cómo apoyar",
     koFiLine: "Desde cualquier parte del mundo, con tarjeta o PayPal.",
-    mpLine: "Si estás en Argentina o Latinoamérica, esta es la opción más simple.",
+    mpLine2: "Si estás en Argentina, una transferencia simple y sin costo.",
     whatTitle: "En qué se usa tu aporte",
     what: [
       "Dominio y hosting del sitio.",
@@ -43,8 +51,17 @@ const COPY = {
     ],
     safeTitle: "Tranquilidad",
     safeBody:
-      "El pago se procesa en Ko‑fi o Mercado Pago; este sitio no almacena ni accede a tus datos de pago. Una donación es puntual y sin compromiso.",
+      "Las donaciones con Ko‑fi se procesan en esa plataforma. Si elegís transferencia, vas a tu banco o Mercado Pago y enviás el monto al CVU/alias indicado. Este sitio no almacena ni accede a tus datos bancarios.",
     thanksTitle: "¡Gracias por viajar con nosotros!",
+    bankTitle: "Datos para transferencia",
+    bankNote:
+      "Desde tu banco o app de Mercado Pago: buscá la opción “transferir”, pegá el CVU o el alias y enviá el monto. Titular y CUIT son los del destino de la transferencia.",
+    bankTitular: "Titular",
+    bankCuit: "CUIT / CUIL",
+    bankCvu: "CVU",
+    bankAlias: "Alias",
+    copyLabel: "Copiar",
+    copiedLabel: "¡Copiado!",
   },
   en: {
     footer: "Support the project",
@@ -53,8 +70,10 @@ const COPY = {
       "Exploring the North takes real time and research. If what you read helped you plan your trip, consider supporting Destinos del Norte so it stays free and ad‑free.",
     note: "It goes to the domain, photography and the time spent researching and updating each destination.",
     koFiLabel: "Support with Ko‑fi",
-    mpLabel: "Support from Argentina (Mercado Pago)",
-    mpHint: "Argentina and several Latin American countries",
+    mpLabel: "Support by bank transfer (Argentina)",
+    mpLine:
+      "Bank transfer via CVU (Mercado Pago), free of charge for the donor. Best from Argentina.",
+    mpHint: "Bank transfer from Argentina",
     panelTitle: "Help us keep the North within everyone's reach",
     panelBody:
       "This site is free and has no ads. Your donation covers the domain and lets us invest time researching every town, route and experience.",
@@ -71,7 +90,7 @@ const COPY = {
     ],
     howTitle: "How to support",
     koFiLine: "From anywhere in the world, with card or PayPal.",
-    mpLine: "If you are in Argentina or Latin America, this is the simplest option.",
+    mpLine2: "If you are in Argentina, a simple, free bank transfer.",
     whatTitle: "Where your support goes",
     what: [
       "Domain and hosting of the site.",
@@ -80,8 +99,17 @@ const COPY = {
     ],
     safeTitle: "Peace of mind",
     safeBody:
-      "Payment is processed by Ko‑fi or Mercado Pago; this site never stores or accesses your payment data. A donation is one‑time and commitment‑free.",
+      "Ko‑fi donations are processed on that platform. If you choose a bank transfer, you go to your bank or Mercado Pago app and send the amount to the CVU/alias shown. This site never stores or accesses your banking data.",
     thanksTitle: "Thank you for traveling with us!",
+    bankTitle: "Bank transfer details",
+    bankNote:
+      "From your bank or Mercado Pago app: choose “transfer”, paste the CVU or the alias and send the amount. The account holder and CUIT are those shown for the transfer destination.",
+    bankTitular: "Account holder",
+    bankCuit: "CUIT / CUIL",
+    bankCvu: "CVU",
+    bankAlias: "Alias",
+    copyLabel: "Copy",
+    copiedLabel: "Copied!",
   },
   pt: {
     footer: "Apoiar o projeto",
@@ -90,8 +118,10 @@ const COPY = {
       "Explorar o Norte exige tempo e pesquisa reais. Se o que você leu ajudou a planejar sua viagem, considere apoiar a Destinos del Norte para que continue gratuita e sem anúncios.",
     note: "Vai para o domínio, a fotografia e o tempo de pesquisar e atualizar cada destino.",
     koFiLabel: "Apoiar com Ko‑fi",
-    mpLabel: "Apoiar da Argentina (Mercado Pago)",
-    mpHint: "Argentina e vários países da América Latina",
+    mpLabel: "Apoiar por transferência (Argentina)",
+    mpLine:
+      "Transferência bancária via CVU (Mercado Pago), sem custo para quem doa. Ideal da Argentina.",
+    mpHint: "Transferência da Argentina",
     panelTitle: "Ajude a manter o Norte ao alcance de todos",
     panelBody:
       "Este site é gratuito e sem anúncios. Sua doação cobre o domínio e nos permite dedicar tempo a pesquisar cada vila, rota e experiência.",
@@ -108,7 +138,7 @@ const COPY = {
     ],
     howTitle: "Como apoiar",
     koFiLine: "De qualquer lugar do mundo, com cartão ou PayPal.",
-    mpLine: "Se você está na Argentina ou na América Latina, esta é a opção mais simples.",
+    mpLine2: "Se você está na Argentina, uma transferência simples e sem custo.",
     whatTitle: "Para onde vai sua contribuição",
     what: [
       "Domínio e hospedagem do site.",
@@ -117,8 +147,17 @@ const COPY = {
     ],
     safeTitle: "Tranquilidade",
     safeBody:
-      "O pagamento é processado pela Ko‑fi ou Mercado Pago; este site não armazena nem acessa seus dados de pagamento. Uma doação é pontual e sem compromisso.",
+      "Doações via Ko‑fi são processadas nessa plataforma. Se você escolher transferência, vá ao seu banco ou app do Mercado Pago e envie o valor para o CVU/alias indicado. Este site não armazena nem acessa seus dados bancários.",
     thanksTitle: "Obrigado por viajar com a gente!",
+    bankTitle: "Dados para transferência",
+    bankNote:
+      "Do seu banco ou app do Mercado Pago: escolha “transferir”, cole o CVU ou o alias e envie o valor. O titular e o CUIT são os indicados para o destino da transferência.",
+    bankTitular: "Titular",
+    bankCuit: "CUIT / CUIL",
+    bankCvu: "CVU",
+    bankAlias: "Alias",
+    copyLabel: "Copiar",
+    copiedLabel: "Copiado!",
   },
 } as const;
 
@@ -129,6 +168,7 @@ export interface SupportCopy {
   note: string;
   koFiLabel: string;
   mpLabel: string;
+  mpLine: string;
   mpHint: string;
   panelTitle: string;
   panelBody: string;
@@ -139,29 +179,32 @@ export interface SupportCopy {
   values: string[];
   howTitle: string;
   koFiLine: string;
-  mpLine: string;
+  mpLine2: string;
   whatTitle: string;
   what: string[];
   safeTitle: string;
   safeBody: string;
   thanksTitle: string;
+  bankTitle: string;
+  bankNote: string;
+  bankTitular: string;
+  bankCuit: string;
+  bankCvu: string;
+  bankAlias: string;
+  copyLabel: string;
+  copiedLabel: string;
 }
 
 export function supportCopy(lang: Lang): SupportCopy {
   return COPY[lang] as unknown as SupportCopy;
 }
 
-/** Orden de proveedores según idioma: es → Mercado Pago primero; en/pt → Ko‑fi primero. */
-export function supportButtons(lang: Lang): { key: SupportProvider; label: string; href: string; hint?: string }[] {
+/** Orden de proveedores según idioma: es → transferencia primero; en/pt → Ko‑fi primero. */
+export function supportButtons(lang: Lang): { key: SupportProvider; label: string; href?: string }[] {
   const c = supportCopy(lang);
   const koFi = { key: "ko-fi" as const, label: c.koFiLabel, href: SUPPORT_URLS.koFi };
-  const mp = {
-    key: "mercado-pago" as const,
-    label: c.mpLabel,
-    href: SUPPORT_URLS.mercadoPago,
-    hint: c.mpHint,
-  };
-  return lang === "es" ? [mp, koFi] : [koFi, mp];
+  const bank = { key: "bank-transfer" as const, label: c.mpLabel };
+  return lang === "es" ? [bank, koFi] : [koFi, bank];
 }
 
 /** Ruta de la página de apoyo según idioma (misma slug para mantener el patrón espejo es/en/pt). */

@@ -1,6 +1,7 @@
 ---
 import { langFromPath, type Lang } from "../lib/i18n";
-import { supportButtons, supportCopy } from "../lib/support";
+import { SUPPORT_URLS, supportCopy, supportPage } from "../lib/support";
+import BankDetails from "./BankDetails.astro";
 
 interface Props {
   size?: "compact" | "panel";
@@ -10,7 +11,7 @@ interface Props {
 const { size = "compact", location = "page" } = Astro.props;
 const lang: Lang = langFromPath(Astro.url.pathname);
 const c = supportCopy(lang);
-const buttons = supportButtons(lang);
+const pageHref = supportPage(lang);
 ---
 
 <div
@@ -22,6 +23,14 @@ const buttons = supportButtons(lang);
     <>
       <p class="font-display text-lg font-bold text-navy">{c.compactTitle}</p>
       <p class="mt-2 text-sm leading-relaxed text-body">{c.compactBody}</p>
+      <a
+        href={pageHref}
+        data-donation="apoyar-page"
+        data-loc={location}
+        class="mt-4 inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
+      >
+        {c.cta}
+      </a>
     </>
   ) : (
     <>
@@ -29,39 +38,26 @@ const buttons = supportButtons(lang);
       <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-body lg:text-base">
         {c.panelBody}
       </p>
+      <div class="mx-auto mt-6 max-w-xl space-y-3 text-left">
+        <a
+          href={SUPPORT_URLS.koFi}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-donation="ko-fi"
+          data-loc={location}
+          class="flex w-full items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
+        >
+          {c.koFiLabel}
+        </a>
+        <BankDetails />
+      </div>
+      <p class="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-body-light">{c.note}</p>
     </>
   )}
-
-  <div
-    class={`mt-5 flex flex-wrap gap-3 ${
-      size === "panel" ? "justify-center" : ""
-    }`}
-  >
-    {buttons.map((b, i) => (
-      <a
-        href={b.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-donation={b.key}
-        data-loc={location}
-        class={
-          i === 0
-            ? "inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
-            : "inline-flex items-center justify-center rounded-lg border border-border-input bg-header px-6 py-3 text-sm font-semibold text-navy transition-colors duration-200 hover:border-terracota hover:text-terracota"
-        }
-      >
-        {b.label}
-      </a>
-    ))}
-  </div>
-
-  <p class={`mt-4 text-xs leading-relaxed text-body-light ${size === "panel" ? "mx-auto max-w-xl" : ""}`}>
-    {c.note}
-  </p>
 </div>
 
 <script>
-  const providers = new Set(["ko-fi", "mercado-pago"]);
+  const providers = new Set(["ko-fi", "apoyar-page"]);
   document.querySelectorAll<HTMLAnchorElement>("[data-donation]").forEach((el) => {
     el.addEventListener("click", () => {
       const provider = el.dataset.donation ?? "";
