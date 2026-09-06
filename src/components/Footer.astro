@@ -5,8 +5,10 @@ import Newsletter from "./Newsletter.astro";
 import { SITE } from "../lib/site";
 import { url } from "../lib/site";
 import { langFromPath, localeHref, type Lang } from "../lib/i18n";
+import { supportCopy } from "../lib/support";
 
 const lang: Lang = langFromPath(Astro.url.pathname);
+const apoyarLabel = supportCopy(lang).footer;
 
 const FOOTER = {
   es: {
@@ -165,7 +167,15 @@ const columns = [
       <p class="text-xs text-navy-secondary">
         © {new Date().getFullYear()} Destinos del Norte. {f.derechos}
       </p>
-      <p class="text-xs text-navy-secondary">Salta · Jujuy · Tucumán</p>
+      <div class="flex items-center gap-4">
+        <a
+          href={url(lh("/apoyar/"))}
+          class="text-xs text-navy-secondary transition-colors duration-150 hover:text-terracota"
+        >
+          {apoyarLabel}
+        </a>
+        <p class="text-xs text-navy-secondary">Salta · Jujuy · Tucumán</p>
+      </div>
     </div>
   </div>
 </footer>

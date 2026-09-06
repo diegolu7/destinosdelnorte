@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionTitle from "../../components/SectionTitle.astro";
 import ProvinceCard from "../../components/ProvinceCard.astro";
 import Icon from "../../components/Icon.astro";
+import SupportCta from "../../components/SupportCta.astro";
 import { resolveImage } from "../../lib/images";
 import { SITE, url } from "../../lib/site";
 import { langFromPath, type Lang } from "../../lib/i18n";
@@ -182,6 +183,10 @@ const aboutPage = {
         ))
       }
     </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-12">
+    <SupportCta size="panel" location="sobre-nosotros" />
   </section>
 
   <section class="mx-auto w-full max-w-6xl px-5 py-8 lg:px-8 lg:py-14">

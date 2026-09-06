@@ -1,0 +1,80 @@
+---
+import { langFromPath, type Lang } from "../lib/i18n";
+import { supportButtons, supportCopy } from "../lib/support";
+
+interface Props {
+  size?: "compact" | "panel";
+  location?: string;
+}
+
+const { size = "compact", location = "page" } = Astro.props;
+const lang: Lang = langFromPath(Astro.url.pathname);
+const c = supportCopy(lang);
+const buttons = supportButtons(lang);
+---
+
+<div
+  class={`rounded-2xl border border-border-card bg-tarjeta shadow-card ${
+    size === "compact" ? "p-5 sm:p-6" : "p-6 text-center sm:p-10"
+  }`}
+>
+  {size === "compact" ? (
+    <>
+      <p class="font-display text-lg font-bold text-navy">{c.compactTitle}</p>
+      <p class="mt-2 text-sm leading-relaxed text-body">{c.compactBody}</p>
+    </>
+  ) : (
+    <>
+      <h2 class="font-display text-xl font-bold text-navy lg:text-2xl">{c.panelTitle}</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-body lg:text-base">
+        {c.panelBody}
+      </p>
+    </>
+  )}
+
+  <div
+    class={`mt-5 flex flex-wrap gap-3 ${
+      size === "panel" ? "justify-center" : ""
+    }`}
+  >
+    {buttons.map((b, i) => (
+      <a
+        href={b.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-donation={b.key}
+        data-loc={location}
+        class={
+          i === 0
+            ? "inline-flex items-center justify-center rounded-lg bg-terracota px-6 py-3 text-sm font-semibold text-white shadow-button transition-colors duration-200 hover:bg-terracota-hover"
+            : "inline-flex items-center justify-center rounded-lg border border-border-input bg-header px-6 py-3 text-sm font-semibold text-navy transition-colors duration-200 hover:border-terracota hover:text-terracota"
+        }
+      >
+        {b.label}
+      </a>
+    ))}
+  </div>
+
+  <p class={`mt-4 text-xs leading-relaxed text-body-light ${size === "panel" ? "mx-auto max-w-xl" : ""}`}>
+    {c.note}
+  </p>
+</div>
+
+<script>
+  const providers = new Set(["ko-fi", "mercado-pago"]);
+  document.querySelectorAll<HTMLAnchorElement>("[data-donation]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const provider = el.dataset.donation ?? "";
+      const loc = el.dataset.loc ?? "page";
+      const lang = document.documentElement.lang || "es-AR";
+      if (!providers.has(provider)) return;
+      if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "donation_click", {
+          donation_provider: provider,
+          donation_location: loc,
+          donation_lang: lang,
+        });
+      }
+    });
+  });
+</script>

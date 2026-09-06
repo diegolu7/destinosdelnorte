@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import SupportCta from "../../../components/SupportCta.astro";
 import { url } from "../../../lib/site";
 
 export async function getStaticPaths() {
@@ -74,6 +75,10 @@ const articleSchema = {
       >
         <span class="rotate-180" aria-hidden="true">➔</span> Volver al blog
       </a>
+    </div>
+
+    <div class="mt-8">
+      <SupportCta location="blog" />
     </div>
   </section>
 </BaseLayout>

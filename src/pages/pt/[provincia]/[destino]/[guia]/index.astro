@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../../../components/Breadcrumbs.astro";
 import RelatedGuides from "../../../../../components/RelatedGuides.astro";
+import SupportCta from "../../../../../components/SupportCta.astro";
 import { url } from "../../../../../lib/site";
 import { resolveImage as getImage } from "../../../../../lib/images";
 
@@ -103,6 +104,10 @@ const articleSchema = {
       ← Voltar para {destino.data.name}
     </a>
   </section>
+
+  <div class="mx-auto w-full max-w-3xl px-5 lg:px-8">
+    <SupportCta location="guia" />
+  </div>
 
   <RelatedGuides title="Outras guias deste destino" guides={otrasGuias} />
 </BaseLayout>

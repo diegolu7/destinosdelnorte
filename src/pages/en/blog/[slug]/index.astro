@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../../components/Breadcrumbs.astro";
+import SupportCta from "../../../../components/SupportCta.astro";
 import { t } from "../../../../lib/ui";
 import { url } from "../../../../lib/site";
 
@@ -78,6 +79,10 @@ const articleSchema = {
       >
         <span class="rotate-180" aria-hidden="true">➔</span> Back to the blog
       </a>
+    </div>
+
+    <div class="mt-8">
+      <SupportCta location="blog" />
     </div>
   </section>
 </BaseLayout>
