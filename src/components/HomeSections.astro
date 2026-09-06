@@ -22,8 +22,6 @@ const T = {
     verTodosDestinos: "Ver todos los destinos",
     verTodos: "Ver todos",
     experiencias: "Experiencias que te van a encantar",
-    verTodasExperiencias: "Ver todas las experiencias",
-    verTodas: "Ver todas",
     anterior: "Destino anterior",
     siguiente: "Destino siguiente",
     irAl: "Ir al destino",
@@ -34,8 +32,6 @@ const T = {
     verTodosDestinos: "See all destinations",
     verTodos: "See all",
     experiencias: "Experiences you will love",
-    verTodasExperiencias: "See all experiences",
-    verTodas: "See all",
     anterior: "Previous destination",
     siguiente: "Next destination",
     irAl: "Go to destination",
@@ -46,8 +42,6 @@ const T = {
     verTodosDestinos: "Ver todos os destinos",
     verTodos: "Ver todos",
     experiencias: "Experiências que você vai amar",
-    verTodasExperiencias: "Ver todas as experiências",
-    verTodas: "Ver todas",
     anterior: "Destino anterior",
     siguiente: "Próximo destino",
     irAl: "Ir para o destino",
@@ -73,7 +67,6 @@ const experiencias = (await getCollection(EXP[lang])).sort((a, b) =>
   a.id.localeCompare(b.id, "en"),
 );
 const saltaSlug = provincias.find((p) => p.data.slug === "salta")?.data.slug ?? "salta";
-const jujuySlug = provincias.find((p) => p.data.slug === "jujuy")?.data.slug ?? "jujuy";
 
 const EXPERIENCIA_EJEMPLOS: Record<
   string,
@@ -199,9 +192,6 @@ const experienciasCard = experiencias.map((exp) => {
   <div class="mx-auto w-full max-w-6xl px-5 pb-16 lg:px-8 lg:pb-24">
     <div class="flex items-end justify-between gap-4">
       <SectionTitle title={t.experiencias} />
-      <a href={url(`${prefix}/${jujuySlug}/`)} class="hidden shrink-0 pb-1 text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:inline-flex">
-        {t.verTodasExperiencias}
-      </a>
     </div>
     <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
@@ -216,9 +206,6 @@ const experienciasCard = experiencias.map((exp) => {
         ))
       }
     </div>
-    <a href={url(`${prefix}/${jujuySlug}/`)} class="mt-5 inline-flex text-sm font-medium text-terracota transition-colors duration-200 hover:text-terracota-hover lg:hidden">
-      {t.verTodas}
-    </a>
   </div>
 </section>
 
