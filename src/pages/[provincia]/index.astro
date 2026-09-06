@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import DestinationCard from "../../components/DestinationCard.astro";
+import SupportCta from "../../components/SupportCta.astro";
 import { resolveImage as getImage } from "../../lib/images";
 
 export async function getStaticPaths() {
@@ -72,4 +73,8 @@ const touristDestination = {
       <Content />
     </div>
   </section>
+
+  <div class="mx-auto w-full max-w-6xl px-5 py-6 lg:px-8">
+    <SupportCta location="provincia" />
+  </div>
 </BaseLayout>
