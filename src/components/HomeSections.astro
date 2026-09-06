@@ -20,6 +20,7 @@ const T = {
     destinos: "Destinos imperdibles del Norte",
     experiencias: "Experiencias que te van a encantar",
     anterior: "Destino anterior",
+    desliza: "Deslizá",
     siguiente: "Destino siguiente",
     irAl: "Ir al destino",
   },
@@ -28,6 +29,7 @@ const T = {
     destinos: "Unmissable destinations of the North",
     experiencias: "Experiences you will love",
     anterior: "Previous destination",
+    desliza: "Swipe",
     siguiente: "Next destination",
     irAl: "Go to destination",
   },
@@ -36,6 +38,7 @@ const T = {
     destinos: "Destinos imperdíveis do Norte",
     experiencias: "Experiências que você vai amar",
     anterior: "Destino anterior",
+    desliza: "Deslize",
     siguiente: "Próximo destino",
     irAl: "Ir para o destino",
   },
@@ -171,18 +174,23 @@ const experienciasCard = experiencias.map((exp) => {
     <div class="flex items-end justify-between gap-4">
       <SectionTitle title={t.experiencias} />
     </div>
-    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-8 flex snap-x snap-mandatory flex-nowrap gap-4 overflow-x-auto px-1 pb-2 scroll-pl-5 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:snap-none lg:grid-cols-3">
       {
         experienciasCard.map((experiencia) => (
-          <ExperienceCard
-            nombre={experiencia.nombre}
-            descripcion={experiencia.descripcion}
-            icono={experiencia.icono}
-            ejemplos={experiencia.ejemplos}
-          />
+          <div class="w-[82%] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none">
+            <ExperienceCard
+              nombre={experiencia.nombre}
+              descripcion={experiencia.descripcion}
+              icono={experiencia.icono}
+              ejemplos={experiencia.ejemplos}
+            />
+          </div>
         ))
       }
     </div>
+    <p class="mt-4 flex items-center gap-1 text-xs font-medium text-body-light sm:hidden">
+      {t.desliza} <span aria-hidden="true" class="text-terracota">→</span>
+    </p>
   </div>
 </section>
 
