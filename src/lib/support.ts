@@ -16,12 +16,12 @@ export type SupportProvider = "ko-fi" | "bank-transfer";
 
 const COPY = {
   es: {
-    footer: "Apoyar el proyecto",
+    footer: "Apoyar el proyecto ♥",
     compactTitle: "¿Te sirvió esta guía?",
     compactBody:
       "Explorar el Norte nos lleva tiempo e investigación real. Si lo que leíste te ayudó a planear tu viaje, considerá apoyar Destinos del Norte para que siga siendo gratuito y sin publicidad.",
     note: "Va al dominio, la fotografía y el tiempo de investigar y actualizar cada destino.",
-    koFiLabel: "Apoyar con Ko‑fi",
+    koFiLabel: "Apoyar con Ko‑fi ♥",
     mpLabel: "Apoyar por transferencia (Argentina)",
     mpLine:
       "Transferencia bancaria vía CVU (Mercado Pago), sin costo para el donante. Ideal desde Argentina.",
@@ -29,7 +29,7 @@ const COPY = {
     panelTitle: "Ayudanos a mantener el Norte al alcance de todos",
     panelBody:
       "Este sitio es gratuito y sin anuncios. Lo que donás cubre el dominio y nos permite dedicar tiempo a investigar cada pueblo, ruta y experiencia.",
-    cta: "Quiero apoyar",
+    cta: "Quiero apoyar ♥",
     pageLeadTitle: "Todo lo que ves acá es gratis y sin publicidad.",
     pageLeadBody:
       "Destinos del Norte es una guía independiente del Noroeste Argentino, sin banners ni contenido pago. Si te sirve, podés devolver el gesto con una donación puntual: ayuda a cubrir el dominio y el tiempo de investigación detrás de cada guía.",
@@ -64,12 +64,12 @@ const COPY = {
     copiedLabel: "¡Copiado!",
   },
   en: {
-    footer: "Support the project",
+    footer: "Support the project ♥",
     compactTitle: "Was this guide useful?",
     compactBody:
       "Exploring the North takes real time and research. If what you read helped you plan your trip, consider supporting Destinos del Norte so it stays free and ad‑free.",
     note: "It goes to the domain, photography and the time spent researching and updating each destination.",
-    koFiLabel: "Support with Ko‑fi",
+    koFiLabel: "Support with Ko‑fi ♥",
     mpLabel: "Support by bank transfer (Argentina)",
     mpLine:
       "Bank transfer via CVU (Mercado Pago), free of charge for the donor. Best from Argentina.",
@@ -77,7 +77,7 @@ const COPY = {
     panelTitle: "Help us keep the North within everyone's reach",
     panelBody:
       "This site is free and has no ads. Your donation covers the domain and lets us invest time researching every town, route and experience.",
-    cta: "Support the project",
+    cta: "Support the project ♥",
     pageLeadTitle: "Everything you see here is free and ad‑free.",
     pageLeadBody:
       "Destinos del Norte is an independent guide to the Argentine Northwest, with no banners or paid content. If it helps you, you can give back with a one‑time donation: it covers the domain and the research time behind every guide.",
@@ -112,12 +112,12 @@ const COPY = {
     copiedLabel: "Copied!",
   },
   pt: {
-    footer: "Apoiar o projeto",
+    footer: "Apoiar o projeto ♥",
     compactTitle: "Esta guia foi útil?",
     compactBody:
       "Explorar o Norte exige tempo e pesquisa reais. Se o que você leu ajudou a planejar sua viagem, considere apoiar a Destinos del Norte para que continue gratuita e sem anúncios.",
     note: "Vai para o domínio, a fotografia e o tempo de pesquisar e atualizar cada destino.",
-    koFiLabel: "Apoiar com Ko‑fi",
+    koFiLabel: "Apoiar com Ko‑fi ♥",
     mpLabel: "Apoiar por transferência (Argentina)",
     mpLine:
       "Transferência bancária via CVU (Mercado Pago), sem custo para quem doa. Ideal da Argentina.",
@@ -125,7 +125,7 @@ const COPY = {
     panelTitle: "Ajude a manter o Norte ao alcance de todos",
     panelBody:
       "Este site é gratuito e sem anúncios. Sua doação cobre o domínio e nos permite dedicar tempo a pesquisar cada vila, rota e experiência.",
-    cta: "Quero apoiar",
+    cta: "Quero apoiar ♥",
     pageLeadTitle: "Tudo o que você vê aqui é grátis e sem anúncios.",
     pageLeadBody:
       "Destinos del Norte é um guia independente do Noroeste Argentino, sem banners nem conteúdo pago. Se for útil para você, pode retribuir com uma doação pontual: ela cobre o domínio e o tempo de pesquisa por trás de cada guia.",

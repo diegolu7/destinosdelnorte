@@ -10,6 +10,7 @@ import DestinationMap from "../../../components/DestinationMap.astro";
 import Reviews from "../../../components/Reviews.astro";
 import RelatedGuides from "../../../components/RelatedGuides.astro";
 import RelatedDestinations from "../../../components/RelatedDestinations.astro";
+import SupportCta from "../../../components/SupportCta.astro";
 import { resolveImage as getImage } from "../../../lib/images";
 
 export async function getStaticPaths() {
@@ -181,4 +182,8 @@ const touristDestination = {
     linkHref={`/${provincia.data.slug}/`}
     destinos={destinosCercanos}
   />
+
+  <div class="mx-auto w-full max-w-6xl px-5 py-6 lg:px-8">
+    <SupportCta location="destino" />
+  </div>
 </BaseLayout>
