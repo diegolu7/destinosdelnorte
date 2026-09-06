@@ -96,10 +96,12 @@ const slides = [
     ))
   }
 
+  <div aria-hidden="true" class="hero-scrim"></div>
+
   <div class="absolute inset-0 flex items-center">
     <div class="mx-auto w-full max-w-6xl px-5 lg:px-8">
-      <div class="max-w-2xl">
-        <h1 class="font-display font-bold leading-tight text-navy [text-shadow:0_1px_2px_rgba(247,245,241,0.85),0_2px_5px_rgba(247,245,241,0.55)]">
+      <div class="max-w-2xl -translate-y-[85px] md:translate-y-0">
+        <h1 class="font-display font-bold leading-tight text-white">
           <span class="block text-[28px] lg:text-[42px]">{t.linea1}</span>
           <span class="block text-[28px] lg:text-[42px]">{t.linea2}</span>
           <span class="block text-[28px] font-extrabold lg:text-[42px]">{t.linea3}</span>
@@ -109,7 +111,7 @@ const slides = [
             slides.map((slide, i) => (
               <p
                 data-text={i}
-                class={`col-start-1 row-start-1 max-w-md text-sm leading-relaxed text-body transition-opacity duration-1000 ease-in-out lg:text-base lg:leading-relaxed [text-shadow:0_1px_2px_rgba(247,245,241,0.9),0_1px_3px_rgba(247,245,241,0.6)] ${
+                class={`col-start-1 row-start-1 max-w-md text-sm leading-relaxed text-white/90 transition-opacity duration-1000 ease-in-out lg:text-base lg:leading-relaxed ${
                   i === 0 ? "opacity-100" : "opacity-0"
                 }`}
               >
@@ -162,6 +164,44 @@ const slides = [
     <Icon name="arrow" size={20} />
   </button>
 </section>
+
+<style>
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 27, 73, 0.94) 0%,
+        rgba(6, 27, 73, 0.84) 22%,
+        rgba(6, 27, 73, 0.62) 42%,
+        rgba(6, 27, 73, 0.28) 58%,
+        rgba(6, 27, 73, 0.06) 74%,
+        rgba(6, 27, 73, 0) 88%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(6, 27, 73, 0.55) 0%,
+        rgba(6, 27, 73, 0.2) 55%,
+        rgba(6, 27, 73, 0) 100%
+      );
+  }
+
+  @media (min-width: 1024px) {
+    .hero-scrim {
+      background: linear-gradient(
+        90deg,
+        rgba(6, 27, 73, 0.94) 0%,
+        rgba(6, 27, 73, 0.82) 18%,
+        rgba(6, 27, 73, 0.58) 35%,
+        rgba(6, 27, 73, 0.28) 50%,
+        rgba(6, 27, 73, 0.08) 64%,
+        rgba(6, 27, 73, 0) 76%
+      );
+    }
+  }
+</style>
 
 <script>
   const slider = document.getElementById("hero-slider");
