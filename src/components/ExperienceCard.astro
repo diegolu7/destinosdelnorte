@@ -25,19 +25,21 @@ const hasExtra = (ejemplos?.length ?? 0) > 0;
       <>
         <p class="text-sm leading-relaxed text-body-light">{descripcion}</p>
         {ejemplos!.length > 0 && (
-          <p class="flex flex-wrap gap-x-2 gap-y-1 text-sm">
+          <ul class="flex flex-col items-start gap-1.5">
             {ejemplos!.map((ejemplo) => (
-              <a
-                href={ejemplo.href}
-                class="inline-flex items-baseline gap-1 text-terracota transition-colors duration-150 hover:underline hover:underline-offset-4"
-              >
-                {ejemplo.nombre}
-                {ejemplo.provincia && (
-                  <span class="text-body-light">· {ejemplo.provincia}</span>
-                )}
-              </a>
+              <li>
+                <a
+                  href={ejemplo.href}
+                  class="inline-flex items-baseline gap-1 text-sm text-terracota transition-colors duration-150 hover:underline hover:underline-offset-4"
+                >
+                  {ejemplo.nombre}
+                  {ejemplo.provincia && (
+                    <span class="text-body-light">· {ejemplo.provincia}</span>
+                  )}
+                </a>
+              </li>
             ))}
-          </p>
+          </ul>
         )}
       </>
     ) : (
