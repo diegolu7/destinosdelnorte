@@ -59,41 +59,34 @@ const destinos = (await getCollection(DEST[lang])).sort(
 const experiencias = (await getCollection(EXP[lang])).sort((a, b) =>
   a.id.localeCompare(b.id, "en"),
 );
-const EXPERIENCIA_EJEMPLOS: Record<
-  string,
-  { destinos: string[]; provincias: string[] }
-> = {
-  aventura: { destinos: ["hornocal", "quebrada-de-las-conchas"], provincias: ["jujuy", "salta"] },
-  bodegas: { destinos: ["cafayate", "amaicha-del-valle"], provincias: ["salta", "tucuman"] },
-  cultura: { destinos: ["purmamarca", "tilcara"], provincias: ["jujuy"] },
-  gastronomia: { destinos: ["cafayate", "purmamarca"], provincias: ["salta", "jujuy", "tucuman"] },
-  naturaleza: { destinos: ["salinas-grandes", "tafi-del-valle"], provincias: ["jujuy", "tucuman"] },
-  senderismo: { destinos: ["cachi", "hornocal"], provincias: ["salta", "jujuy"] },
+const EXPERIENCIA_EJEMPLOS: Record<string, string[]> = {
+  aventura: ["hornocal", "quebrada-de-las-conchas"],
+  bodegas: ["cafayate", "amaicha-del-valle"],
+  cultura: ["purmamarca", "tilcara"],
+  gastronomia: ["cafayate", "purmamarca"],
+  naturaleza: ["salinas-grandes", "tafi-del-valle"],
+  senderismo: ["cachi", "hornocal"],
 };
 
 const destinoByName = new Map(destinos.map((d) => [d.data.slug, d]));
 const provByName = new Map(provincias.map((p) => [p.data.slug, p.data.name]));
 
 const experienciasCard = experiencias.map((exp) => {
-  const ref = EXPERIENCIA_EJEMPLOS[exp.data.icono];
-  const ejemplos = (ref?.destinos ?? [])
+  const slugs = EXPERIENCIA_EJEMPLOS[exp.data.icono] ?? [];
+  const ejemplos = slugs
     .map((slug) => destinoByName.get(slug))
     .filter((d): d is NonNullable<typeof d> => Boolean(d))
     .slice(0, 2)
     .map((d) => ({
       nombre: d.data.name,
       href: `${prefix}/${d.data.provincia}/${d.data.slug}/`,
+      provincia: provByName.get(d.data.provincia),
     }));
-  const provinciasLabel = (ref?.provincias ?? [])
-    .map((slug) => provByName.get(slug))
-    .filter((p): p is string => Boolean(p))
-    .join(" · ");
   return {
     nombre: exp.data.nombre,
     descripcion: exp.data.descripcion,
     icono: exp.data.icono,
     ejemplos,
-    provincias: provinciasLabel,
   };
 });
 ---
@@ -186,7 +179,6 @@ const experienciasCard = experiencias.map((exp) => {
             descripcion={experiencia.descripcion}
             icono={experiencia.icono}
             ejemplos={experiencia.ejemplos}
-            provincias={experiencia.provincias}
           />
         ))
       }

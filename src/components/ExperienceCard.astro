@@ -5,11 +5,10 @@ interface Props {
   nombre: string;
   descripcion: string;
   icono: "aventura" | "cultura" | "gastronomia" | "naturaleza" | "bodegas" | "senderismo";
-  ejemplos?: { nombre: string; href: string }[];
-  provincias?: string;
+  ejemplos?: { nombre: string; href: string; provincia?: string }[];
 }
 
-const { nombre, descripcion, icono, ejemplos, provincias } = Astro.props;
+const { nombre, descripcion, icono, ejemplos } = Astro.props;
 const hasExtra = (ejemplos?.length ?? 0) > 0;
 ---
 
@@ -26,22 +25,18 @@ const hasExtra = (ejemplos?.length ?? 0) > 0;
       <>
         <p class="text-sm leading-relaxed text-body-light">{descripcion}</p>
         {ejemplos!.length > 0 && (
-          <ul class="flex flex-wrap gap-1.5">
+          <p class="flex flex-wrap gap-x-2 gap-y-1 text-sm">
             {ejemplos!.map((ejemplo) => (
-              <li>
-                <a
-                  href={ejemplo.href}
-                  class="inline-flex rounded-full bg-terracota/10 px-3 py-1 text-xs font-medium text-terracota transition-colors duration-150 hover:bg-terracota/20"
-                >
-                  {ejemplo.nombre}
-                </a>
-              </li>
+              <a
+                href={ejemplo.href}
+                class="inline-flex items-baseline gap-1 text-terracota transition-colors duration-150 hover:underline hover:underline-offset-4"
+              >
+                {ejemplo.nombre}
+                {ejemplo.provincia && (
+                  <span class="text-body-light">· {ejemplo.provincia}</span>
+                )}
+              </a>
             ))}
-          </ul>
-        )}
-        {provincias && (
-          <p class="mt-auto pt-1 text-[11px] font-semibold uppercase tracking-wider text-navy/60">
-            {provincias}
           </p>
         )}
       </>
