@@ -98,12 +98,13 @@ Lista de tareas pendientes y futuras del proyecto. Se actualiza a medida que se 
 | **Ads (AdSense)** | Ingreso "pasivo" | UX/SEO negativo, requiere volumen y aplicar consentimiento (GDPR) | Fase 3+ |
 
 ### 8.4 Plan de implementación (checklist)
-- [ ] Crear cuenta/credenciales PayPal (botón Donate) y/o enlace Mercado Pago; definir `SUPPORT_URLS` en `src/lib/site.ts` (paypal, mercado pago opcional).
-- [ ] Agregar keys de UI en `ui.ts` (es/en/pt): título "Apoyar el proyecto", copy y label del botón.
-- [ ] Componente `SupportButton.astro` (enlace externo `rel="noopener noreferrer"`, ícono, discreto) y ubicarlo en: Footer, sobre nosotros (es/en/pt) y CTA final de guías/blog.
-- [ ] Registrar evento GA4: `gtag('event','donation_click',{location, lang})` solo en PROD (BaseLayout/script inline en el botón).
-- [ ] Test manual en los 3 idiomas (link abre ventana correcta) + `npm run build`/`check`.
-- [ ] **Medición posterior (30 días)**: clics, página e idioma que convierten; decidir si se agrega afiliación (Fase 3).
+- [x] Donaciones en producción: **Ko‑fi** (`ko-fi.com/destinosdelnorte`) para el mundo + **transferencia bancaria (CVU Mercado Pago)** para Argentina (Titular Diego Fernando Luis Castro · CUIT 23-36128179-9 · CVU 0000003100043255045190 · Alias destinos.norte).
+- [x] Copy i18n en `src/lib/support.ts` (es/en/pt); página `/apoyar` (+ espejos en/pt) y CTAs contextuales (guías/blog/sobre nosotros) + link en footer.
+- [x] `BankDetails.astro` con datos públicos y botones de copiado (CVU/alias).
+- [x] Evento GA4 `donation_click` (PROD) en los CTAs.
+- [x] Privacidad: nota de procesamiento por Ko‑fi/transferencia CVU (×3 idiomas).
+- [x] Test manual de copiado y de links (Ko‑fi ya configurado).
+- [ ] **Medición posterior (30 días)**: clics por ubicación/idioma/proveedor; decidir si se agrega afiliación (Fase 3) o recurrencia.
 
 ### 8.5 Cumplimiento / confianza
 - Etiquetar siempre como **"donación / apoyo"** (no venta de bienes/servicios); sin promesas de beneficios a cambio.
