@@ -12,6 +12,7 @@ import RelatedGuides from "../../../../components/RelatedGuides.astro";
 import RelatedDestinations from "../../../../components/RelatedDestinations.astro";
 import SupportCta from "../../../../components/SupportCta.astro";
 import { resolveImage as getImage } from "../../../../lib/images";
+import { destinoDescription, destinoTitle } from "../../../../lib/seo";
 
 export async function getStaticPaths() {
   const destinos = await getCollection("destinosEn");
@@ -94,22 +95,36 @@ const linkVerGoogle =
 
 const { Content } = await render(destino);
 
-const title = `Things to do in ${destino.data.name}: places to visit | Destinos del Norte`;
+const title = destinoTitle("en", destino.data.name, provincia.data.name);
+const seoDesc = destinoDescription("en", {
+  intro: destino.data.intro,
+  name: destino.data.name,
+  prov: provincia.data.name,
+  places: (destino.data.lugaresImperdibles ?? []).slice(0, 3).map((l) => l.nombre),
+});
 
-const touristDestination = {
+const touristDestination: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "TouristDestination",
   name: destino.data.name,
   description: destino.data.intro,
   url: new URL(Astro.url.pathname, Astro.site).toString(),
   image: new URL(getImage(destino.data.imagen).src, Astro.site).toString(),
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: provincia.data.name,
+    addressCountry: "AR",
+  },
+  ...(destino.data.lat !== undefined && destino.data.lng !== undefined
+    ? { geo: { "@type": "GeoCoordinates", latitude: destino.data.lat, longitude: destino.data.lng } }
+    : {}),
 };
 ---
 
 <BaseLayout
   lang="en"
   title={title}
-  description={destino.data.descripcion}
+  description={seoDesc}
   breadcrumbs={[
     { name: provincia.data.name, path: `/en/${provincia.data.slug}/` },
     { name: destino.data.name, path: `/en/${provincia.data.slug}/${destino.data.slug}/` },

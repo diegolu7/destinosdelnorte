@@ -5,6 +5,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import DestinationCard from "../../components/DestinationCard.astro";
 import SupportCta from "../../components/SupportCta.astro";
 import { resolveImage as getImage } from "../../lib/images";
+import { provinciaDescription, provinciaTitle } from "../../lib/seo";
 
 export async function getStaticPaths() {
   const provincias = (await getCollection("provincias")).filter((p) => p.data.lang === "es");
@@ -22,21 +23,27 @@ const destinos = (await getCollection("destinos"))
 
 const { Content } = await render(provincia);
 
-const title = `Qué hacer en ${provincia.data.name}: lugares para visitar | Destinos del Norte`;
+const title = provinciaTitle("es", provincia.data.name);
+const seoDesc = provinciaDescription("es", {
+  intro: provincia.data.intro,
+  prov: provincia.data.name,
+  destinos: destinos.map((d) => d.data.name),
+});
 
-const touristDestination = {
+const touristDestination: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "TouristDestination",
   name: provincia.data.name,
   description: provincia.data.intro,
   url: new URL(Astro.url.pathname, Astro.site).toString(),
   image: new URL(getImage(provincia.data.imagen).src, Astro.site).toString(),
+  address: { "@type": "PostalAddress", addressRegion: provincia.data.name, addressCountry: "AR" },
 };
 ---
 
 <BaseLayout
   title={title}
-  description={provincia.data.descripcion}
+  description={seoDesc}
   breadcrumbs={[{ name: provincia.data.name, path: `/${provincia.data.slug}/` }]}
   jsonLd={[touristDestination]}
 >
