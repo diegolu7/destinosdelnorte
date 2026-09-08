@@ -10,3 +10,6 @@ dist/
 
 # Favicon fuente en la raíz (se sirve desde public/)
 /favicon.ico
+
+# Documento interno de negocio (NO se sube)
+evolutivo.md
